@@ -1,0 +1,4 @@
+Pizzaria
+
+Introdução:
+	O sistema será responsavel por gerenciar os pedidos, des de a sua entrada até sua entrega, existira um cadastro de pedido com os dados necessarios do cliente e sobre o pedido, o pedido ficará em aguardo esperando aprovação, ele será aprovado quando um atendente vizualizar e mudar seu status para fila de produção, e quando o pedido for entrar em produção o pizzaiolo ira mudar o status do pedido para produzindo, quando pronto o pedido sera alterado para pronto,caso o pedido for para ser entregue o estado do pedido deve ser mudado para entregando.
