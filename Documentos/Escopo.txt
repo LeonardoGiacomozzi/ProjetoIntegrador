@@ -1,4 +1,92 @@
-Pizzaria
+TABACA HACA
 
-Introdução:
-	O sistema será responsavel por gerenciar os pedidos, des de a sua entrada até sua entrega, existira um cadastro de pedido com os dados necessarios do cliente e sobre o pedido, o pedido ficará em aguardo esperando aprovação, ele será aprovado quando um atendente vizualizar e mudar seu status para fila de produção, e quando o pedido for entrar em produção o pizzaiolo ira mudar o status do pedido para produzindo, quando pronto o pedido sera alterado para pronto,caso o pedido for para ser entregue o estado do pedido deve ser mudado para entregando.
+o sistema irá 
+cadastrar os produtos
+
+	-ID
+	-Nome
+	-Categoria
+	-Fornecedor
+	-Quantidade
+	-Valor
+	
+
+
+cadastro de cliente
+
+	-ID
+	-Nome
+	-Endereço
+	-CPF
+	-Data de Nacimento
+	-Contato
+		-Telefone
+		-Email
+	
+
+
+cadastro de funcionario
+
+	-ID
+	-Nome
+	-Cargo
+
+
+cadastro de fornecedor
+
+	-ID
+	-Nome
+	-CNPJ
+	-Contato
+		-Telefone
+		-Email
+	-Pessoa responsavel
+
+
+
+Gerenciamento simples de estoque
+
+	-Entrada de produtos
+	-Saida de Produtos
+
+controle simples de entrada e saida de valores
+
+	-Entrada
+	-Disponivel
+	-saidas
+
+gerenciamento do rendimento do funcionario
+
+	-Cadastro de metas
+		
+		-produsto para vender
+		-quantidade de produtos
+
+	-Quantidade de Vendas
+		-Produto
+		-quantidade
+
+Cadastro de Venda
+	
+	-Numero Da nota
+	-Valor
+	-Produtos
+	-Funcionario
+	-Cliente
+
+
+O sistema possuirá um cadastro de cliente, cadastro de produto, cadastro de funcionario, cadastro de fornecedor, Cadastro de Venda, uma rotina que ira controlar a quantidade de entrada e a quantidade de saida dos produtos,uma rotina que ira controlar o rendimento do funcionario 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
