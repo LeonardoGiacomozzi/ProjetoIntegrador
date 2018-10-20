@@ -2,6 +2,8 @@ package edu.sit.model;
 
 import java.util.Date;
 
+import edu.sit.uteis.CalculoIdade;
+
 public class Pessoa {
 	
 	private Integer id;
@@ -48,8 +50,30 @@ public class Pessoa {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	public Pessoa(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Contato contato) {
+	private Pessoa( String nome, Date dataDeNascimento, String endereco, String cpf, Contato contato) {
+		setNome(nome);
+		setDataDeNascimento(dataDeNascimento);
+		setEndereco(endereco);
+		setCpf(cpf);
+		setContato(contato);
+	}
+	
+	public int getIdade(Date dataNacimento) {
+				
+		return  CalculoIdade.calculaIdade(dataNacimento);
 		
+	}
+	public static Pessoa criaPessoa(String nome,Date dataNascimento) {
+		return new Pessoa(nome,dataNascimento,"Endereço Não Informado","Cpf Não Informado",Contato.criaContato());
+	}
+	
+	public static Pessoa criaPessoa(Date dataDeNascimento,String cpf) {
+		return new Pessoa("Nome não Informado",dataDeNascimento,"Endereço não informado",cpf,Contato.criaContato());
+	}
+	@Override
+	public String toString() {
+	
+		return getNome()+"\t\t"+getIdade(getDataDeNascimento());
 	}
 
 	
