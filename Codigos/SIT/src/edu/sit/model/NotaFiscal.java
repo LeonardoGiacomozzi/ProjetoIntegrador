@@ -13,6 +13,9 @@ public class NotaFiscal implements Serializable {
 	private Cliente cliente;
 	private ArrayList<Produto> produtos;
 	private Calendar dataEmissao;
+	private Double total=0.0;
+
+	
 	public Integer getId() {
 		return id;
 	}
@@ -39,6 +42,12 @@ public class NotaFiscal implements Serializable {
 	}
 	public void setProdutos(ArrayList<Produto> produtos) {
 		this.produtos = produtos;
+	}
+	public Double getTotal() {
+		return total;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 	private NotaFiscal(Funcionario funcionario, Cliente cliente, ArrayList<Produto> produtos) {
 	
@@ -73,6 +82,15 @@ public class NotaFiscal implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	@Override
+	public String toString() {///<sumary> Nota#Cliente#Funcionario#Lista de Produtos#Data de emissão
+		String produtos="";
+		for (Produto produto : getProdutos()) {
+			produtos+="#"+produto.getId();
+		}
+		
+		return getId()+"#"+getCliente().getId()+"#"+getFuncionario().getId()+produtos+"#"+getDataEmissao();
 	}
 	
 	

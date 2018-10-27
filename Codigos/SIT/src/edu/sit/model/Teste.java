@@ -1,10 +1,5 @@
 package edu.sit.model;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
-import edu.sit.controller.GeraAquivoNotaFiscal;
 public class Teste {
 	 
 	 

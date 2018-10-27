@@ -16,19 +16,27 @@ public class GeraAquivoNotaFiscal {
 	public static boolean geraArquivo(NotaFiscal nota,String local) throws NotaFiscalException {
 		
 		List<String> palavras = new ArrayList<String>();
+		palavras.add("-------------------------------------------------------------------------------------------");
 		palavras.add("Cliente:");
 		palavras.add("Nome:\t"+nota.getCliente().getNome()+"\tCPF:\t"+nota.getCliente().getCpf());
+		palavras.add("-------------------------------------------------------------------------------------------");
 		palavras.add("Funcionario:");
 		palavras.add("Nome:\t"+nota.getFuncionario().getNome()+"\tCargo:\t"+nota.getFuncionario().getCargo().getDescricao());
+		palavras.add("-------------------------------------------------------------------------------------------");
 		palavras.add("Produtos:");
 		for (Produto produto : nota.getProdutos()) {
 			palavras.add(produto.getNome()+"\t\tR$"+produto.getValorUnitario());
 			
 		}
+		palavras.add("-------------------------------------------------------------------------------------------");
+		palavras.add("Valor Tota--------------------------------------------------------------------------R$"+nota.getTotal());
+		palavras.add("-------------------------------------------------------------------------------------------");
 		palavras.add("Data de emissão:\t"+nota.getDataEmissao().get(Calendar.DAY_OF_MONTH)+
 				"/"+nota.getDataEmissao().get(Calendar.MONTH)+
 				"/"+nota.getDataEmissao().get(Calendar.YEAR)+
 				"\tHora:\t"+nota.getDataEmissao().get(Calendar.HOUR_OF_DAY)+":"+nota.getDataEmissao().get(Calendar.MINUTE));
+		palavras.add("-------------------------------------------------------------------------------------------");
+		
 		try {
 			Arquivo.gravaArquivo(local, palavras, false);
 		} catch (IOException e) {

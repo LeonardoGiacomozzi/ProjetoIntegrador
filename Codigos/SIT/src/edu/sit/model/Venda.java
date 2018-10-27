@@ -46,6 +46,13 @@ public class Venda {
 	public void setNotaFiscal(NotaFiscal notaFiscal) {
 		this.notaFiscal = notaFiscal;
 	}
+	public Double getValorCompra() {
+		double total = 0.0;
+		for (Produto produto : getProdutos()) {
+			total += produto.getValorUnitario();
+		}
+		return total;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
