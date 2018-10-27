@@ -21,7 +21,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	}
 
 	@Override
-	public Cliente consulta(int codigo) throws DaoException, ConexaoException {
+	public Cliente consulta(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +33,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	}
 
 	@Override
-	public List<Cliente> consultaFaixa(int... faixa) throws DaoException, ConexaoException {
+	public List<Cliente> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -69,7 +69,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(int codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -79,4 +79,6 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
 }

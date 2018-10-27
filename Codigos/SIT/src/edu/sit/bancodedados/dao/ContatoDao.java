@@ -21,7 +21,7 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 	}
 
 	@Override
-	public Contato consulta(int codigo) throws DaoException, ConexaoException {
+	public Contato consulta(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +33,7 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 	}
 
 	@Override
-	public List<Contato> consultaFaixa(int... faixa) throws DaoException, ConexaoException {
+	public List<Contato> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -69,7 +69,7 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(int codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}

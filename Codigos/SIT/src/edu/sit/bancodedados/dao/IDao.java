@@ -11,7 +11,7 @@ public interface IDao<T> {
 
 	public abstract Map<Integer, T> consultaTodos() throws DaoException, ConexaoException;
 
-	public abstract List<T> consultaFaixa(int... faixa) throws DaoException, ConexaoException;
+	public abstract List<T> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException;
 
 	public abstract boolean insere(T objeto) throws DaoException, ConexaoException;
 
@@ -23,7 +23,7 @@ public interface IDao<T> {
 	
 	public abstract boolean altera(T objeto) throws DaoException, ConexaoException;
 	
-	public abstract boolean exclui(int codigo) throws DaoException, ConexaoException;
+	public abstract boolean exclui(Integer codigo) throws DaoException, ConexaoException;
 	
 	public abstract boolean exclui(T objeto) throws DaoException, ConexaoException;
 

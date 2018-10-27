@@ -21,7 +21,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	}
 
 	@Override
-	public Venda consulta(int codigo) throws DaoException, ConexaoException {
+	public Venda consulta(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +33,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	}
 
 	@Override
-	public List<Venda> consultaFaixa(int... faixa) throws DaoException, ConexaoException {
+	public List<Venda> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -69,7 +69,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(int codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -79,5 +79,5 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-		
+	
 }

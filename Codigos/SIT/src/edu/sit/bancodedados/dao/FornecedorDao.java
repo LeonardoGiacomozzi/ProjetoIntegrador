@@ -21,7 +21,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 	}
 
 	@Override
-	public Fornecedor consulta(int codigo) throws DaoException, ConexaoException {
+	public Fornecedor consulta(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +33,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 	}
 
 	@Override
-	public List<Fornecedor> consultaFaixa(int... faixa) throws DaoException, ConexaoException {
+	public List<Fornecedor> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -69,7 +69,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(int codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -79,4 +79,5 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 }

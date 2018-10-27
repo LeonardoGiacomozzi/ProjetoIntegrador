@@ -21,7 +21,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 	}
 
 	@Override
-	public Funcionario consulta(int codigo) throws DaoException, ConexaoException {
+	public Funcionario consulta(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +33,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 	}
 
 	@Override
-	public List<Funcionario> consultaFaixa(int... faixa) throws DaoException, ConexaoException {
+	public List<Funcionario> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -69,7 +69,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(int codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -79,4 +79,5 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 }

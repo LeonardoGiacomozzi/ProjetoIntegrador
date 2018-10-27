@@ -21,7 +21,7 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 	}
 
 	@Override
-	public Produto consulta(int codigo) throws DaoException, ConexaoException {
+	public Produto consulta(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +33,7 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 	}
 
 	@Override
-	public List<Produto> consultaFaixa(int... faixa) throws DaoException, ConexaoException {
+	public List<Produto> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -69,7 +69,7 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(int codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -79,4 +79,5 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
 }

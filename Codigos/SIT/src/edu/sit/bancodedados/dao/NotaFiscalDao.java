@@ -21,7 +21,7 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 	}
 
 	@Override
-	public NotaFiscal consulta(int codigo) throws DaoException, ConexaoException {
+	public NotaFiscal consulta(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -33,7 +33,7 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 	}
 
 	@Override
-	public List<NotaFiscal> consultaFaixa(int... faixa) throws DaoException, ConexaoException {
+	public List<NotaFiscal> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -69,7 +69,7 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(int codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -79,5 +79,5 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 }
