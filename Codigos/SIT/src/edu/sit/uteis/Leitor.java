@@ -3,6 +3,8 @@ package edu.sit.uteis;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import edu.sit.erro.leitura.EErroLeitura;
 import edu.sit.view.menu.LeituraException;
@@ -41,7 +43,6 @@ public class Leitor {
 		
 	}
 	
-<<<<<<< HEAD
 	public static Date leData() throws LeituraException {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -52,18 +53,5 @@ public class Leitor {
 		}
 		
 	}
-=======
-//	public static Date leData() throws LeituraException {
-//		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-//		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-//		try {
-//			
-//			return  new Date(sdf.format(teclado.readLine()));
-//		} catch (IOException e) {
-//			throw new LeituraException(EErroLeitura.ERRO_LER_STRING);
-//		}
-//		
-//	}
->>>>>>> branch 'master' of https://github.com/LeonardoGiacomozzi/ProjetoIntegrador.git
 
 }
