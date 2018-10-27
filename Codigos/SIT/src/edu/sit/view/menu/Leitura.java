@@ -7,11 +7,18 @@ import java.io.InputStreamReader;
 public class Leitura {
 	public static String leitor() {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-		String escolha = "";
-		try {
-			escolha = teclado.readLine();
-		} catch (IOException e) {
-			System.out.println("Erro");
-		}
+		
+			  String escolha="";
+			try {
+				escolha = teclado.readLine();
+			} catch (IOException e) {
+				System.out.println(EMensagensErroLeitura.ERRO_CARACTER);
+			}
+			 
+		
+		return escolha;
+		
+		
+		
 	}
 }
