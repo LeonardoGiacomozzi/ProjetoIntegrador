@@ -34,6 +34,7 @@ public class Leitor {
 	
 	public static Double leDouble() throws LeituraException {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("a");
 		
 		try {
 			return  Double.parseDouble(teclado.readLine());
