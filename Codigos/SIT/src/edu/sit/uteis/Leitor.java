@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import edu.sit.bancodedados.dao.DaoException;
 import edu.sit.erro.leitura.EErroLeitura;
 import edu.sit.view.menu.LeituraException;
 
@@ -20,7 +19,6 @@ public class Leitor {
 		} catch (IOException e) {
 			throw new LeituraException(EErroLeitura.ERRO_LER_STRING);
 		}
-		
 	}
 	
 	public static Integer leInteger() throws LeituraException {
@@ -49,14 +47,11 @@ public class Leitor {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			
-			return  new Date(sdf.format(teclado.readLine()));
+			return new Date(sdf.format(teclado.readLine()));
 		} catch (IOException e) {
 			throw new LeituraException(EErroLeitura.ERRO_LER_STRING);
 		}
 		
 	}
-
-	
 
 }
