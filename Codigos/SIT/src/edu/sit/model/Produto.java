@@ -1,12 +1,42 @@
 package edu.sit.model;
 
 public class Produto {
+	
 	private Integer id;
 	private String nome;
-	private String categoria;
+	private Integer categoriaId;
+	private Categoria categoria;
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	private Integer fornecedorId;
 	private Fornecedor fornecedor;
 	private Integer quantidade;
 	private Double valorUnitario;
+
+	
+	
+	public Integer getCategoriaId() {
+		return categoriaId;
+	}
+
+	public void setCategoriaId(Integer caracteristicaId) {
+		this.categoriaId = caracteristicaId;
+	}
+
+	public Integer getFornecedorId() {
+		return fornecedorId;
+	}
+
+	public void setFornecedorId(Integer fornecedorId) {
+		this.fornecedorId = fornecedorId;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
 
 	public Integer getId() {
 		return id;
@@ -24,13 +54,6 @@ public class Produto {
 		this.nome = nome;
 	}
 
-	public String getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
 
 	public Fornecedor getFornecedor() {
 		return fornecedor;
@@ -56,17 +79,17 @@ public class Produto {
 		this.valorUnitario = valorUnitario;
 	}
 	
-	public static Produto criaProdutoSemFornecedor(String nome,String categoria,Integer quatidade,Double valorUnitario) {
+	public static Produto criaProdutoSemFornecedor(String nome,Categoria categoria,Integer quatidade,Double valorUnitario) {
 		return new Produto( nome, categoria, Fornecedor.criaFornecedorFull( "SemFornecedor", "SemFornecedor",
 					Contato.criaContato("Sem telefone","Sem Email"),"SemFornecedor"), quatidade,valorUnitario);
 	}
 	
-	public static Produto criaProduto(String nome,String categoria,Integer quatidade,Double valorUnitario,Fornecedor fornecedor) {
+	public static Produto criaProduto(String nome,Categoria categoria,Integer quatidade,Double valorUnitario,Fornecedor fornecedor) {
 		return new Produto( nome, categoria, fornecedor, quatidade,valorUnitario);
 	}
 	
 	
-	private Produto(String nome, String categoria, Fornecedor fornecedor, Integer quantidade,
+	private Produto(String nome, Categoria categoria, Fornecedor fornecedor, Integer quantidade,
 			Double valorUnitario) {
 		setCategoria(categoria);
 		setFornecedor(fornecedor);
@@ -74,7 +97,14 @@ public class Produto {
 		setQuantidade(quantidade);
 		setValorUnitario(valorUnitario);
 	}
-
+	private Produto(String nome, Integer categoria, Integer fornecedor, Integer quantidade,
+			Double valorUnitario) {
+		setCategoriaId(categoria);
+		setFornecedorId(fornecedor);
+		setNome(nome);
+		setQuantidade(quantidade);
+		setValorUnitario(valorUnitario);
+	}
 	@Override
 	public String toString() {
 		return "Produto " + "\n\tId\t:" + getId() + "\n\tNome\t/:" + getNome() + "\n\tCategoria\t:" + getCategoria()
