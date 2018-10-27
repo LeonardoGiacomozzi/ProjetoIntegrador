@@ -55,7 +55,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	public Cliente consulta(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE Codigo = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Teste1 WHERE idCliente = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 			return rs.first() ?  Cliente.criaPessoaBanco(rs.getInt("idCliente"),
