@@ -7,7 +7,7 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 
 public interface IDao<T> {
 	
-	public abstract T consulta(int codigo) throws DaoException, ConexaoException;
+	public abstract T consulta(Integer codigo) throws DaoException, ConexaoException;
 
 	public abstract Map<Integer, T> consultaTodos() throws DaoException, ConexaoException;
 
