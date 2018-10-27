@@ -6,6 +6,7 @@ public class Produto {
 	private String nome;
 	private Integer categoriaId;
 	private Categoria categoria;
+	
 	public Categoria getCategoria() {
 		return categoria;
 	}
