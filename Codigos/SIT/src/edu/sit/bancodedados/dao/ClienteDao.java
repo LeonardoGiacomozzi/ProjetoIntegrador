@@ -19,7 +19,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Tabacaria`.`Cliente` (\r\n" + 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `TESTE`.`Cliente` (\r\n" + 
 					"  `idCliente` INT NOT NULL AUTO_INCREMENT,\r\n" + 
 					"  `Nome` VARCHAR(45) NOT NULL,\r\n" + 
 					"  `CPF` VARCHAR(14) NOT NULL,\r\n" + 

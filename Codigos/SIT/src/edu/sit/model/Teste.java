@@ -25,9 +25,13 @@ public class Teste {
 	    	        df.setTimeZone (TimeZone.getTimeZone ("GMT"));
 	    	        System.out.println (df.format (dt));
 	    	        
-	   ClienteDao teste = new ClienteDao();
-	   Cliente cliente = teste.consulta(1);
-	   System.out.println(cliente);
+	   ///ClienteDao teste = new ClienteDao();
+	   //Cliente cliente = teste.consulta(1);
+	   //System.out.println(cliente);
+	   
+	   ClienteDao teste1 = new ClienteDao();
+	   System.out.println(teste1.excluiTabela());
+	 
 	   
 	    	    
 	    }
