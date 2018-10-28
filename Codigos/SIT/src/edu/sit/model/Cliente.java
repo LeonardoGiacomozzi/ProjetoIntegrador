@@ -88,14 +88,13 @@ public class Cliente {
 		return new Cliente(0,"Nome não Informado",dataDeNascimento,"Endereço não informado",cpf,Contato.criaContato());
 	}
 	
-	public static Cliente criaPessoaBanco(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
+	public static Cliente consultaPessoaBanco(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
 		return new Cliente(id, nome, dataDeNascimento, endereco, cpf, contato);
 	}
 
 	
 	@Override
 	public String toString() {
-	
 		return getNome()+"\t\t"+getIdade(getDataDeNascimento());
 	}
 	@Override

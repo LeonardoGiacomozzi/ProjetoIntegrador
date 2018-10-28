@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,16 +20,12 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS `TESTE`.`Cliente` (\r\n" + 
-					"  `idCliente` INT NOT NULL AUTO_INCREMENT,\r\n" + 
-					"  `Nome` VARCHAR(45) NOT NULL,\r\n" + 
-					"  `CPF` VARCHAR(14) NOT NULL,\r\n" + 
-					"  `Data_Nascimento` DATE NOT NULL,\r\n" + 
-					"  `Endereco` VARCHAR(45) NOT NULL,\r\n" + 
-					"  `Contato_idContato` INT NOT NULL,\r\n" + 
-					"  PRIMARY KEY (`idCliente`),\r\n" + 
-					"  INDEX `fk_Cliente_Contato1_idx` (`Contato_idContato` ASC))\r\n" + 
-					"ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `TESTE`.`Cliente` (\r\n"
+					+ "  `idCliente` INT NOT NULL AUTO_INCREMENT,\r\n" + "  `Nome` VARCHAR(45) NOT NULL,\r\n"
+					+ "  `CPF` VARCHAR(14) NOT NULL,\r\n" + "  `Data_Nascimento` DATE NOT NULL,\r\n"
+					+ "  `Endereco` VARCHAR(45) NOT NULL,\r\n" + "  `Contato_idContato` INT NOT NULL,\r\n"
+					+ "  PRIMARY KEY (`idCliente`),\r\n"
+					+ "  INDEX `fk_Cliente_Contato1_idx` (`Contato_idContato` ASC))\r\n" + "ENGINE = InnoDB;");
 			return true;
 		} catch (SQLException e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -44,7 +41,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			Statement st = conexao.createStatement();
 			st.execute("DROP TABLE Cliente;");
 			return true;
-		} catch (SQLException e){
+		} catch (SQLException e) {
 			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();
@@ -58,12 +55,12 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Teste1 WHERE idCliente = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ?  Cliente.criaPessoaBanco(rs.getInt("idCliente"),
-										   rs.getString("Nome"),
-										   rs.getDate("Data_Nascimento"),
-										   rs.getString("CPF"),
-										   rs.getString("Endereco"),
-										   rs.getInt("Contato_idContato")) : null;
+			return rs.first() ? Cliente.consultaPessoaBanco(rs.getInt("idCliente"), 
+														rs.getString("Nome"),
+														rs.getDate("Data_Nascimento"),
+														rs.getString("CPF"), 
+														rs.getString("Endereco"),
+														rs.getInt("Contato_idContato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -73,8 +70,26 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 
 	@Override
 	public Map<Integer, Cliente> consultaTodos() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		Map<Integer, Cliente> clientes = new HashMap<Integer, Cliente>();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM Cliente;");
+			while (rs.next()) {
+				clientes.put(Integer.valueOf(rs.getInt("idCliente")), Cliente.consultaPessoaBanco(rs.getInt("idCliente"), 
+																								rs.getString("Nome"),
+																								rs.getDate("Data_Nascimento"), 
+																								rs.getString("CPF"), 
+																								rs.getString("Endereco"),
+																								rs.getInt("Contato_idContato")));
+			}
+			return clientes;
+		} catch (SQLException e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+
 	}
 
 	@Override
@@ -124,6 +139,4 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
 }
