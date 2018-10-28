@@ -57,13 +57,20 @@ public class Cliente {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	private Cliente(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Contato contato) {
-		setId(id);
+	private Cliente (String nome, Date dataDeNascimento, String endereco, String cpf, Contato contato) {
 		setNome(nome);
 		setDataDeNascimento(dataDeNascimento);
 		setEndereco(endereco);
 		setCpf(cpf);
 		setContato(contato);
+	}
+	
+	private Cliente (String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
+		setNome(nome);
+		setDataDeNascimento(dataDeNascimento);
+		setEndereco(endereco);
+		setCpf(cpf);
+		setContatoid(contato);
 	}
 	
 	private Cliente(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
@@ -81,11 +88,15 @@ public class Cliente {
 		
 	}
 	public static Cliente criaPessoa(String nome,Date dataNascimento) {
-		return new Cliente(0,nome,dataNascimento,"Endereço Não Informado","Cpf Não Informado",Contato.criaContato());
+		return new Cliente(nome,dataNascimento,"Endereço Não Informado","Cpf Não Informado",Contato.criaContato());
 	}
 	
 	public static Cliente criaPessoa(Date dataDeNascimento,String cpf) {
-		return new Cliente(0,"Nome não Informado",dataDeNascimento,"Endereço não informado",cpf,Contato.criaContato());
+		return new Cliente("Nome não Informado",dataDeNascimento,"Endereço não informado",cpf,Contato.criaContato());
+	}
+	
+	public static Cliente criaPessoaBanco(String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
+		return new Cliente(nome, dataDeNascimento, endereco, cpf, contato);
 	}
 	
 	public static Cliente consultaPessoaBanco(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {

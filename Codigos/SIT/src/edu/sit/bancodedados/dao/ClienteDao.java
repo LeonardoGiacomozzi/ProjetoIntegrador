@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 					+ "  PRIMARY KEY (`idCliente`),\r\n"
 					+ "  INDEX `fk_Cliente_Contato1_idx` (`Contato_idContato` ASC))\r\n" + "ENGINE = InnoDB;");
 			return true;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();
@@ -41,7 +42,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			Statement st = conexao.createStatement();
 			st.execute("DROP TABLE Cliente;");
 			return true;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();
@@ -49,11 +50,11 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	}
 
 	@Override
-	public Cliente consulta(Integer codigo) throws DaoException, ConexaoException {
+	public Cliente consulta(Integer idCliente) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Teste1 WHERE idCliente = ?;");
-			pst.setInt(1, codigo);
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE idCliente = ?;");
+			pst.setInt(1, idCliente);
 			ResultSet rs = pst.executeQuery();
 			return rs.first() ? Cliente.consultaPessoaBanco(rs.getInt("idCliente"), 
 														rs.getString("Nome"),
@@ -84,7 +85,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 																								rs.getInt("Contato_idContato")));
 			}
 			return clientes;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();
@@ -100,20 +101,53 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 
 	@Override
 	public boolean insere(Cliente objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("INSERT INTO Cliente (Nome, Data_Nascimento, CPF, Endereco, Contato_idContato) values (?, ?, ?, ?, ?);");
+			pst.setString(1, objeto.getNome());
+			pst.setDate(2, new java.sql.Date(objeto.getDataDeNascimento().getTime()));
+			pst.setString(3, objeto.getCpf());
+			pst.setString(4, objeto.getEndereco());
+			pst.setInt(5, objeto.getContatoid());
+			return pst.executeUpdate() > 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public List<Cliente> insereVarios(Map<Integer, Cliente> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Cliente> insereVarios(List<Cliente> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		List<Cliente> falhados = new ArrayList<>();
+		try {
+			PreparedStatement pst = conexao.prepareStatement
+					("INSERT INTO Cliente (Nome, Data_Nascimento, CPF, Endereco, Contato_idContato) values (?, ?, ?, ?, ?);");
+			for (Cliente cliente : objetos) {
+				try {
+					pst.setString(1, cliente.getNome());
+					pst.setDate(2, new java.sql.Date(cliente.getDataDeNascimento().getTime()));
+					pst.setString(3, cliente.getCpf());
+					pst.setString(4, cliente.getEndereco());
+					pst.setInt(5, cliente.getContatoid());
+					pst.executeUpdate();
+				} catch (SQLException i) {
+					new DaoException(EErrosDao.INSERE_DADO, i.getMessage(), this.getClass());
+					falhados.add(cliente);
+				}
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return falhados;
 	}
 
 	@Override
