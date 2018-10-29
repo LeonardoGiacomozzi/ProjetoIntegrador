@@ -52,6 +52,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	@Override
 	public Cliente consulta(Integer idCliente) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
+		
 		try {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE idCliente = ?;");
 			pst.setInt(1, idCliente);
@@ -105,7 +106,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		try {
 			PreparedStatement pst = conexao.prepareStatement("INSERT INTO Cliente (Nome, Data_Nascimento, CPF, Endereco, Contato_idContato) values (?, ?, ?, ?, ?);");
 			pst.setString(1, objeto.getNome());
-			pst.setDate(2, new java.sql.Date(objeto.getDataDeNascimento().getTime()));
+			pst.setDate(2, java.sql.Date.valueOf(objeto.getDataDeNascimento()));
 			pst.setString(3, objeto.getCpf());
 			pst.setString(4, objeto.getEndereco());
 			pst.setInt(5, objeto.getContatoid());
@@ -132,7 +133,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			for (Cliente cliente : objetos) {
 				try {
 					pst.setString(1, cliente.getNome());
-					pst.setDate(2, new java.sql.Date(cliente.getDataDeNascimento().getTime()));
+					pst.setDate(2, java.sql.Date.valueOf(cliente.getDataDeNascimento()));
 					pst.setString(3, cliente.getCpf());
 					pst.setString(4, cliente.getEndereco());
 					pst.setInt(5, cliente.getContatoid());
@@ -162,7 +163,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		try {
 			PreparedStatement pst = conexao.prepareStatement("UPDATE Cliente SET Nome = '?', Data_Nascimento = '?', CPF = '?', Endereco = '?'  WHERE idCliente = ?;");
 			pst.setString(1, objeto.getNome());
-			pst.setDate(2, new java.sql.Date(objeto.getDataDeNascimento().getTime()));
+			pst.setDate(2,java.sql.Date.valueOf(objeto.getDataDeNascimento()));
 			pst.setString(3, objeto.getCpf());
 			pst.setString(4, objeto.getEndereco());
 			pst.setInt(5, objeto.getId());

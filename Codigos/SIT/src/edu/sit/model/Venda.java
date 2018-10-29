@@ -5,9 +5,12 @@ import java.util.ArrayList;
 public class Venda {
 	private Integer id;
 	private Double valor;
+	private Integer clienteId;
 	private Cliente cliente;
 	private ArrayList<Produto> produtos;
+	private Integer funcionarioId;
 	private Funcionario funcionario;
+	private Integer notaFiscalId;
 	private NotaFiscal notaFiscal;
 
 	public Integer getId() {
@@ -95,6 +98,24 @@ public class Venda {
 			listaProdutos += produto.toString()+"\n";
 		}
 		return "Funcionário:\t\t"+ getFuncionario()+ "\nCliente:\t\t"+ getCliente()+"\nValor:\t\t"+ getValor()+"\nProdutos:\t\t"+ listaProdutos;					
+	}
+	public Integer getClienteId() {
+		return clienteId;
+	}
+	public void setClienteId(Integer clienteId) {
+		this.clienteId = clienteId;
+	}
+	public Integer getFuncionarioId() {
+		return funcionarioId;
+	}
+	public void setFuncionarioId(Integer funcionarioId) {
+		this.funcionarioId = funcionarioId;
+	}
+	public Integer getNotaFiscalId() {
+		return notaFiscalId;
+	}
+	public void setNotaFiscalId(Integer notaFiscalId) {
+		this.notaFiscalId = notaFiscalId;
 	}
 
 	

@@ -1,12 +1,14 @@
 package edu.sit.uteis;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class CalculoIdade {
-	public static int calculaIdade(java.util.Date dataNasc) {
+	public static int calculaIdade(LocalDate dataNasc) {
 
 	    Calendar dataNascimento = Calendar.getInstance();  
-	    dataNascimento.setTime(dataNasc); 
+	    dataNascimento.setTime(Date.valueOf(dataNasc)); 
 	    Calendar hoje = Calendar.getInstance();  
 
 	    int idade = hoje.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR); 

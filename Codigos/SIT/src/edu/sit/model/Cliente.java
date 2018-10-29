@@ -1,5 +1,8 @@
 package edu.sit.model;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 
 import edu.sit.uteis.CalculoIdade;
@@ -8,7 +11,7 @@ public class Cliente {
 	
 	private Integer id;
 	private	String nome;
-	private Date dataDeNascimento;
+	private LocalDate dataDeNascimento;
 	private String endereco;
 	private String cpf;
 	private Contato contato;
@@ -32,10 +35,10 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Date getDataDeNascimento() {
+	public LocalDate getDataDeNascimento() {
 		return dataDeNascimento;
 	}
-	public void setDataDeNascimento(Date dataDeNascimento) {
+	public void setDataDeNascimento(LocalDate dataDeNascimento) {
 		this.dataDeNascimento = dataDeNascimento;
 	}
 	public String getEndereco() {
@@ -56,7 +59,7 @@ public class Cliente {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	private Cliente (String nome, Date dataDeNascimento, String endereco, String cpf, Contato contato) {
+	private Cliente (String nome, LocalDate dataDeNascimento, String endereco, String cpf, Contato contato) {
 		setNome(nome);
 		setDataDeNascimento(dataDeNascimento);
 		setEndereco(endereco);
@@ -64,7 +67,7 @@ public class Cliente {
 		setContato(contato);
 	}
 	
-	private Cliente (String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
+	private Cliente (String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		setNome(nome);
 		setDataDeNascimento(dataDeNascimento);
 		setEndereco(endereco);
@@ -75,26 +78,28 @@ public class Cliente {
 	private Cliente(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
 		setId(id);
 		setNome(nome);
-		setDataDeNascimento(dataDeNascimento);
+		Instant instant = dataDeNascimento.toInstant();
+		LocalDate from = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+		setDataDeNascimento(from);
 		setEndereco(endereco);
 		setCpf(cpf);
 		setContatoid(contato);
 	}
 	
-	public int getIdade(Date dataNacimento) {
+	public int getIdade(LocalDate dataNacimento) {
 				
 		return  CalculoIdade.calculaIdade(dataNacimento);
 		
 	}
-	public static Cliente criaPessoa(String nome,Date dataNascimento) {
+	public static Cliente criaPessoa(String nome,LocalDate dataNascimento) {
 		return new Cliente(nome,dataNascimento,"Endereço Não Informado","Cpf Não Informado",Contato.criaContato());
 	}
 	
-	public static Cliente criaPessoa(Date dataDeNascimento,String cpf) {
+	public static Cliente criaPessoa(LocalDate dataDeNascimento,String cpf) {
 		return new Cliente("Nome não Informado",dataDeNascimento,"Endereço não informado",cpf,Contato.criaContato());
 	}
 	
-	public static Cliente criaPessoaBanco(String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
+	public static Cliente criaPessoaBanco(String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		return new Cliente(nome, dataDeNascimento, endereco, cpf, contato);
 	}
 	

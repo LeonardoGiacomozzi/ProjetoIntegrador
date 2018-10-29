@@ -6,17 +6,15 @@ public class Produto {
 	private String nome;
 	private Integer categoriaId;
 	private Categoria categoria;
-	
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
 	private Integer fornecedorId;
 	private Fornecedor fornecedor;
 	private Integer quantidade;
 	private Double valorUnitario;
 
 	
+	public Categoria getCategoria() {
+		return categoria;
+	}
 	
 	public Integer getCategoriaId() {
 		return categoriaId;
