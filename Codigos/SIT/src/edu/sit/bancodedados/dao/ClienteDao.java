@@ -158,14 +158,35 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 
 	@Override
 	public boolean altera(Cliente objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("UPDATE Cliente SET Nome = '?', Data_Nascimento = '?', CPF = '?', Endereco = '?'  WHERE idCliente = ?;");
+			pst.setString(1, objeto.getNome());
+			pst.setDate(2, new java.sql.Date(objeto.getDataDeNascimento().getTime()));
+			pst.setString(3, objeto.getCpf());
+			pst.setString(4, objeto.getEndereco());
+			pst.setInt(5, objeto.getId());
+			return pst.executeUpdate() > 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.ALTERA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
-	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean exclui(Integer idCliente) throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Cliente WHERE idCliente = ?;");
+			pst.setInt(1, idCliente);
+			pst.execute();
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override

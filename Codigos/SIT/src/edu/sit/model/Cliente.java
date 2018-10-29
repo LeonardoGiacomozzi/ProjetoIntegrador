@@ -14,7 +14,6 @@ public class Cliente {
 	private Contato contato;
 	private Integer contatoid;
 	
-	
 	public Integer getContatoid() {
 		return contatoid;
 	}
@@ -102,7 +101,6 @@ public class Cliente {
 	public static Cliente consultaPessoaBanco(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
 		return new Cliente(id, nome, dataDeNascimento, endereco, cpf, contato);
 	}
-
 	
 	@Override
 	public String toString() {
