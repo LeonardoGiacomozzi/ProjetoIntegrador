@@ -181,8 +181,8 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		try {
 			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Cliente WHERE idCliente = ?;");
 			pst.setInt(1, idCliente);
-			pst.execute();
-			return true;
+			return pst.executeUpdate()>0;
+			 
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
 		} finally {
