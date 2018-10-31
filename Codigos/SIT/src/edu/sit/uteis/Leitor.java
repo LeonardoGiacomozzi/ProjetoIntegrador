@@ -3,8 +3,8 @@ package edu.sit.uteis;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import edu.sit.erro.leitura.EErroLeitura;
 import edu.sit.view.menu.LeituraException;
@@ -44,11 +44,12 @@ public class Leitor {
 		
 	}
 	
-	public static Date leData() throws LeituraException {
+	public static LocalDate leData() throws LeituraException {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			return new Date(sdf.format(teclado.readLine()));
+			DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate ld = LocalDate.parse(teclado.readLine(),formatador);
+			return ld;
 		} catch (IOException e) {
 			throw new LeituraException(EErroLeitura.ERRO_LER_STRING);
 		}
