@@ -72,7 +72,7 @@ public class CadastroCliente {
 	
 	try {
 		Contato contato = Contato.criaContato(tel, email);
-		 new ContatoDao().insere(contato);
+		new ContatoDao().insere(contato);
 	}	catch (Exception e) {
 		// TODO: handle exception
 	}	
