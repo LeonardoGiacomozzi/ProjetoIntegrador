@@ -7,6 +7,7 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.TimeZone;
 
+import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.DaoException;
@@ -44,18 +45,18 @@ public class Teste {
 	 //teste1.add(Cliente.criaPessoaBanco("Larissa", new Date(), "Travessa", "444.444.444-44", 4));
 	 //System.out.println(teste1);
 	
-	    	Date date = new Date();
-	    	Instant instant = date.toInstant();
-	    	LocalDate from = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-	 System.out.println(from);
+	
 	  
 	 
 	 
-	    	        
-	    	        ///ClienteDao teste = new ClienteDao();
-	   //Cliente cliente = teste.consulta(1);
-	   //System.out.println(cliente);
-	   
+	         
+	    ClienteDao teste = new ClienteDao();
+
+	    //Conexao teste1 = new Conexao();
+	    //System.out.println(teste1.abreConexao());
+	    
+	    //System.out.println(teste.insere(Cliente.criaPessoaBanco("Maluco", LocalDate.now(), "Rua", "3232", 20)));
+	    System.out.println(teste.pegaUltimoID());
 	 
 	   
 	    	    

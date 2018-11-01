@@ -26,5 +26,7 @@ public interface IDao<T> {
 	public abstract boolean exclui(Integer codigo) throws DaoException, ConexaoException;
 	
 	public abstract boolean exclui(T objeto) throws DaoException, ConexaoException;
+	
+	public abstract T pegaUltimoID() throws DaoException, ConexaoException;
 
 }

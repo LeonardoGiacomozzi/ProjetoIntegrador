@@ -6,7 +6,8 @@ public enum EErrosDao {
 	CONSULTA_DADO ("Erro ao consultar dados na tabela especificada: "),
 	INSERE_DADO ("Erro ao inserir dados na tabela especificada: "),
 	ALTERA_DADO ("Erro ao alterar os dados da tabela especificada: "),
-	EXCLUI_DADO ("Erro ao excluir os dados da tabela especificada: ");
+	EXCLUI_DADO ("Erro ao excluir os dados da tabela especificada: "),
+	PEGA_ID ("Erro ao consultar o ultimo ID da tabela especificada: ");
 	
 	private String mensagem;
 

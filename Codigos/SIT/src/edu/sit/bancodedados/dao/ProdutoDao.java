@@ -79,5 +79,11 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public Produto pegaUltimoID(Integer idCliente) throws DaoException, ConexaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

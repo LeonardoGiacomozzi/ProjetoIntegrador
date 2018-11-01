@@ -79,5 +79,11 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public Funcionario pegaUltimoID(Integer idCliente) throws DaoException, ConexaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

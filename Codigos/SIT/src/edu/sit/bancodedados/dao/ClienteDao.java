@@ -52,7 +52,6 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	@Override
 	public Cliente consulta(Integer idCliente) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
-		
 		try {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE idCliente = ?;");
 			pst.setInt(1, idCliente);
@@ -181,7 +180,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		try {
 			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Cliente WHERE idCliente = ?;");
 			pst.setInt(1, idCliente);
-			return pst.executeUpdate()>0;
+			return pst.executeUpdate() > 0;
 			 
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
@@ -195,4 +194,18 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public Cliente pegaUltimoID() throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			return (Cliente) st.executeQuery("SELECT MAX(idCliente) FROM Cliente;"); 
+			
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}	
 }
