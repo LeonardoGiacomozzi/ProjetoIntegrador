@@ -4,8 +4,11 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.TimeZone;
+
+import javax.swing.text.DateFormatter;
 
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -56,8 +59,9 @@ public class Teste {
 	    //System.out.println(teste1.abreConexao());
 	    
 	    //System.out.println(teste.insere(Cliente.criaPessoaBanco("Maluco", LocalDate.now(), "Rua", "3232", 20)));
+	    //System.out.println(teste.insere(Cliente.criaPessoaBanco("Leonardo", LocalDate.parse("26/01/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Rua Blumenau", "111.111.222-33", 1)));
+	    //System.out.println(teste.criaTabela());
 	    System.out.println(teste.pegaUltimoID());
-	 
 	   
 	    	    
 	    }

@@ -58,7 +58,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			ResultSet rs = pst.executeQuery();
 			return rs.first() ? Cliente.consultaPessoaBanco(rs.getInt("idCliente"), 
 														rs.getString("Nome"),
-														rs.getDate("Data_Nascimento"),
+														rs.getDate("Data_Nascimento").toLocalDate(),
 														rs.getString("CPF"), 
 														rs.getString("Endereco"),
 														rs.getInt("Contato_idContato")) : null;
@@ -79,7 +79,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			while (rs.next()) {
 				clientes.put(Integer.valueOf(rs.getInt("idCliente")), Cliente.consultaPessoaBanco(rs.getInt("idCliente"), 
 																								rs.getString("Nome"),
-																								rs.getDate("Data_Nascimento"), 
+																								rs.getDate("Data_Nascimento").toLocalDate(), 
 																								rs.getString("CPF"), 
 																								rs.getString("Endereco"),
 																								rs.getInt("Contato_idContato")));
@@ -200,7 +200,8 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			return (Cliente) st.executeQuery("SELECT MAX(idCliente) FROM Cliente;"); 
+			ResultSet rs = st.executeQuery("SELECT MAX(idCliente) FROM Cliente;");
+			return rs.first() ? Cliente.pegaUltimoID(rs.getInt("idCliente")) : null;
 			
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());

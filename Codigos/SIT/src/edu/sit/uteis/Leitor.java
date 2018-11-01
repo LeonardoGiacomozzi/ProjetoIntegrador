@@ -51,7 +51,7 @@ public class Leitor {
 			LocalDate ld = LocalDate.parse(teclado.readLine(),formatador);
 			return ld;
 		} catch (IOException e) {
-			throw new LeituraException(EErroLeitura.ERRO_LER_STRING);
+			throw new LeituraException(EErroLeitura.ERRO_LER_DATA);
 		}
 		
 	}

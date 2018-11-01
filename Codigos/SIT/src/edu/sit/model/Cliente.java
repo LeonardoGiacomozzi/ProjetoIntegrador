@@ -1,9 +1,6 @@
 package edu.sit.model;
 
-import java.time.Instant;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
 
 import edu.sit.uteis.CalculoIdade;
 
@@ -75,12 +72,10 @@ public class Cliente {
 		setContatoid(contato);
 	}
 	
-	private Cliente(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
+	private Cliente(Integer id, String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		setId(id);
 		setNome(nome);
-		Instant instant = dataDeNascimento.toInstant();
-		LocalDate from = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-		setDataDeNascimento(from);
+		setDataDeNascimento(dataDeNascimento);
 		setEndereco(endereco);
 		setCpf(cpf);
 		setContatoid(contato);
@@ -95,7 +90,7 @@ public class Cliente {
 		return  CalculoIdade.calculaIdade(dataNacimento);
 		
 	}
-	public static Cliente criaPessoa(String nome,LocalDate dataNascimento) {
+	public static Cliente criaPessoa(String nome, LocalDate dataNascimento) {
 		return new Cliente(nome,dataNascimento,"Endereço Não Informado","Cpf Não Informado",Contato.criaContato());
 	}
 	
@@ -107,7 +102,7 @@ public class Cliente {
 		return new Cliente(nome, dataDeNascimento, endereco, cpf, contato);
 	}
 	
-	public static Cliente consultaPessoaBanco(Integer id, String nome, Date dataDeNascimento, String endereco, String cpf, Integer contato) {
+	public static Cliente consultaPessoaBanco(Integer id, String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		return new Cliente(id, nome, dataDeNascimento, endereco, cpf, contato);
 	}
 	
