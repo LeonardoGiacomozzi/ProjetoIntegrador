@@ -81,7 +81,7 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 	}
 
 	@Override
-	public Contato pegaUltimoID(Integer idCliente) throws DaoException, ConexaoException {
+	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}

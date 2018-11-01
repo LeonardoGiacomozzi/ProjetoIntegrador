@@ -21,7 +21,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS `TESTE`.`Cliente` (\r\n"
+			st.executeUpdate("CREATE TABLE `teste`.`Cliente` (\r\n"
 					+ "  `idCliente` INT NOT NULL AUTO_INCREMENT,\r\n" + "  `Nome` VARCHAR(45) NOT NULL,\r\n"
 					+ "  `CPF` VARCHAR(14) NOT NULL,\r\n" + "  `Data_Nascimento` DATE NOT NULL,\r\n"
 					+ "  `Endereco` VARCHAR(45) NOT NULL,\r\n" + "  `Contato_idContato` INT NOT NULL,\r\n"
@@ -196,13 +196,12 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	}
 
 	@Override
-	public Cliente pegaUltimoID() throws DaoException, ConexaoException {
+	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT MAX(idCliente) FROM Cliente;");
-			return rs.first() ? Cliente.pegaUltimoID(rs.getInt("idCliente")) : null;
-			
+			return rs.first() ? rs.getInt(1) : 0 ;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());
 		} finally {

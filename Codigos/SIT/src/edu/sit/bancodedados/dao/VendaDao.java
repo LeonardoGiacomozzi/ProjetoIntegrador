@@ -81,7 +81,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	}
 
 	@Override
-	public Venda pegaUltimoID(Integer idCliente) throws DaoException, ConexaoException {
+	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}

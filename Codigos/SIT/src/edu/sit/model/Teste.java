@@ -5,7 +5,9 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 
 import javax.swing.text.DateFormatter;
@@ -54,6 +56,7 @@ public class Teste {
 	 
 	         
 	    ClienteDao teste = new ClienteDao();
+	    System.out.println(teste.pegaUltimoID());
 
 	    //Conexao teste1 = new Conexao();
 	    //System.out.println(teste1.abreConexao());
@@ -61,7 +64,7 @@ public class Teste {
 	    //System.out.println(teste.insere(Cliente.criaPessoaBanco("Maluco", LocalDate.now(), "Rua", "3232", 20)));
 	    //System.out.println(teste.insere(Cliente.criaPessoaBanco("Leonardo", LocalDate.parse("26/01/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Rua Blumenau", "111.111.222-33", 1)));
 	    //System.out.println(teste.criaTabela());
-	    System.out.println(teste.pegaUltimoID());
+	    //System.out.println(teste.pegaUltimoID());
 	   
 	    	    
 	    }
