@@ -53,7 +53,7 @@ public class Teste {
 	 //System.out.println(new ClienteDao().insereVarios(teste1));
 	    	
 	    ClienteDao teste = new ClienteDao();
-	    teste.altera(Cliente.)
+	    teste
 	    	
 	    	
 	

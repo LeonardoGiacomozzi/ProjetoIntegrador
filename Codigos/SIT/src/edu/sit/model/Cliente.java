@@ -98,7 +98,7 @@ public class Cliente {
 		return new Cliente("Nome não Informado",dataDeNascimento,"Endereço não informado",cpf,Contato.criaContato());
 	}
 	
-	public static Cliente criaEalteraClienteBanco(String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
+	public static Cliente criaClienteBanco(String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		return new Cliente(nome, dataDeNascimento, endereco, cpf, contato);
 	}
 	
