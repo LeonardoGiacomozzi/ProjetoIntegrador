@@ -15,13 +15,13 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.model.Cliente;
 
 public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
-
+	
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE `teste`.`Cliente` (\r\n"
+			st.executeUpdate("CREATE TABLE `Cliente` (\r\n"
 					+ "  `idCliente` INT NOT NULL AUTO_INCREMENT,\r\n" + "  `Nome` VARCHAR(45) NOT NULL,\r\n"
 					+ "  `CPF` VARCHAR(14) NOT NULL,\r\n" + "  `Data_Nascimento` DATE NOT NULL,\r\n"
 					+ "  `Endereco` VARCHAR(45) NOT NULL,\r\n" + "  `Contato_idContato` INT NOT NULL,\r\n"
@@ -56,7 +56,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE idCliente = ?;");
 			pst.setInt(1, idCliente);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Cliente.consultaPessoaBanco(rs.getInt("idCliente"), 
+			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("idCliente"), 
 														rs.getString("Nome"),
 														rs.getDate("Data_Nascimento").toLocalDate(),
 														rs.getString("CPF"), 
@@ -77,7 +77,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Cliente;");
 			while (rs.next()) {
-				clientes.put(Integer.valueOf(rs.getInt("idCliente")), Cliente.consultaPessoaBanco(rs.getInt("idCliente"), 
+				clientes.put(Integer.valueOf(rs.getInt("idCliente")), Cliente.consultaClienteBanco(rs.getInt("idCliente"), 
 																								rs.getString("Nome"),
 																								rs.getDate("Data_Nascimento").toLocalDate(), 
 																								rs.getString("CPF"), 
@@ -115,11 +115,6 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		} finally {
 			Conexao.fechaConexao();
 		}
-	}
-
-	@Override
-	public List<Cliente> insereVarios(Map<Integer, Cliente> objetos) throws DaoException, ConexaoException {
-		return null;
 	}
 
 	@Override
@@ -187,12 +182,6 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		} finally {
 			Conexao.fechaConexao();
 		}
-	}
-
-	@Override
-	public boolean exclui(Cliente objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

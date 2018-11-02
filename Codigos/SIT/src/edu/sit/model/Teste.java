@@ -7,7 +7,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 
 import javax.swing.text.DateFormatter;
@@ -44,19 +46,23 @@ public class Teste {
 	  //System.out.println(teste.consulta(5));
 	 
 	 //List<Cliente> teste1 = new ArrayList<>();
-	 //teste1.add(Cliente.criaPessoaBanco("Joao", new Date(), "Rua", "111.111.111-11", 1));
-	 //teste1.add(Cliente.criaPessoaBanco("Maria", new Date(), "Avenida", "222.222.222-22", 2));
-	 //teste1.add(Cliente.criaPessoaBanco("Roberto", new Date(), "Praça", "333.333.333-33", 3));
-	 //teste1.add(Cliente.criaPessoaBanco("Larissa", new Date(), "Travessa", "444.444.444-44", 4));
-	 //System.out.println(teste1);
+	 //teste1.add(Cliente.criaPessoaBanco("Joao", LocalDate.parse("26/01/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Rua", "111.111.111-11", 1));
+	 //teste1.add(Cliente.criaPessoaBanco("Maria", LocalDate.parse("26/01/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Avenida", "222.222.222-22", 2));
+	// teste1.add(Cliente.criaPessoaBanco("Roberto", LocalDate.parse("26/01/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Praça", "333.333.333-33", 3));
+	 //teste1.add(Cliente.criaPessoaBanco("Larissa", LocalDate.parse("26/01/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Travessa", "444.444.444-44", 4));
+	 //System.out.println(new ClienteDao().insereVarios(teste1));
+	    	
+	    ClienteDao teste = new ClienteDao();
+	    teste.altera(Cliente.)
+	    	
+	    	
 	
 	
 	  
 	 
 	 
 	         
-	    ClienteDao teste = new ClienteDao();
-	    System.out.println(teste.pegaUltimoID());
+	    
 
 	    //Conexao teste1 = new Conexao();
 	    //System.out.println(teste1.abreConexao());

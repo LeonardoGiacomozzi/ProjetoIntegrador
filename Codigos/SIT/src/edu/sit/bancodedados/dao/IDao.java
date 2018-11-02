@@ -15,8 +15,6 @@ public interface IDao<T> {
 
 	public abstract boolean insere(T objeto) throws DaoException, ConexaoException;
 
-	public abstract List<T> insereVarios(Map<Integer, T> objetos) throws DaoException, ConexaoException;
-
 	public abstract List<T> insereVarios(List<T> objetos) throws DaoException, ConexaoException;
 
 	public abstract boolean insereVariosTransacao(List<T> objetos) throws DaoException, ConexaoException;
@@ -24,8 +22,6 @@ public interface IDao<T> {
 	public abstract boolean altera(T objeto) throws DaoException, ConexaoException;
 	
 	public abstract boolean exclui(Integer codigo) throws DaoException, ConexaoException;
-	
-	public abstract boolean exclui(T objeto) throws DaoException, ConexaoException;
 	
 	public abstract Integer pegaUltimoID() throws DaoException, ConexaoException;
 

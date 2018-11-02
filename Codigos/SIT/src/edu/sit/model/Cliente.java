@@ -90,19 +90,19 @@ public class Cliente {
 		return  CalculoIdade.calculaIdade(dataNacimento);
 		
 	}
-	public static Cliente criaPessoa(String nome, LocalDate dataNascimento) {
+	public static Cliente criaCliente(String nome, LocalDate dataNascimento) {
 		return new Cliente(nome,dataNascimento,"Endereço Não Informado","Cpf Não Informado",Contato.criaContato());
 	}
 	
-	public static Cliente criaPessoa(LocalDate dataDeNascimento,String cpf) {
+	public static Cliente criaCliente(LocalDate dataDeNascimento,String cpf) {
 		return new Cliente("Nome não Informado",dataDeNascimento,"Endereço não informado",cpf,Contato.criaContato());
 	}
 	
-	public static Cliente criaPessoaBanco(String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
+	public static Cliente criaEalteraClienteBanco(String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		return new Cliente(nome, dataDeNascimento, endereco, cpf, contato);
 	}
 	
-	public static Cliente consultaPessoaBanco(Integer id, String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
+	public static Cliente consultaClienteBanco(Integer id, String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		return new Cliente(id, nome, dataDeNascimento, endereco, cpf, contato);
 	}
 	
