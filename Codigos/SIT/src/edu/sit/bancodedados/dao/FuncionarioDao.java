@@ -45,12 +45,6 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 	}
 
 	@Override
-	public List<Funcionario> insereVarios(Map<Integer, Funcionario> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Funcionario> insereVarios(List<Funcionario> objetos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
@@ -70,12 +64,6 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 
 	@Override
 	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean exclui(Funcionario objeto) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -45,12 +45,6 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	}
 
 	@Override
-	public List<Venda> insereVarios(Map<Integer, Venda> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<Venda> insereVarios(List<Venda> objetos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
@@ -70,12 +64,6 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 
 	@Override
 	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean exclui(Venda objeto) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}

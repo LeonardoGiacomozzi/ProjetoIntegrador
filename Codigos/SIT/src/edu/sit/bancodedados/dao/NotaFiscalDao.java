@@ -45,12 +45,6 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 	}
 
 	@Override
-	public List<NotaFiscal> insereVarios(Map<Integer, NotaFiscal> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public List<NotaFiscal> insereVarios(List<NotaFiscal> objetos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
@@ -70,12 +64,6 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 
 	@Override
 	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean exclui(NotaFiscal objeto) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}

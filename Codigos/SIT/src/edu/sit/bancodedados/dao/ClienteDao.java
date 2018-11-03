@@ -155,7 +155,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	public boolean altera(Cliente objeto) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("UPDATE Cliente SET Nome = '?', Data_Nascimento = '?', CPF = '?', Endereco = '?'  WHERE idCliente = ?;");
+			PreparedStatement pst = conexao.prepareStatement("UPDATE Cliente SET Nome = ?, Data_Nascimento = ?, CPF = ?, Endereco = ?  WHERE idCliente = ?;");
 			pst.setString(1, objeto.getNome());
 			pst.setDate(2,java.sql.Date.valueOf(objeto.getDataDeNascimento()));
 			pst.setString(3, objeto.getCpf());

@@ -51,11 +51,17 @@ public class Teste {
 	// teste1.add(Cliente.criaPessoaBanco("Roberto", LocalDate.parse("26/01/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Praça", "333.333.333-33", 3));
 	 //teste1.add(Cliente.criaPessoaBanco("Larissa", LocalDate.parse("26/01/1998", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Travessa", "444.444.444-44", 4));
 	 //System.out.println(new ClienteDao().insereVarios(teste1));
+	   
+	   
 	    	
-	    ClienteDao teste = new ClienteDao();
-	    teste
-	    	
-	    	
+	   try {
+			ClienteDao test1 = new ClienteDao();
+			Cliente teste3 = new ClienteDao().consulta(2);
+			teste3.setNome("Xico");
+			System.out.println(test1.altera(teste3));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	
 	
 	  
