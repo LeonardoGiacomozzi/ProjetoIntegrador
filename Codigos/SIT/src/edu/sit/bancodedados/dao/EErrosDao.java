@@ -7,7 +7,8 @@ public enum EErrosDao {
 	INSERE_DADO ("Erro ao inserir dados na tabela especificada: "),
 	ALTERA_DADO ("Erro ao alterar os dados da tabela especificada: "),
 	EXCLUI_DADO ("Erro ao excluir os dados da tabela especificada: "),
-	PEGA_ID ("Erro ao consultar o ultimo ID da tabela especificada: ");
+	PEGA_ID ("Erro ao consultar o ultimo ID da tabela especificada: "),
+	ROLLBACK ("Erro ao efetuar o roolback na tabela especificada: ");
 	
 	private String mensagem;
 

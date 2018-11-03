@@ -1,20 +1,5 @@
 package edu.sit.model;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TimeZone;
-
-import javax.swing.text.DateFormatter;
-
-import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.DaoException;
@@ -54,15 +39,17 @@ public class Teste {
 	   
 	   
 	    	
-	   try {
-			ClienteDao test1 = new ClienteDao();
-			Cliente teste3 = new ClienteDao().consulta(2);
-			teste3.setNome("Xico");
-			System.out.println(test1.altera(teste3));
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	  // try {
+		//	ClienteDao test1 = new ClienteDao();
+			//Cliente teste3 = new ClienteDao().consulta(2);
+		//	teste3.setNome("Xico");
+		//	System.out.println(test1.altera(teste3));
+	//	} catch (Exception e) {
+		//	System.out.println(e.getMessage());
+	//	}
 	
+	  ClienteDao teste = new ClienteDao();
+	  System.out.println(teste.consultaFaixa(1,2,3,4));
 	
 	  
 	 
