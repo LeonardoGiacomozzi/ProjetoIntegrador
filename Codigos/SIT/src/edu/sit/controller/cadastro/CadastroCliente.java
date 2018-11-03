@@ -2,14 +2,20 @@ package edu.sit.controller.cadastro;
 
 import java.time.LocalDate;
 
+import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
+import edu.sit.bancodedados.dao.DaoException;
+import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.EErroCadastro;
+import edu.sit.model.Cliente;
 import edu.sit.model.Contato;
 import edu.sit.uteis.Leitor;
 import edu.sit.view.menu.LeituraException;
 
 public class CadastroCliente {
 	
-	public boolean CadastraCliente() {
+	public boolean CadastraCliente() throws ConexaoException, CadastroExeption {
 		
 		String nome = null;
 		LocalDate dataNascimento = null;
@@ -73,8 +79,11 @@ public class CadastroCliente {
 	try {
 		Contato contato = Contato.criaContato(tel, email);
 		new ContatoDao().insere(contato);
-		} catch (Exception e) {
-		throw
+		int idContato=new ContatoDao().pegaUltimoID();
+		Cliente cliente = Cliente.criaClienteBanco(nome,dataNascimento , endereco, cpf, idContato);
+		System.out.println(new ClienteDao().insere(cliente)?"Cliente cadastrado com sucesso":"Faha");
+	} catch (DaoException e) {
+		throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CLIENTE);
 	}	
 		return true;
 	}
