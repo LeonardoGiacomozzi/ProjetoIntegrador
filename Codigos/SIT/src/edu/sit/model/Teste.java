@@ -1,5 +1,10 @@
 package edu.sit.model;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.DaoException;
@@ -51,8 +56,12 @@ public class Teste {
 	  ClienteDao teste = new ClienteDao();
 	  System.out.println(teste.consultaFaixa(1,2,3,4));
 	
-	  
-	 
+	  List<Cliente> teste1 = new ArrayList<>();
+	  teste1.add(Cliente.criaClienteBanco("Bruno", LocalDate.parse("19/08/1924", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Rua", "111.111.111-11", 1));
+	  teste1.add(Cliente.criaClienteBanco("Diego", LocalDate.parse("01/12/1962", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Avenida", "222.222.222-22", 2));
+	  teste1.add(Cliente.criaClienteBanco("Rodrigo", LocalDate.parse("12/02/2001", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Praça", "333.333.333-33", 3));
+	  teste1.add(Cliente.criaClienteBanco("Carol", LocalDate.parse("25/06/19432498", DateTimeFormatter.ofPattern("dd/MM/yyyy")), "Travessa", "444.444.444-44", 4));
+	  System.out.println(new ClienteDao().insereVariosTransacao(teste1));
 	 
 	         
 	    

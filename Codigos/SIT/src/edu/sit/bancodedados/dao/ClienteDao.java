@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Savepoint;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -167,7 +166,6 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			conexao.setAutoCommit(false);
-			Savepoint sp =  conexao.setSavepoint();
 			PreparedStatement pst = conexao.prepareStatement(
 					"INSERT INTO Cliente (Nome, Data_Nascimento, CPF, Endereco, Contato_idContato) values (?, ?, ?, ?, ?);");
 			for (Cliente cliente : objetos) {
