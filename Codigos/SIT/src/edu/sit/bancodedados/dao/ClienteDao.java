@@ -93,7 +93,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		List<Cliente> cliente = new ArrayList<Cliente>();
 		try {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE idCliente = ?;");
-			for (int codigo : codigos) {
+			for (Integer codigo : codigos) {
 				try {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
@@ -208,20 +208,21 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			Conexao.fechaConexao();
 		}
 	}
-
-	@Override
-	public boolean exclui(Integer idCliente) throws DaoException, ConexaoException {
+	
+	public boolean exclui (Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Cliente WHERE idCliente = ?;");
-			pst.setInt(1, idCliente);
-			return pst.executeUpdate() > 0;
-
+			for (Integer novo : codigos) {
+				pst.setInt(1, novo);
+				pst.execute();
+			}
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();
 		}
+		return true;	
 	}
 
 	@Override
