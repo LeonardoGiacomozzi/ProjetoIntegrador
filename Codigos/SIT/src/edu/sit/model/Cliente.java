@@ -112,8 +112,10 @@ public class Cliente {
 	
 	@Override
 	public String toString() {
-		return getNome()+"\t\t"+getIdade(getDataDeNascimento());
+		return "ID: \t\t" + getId() + "\nNome: \t\t" + getNome()+ "\nIdade: \t\t" + getIdade(getDataDeNascimento()) + 
+				"\nEndereço: \t" + getEndereco() + "\nCPF: \t\t" + getCpf();
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

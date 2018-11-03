@@ -24,7 +24,6 @@ public class Teste {
 		}
 		
 		
-		
 		//Insere 1 por 1
 		//System.out.println(teste.insere(Cliente.criaClienteBanco("Maria", LocalDate.parse("25/06/1998", DateTimeFormatter.ofPattern(
 		//	"dd/MM/yyyy")), "Rua", "111.111.111-11", 1)));
@@ -57,6 +56,14 @@ public class Teste {
 		
 		
 		ContatoDao teste1 = new ContatoDao();
-		teste1.criaTabela();
+		//teste1.criaTabela();
+		//System.out.println(teste1.insere(Contato.criaContato("3336-2333", "hericles_peixer@hotmail.com")));
+		//List<Contato> teste2 = new ArrayList<>();
+		//teste2.add(Contato.criaContato("4444-3232", "kkkkkk@hotmail.com"));
+		//teste2.add(Contato.criaContato("5555-5555", "sssssss@hotmail.com"));
+		//teste2.add(Contato.criaContato("6666-6666", "qqqqqq@hotmail.com"));
+		//System.out.println(teste1.insereVarios(teste2));
+		//System.out.println(teste1.consulta(1));
+		System.out.println(teste1.consulta(3));
 	}
 }
