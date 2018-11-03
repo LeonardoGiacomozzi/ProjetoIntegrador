@@ -21,11 +21,11 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE `Cliente` (\r\n" + "  `idCliente` INT NOT NULL AUTO_INCREMENT,\r\n"
-					+ "  `Nome` VARCHAR(45) NOT NULL,\r\n" + "  `CPF` VARCHAR(14) NOT NULL,\r\n"
-					+ "  `Data_Nascimento` DATE NOT NULL,\r\n" + "  `Endereco` VARCHAR(45) NOT NULL,\r\n"
-					+ "  `Contato_idContato` INT NOT NULL,\r\n" + "  PRIMARY KEY (`idCliente`),\r\n"
-					+ "  INDEX `fk_Cliente_Contato1_idx` (`Contato_idContato` ASC))\r\n" + "ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Cliente (" + " idCliente INT NOT NULL AUTO_INCREMENT,"
+					+ " Nome VARCHAR(45) NOT NULL," + " CPF VARCHAR(14) NOT NULL,"
+					+ " Data_Nascimento DATE NOT NULL," + " Endereco VARCHAR(45) NOT NULL,"
+					+ " Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCliente),"
+					+ " INDEX fk_Cliente_Contato1_idx (Contato_idContato ASC))" + "ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
