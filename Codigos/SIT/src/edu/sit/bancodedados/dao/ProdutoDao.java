@@ -43,7 +43,6 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 
 	@Override
 	public Produto consulta(Integer codigo) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
