@@ -1,8 +1,11 @@
 package edu.sit.bancodedados.dao;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.model.Venda;
 
@@ -10,8 +13,19 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			st.executeUpdate("CREATE TABLE Venda (" + " idVenda INT NOT NULL AUTO_INCREMENT," + " Valor DOUBLE NOT NULL," + 
+					" Funcionario_idCadastro_Funcionario INT NOT NULL," + " Nota_Fiscal_idNota_Fiscal INT NOT NULL," + 
+					" PRIMARY KEY (idVenda)," + " INDEX fk_Venda_Funcionário1_idx (Funcionario_idCadastro_Funcionario ASC)," + 
+					" INDEX fk_Venda_Nota_Fiscal1_idx (Nota_Fiscal_idNota_Fiscal ASC))" + " ENGINE = InnoDB;");
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override

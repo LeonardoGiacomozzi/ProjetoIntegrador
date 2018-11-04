@@ -1,8 +1,11 @@
 package edu.sit.bancodedados.dao;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.model.Produto;
 
@@ -10,8 +13,18 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			st.executeUpdate("CREATE TABLE Produtos (" + " idProdutos INT NOT NULL AUTO_INCREMENT," + 
+					" Nome VARCHAR(45) NOT NULL," + " Categoria VARCHAR(15) NOT NULL," + " Quantidade INT(80) NOT NULL," + 
+					" Valor DOUBLE NOT NULL," + " PRIMARY KEY (idProdutos))" + " ENGINE = InnoDB;");
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override

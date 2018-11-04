@@ -12,6 +12,8 @@ import edu.sit.bancodedados.dao.DaoException;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.NotaFiscalDao;
+import edu.sit.bancodedados.dao.ProdutoDao;
+import edu.sit.bancodedados.dao.VendaDao;
 
 public class Teste {	 
 	public static void main(String[] args) throws DaoException, ConexaoException {
@@ -83,6 +85,12 @@ public class Teste {
 		//System.out.println(teste3.criaTabela());
 		
 		FornecedorDao teste4 = new FornecedorDao();
-		System.out.println(teste4.criaTabela());
+		//System.out.println(teste4.criaTabela());
+		
+		ProdutoDao teste5 = new ProdutoDao();
+		//System.out.println(teste5.criaTabela());
+		
+		VendaDao teste6 = new VendaDao();
+		//System.out.println(teste6.criaTabela());
 	}
 }
