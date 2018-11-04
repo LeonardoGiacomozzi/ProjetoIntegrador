@@ -1,8 +1,11 @@
 package edu.sit.bancodedados.dao;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.model.Funcionario;
 
@@ -10,8 +13,20 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			st.executeUpdate("CREATE TABLE Funcionario (" + " idCadastro_Funcionario INT NOT NULL AUTO_INCREMENT," + 
+					" Nome VARCHAR(45) NOT NULL," + " Funcao VARCHAR(45) NOT NULL," + " Salario DOUBLE NOT NULL," + 
+					" Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCadastro_Funcionario)," + 
+					" INDEX fk_Funcionario_Contato1_idx (Contato_idContato ASC))" + "ENGINE = InnoDB" + 
+					" DEFAULT CHARACTER SET = armscii8;");
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
@@ -63,7 +78,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -72,6 +87,5 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
+	}	
 }

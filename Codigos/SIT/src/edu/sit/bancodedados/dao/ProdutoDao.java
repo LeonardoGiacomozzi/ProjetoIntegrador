@@ -63,7 +63,7 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -73,5 +73,4 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }

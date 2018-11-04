@@ -1,8 +1,11 @@
 package edu.sit.bancodedados.dao;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.model.Fornecedor;
 
@@ -10,8 +13,19 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			st.executeUpdate("CREATE TABLE Fornecedor (" + " idCadastro_Fornecedor INT NOT NULL AUTO_INCREMENT," + 
+					" Nome VARCHAR(45) NOT NULL," + " CNPJ VARCHAR(45) NOT NULL," + 
+					" Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCadastro_Fornecedor)," + 
+					" INDEX fk_Fornecedor_Contato1_idx (Contato_idContato ASC))" + " ENGINE = InnoDB;");
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
@@ -61,17 +75,16 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
-	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
+	}	
 }

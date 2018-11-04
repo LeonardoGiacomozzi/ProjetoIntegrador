@@ -9,6 +9,9 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.DaoException;
+import edu.sit.bancodedados.dao.FornecedorDao;
+import edu.sit.bancodedados.dao.FuncionarioDao;
+import edu.sit.bancodedados.dao.NotaFiscalDao;
 
 public class Teste {	 
 	public static void main(String[] args) throws DaoException, ConexaoException {
@@ -72,5 +75,14 @@ public class Teste {
 		//teste1.altera(contato);
 		//System.out.println(teste1.exclui(2,4));
 		//System.out.println(teste1.pegaUltimoID());
+		
+		FuncionarioDao teste2 = new FuncionarioDao();
+		//System.out.println(teste2.criaTabela());
+		
+		NotaFiscalDao teste3 = new NotaFiscalDao();
+		//System.out.println(teste3.criaTabela());
+		
+		FornecedorDao teste4 = new FornecedorDao();
+		System.out.println(teste4.criaTabela());
 	}
 }

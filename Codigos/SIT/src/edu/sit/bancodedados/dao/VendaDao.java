@@ -63,7 +63,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -72,6 +72,5 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
+	}	
 }

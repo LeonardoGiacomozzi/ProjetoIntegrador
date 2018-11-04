@@ -78,9 +78,9 @@ public class Produto {
 		this.valorUnitario = valorUnitario;
 	}
 	
-	public static Produto criaProdutoSemFornecedor(String nome,Categoria categoria,Integer quatidade,Double valorUnitario) {
-		return new Produto( nome, categoria, Fornecedor.criaFornecedorFull( "SemFornecedor", "SemFornecedor",
-					Contato.criaContato("Sem telefone","Sem Email"),"SemFornecedor"), quatidade,valorUnitario);
+	public static Produto criaProdutoSemFornecedor(String nome,Categoria categoria, Integer quatidade,Double valorUnitario) {
+		return new Produto(nome, categoria, Fornecedor.criaFornecedorFull("Sem Fornecedor", "Sem Fornecedor",
+					"Sem Fornecedor", Contato.criaContato("Sem telefone","Sem Email")), quatidade,valorUnitario);
 	}
 	
 	public static Produto criaProduto(String nome,Categoria categoria,Integer quatidade,Double valorUnitario,Fornecedor fornecedor) {

@@ -47,15 +47,15 @@ public class Fornecedor {
 		this.pessoaResponsavel = pessoaResponsavel;
 	}
 
-	private Fornecedor(String nome, String cNPJ, Contato contato, String pessoaResponsavel) {
+	private Fornecedor(String nome, String cNPJ, String pessoaResponsavel, Contato contato) {
 		setCNPJ(cNPJ);
 		setContato(contato);
 		setNome(nome);
 		setPessoaResponsavel(pessoaResponsavel);
 	}
 
-	public static Fornecedor criaFornecedorFull(String nome, String cNPJ, Contato contato, String pessoaResponsavel) {
-		return new Fornecedor(nome, cNPJ, contato, pessoaResponsavel);
+	public static Fornecedor criaFornecedorFull(String nome, String cNPJ, String pessoaResponsavel, Contato contato) {
+		return new Fornecedor(nome, cNPJ, pessoaResponsavel, contato);
 	}
 
 	@Override

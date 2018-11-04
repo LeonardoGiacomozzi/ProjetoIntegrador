@@ -1,8 +1,11 @@
 package edu.sit.bancodedados.dao;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
 
+import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.model.NotaFiscal;
 
@@ -10,8 +13,18 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			st.executeUpdate("CREATE TABLE Nota_Fiscal (" + " idNota_Fiscal INT NOT NULL AUTO_INCREMENT," + 
+					" Numero_Nota BLOB NOT NULL," + " PRIMARY KEY (idNota_Fiscal))" + 
+					"ENGINE = InnoDB;");
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
@@ -63,7 +76,7 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 	}
 
 	@Override
-	public boolean exclui(Integer codigo) throws DaoException, ConexaoException {
+	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -73,5 +86,4 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
 }
