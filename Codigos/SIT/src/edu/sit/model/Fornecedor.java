@@ -4,8 +4,17 @@ public class Fornecedor {
 	private Integer id;
 	private String nome;
 	private String CNPJ;
-	private Contato contato;
 	private String pessoaResponsavel;
+	private Contato contato;
+	private Integer contatoid;
+
+	public Integer getContatoid() {
+		return contatoid;
+	}
+
+	public void setContatoid(Integer contatoid) {
+		this.contatoid = contatoid;
+	}
 
 	public Integer getId() {
 		return id;
@@ -53,9 +62,21 @@ public class Fornecedor {
 		setNome(nome);
 		setPessoaResponsavel(pessoaResponsavel);
 	}
+	
+	private Fornecedor(Integer id, String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
+		setId(id);
+		setNome(nome);
+		setCNPJ(cNPJ);
+		setPessoaResponsavel(pessoaResponsavel);
+		setContatoid(contato);
+	}
 
 	public static Fornecedor criaFornecedorFull(String nome, String cNPJ, String pessoaResponsavel, Contato contato) {
 		return new Fornecedor(nome, cNPJ, pessoaResponsavel, contato);
+	}
+	
+	public static Fornecedor consultaFornecedorBanco(Integer id, String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
+		return new Fornecedor (id, nome, cNPJ, pessoaResponsavel, contato);
 	}
 
 	@Override

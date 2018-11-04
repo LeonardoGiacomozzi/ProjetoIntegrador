@@ -29,8 +29,16 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 
 	@Override
 	public boolean excluiTabela() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			st.execute("DROP TABLE Nota_Fiscal;");
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override

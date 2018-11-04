@@ -30,8 +30,16 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 
 	@Override
 	public boolean excluiTabela() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			st.execute("DROP TABLE Venda;");
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override

@@ -86,6 +86,7 @@ public class Teste {
 		
 		FornecedorDao teste4 = new FornecedorDao();
 		//System.out.println(teste4.criaTabela());
+		//System.out.println(teste4.excluiTabela());
 		
 		ProdutoDao teste5 = new ProdutoDao();
 		//System.out.println(teste5.criaTabela());

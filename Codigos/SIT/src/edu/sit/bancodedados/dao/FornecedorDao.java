@@ -1,6 +1,8 @@
 package edu.sit.bancodedados.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +19,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		try {
 			Statement st = conexao.createStatement();
 			st.executeUpdate("CREATE TABLE Fornecedor (" + " idCadastro_Fornecedor INT NOT NULL AUTO_INCREMENT," + 
-					" Nome VARCHAR(45) NOT NULL," + " CNPJ VARCHAR(45) NOT NULL," + 
+					" Nome VARCHAR(45) NOT NULL," + " CNPJ VARCHAR(45) NOT NULL," + " Pessoa_Responsavel VARCHAR(50) NOT NULL," + 
 					" Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCadastro_Fornecedor)," + 
 					" INDEX fk_Fornecedor_Contato1_idx (Contato_idContato ASC))" + " ENGINE = InnoDB;");
 			return true;
@@ -30,14 +32,32 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 
 	@Override
 	public boolean excluiTabela() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			st.execute("DROP TABLE Fornecedor;");
+			return true;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public Fornecedor consulta(Integer codigo) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor WHERE idCadastro_Fornecedor = ?;");
+			pst.setInt(1, codigo);
+			ResultSet rs = pst.executeQuery();
+			return rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"),
+					rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")) : null;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
