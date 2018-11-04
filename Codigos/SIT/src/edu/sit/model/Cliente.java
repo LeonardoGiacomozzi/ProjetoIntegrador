@@ -81,10 +81,6 @@ public class Cliente {
 		setContatoid(contato);
 	}
 	
-	private Cliente(Integer id) {
-		setId(id);
-	}
-	
 	public int getIdade(LocalDate dataNacimento) {
 				
 		return  CalculoIdade.calculaIdade(dataNacimento);
@@ -104,10 +100,6 @@ public class Cliente {
 	
 	public static Cliente consultaClienteBanco(Integer id, String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		return new Cliente(id, nome, dataDeNascimento, endereco, cpf, contato);
-	}
-	
-	public static Cliente pegaUltimoID(Integer id) {
-		return new Cliente(id);
 	}
 	
 	@Override

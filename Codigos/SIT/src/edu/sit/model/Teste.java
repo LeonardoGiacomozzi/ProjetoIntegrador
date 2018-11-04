@@ -28,10 +28,9 @@ public class Teste {
 			System.out.println(e.getMessage());
 		}
 		
-		
 		//Insere 1 por 1
-		//System.out.println(teste.insere(Cliente.criaClienteBanco("Maria", LocalDate.parse("25/06/1998", DateTimeFormatter.ofPattern(
-		//	"dd/MM/yyyy")), "Rua", "111.111.111-11", 1)));
+		System.out.println(teste.insere(Cliente.criaClienteBanco("Maria", LocalDate.parse("25/06/1998", DateTimeFormatter.ofPattern(
+			"dd/MM/yyyy")), "Rua", "111.111.111-11", new ContatoDao().pegaUltimoID())));
 		
 		//Insere Varios por Lista
 		//List<Cliente> lcliente = new ArrayList<>();
@@ -77,8 +76,9 @@ public class Teste {
 		//teste1.altera(contato);
 		//System.out.println(teste1.exclui(2,4));
 		//System.out.println(teste1.pegaUltimoID());
+		//System.out.println(teste1.pegaUltimoID());
 		
-		FuncionarioDao teste2 = new FuncionarioDao();
+		FuncionarioDao teste12 = new FuncionarioDao();
 		//System.out.println(teste2.criaTabela());
 		
 		NotaFiscalDao teste3 = new NotaFiscalDao();
