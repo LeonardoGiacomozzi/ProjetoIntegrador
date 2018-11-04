@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -63,14 +64,46 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 
 	@Override
 	public Map<Integer, Contato> consultaTodos() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		Map<Integer, Contato> contatos = new HashMap<Integer, Contato>();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM Contato;");
+			while (rs.next()) {
+				contatos.put(Integer.valueOf(rs.getInt("idContato")),
+						Contato.consultaContatoBanco(rs.getInt("idContato"), rs.getString("Telefone"), rs.getString("Email")));
+			}
+			return contatos;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
-	public List<Contato> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Contato> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		List<Contato> contato = new ArrayList<Contato>();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Contato WHERE idContato = ?;");
+			for (Integer codigo : codigos) {
+				try {
+					pst.setInt(1, codigo);
+					ResultSet rs = pst.executeQuery();
+					if (rs.first()) {
+						contato.add(Contato.consultaContatoBanco(rs.getInt("idContato"), rs.getString("Telefone"), rs.getString("Email")));
+					}
+				} catch (Exception c) {
+					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
+				}
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return contato;
 	}
 
 	@Override
@@ -142,19 +175,49 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 
 	@Override
 	public boolean altera(Contato objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"UPDATE Contato SET Telefone = ?, Email = ? WHERE idContato = ?;");
+			pst.setString(1, objeto.getTelefone());
+			pst.setString(2, objeto.getEmail());
+			pst.setInt(3, objeto.getId());
+			return pst.executeUpdate() > 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.ALTERA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Contato WHERE idContato = ?;");
+			for (Integer novo : codigos) {
+				pst.setInt(1, novo);
+				pst.execute();
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return true;
 	}
 	
 	@Override
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery("SELECT MAX(idContato) FROM Contato;");
+			return rs.first() ? rs.getInt(1) : 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 }

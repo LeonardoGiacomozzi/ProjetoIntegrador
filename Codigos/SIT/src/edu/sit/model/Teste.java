@@ -64,6 +64,13 @@ public class Teste {
 		//teste2.add(Contato.criaContato("6666-6666", "qqqqqq@hotmail.com"));
 		//System.out.println(teste1.insereVarios(teste2));
 		//System.out.println(teste1.consulta(1));
-		System.out.println(teste1.consulta(3));
+		//System.out.println(teste1.consulta(3));
+		//System.out.println(teste1.consultaTodos());
+		//System.out.println(teste1.consultaFaixa(1,2,4));
+		//Contato contato = new ContatoDao().consulta(1);
+		//contato.setTelefone("xxxx-xxxx");
+		//teste1.altera(contato);
+		//System.out.println(teste1.exclui(2,4));
+		//System.out.println(teste1.pegaUltimoID());
 	}
 }

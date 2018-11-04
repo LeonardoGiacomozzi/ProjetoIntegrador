@@ -84,7 +84,6 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		} finally {
 			Conexao.fechaConexao();
 		}
-
 	}
 
 	@Override
