@@ -12,6 +12,8 @@ import java.util.Map;
 
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.erros.dao.DaoException;
+import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.Cliente;
 
 public class ClienteDao implements IDao<Cliente>, IInstaladorDao {

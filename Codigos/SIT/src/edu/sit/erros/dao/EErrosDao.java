@@ -1,4 +1,4 @@
-package edu.sit.bancodedados.dao;
+package edu.sit.erros.dao;
 
 public enum EErrosDao {
 	CRIAR_TABELA ("Erro ao criar a tabela especificada: "),

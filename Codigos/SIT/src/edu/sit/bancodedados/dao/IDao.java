@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.erros.dao.DaoException;
 
 public interface IDao<T> {
 	

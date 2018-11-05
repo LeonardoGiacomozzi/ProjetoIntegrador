@@ -7,6 +7,8 @@ import java.util.Map;
 
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.erros.dao.DaoException;
+import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.Produto;
 
 public class ProdutoDao implements IDao<Produto>, IInstaladorDao {

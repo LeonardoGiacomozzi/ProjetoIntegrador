@@ -8,12 +8,12 @@ import java.util.List;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
-import edu.sit.bancodedados.dao.DaoException;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.NotaFiscalDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.VendaDao;
+import edu.sit.erros.dao.DaoException;
 
 public class Teste {	 
 	public static void main(String[] args) throws DaoException, ConexaoException {
