@@ -65,10 +65,26 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		}
 	}
 	
-	public Fornecedor getFullProperty(Integer id) throws DaoException, ConexaoException {
+	public Fornecedor consultaCompleta(Integer id) throws DaoException, ConexaoException {
 		Fornecedor fornecedor = consulta(id);
 		fornecedor.setContato(new ContatoDao().consulta(fornecedor.getContatoid()));
 		return fornecedor; 
+	}
+	
+	public Fornecedor consultaCNPJ(String cnpj) throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor Where CNPJ = ?;");
+			pst.setString(1, cnpj);
+			ResultSet rs = pst.executeQuery();
+			Fornecedor fornecedor = rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"),
+					rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")) : null;
+			return consultaCompleta(fornecedor.getId());
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
@@ -90,6 +106,14 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 			Conexao.fechaConexao();
 		}
 	}
+	
+	//public Map<Integer, Fornecedor> consultaTodosCompleto() throws DaoException, ConexaoException {
+	//	Map<Integer, Fornecedor> fornecedorCompleto = consultaTodos();
+	//	Map<Integer, Fornecedor> retorno = new HashMap<>();
+	//	for (int i = 0; i < fornecedorCompleto.size(); i++) {
+			
+	//	}
+	//}
 
 	@Override
 	public List<Fornecedor> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {
