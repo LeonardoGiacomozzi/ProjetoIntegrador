@@ -43,7 +43,7 @@ public class Teste {
 //		//System.out.println(teste.insereVarios(lcliente));
 //		
 //		
-        System.out.println(teste.getFullProperty(1));
+       //System.out.println(teste.getFullProperty(1));
 //		
 //		//Consulta por id
 //		//System.out.println(teste.consulta(1));
@@ -53,15 +53,15 @@ public class Teste {
 //		
 //		
 //		
-//		
 //		//Exclui apenas 1 linha ou varias....
 //		//System.out.println(teste.exclui(7,8,9,10));
 //		
 //		
 //		
-		//ContatoDao teste1 = new ContatoDao();
+		ContatoDao teste1 = new ContatoDao();
 //		//teste1.criaTabela();
 //		//System.out.println(teste1.insere(Contato.criaContato("3336-2333", "hericles_peixer@hotmail.com")));
+		//teste1.insere(Contato.criaContato("1111-1111", "22222@hotmail.com"));
 //		//List<Contato> teste2 = new ArrayList<>();
 //		//teste2.add(Contato.criaContato("4444-3232", "kkkkkk@hotmail.com"));
 //		//teste2.add(Contato.criaContato("5555-5555", "sssssss@hotmail.com"));
@@ -78,15 +78,18 @@ public class Teste {
 //		//System.out.println(teste1.pegaUltimoID());
 		//System.out.println(teste1.pegaUltimoID());
 //		
-//		FuncionarioDao teste12 = new FuncionarioDao();
+		FuncionarioDao teste12 = new FuncionarioDao();
 //		//System.out.println(teste2.criaTabela());
 //		
 //		NotaFiscalDao teste3 = new NotaFiscalDao();
 //		//System.out.println(teste3.criaTabela());
 //		
-//		FornecedorDao teste4 = new FornecedorDao();
+		FornecedorDao teste4 = new FornecedorDao();
 //		//System.out.println(teste4.criaTabela());
 //		//System.out.println(teste4.excluiTabela());
+		//System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs", "xx.xxx.xxx/xxxx-xx", "Jose", new ContatoDao().pegaUltimoID())));
+		//System.out.println(teste4.consultaTodos());
+		//System.out.println(teste4.exclui(1));
 //		
 //		ProdutoDao teste5 = new ProdutoDao();
 //		//System.out.println(teste5.criaTabela());

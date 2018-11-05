@@ -66,6 +66,12 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			Conexao.fechaConexao();
 		}
 	}
+	
+	public Cliente getFullProperty(Integer id) throws DaoException, ConexaoException {
+		Cliente cliente = consulta(id);
+		cliente.setContato(new ContatoDao().consulta(cliente.getContatoid()));
+		return cliente;
+	}
 
 	@Override
 	public Map<Integer, Cliente> consultaTodos() throws DaoException, ConexaoException {
@@ -238,11 +244,5 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		} finally {
 			Conexao.fechaConexao();
 		}
-	}
-	
-	public Cliente getFullProperty(Integer id) throws DaoException, ConexaoException {
-		Cliente cliente = consulta(id);
-		cliente.setContato(new ContatoDao().consulta(cliente.getContatoid()));
-		return cliente;
 	}
 }

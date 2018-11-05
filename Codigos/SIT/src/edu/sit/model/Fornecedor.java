@@ -56,11 +56,18 @@ public class Fornecedor {
 		this.pessoaResponsavel = pessoaResponsavel;
 	}
 
-	private Fornecedor(String nome, String cNPJ, String pessoaResponsavel, Contato contato) {
-		setCNPJ(cNPJ);
-		setContato(contato);
+	private Fornecedor(String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
 		setNome(nome);
+		setCNPJ(cNPJ);
 		setPessoaResponsavel(pessoaResponsavel);
+		setContatoid(contato);
+	}
+	
+	private Fornecedor(String nome, String cNPJ, String pessoaResponsavel, Contato contato) {
+		setNome(nome);
+		setCNPJ(cNPJ);
+		setPessoaResponsavel(pessoaResponsavel);
+		setContato(contato);
 	}
 	
 	private Fornecedor(Integer id, String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
@@ -112,7 +119,8 @@ public class Fornecedor {
 
 	@Override
 	public String toString() {
-		return "ID \t\t" + getId() + "\nFornecedor:\t\t" + getNome() + "\nContato:\t\t" + getContato().getEmail();
+		return "ID: \t\t" + getId() + "\nFornecedor:\t" + getNome() + "\nCPNJ: \t\t" + getCNPJ() + "\nResponsável: \t" + 
+				getPessoaResponsavel() + getContato();
 	}
 
 }
