@@ -59,7 +59,7 @@ public class Teste {
 //		
 //		
 //		
-//		ContatoDao teste1 = new ContatoDao();
+		ContatoDao teste1 = new ContatoDao();
 //		//teste1.criaTabela();
 //		//System.out.println(teste1.insere(Contato.criaContato("3336-2333", "hericles_peixer@hotmail.com")));
 //		//List<Contato> teste2 = new ArrayList<>();
@@ -76,7 +76,7 @@ public class Teste {
 //		//teste1.altera(contato);
 //		//System.out.println(teste1.exclui(2,4));
 //		//System.out.println(teste1.pegaUltimoID());
-//		//System.out.println(teste1.pegaUltimoID());
+		System.out.println(teste1.pegaUltimoID());
 //		
 //		FuncionarioDao teste12 = new FuncionarioDao();
 //		//System.out.println(teste2.criaTabela());
