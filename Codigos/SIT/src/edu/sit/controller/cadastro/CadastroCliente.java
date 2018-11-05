@@ -54,7 +54,7 @@ public class CadastroCliente {
 	while (cpf== null) {
 		try {
 			System.out.print("Cpf:\t");
-			endereco = Leitor.leString();
+			endereco = Leitor.leCpf();
 		} catch (LeituraException e) {
 			System.out.println(e.getMessage());
 		}
