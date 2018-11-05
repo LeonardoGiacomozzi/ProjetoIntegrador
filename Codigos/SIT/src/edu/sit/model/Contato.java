@@ -55,6 +55,6 @@ public class Contato {
 
 	@Override
 	public String toString() {
-		return "Telefone: \t" + getTelefone() + "\nE-mail: \t" + getEmail();
+		return "\nTelefone: \t" + getTelefone() + "\nE-mail: \t" + getEmail();
 	}
 }

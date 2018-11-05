@@ -81,7 +81,7 @@ public class CadastroCliente {
 		new ContatoDao().insere(contato);
 		int idContato=new ContatoDao().pegaUltimoID();
 		Cliente cliente = Cliente.criaClienteBanco(nome,dataNascimento , endereco, cpf, idContato);
-		System.out.println(new ClienteDao().insere(cliente)?"Cliente cadastrado com sucesso":"Faha");
+		System.out.println(new ClienteDao().insere(cliente)?"Cliente cadastrado com sucesso":"Falha");
 	} catch (DaoException e) {
 		throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CLIENTE);
 	}	

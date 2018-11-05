@@ -19,7 +19,7 @@ public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException {
 		
 //		//Cria Tabela Banco
-//		ClienteDao teste = new ClienteDao();
+		ClienteDao teste = new ClienteDao();
 //		try {
 //			//System.out.println(teste.criaTabela());
 //		//Exclui tabela
@@ -43,7 +43,7 @@ public class Teste {
 //		//System.out.println(teste.insereVarios(lcliente));
 //		
 //		
-//		
+        System.out.println(teste.getFullProperty(1));
 //		
 //		//Consulta por id
 //		//System.out.println(teste.consulta(1));
@@ -59,7 +59,7 @@ public class Teste {
 //		
 //		
 //		
-		ContatoDao teste1 = new ContatoDao();
+		//ContatoDao teste1 = new ContatoDao();
 //		//teste1.criaTabela();
 //		//System.out.println(teste1.insere(Contato.criaContato("3336-2333", "hericles_peixer@hotmail.com")));
 //		//List<Contato> teste2 = new ArrayList<>();
@@ -76,7 +76,7 @@ public class Teste {
 //		//teste1.altera(contato);
 //		//System.out.println(teste1.exclui(2,4));
 //		//System.out.println(teste1.pegaUltimoID());
-		System.out.println(teste1.pegaUltimoID());
+		//System.out.println(teste1.pegaUltimoID());
 //		
 //		FuncionarioDao teste12 = new FuncionarioDao();
 //		//System.out.println(teste2.criaTabela());
