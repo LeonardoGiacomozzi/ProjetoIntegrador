@@ -29,8 +29,8 @@ public class Teste {
 		}
 		
 		//Insere 1 por 1
-		System.out.println(teste.insere(Cliente.criaClienteBanco("Maria", LocalDate.parse("25/06/1998", DateTimeFormatter.ofPattern(
-			"dd/MM/yyyy")), "Rua", "111.111.111-11", new ContatoDao().pegaUltimoID())));
+//		System.out.println(teste.insere(Cliente.criaClienteBanco("Maria", LocalDate.parse("25/06/1998", DateTimeFormatter.ofPattern(
+//			"dd/MM/yyyy")), "Rua", "111.111.111-11", new ContatoDao().pegaUltimoID())));
 		
 		//Insere Varios por Lista
 		//List<Cliente> lcliente = new ArrayList<>();
