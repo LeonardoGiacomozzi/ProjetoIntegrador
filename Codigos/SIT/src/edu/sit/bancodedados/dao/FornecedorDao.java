@@ -68,7 +68,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 	public Fornecedor getFullProperty(Integer id) throws DaoException, ConexaoException {
 		Fornecedor fornecedor = consulta(id);
 		fornecedor.setContato(new ContatoDao().consulta(fornecedor.getContatoid()));
-		return fornecedor;
+		return fornecedor; 
 	}
 
 	@Override

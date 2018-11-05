@@ -90,6 +90,7 @@ public class Teste {
 		//System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs", "xx.xxx.xxx/xxxx-xx", "Jose", new ContatoDao().pegaUltimoID())));
 		//System.out.println(teste4.consultaTodos());
 		//System.out.println(teste4.exclui(1));
+		System.out.println(teste4.getFullProperty(2));
 //		
 //		ProdutoDao teste5 = new ProdutoDao();
 //		//System.out.println(teste5.criaTabela());
