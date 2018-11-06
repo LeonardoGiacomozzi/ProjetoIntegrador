@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -71,6 +69,22 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Cliente cliente = consulta(id);
 		cliente.setContato(new ContatoDao().consulta(cliente.getContatoid()));
 		return cliente;
+	}
+	
+	public Cliente consultaCPF(String cpf) throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE CPF = ?;");
+			pst.setString(1, cpf);
+			ResultSet rs = pst.executeQuery();
+			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("idCliente"), rs.getString("Nome"),
+					rs.getDate("Data_Nascimento").toLocalDate(), rs.getString("CPF"), rs.getString("Endereco"),
+					rs.getInt("Contato_idContato")) : null;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override

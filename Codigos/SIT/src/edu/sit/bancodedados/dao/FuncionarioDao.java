@@ -18,7 +18,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		try {
 			Statement st = conexao.createStatement();
 			st.executeUpdate("CREATE TABLE Funcionario (" + " idCadastro_Funcionario INT NOT NULL AUTO_INCREMENT," + 
-					" Nome VARCHAR(45) NOT NULL," + " Funcao VARCHAR(45) NOT NULL," + " Salario DOUBLE NOT NULL," + 
+					" Nome VARCHAR(45) NOT NULL," + " Cargo VARCHAR(45) NOT NULL," + " Salario DOUBLE NOT NULL," + 
 					" Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCadastro_Funcionario)," + 
 					" INDEX fk_Funcionario_Contato1_idx (Contato_idContato ASC))" + "ENGINE = InnoDB" + 
 					" DEFAULT CHARACTER SET = armscii8;");

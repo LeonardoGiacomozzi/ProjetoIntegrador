@@ -1,18 +1,10 @@
 package edu.sit.model;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
-import edu.sit.bancodedados.dao.NotaFiscalDao;
-import edu.sit.bancodedados.dao.ProdutoDao;
-import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.erros.dao.DaoException;
 
 public class Teste {	 
@@ -51,7 +43,7 @@ public class Teste {
 //		
 //		//Consulta todos
 		//System.out.println(teste.consultaTodos());
-//		
+		//System.out.println(teste.consultaCPF("111.111.111-11"));
 //		
 //		
 //		//Exclui apenas 1 linha ou varias....
@@ -80,7 +72,8 @@ public class Teste {
 		//System.out.println(teste1.pegaUltimoID());
 //		
 		FuncionarioDao teste12 = new FuncionarioDao();
-//		//System.out.println(teste2.criaTabela());
+		System.out.println(teste12.criaTabela());
+		//System.out.println(teste12.excluiTabela());
 //		
 //		NotaFiscalDao teste3 = new NotaFiscalDao();
 //		//System.out.println(teste3.criaTabela());
