@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -65,15 +63,14 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 	}
 
 	@Override
-	public Map<Integer, Contato> consultaTodos() throws DaoException, ConexaoException {
+	public List<Contato> consultaTodos() throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
-		Map<Integer, Contato> contatos = new HashMap<Integer, Contato>();
+		List<Contato> contatos = new ArrayList<Contato>();
 		try {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Contato;");
 			while (rs.next()) {
-				contatos.put(Integer.valueOf(rs.getInt("idContato")),
-						Contato.consultaContatoBanco(rs.getInt("idContato"), rs.getString("Telefone"), rs.getString("Email")));
+				contatos.add(Contato.consultaContatoBanco(rs.getInt("idContato"), rs.getString("Telefone"), rs.getString("Email")));
 			}
 			return contatos;
 		} catch (Exception e) {

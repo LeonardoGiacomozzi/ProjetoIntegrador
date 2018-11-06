@@ -50,7 +50,7 @@ public class Teste {
 //		//System.out.println(teste.consulta(1));
 //		
 //		//Consulta todos
-//		//System.out.println(teste.consultaTodos());
+		//System.out.println(teste.consultaTodos());
 //		
 //		
 //		
@@ -70,7 +70,7 @@ public class Teste {
 //		//System.out.println(teste1.insereVarios(teste2));
 //		//System.out.println(teste1.consulta(1));
 //		//System.out.println(teste1.consulta(3));
-		System.out.println(teste1.consultaTodos());
+		//System.out.println(teste1.consultaTodos());
 //		//System.out.println(teste1.consultaFaixa(1,2,4));
 //		//Contato contato = new ContatoDao().consulta(1);
 //		//contato.setTelefone("xxxx-xxxx");
@@ -93,6 +93,7 @@ public class Teste {
 		//System.out.println(teste4.exclui(1));
 		//System.out.println(teste4.consultaCompleta(2));
 		//System.out.println(teste4.consultaCNPJ("xx.xxx.xxx/xxxx-xx"));
+		//System.out.println(teste4.consultaTodos());
 //		
 //		ProdutoDao teste5 = new ProdutoDao();
 //		//System.out.println(teste5.criaTabela());

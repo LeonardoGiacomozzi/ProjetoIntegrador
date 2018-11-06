@@ -6,9 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -88,15 +86,14 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 	}
 
 	@Override
-	public Map<Integer, Fornecedor> consultaTodos() throws DaoException, ConexaoException {
+	public List<Fornecedor> consultaTodos() throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
-		Map<Integer, Fornecedor> fornecedores = new HashMap<Integer, Fornecedor>();
+		List<Fornecedor> fornecedores = new ArrayList<Fornecedor>();
 		try {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Fornecedor;");
 			while (rs.next()) {
-				fornecedores.put(Integer.valueOf(rs.getInt("idCadastro_Fornecedor")),
-						Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"), 
+				fornecedores.add(Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"), 
 								rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")));
 			}
 			return fornecedores;

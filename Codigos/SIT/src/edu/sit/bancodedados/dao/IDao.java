@@ -1,7 +1,6 @@
 package edu.sit.bancodedados.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
@@ -10,7 +9,7 @@ public interface IDao<T> {
 	
 	public abstract T consulta(Integer codigo) throws DaoException, ConexaoException;
 
-	public abstract Map<Integer, T> consultaTodos() throws DaoException, ConexaoException;
+	public abstract List<T> consultaTodos() throws DaoException, ConexaoException;
 
 	public abstract List<T> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException;
 

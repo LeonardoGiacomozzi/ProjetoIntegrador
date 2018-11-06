@@ -3,7 +3,6 @@ package edu.sit.bancodedados.dao;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.List;
-import java.util.Map;
 
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -50,7 +49,7 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 	}
 
 	@Override
-	public Map<Integer, NotaFiscal> consultaTodos() throws DaoException, ConexaoException {
+	public List<NotaFiscal> consultaTodos() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}

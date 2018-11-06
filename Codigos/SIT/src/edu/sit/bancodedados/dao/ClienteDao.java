@@ -74,15 +74,14 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	}
 
 	@Override
-	public Map<Integer, Cliente> consultaTodos() throws DaoException, ConexaoException {
+	public List<Cliente> consultaTodos() throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
-		Map<Integer, Cliente> clientes = new HashMap<Integer, Cliente>();
+		List<Cliente> clientes = new ArrayList<Cliente>();
 		try {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Cliente;");
 			while (rs.next()) {
-				clientes.put(Integer.valueOf(rs.getInt("idCliente")),
-						Cliente.consultaClienteBanco(rs.getInt("idCliente"), rs.getString("Nome"),
+				clientes.add(Cliente.consultaClienteBanco(rs.getInt("idCliente"), rs.getString("Nome"),
 								rs.getDate("Data_Nascimento").toLocalDate(), rs.getString("CPF"),
 								rs.getString("Endereco"), rs.getInt("Contato_idContato")));
 			}
