@@ -1,6 +1,8 @@
 package edu.sit.bancodedados.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
+import edu.sit.model.Contato;
 import edu.sit.model.Funcionario;
 
 public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
@@ -46,8 +49,18 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 
 	@Override
 	public Funcionario consulta(Integer codigo) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Funcionario WHERE idCadastro_Funcionario = ?;");
+			pst.setInt(1, codigo);
+			ResultSet rs = pst.executeQuery();
+			return rs.first() ? Funcionario.consultaFuncionarioBanco(rs.getInt("idCadastro_Funcionario"), rs.getString("Nome"), 
+					rs.getString("CPF"), rs.getInt("Cargo"), rs.getInt("Contato_idContato")) : null;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override

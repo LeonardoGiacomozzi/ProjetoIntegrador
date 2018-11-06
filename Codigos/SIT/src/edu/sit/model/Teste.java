@@ -72,7 +72,7 @@ public class Teste {
 		//System.out.println(teste1.pegaUltimoID());
 //		
 		FuncionarioDao teste12 = new FuncionarioDao();
-		System.out.println(teste12.criaTabela());
+		//System.out.println(teste12.criaTabela());
 		//System.out.println(teste12.excluiTabela());
 //		
 //		NotaFiscalDao teste3 = new NotaFiscalDao();

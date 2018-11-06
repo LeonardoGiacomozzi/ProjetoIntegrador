@@ -105,7 +105,8 @@ public class Cliente {
 	@Override
 	public String toString() {
 		return "ID: \t\t" + getId() + "\nNome: \t\t" + getNome()+ "\nIdade: \t\t" + getIdade(getDataDeNascimento()) + 
-				"\nEndereço: \t" + getEndereco() + "\nCPF: \t\t" + getCpf() + (getContato() == null ? "\nContatoID: \t" + getContatoid() : getContato().toString());
+				"\nEndereço: \t" + getEndereco() + "\nCPF: \t\t" + getCpf() + 
+				(getContato() == null ? "\nContatoID: \t" + getContatoid() : getContato().toString());
 	}
 	
 	@Override
