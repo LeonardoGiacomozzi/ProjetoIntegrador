@@ -11,6 +11,7 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.Contato;
+import edu.sit.model.ECargo;
 import edu.sit.model.Funcionario;
 
 public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
@@ -55,7 +56,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 			return rs.first() ? Funcionario.consultaFuncionarioBanco(rs.getInt("idCadastro_Funcionario"), rs.getString("Nome"), 
-					rs.getString("CPF"), rs.getInt("Cargo"), rs.getInt("Contato_idContato")) : null;
+					rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato_idContato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
