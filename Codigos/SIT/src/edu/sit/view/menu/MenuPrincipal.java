@@ -11,7 +11,7 @@ public class MenuPrincipal {
 		System.out.println(" *** Menu Tabacaria *** ");
 		System.out.println("1 - Cadastrar");
 		System.out.println("2 - Vendas");
-		System.out.println("3 - Gerenciar");
+		System.out.println("3 - Gerenciar ");
 		System.out.println("4 - Configurações");
 
 		String escolha = "";
