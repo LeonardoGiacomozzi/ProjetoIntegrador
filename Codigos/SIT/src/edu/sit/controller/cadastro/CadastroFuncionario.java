@@ -2,8 +2,15 @@ package edu.sit.controller.cadastro;
 
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.ClienteDao;
+import edu.sit.bancodedados.dao.ContatoDao;
+import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.EErroCadastro;
+import edu.sit.erros.dao.DaoException;
+import edu.sit.model.Cliente;
 import edu.sit.model.ECargo;
+import edu.sit.model.Funcionario;
 import edu.sit.uteis.Leitor;
 import edu.sit.view.menu.LeituraException;
 
@@ -13,7 +20,8 @@ public class CadastroFuncionario {
 
 		String nome = null;
 		ECargo cargo = null;
-
+		String cpf = null;
+		
 		System.out.println("*****CADASTRO DE FUNCIONARIO*****");
 
 		while (nome == null) {
@@ -34,6 +42,25 @@ public class CadastroFuncionario {
 				System.out.println(e.getMessage());
 			}
 		}
+		
+		while (cpf== null) {
+			try {
+				System.out.print("Cpf:\t");
+				cpf = Leitor.leCpf();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		if (CadastroContato.cadastraContato()) {
+
+			try {
+				Funcionario funcionario =	Funcionario.criaFuncionarioBanco(nome, cpf, cargo, new ContatoDao().pegaUltimoID());
+				System.out.println(new FuncionarioDao().insere(funcionario) ? "Funcionario cadastrado com sucesso" : "Falha");
+			} catch (DaoException e) {
+				throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_FUNCIONARIO);
+			}
+		}
+		
 		
 		return true;
 	}
