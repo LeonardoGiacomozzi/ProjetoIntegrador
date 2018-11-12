@@ -104,13 +104,15 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		}
 	}
 	
-	//public Map<Integer, Fornecedor> consultaTodosCompleto() throws DaoException, ConexaoException {
-	//	Map<Integer, Fornecedor> fornecedorCompleto = consultaTodos();
-	//	Map<Integer, Fornecedor> retorno = new HashMap<>();
-	//	for (int i = 0; i < fornecedorCompleto.size(); i++) {
-			
-	//	}
-	//}
+	public List<Fornecedor> consultaTodosCompleto() throws DaoException, ConexaoException {
+		
+		List<Fornecedor> fornecedores = consultaTodos();
+		for (Fornecedor fornecedor : fornecedores) {
+			fornecedor = consultaCompleta(fornecedor.getId());
+		}
+		return fornecedores;
+	
+	}
 
 	@Override
 	public List<Fornecedor> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {

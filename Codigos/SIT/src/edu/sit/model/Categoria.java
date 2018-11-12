@@ -49,5 +49,20 @@ public class Categoria {
 	public String toString() {
 		return "Caracteristica Id=" + getId() + " Nome=" + getNome();
 	}
+	private Categoria(String nome) {
+		setNome(nome);
+	}
 	
+	private Categoria(Integer id, String nome) {
+		setNome(nome);
+		setId(id);
+	}
+	
+	public Categoria criaCategoria(String nome) {
+		return new Categoria(nome);
+	}
+	
+	public Categoria criaCategoriaBd(Integer id,String nome) {
+		return new Categoria(id,nome);
+	}
 }
