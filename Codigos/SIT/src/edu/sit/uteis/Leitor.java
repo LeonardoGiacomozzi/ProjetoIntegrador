@@ -67,5 +67,15 @@ public class Leitor {
 		}
 		throw new LeituraException(EErroLeitura.ERRO_LER_CPF);
 	}
+	
+	public static String leCnpj() throws LeituraException {
+		Pattern padrao = Pattern.compile("(^\\d{2}.\\d{3}.\\d{3}/\\d{4}-\\d{2}$)");
+		String cnpj = leString();
+		Matcher matcher = padrao.matcher(cnpj);
+		if (matcher.matches()) {
+			return cnpj;
+		}
+		throw new LeituraException(EErroLeitura.ERRO_LER_CNPJ);
+	}
 
 }
