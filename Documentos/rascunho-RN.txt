@@ -1,0 +1,37 @@
+para entrar no sistema o funcionario vai fazer login e senha
+
+só sera gerada a nota fiscal depois do recebimento do dinheiro
+
+O sistema só ira arquivar a nota fiscal depois do cliente efetuar o pagamento
+
+O cliente só podera ser cadastrado se for maior de idade
+
+o sistema só irá realizar a cobrança se o produto estiver em estoque
+
+Só será realizada a baixa do produto depois que o pagamento for realizado 
+
+O funcionario terá que cadastrar o produto depois de efetuar o pagamento para o fornecedor
+
+Só sera realizado o pagamento depois que o produto chegar
+
+Funcionario terá que realizar controle de estoque
+
+Cliente só recebera o produto depois de efetuar o pagamento
+
+O funcionario nao tera validaçao de idade pois automaticamente terá que passar por entrevista
+
+sistema só irá cadastrar o cliente se tiver cpf informado
+
+Deverá ser informado o telefone e o email (Opcional)
+
+Endereço do cliente não será obrigatório
+
+
+
+
+
+
+
+
+
+
