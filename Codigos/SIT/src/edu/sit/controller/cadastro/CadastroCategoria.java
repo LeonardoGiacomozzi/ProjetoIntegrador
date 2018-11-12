@@ -1,9 +1,11 @@
 package edu.sit.controller.cadastro;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erros.dao.DaoException;
+import edu.sit.model.Categoria;
 import edu.sit.uteis.Leitor;
 import edu.sit.view.menu.LeituraException;
 
@@ -22,7 +24,8 @@ public class CadastroCategoria {
 			}
 		}
 		try {
-
+			Categoria categoria = Categoria.criaCategoria(nome);
+			new CategoriaDao().insere(categoria);
 			
 		} catch (DaoException e) {
 			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CONTATO);

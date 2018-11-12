@@ -58,11 +58,11 @@ public class Categoria {
 		setId(id);
 	}
 	
-	public Categoria criaCategoria(String nome) {
+	public static Categoria criaCategoria(String nome) {
 		return new Categoria(nome);
 	}
 	
-	public Categoria criaCategoriaBd(Integer id,String nome) {
+	public static Categoria criaCategoriaBd(Integer id,String nome) {
 		return new Categoria(id,nome);
 	}
 }
