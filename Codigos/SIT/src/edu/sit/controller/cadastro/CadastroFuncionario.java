@@ -2,13 +2,11 @@ package edu.sit.controller.cadastro;
 
 
 import edu.sit.bancodedados.conexao.ConexaoException;
-import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erros.dao.DaoException;
-import edu.sit.model.Cliente;
 import edu.sit.model.ECargo;
 import edu.sit.model.Funcionario;
 import edu.sit.uteis.Leitor;
