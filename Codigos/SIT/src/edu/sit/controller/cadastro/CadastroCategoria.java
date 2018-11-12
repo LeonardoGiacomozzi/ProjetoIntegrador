@@ -28,7 +28,7 @@ public class CadastroCategoria {
 			new CategoriaDao().insere(categoria);
 			
 		} catch (DaoException e) {
-			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CONTATO);
+			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
 		}
 		return false;
 	}
