@@ -10,7 +10,6 @@ import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
-import edu.sit.model.Contato;
 import edu.sit.model.ECargo;
 import edu.sit.model.Funcionario;
 
