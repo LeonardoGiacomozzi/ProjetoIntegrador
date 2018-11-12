@@ -78,7 +78,7 @@ public class Fornecedor {
 		setContatoid(contato);
 	}
 
-	public static Fornecedor criaFornecedorFull(String nome, String cNPJ, String pessoaResponsavel, Contato contato) {
+	public static Fornecedor criaFornecedorFull(String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
 		return new Fornecedor(nome, cNPJ, pessoaResponsavel, contato);
 	}
 	

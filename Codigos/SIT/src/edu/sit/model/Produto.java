@@ -80,7 +80,7 @@ public class Produto {
 	
 	public static Produto criaProdutoSemFornecedor(String nome,Categoria categoria, Integer quatidade,Double valorUnitario) {
 		return new Produto(nome, categoria, Fornecedor.criaFornecedorFull("Sem Fornecedor", "Sem Fornecedor",
-					"Sem Fornecedor", Contato.criaContato("Sem telefone","Sem Email")), quatidade,valorUnitario);
+					"Sem Fornecedor", 0), quatidade,valorUnitario);
 	}
 	
 	public static Produto criaProduto(String nome,Categoria categoria,Integer quatidade,Double valorUnitario,Fornecedor fornecedor) {
