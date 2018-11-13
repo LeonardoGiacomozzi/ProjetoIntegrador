@@ -141,6 +141,10 @@ public class Produto {
 			return false;
 		return true;
 	}
+	
+	public boolean criaProdutoBanco() {
+		return true;
+	}
 
 	
 }

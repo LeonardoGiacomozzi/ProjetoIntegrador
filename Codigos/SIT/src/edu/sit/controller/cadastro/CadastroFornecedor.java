@@ -11,11 +11,12 @@ import edu.sit.uteis.Leitor;
 import edu.sit.view.menu.LeituraException;
 
 public class CadastroFornecedor {
-	String nome = null;
-	String cnpj = null;
-	String pessoaResponsavel = null;
+	
 
-	public boolean CadastraCliente() throws ConexaoException, CadastroExeption {
+	public static boolean CadastraFornecedor() throws ConexaoException, CadastroExeption {
+		String nome = null;
+		String cnpj = null;
+		String pessoaResponsavel = null;
 		System.out.println("*****CADASTRO DE FOENECEDOR*****");
 
 		while (nome == null) {
