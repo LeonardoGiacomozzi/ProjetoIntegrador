@@ -1,13 +1,15 @@
 package edu.sit.controller.cadastro;
 
 
+import java.time.LocalDate;
+
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
-import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erros.dao.DaoException;
-import edu.sit.model.Fornecedor;
+import edu.sit.model.Cliente;
 import edu.sit.uteis.Leitor;
 import edu.sit.view.menu.LeituraException;
 
@@ -16,8 +18,9 @@ public class CadastroCliente {
 	public boolean CadastraCliente() throws ConexaoException, CadastroExeption {
 
 		String nome = null;
-		String cnpj = null;
-		String pessoaResponsavel = null;
+		String cpf = null;
+		String endereco = null;
+		LocalDate dataNascimento = null;
 		System.out.println("*****CADASTRO DE CLIENTE*****");
 
 		while (nome == null) {
@@ -29,18 +32,26 @@ public class CadastroCliente {
 			}
 		}
 
-		while (cnpj == null) {
+		while (cpf == null) {
 			try {
-				System.out.print("Cnpj:\t");
-				cnpj = Leitor.leCnpj();
+				System.out.print("Cpf:\t");
+				cpf = Leitor.leCpf();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
-		while (pessoaResponsavel == null) {
+		while (endereco == null) {
 			try {
-				System.out.print("Nome da pessoa responsavel:\t");
-				pessoaResponsavel = Leitor.leString();
+				System.out.print("Endereço:\t");
+				endereco = Leitor.leString();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		while (dataNascimento == null) {
+			try {
+				System.out.print("Data de Nascimento (dd/mm/aaaa):\t");
+				dataNascimento = Leitor.leData();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
@@ -48,10 +59,10 @@ public class CadastroCliente {
 		if (CadastroContato.cadastraContato()) {
 
 			try {
-				Fornecedor fornecedor = Fornecedor.criaFornecedorFull(nome, cnpj, pessoaResponsavel, new ContatoDao().pegaUltimoID());
-				System.out.println(new FornecedorDao().insere(fornecedor) ? "Fornecedor cadastrado com sucesso" : "Falha");
+				Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf, new ContatoDao().pegaUltimoID());
+				System.out.println(new ClienteDao().insere(cliente) ? "Cliente cadastrado com sucesso" : "Falha");
 			} catch (DaoException e) {
-				throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_FORNECEDOR);
+				throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CLIENTE);
 			}
 		}
 		return true;
