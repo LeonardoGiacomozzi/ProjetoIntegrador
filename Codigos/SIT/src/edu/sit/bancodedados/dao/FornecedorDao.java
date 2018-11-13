@@ -105,13 +105,12 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 	}
 	
 	public List<Fornecedor> consultaTodosCompleto() throws DaoException, ConexaoException {
-		
+		List<Fornecedor> fornecedoresCompleto = new ArrayList<>();
 		List<Fornecedor> fornecedores = consultaTodos();
 		for (Fornecedor fornecedor : fornecedores) {
-			fornecedor = consultaCompleta(fornecedor.getId());
+			fornecedoresCompleto.add(consultaCompleta(fornecedor.getId()));
 		}
-		return fornecedores;
-	
+		return fornecedoresCompleto;
 	}
 
 	@Override
@@ -138,6 +137,15 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 			Conexao.fechaConexao();
 		}
 		return fornecedor;
+	}
+	
+	public List<Fornecedor> consultaFaixaCompleto(Integer... codigos) throws DaoException, ConexaoException {
+		List<Fornecedor> fornecedoresCompleto = new ArrayList<>();
+		List<Fornecedor> fornecedores = consultaFaixa(codigos);
+		for (Fornecedor fornecedor : fornecedores) {
+			fornecedoresCompleto.add(consultaCompleta(fornecedor.getId()));
+		}
+		return fornecedoresCompleto;
 	}
 
 	@Override

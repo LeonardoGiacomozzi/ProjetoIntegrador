@@ -65,7 +65,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		}
 	}
 	
-	public Cliente getFullProperty(Integer id) throws DaoException, ConexaoException {
+	public Cliente consultaCompleta(Integer id) throws DaoException, ConexaoException {
 		Cliente cliente = consulta(id);
 		cliente.setContato(new ContatoDao().consulta(cliente.getContatoid()));
 		return cliente;
@@ -106,6 +106,15 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			Conexao.fechaConexao();
 		}
 	}
+	
+	public List<Cliente> consultaTodosCompleto() throws DaoException, ConexaoException {
+		List<Cliente> clientesCompleto = new ArrayList<>();
+		List<Cliente> clientes = consultaTodos();
+		for (Cliente cliente : clientes) {
+			clientesCompleto.add(consultaCompleta(cliente.getId()));
+		}
+		return clientesCompleto;
+	}
 
 	@Override
 	public List<Cliente> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {
@@ -132,6 +141,15 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			Conexao.fechaConexao();
 		}
 		return cliente;
+	}
+	
+	public List<Cliente> consultaFaixaCompleto(Integer... codigos) throws DaoException, ConexaoException {
+		List<Cliente> clientesCompleto = new ArrayList<>();
+		List<Cliente> clientes = consultaFaixa(codigos);
+		for (Cliente cliente : clientes) {
+			clientesCompleto.add(consultaCompleta(cliente.getId()));
+		}
+		return clientesCompleto;
 	}
 
 	@Override
