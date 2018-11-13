@@ -17,7 +17,7 @@ public class CadastroCategoria {
 
 		while (nome == null) {
 			try {
-				System.out.print("Telefone:\t");
+				System.out.print("Nome:\t");
 				nome = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
