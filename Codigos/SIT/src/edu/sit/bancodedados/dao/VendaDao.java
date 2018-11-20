@@ -1,6 +1,8 @@
 package edu.sit.bancodedados.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
+import edu.sit.model.Fornecedor;
 import edu.sit.model.Venda;
 
 public class VendaDao implements IDao<Venda>, IInstaladorDao {
@@ -17,10 +20,11 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Venda (" + " idVenda INT NOT NULL AUTO_INCREMENT," + " Valor DOUBLE NOT NULL," + 
-					" Funcionario_idCadastro_Funcionario INT NOT NULL," + " Nota_Fiscal_idNota_Fiscal INT NOT NULL," + 
-					" PRIMARY KEY (idVenda)," + " INDEX fk_Venda_Funcionário1_idx (Funcionario_idCadastro_Funcionario ASC)," + 
-					" INDEX fk_Venda_Nota_Fiscal1_idx (Nota_Fiscal_idNota_Fiscal ASC))" + " ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Venda (" + " idVenda INT NOT NULL AUTO_INCREMENT,"
+					+ " Valor DOUBLE NOT NULL," + " Funcionario_idCadastro_Funcionario INT NOT NULL,"
+					+ " Nota_Fiscal_idNota_Fiscal INT NOT NULL," + " PRIMARY KEY (idVenda),"
+					+ " INDEX fk_Venda_Funcionário1_idx (Funcionario_idCadastro_Funcionario ASC),"
+					+ " INDEX fk_Venda_Nota_Fiscal1_idx (Nota_Fiscal_idNota_Fiscal ASC))" + " ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -45,8 +49,27 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 
 	@Override
 	public Venda consulta(Integer codigo) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao
+					.prepareStatement("SELECT * FROM Venda WHERE idVenda = ?;");
+			pst.setInt(1, codigo);
+			ResultSet rs = pst.executeQuery();
+			return rs.first()
+					? Venda.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"),
+							rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato"))
+					: null;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}
+
+	public Fornecedor consultaCompleta(Integer id) throws DaoException, ConexaoException {
+		Fornecedor fornecedor = consulta(id);
+		fornecedor.setContato(new ContatoDao().consulta(fornecedor.getContatoid()));
+		return fornecedor;
 	}
 
 	@Override
@@ -95,5 +118,5 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
 }
