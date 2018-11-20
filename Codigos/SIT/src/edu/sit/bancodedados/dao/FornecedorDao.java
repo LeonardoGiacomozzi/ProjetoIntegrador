@@ -21,9 +21,9 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Fornecedor (" + " idFornecedor INT NOT NULL AUTO_INCREMENT," + 
+			st.executeUpdate("CREATE TABLE Fornecedor (" + " idCadastro_Fornecedor INT NOT NULL AUTO_INCREMENT," + 
 					" Nome VARCHAR(45) NOT NULL," + " CNPJ VARCHAR(45) NOT NULL," + " Pessoa_Responsavel VARCHAR(50) NOT NULL," + 
-					" Contato_idContato INT NOT NULL," + " PRIMARY KEY (idFornecedor)," + 
+					" Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCasdastro_Fornecedor)," + 
 					" INDEX fk_Fornecedor_Contato1_idx (Contato_idContato ASC))" + " ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {

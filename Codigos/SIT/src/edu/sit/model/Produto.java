@@ -19,8 +19,8 @@ public class Produto {
 		return categoriaId;
 	}
 
-	public void setCategoriaId(Integer caracteristicaId) {
-		this.categoriaId = caracteristicaId;
+	public void setCategoriaId(Integer categoriaId) {
+		this.categoriaId = categoriaId;
 	}
 
 	public Integer getFornecedorId() {
@@ -86,10 +86,23 @@ public class Produto {
 			Fornecedor fornecedor) {
 		return new Produto(nome, categoria, fornecedor, quatidade, valorUnitario);
 	}
-	
+
 	public static Produto criaProdutoBanco(String nome, Integer categoria, Integer fornedcedor, Integer quantidade,
 			Double vaorUnitario) {
 		return new Produto(nome, categoria, fornedcedor, quantidade, vaorUnitario);
+	}
+
+	public static Produto consultaProdutoBanco(Integer id, String nome, Integer quantidade, Double valorUnitario, Integer categoria, Integer fornecedor) {
+		return new Produto(id, nome, quantidade, valorUnitario, categoria, fornecedor);
+	}
+	
+	private Produto(Integer id, String nome, Integer quantidade, Double valorUnitario, Integer categoria, Integer funcionario) {
+		setId(id);
+		setNome(nome);
+		setQuantidade(quantidade);
+		setValorUnitario(valorUnitario);
+		setCategoriaId(categoria);
+		setFornecedorId(funcionario);
 	}
 
 	private Produto(String nome, Categoria categoria, Fornecedor fornecedor, Integer quantidade, Double valorUnitario) {

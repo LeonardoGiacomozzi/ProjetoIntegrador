@@ -3,7 +3,9 @@ package edu.sit.bancodedados.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.sit.bancodedados.conexao.Conexao;
@@ -22,7 +24,7 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 			st.executeUpdate("CREATE TABLE Produtos (" + " idProdutos INT NOT NULL AUTO_INCREMENT," + 
 					" Nome VARCHAR(45) NOT NULL," + " Categoria VARCHAR(15) NOT NULL," + " Quantidade INT(80) NOT NULL," + 
 					" Valor DOUBLE NOT NULL," + " PRIMARY KEY (idProdutos))" + 
-					" INDEX fk_ProdutoS_Fornecedor1_idx (Fornecedor_idCadastro_Fornecedor ASC))" + " ENGINE = InnoDB;");
+					" INDEX fk_ProdutoS_Fornecedor1_idx (Fornecedor_idFornecedor ASC))" + " ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -52,9 +54,9 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Produtos WHERE idProdutos = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			//return rs.first() ? Produto.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"),
-			//		rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")) : null;
-			return null;
+				return rs.first() ? Produto.consultaProdutoBanco(rs.getInt("idProduto"), rs.getString("Nome"),
+					rs.getInt("Quantidade"), rs.getDouble("Valor_Unitario"), rs.getInt("Categoria_idCategoria"), 
+					rs.getInt("Forncedor_idFornecedor")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -62,52 +64,187 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 		}
 	}
 	
-	//public Fornecedor consultaCompleta(Integer id) throws DaoException, ConexaoException {
-		//Fornecedor fornecedor = consulta(id);
-		//fornecedor.setContato(new ContatoDao().consulta(fornecedor.getContatoid()));
-		//return fornecedor; 
-	//}
-
-	@Override
-	public List<Produto> consultaTodos() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public Produto consultaCompleta(Integer id) throws DaoException, ConexaoException {
+		Produto produto = consulta(id);
+		produto.setCategoria(new CategoriaDao().consulta(produto.getCategoriaId()));
+		produto.setFornecedor(new FornecedorDao().consulta(produto.getFornecedorId()));
+		return produto; 
 	}
 
 	@Override
-	public List<Produto> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Produto> consultaTodos() throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		List<Produto> produtos = new ArrayList<Produto>();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM Produtos;");
+			while (rs.next()) {
+				produtos.add(Produto.consultaProdutoBanco(rs.getInt("idProduto"), rs.getString("Nome"),
+						rs.getInt("Quantidade"), rs.getDouble("Valor_Unitario"), rs.getInt("Categoria_idCategoria"), 
+						rs.getInt("Forncedor_idFornecedor")));
+			}
+			return produtos;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}
+	
+	public List<Produto> consultaTodosCompleto() throws DaoException, ConexaoException {
+		List<Produto> produtosCompleto = new ArrayList<>();
+		List<Produto> produtos = consultaTodos();
+		for (Produto produto : produtos) {
+			produtosCompleto.add(consultaCompleta(produto.getId()));
+		}
+		return produtosCompleto;
+	}
+
+	@Override
+	public List<Produto> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		List<Produto> produto = new ArrayList<Produto>();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Produto WHERE idProduto = ?;");
+			for (Integer codigo : codigos) {
+				try {
+					pst.setInt(1, codigo);
+					ResultSet rs = pst.executeQuery();
+					if (rs.first()) {
+						produto.add(Produto.consultaProdutoBanco(rs.getInt("idProduto"), rs.getString("Nome"),
+								rs.getInt("Quantidade"), rs.getDouble("Valor_Unitario"), rs.getInt("Categoria_idCategoria"), 
+								rs.getInt("Forncedor_idFornecedor")));
+					}
+				} catch (Exception c) {
+					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
+				}
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return produto;
+	}
+	
+	public List<Produto> consultaFaixaCompleto(Integer... codigos) throws DaoException, ConexaoException {
+		List<Produto> produtosCompleto = new ArrayList<>();
+		List<Produto> produtos = consultaFaixa(codigos);
+		for (Produto produto : produtos) {
+			produtosCompleto.add(consultaCompleta(produto.getId()));
+		}
+		return produtosCompleto;
 	}
 
 	@Override
 	public boolean insere(Produto objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"INSERT INTO Produto (Nome, Quantidade, Valor_Unitario, Categoria_idCategoria, Forncedor_idForncedor) values (?, ?, ?, ?, ?);");
+			pst.setString(1, objeto.getNome());
+			pst.setInt(2, objeto.getQuantidade());
+			pst.setDouble(3, objeto.getValorUnitario());
+			pst.setInt(4, objeto.getCategoriaId());
+			pst.setInt(5, objeto.getFornecedorId());
+			return pst.executeUpdate() > 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public List<Produto> insereVarios(List<Produto> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		List<Produto> falhados = new ArrayList<>();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"INSERT INTO Produto (Nome, Quantidade, Valor_Unitario, Categoria_idCategoria, Forncedor_idForncedor) values (?, ?, ?, ?, ?);");
+			for (Produto produto : objetos) {
+				try {
+					pst.setString(1, produto.getNome());
+					pst.setInt(2, produto.getQuantidade());
+					pst.setDouble(3, produto.getValorUnitario());
+					pst.setInt(4, produto.getCategoriaId());
+					pst.setInt(5, produto.getFornecedorId());
+					pst.executeUpdate();
+				} catch (SQLException i) {
+					new DaoException(EErrosDao.INSERE_DADO, i.getMessage(), this.getClass());
+					falhados.add(produto);
+				}
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return falhados;
 	}
 
 	@Override
 	public boolean insereVariosTransacao(List<Produto> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			conexao.setAutoCommit(false);
+			PreparedStatement pst = conexao.prepareStatement(
+					"INSERT INTO Produto (Nome, Quantidade, Valor_Unitario, Categoria_idCategoria, Forncedor_idForncedor) values (?, ?, ?, ?, ?);");
+			for (Produto produto : objetos) {
+				pst.setString(1, produto.getNome());
+				pst.setInt(2, produto.getQuantidade());
+				pst.setDouble(3, produto.getValorUnitario());
+				pst.setInt(4, produto.getCategoriaId());
+				pst.setInt(5, produto.getFornecedorId());
+				pst.executeUpdate();
+			}
+			conexao.commit();
+			return true;
+		} catch (Exception e) {
+			try {
+				conexao.rollback();
+			} catch (Exception r) {
+				throw new DaoException(EErrosDao.ROLLBACK, e.getMessage(), this.getClass());
+			}
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public boolean altera(Produto objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"UPDATE Produto SET Nome = ?, Quantidade = ?, Valor_Unitario = ?  WHERE idProduto = ?;");
+			pst.setString(1, objeto.getNome());
+			pst.setInt(2, objeto.getQuantidade());
+			pst.setDouble(3, objeto.getValorUnitario());
+			pst.setInt(5, objeto.getId());
+			return pst.executeUpdate() > 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.ALTERA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Produto WHERE idProduto = ?;");
+			for (Integer novo : codigos) {
+				pst.setInt(1, novo);
+				pst.execute();
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return true;
 	}
 
 	@Override
