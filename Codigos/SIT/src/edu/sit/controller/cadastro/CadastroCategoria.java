@@ -4,10 +4,10 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
+import edu.sit.erro.leitura.LeituraEsception;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Categoria;
 import edu.sit.uteis.Leitor;
-import edu.sit.view.menu.LeituraException;
 
 public class CadastroCategoria {
 
@@ -19,7 +19,7 @@ public class CadastroCategoria {
 			try {
 				System.out.print("Nome:\t");
 				nome = Leitor.leString();
-			} catch (LeituraException e) {
+			} catch (LeituraEsception e) {
 				System.out.println(e.getMessage());
 			}
 		}
