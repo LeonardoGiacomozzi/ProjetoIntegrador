@@ -1,7 +1,7 @@
 package edu.sit.model;
 
 public class Produto {
-	
+
 	private Integer id;
 	private String nome;
 	private Integer categoriaId;
@@ -11,11 +11,10 @@ public class Produto {
 	private Integer quantidade;
 	private Double valorUnitario;
 
-	
 	public Categoria getCategoria() {
 		return categoria;
 	}
-	
+
 	public Integer getCategoriaId() {
 		return categoriaId;
 	}
@@ -36,7 +35,6 @@ public class Produto {
 		this.categoria = categoria;
 	}
 
-
 	public Integer getId() {
 		return id;
 	}
@@ -52,7 +50,6 @@ public class Produto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public Fornecedor getFornecedor() {
 		return fornecedor;
@@ -77,33 +74,40 @@ public class Produto {
 	public void setValorUnitario(Double valorUnitario) {
 		this.valorUnitario = valorUnitario;
 	}
-	
-	public static Produto criaProdutoSemFornecedor(String nome,Categoria categoria, Integer quatidade,Double valorUnitario) {
-		return new Produto(nome, categoria, Fornecedor.criaFornecedorFull("Sem Fornecedor", "Sem Fornecedor",
-					"Sem Fornecedor", 0), quatidade,valorUnitario);
-	}
-	
-	public static Produto criaProduto(String nome,Categoria categoria,Integer quatidade,Double valorUnitario,Fornecedor fornecedor) {
-		return new Produto( nome, categoria, fornecedor, quatidade,valorUnitario);
-	}
-	
-	
-	private Produto(String nome, Categoria categoria, Fornecedor fornecedor, Integer quantidade,
+
+	public static Produto criaProdutoSemFornecedor(String nome, Categoria categoria, Integer quatidade,
 			Double valorUnitario) {
+		return new Produto(nome, categoria,
+				Fornecedor.criaFornecedorFull("Sem Fornecedor", "Sem Fornecedor", "Sem Fornecedor", 0), quatidade,
+				valorUnitario);
+	}
+
+	public static Produto criaProduto(String nome, Categoria categoria, Integer quatidade, Double valorUnitario,
+			Fornecedor fornecedor) {
+		return new Produto(nome, categoria, fornecedor, quatidade, valorUnitario);
+	}
+	
+	public static Produto criaProdutoBanco(String nome, Integer categoria, Integer fornedcedor, Integer quantidade,
+			Double vaorUnitario) {
+		return new Produto(nome, categoria, fornedcedor, quantidade, vaorUnitario);
+	}
+
+	private Produto(String nome, Categoria categoria, Fornecedor fornecedor, Integer quantidade, Double valorUnitario) {
 		setCategoria(categoria);
 		setFornecedor(fornecedor);
 		setNome(nome);
 		setQuantidade(quantidade);
 		setValorUnitario(valorUnitario);
 	}
-	private Produto(String nome, Integer categoria, Integer fornecedor, Integer quantidade,
-			Double valorUnitario) {
+
+	private Produto(String nome, Integer categoria, Integer fornecedor, Integer quantidade, Double valorUnitario) {
 		setCategoriaId(categoria);
 		setFornecedorId(fornecedor);
 		setNome(nome);
 		setQuantidade(quantidade);
 		setValorUnitario(valorUnitario);
 	}
+
 	@Override
 	public String toString() {
 		return "Produto " + "\n\tId\t:" + getId() + "\n\tNome\t/:" + getNome() + "\n\tCategoria\t:" + getCategoria()
@@ -141,10 +145,4 @@ public class Produto {
 			return false;
 		return true;
 	}
-	
-	public static Produto criaProdutoBanco(String nome, Integer categoria,Integer fornedcedor,Integer quantidade,Double vaorUnitario ) {
-		return new Produto(nome,categoria,fornedcedor,quantidade,vaorUnitario);
-	}
-
-	
 }

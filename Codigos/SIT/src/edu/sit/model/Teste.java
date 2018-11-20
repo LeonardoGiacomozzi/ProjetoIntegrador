@@ -5,6 +5,7 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
+import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.erros.dao.DaoException;
 
@@ -80,7 +81,7 @@ public class Teste {
 //		//System.out.println(teste3.criaTabela());
 //		
 		FornecedorDao teste4 = new FornecedorDao();
-//		//System.out.println(teste4.criaTabela());
+		System.out.println(teste4.criaTabela());
 //		//System.out.println(teste4.excluiTabela());
 		//System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs", "xx.xxx.xxx/xxxx-xx", "Jose", new ContatoDao().pegaUltimoID())));
 		//System.out.println(teste4.consultaTodos());
@@ -89,12 +90,12 @@ public class Teste {
 		//System.out.println(teste4.consultaCNPJ("xx.xxx.xxx/xxxx-xx"));
 		//System.out.println(teste4.consultaTodos());
 //		
-//		ProdutoDao teste5 = new ProdutoDao();
-//		//System.out.println(teste5.criaTabela());
+		ProdutoDao teste5 = new ProdutoDao();
+		//System.out.println(teste5.criaTabela());
 //		
 		VendaDao teste6 = new VendaDao();
 //		//System.out.println(teste6.criaTabela());
-		System.out.println(teste6.consultaCompleta(1));
+		//System.out.println(teste6.consultaCompleta(1));
 		
 	}
 }
