@@ -60,6 +60,30 @@ public class Venda {
 	public void setNotaFiscal(NotaFiscal notaFiscal) {
 		this.notaFiscal = notaFiscal;
 	}
+	
+	public Integer getClienteId() {
+		return clienteId;
+	}
+
+	public void setClienteId(Integer clienteId) {
+		this.clienteId = clienteId;
+	}
+
+	public Integer getFuncionarioId() {
+		return funcionarioId;
+	}
+
+	public void setFuncionarioId(Integer funcionarioId) {
+		this.funcionarioId = funcionarioId;
+	}
+
+	public Integer getNotaFiscalId() {
+		return notaFiscalId;
+	}
+
+	public void setNotaFiscalId(Integer notaFiscalId) {
+		this.notaFiscalId = notaFiscalId;
+	}
 
 	public Double getValorCompra() {
 		double total = 0.0;
@@ -98,45 +122,36 @@ public class Venda {
 		setCliente(cliente);
 		setFuncionario(funcionario);
 		setProdutos(produtos);
-
+	}
+	
+	private Venda(Integer id, Double valor, Integer funcionarioId, Integer notaFiscalId) {
+		setId(id);
+		setValor(valor);
+		setFuncionarioId(funcionarioId);
+		setNotaFiscalId(notaFiscalId);
 	}
 
 	public Venda criaVenda(Cliente cliente, ArrayList<Produto> produtos, Funcionario funcionario) {
 		return new Venda(cliente, produtos, funcionario);
 	}
+	
+	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer notaFiscalId) {
+		return new Venda(id, valor, funcionarioId, notaFiscalId);
+	}
 
+//	@Override
+//	public String toString() {
+//		String listaProdutos = "";
+//		for (Produto produto : produtos) {
+//			listaProdutos += produto.toString() + "\n";
+//		}
+//		return "Funcionário:\t\t" + getFuncionario() + "\nCliente:\t\t" + getCliente() + "\nValor:\t\t" + getValor()
+//				+ "\nProdutos:\t\t" + listaProdutos;
+//	}
+	
 	@Override
 	public String toString() {
-		String listaProdutos = "";
-		for (Produto produto : produtos) {
-			listaProdutos += produto.toString() + "\n";
-		}
-		return "Funcionário:\t\t" + getFuncionario() + "\nCliente:\t\t" + getCliente() + "\nValor:\t\t" + getValor()
-				+ "\nProdutos:\t\t" + listaProdutos;
+		return "ID: \t\t" + getId() + "\nValor: \t\t" + getValor() + "\nFuncionario: \t" + getFuncionarioId() + 
+				"\nNota Fiscal: \t" + getNotaFiscalId();
 	}
-
-	public Integer getClienteId() {
-		return clienteId;
-	}
-
-	public void setClienteId(Integer clienteId) {
-		this.clienteId = clienteId;
-	}
-
-	public Integer getFuncionarioId() {
-		return funcionarioId;
-	}
-
-	public void setFuncionarioId(Integer funcionarioId) {
-		this.funcionarioId = funcionarioId;
-	}
-
-	public Integer getNotaFiscalId() {
-		return notaFiscalId;
-	}
-
-	public void setNotaFiscalId(Integer notaFiscalId) {
-		this.notaFiscalId = notaFiscalId;
-	}
-
 }

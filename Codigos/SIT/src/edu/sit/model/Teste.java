@@ -5,6 +5,7 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
+import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.erros.dao.DaoException;
 
 public class Teste {	 
@@ -91,7 +92,9 @@ public class Teste {
 //		ProdutoDao teste5 = new ProdutoDao();
 //		//System.out.println(teste5.criaTabela());
 //		
-//		VendaDao teste6 = new VendaDao();
+		VendaDao teste6 = new VendaDao();
 //		//System.out.println(teste6.criaTabela());
+		System.out.println(teste6.consultaCompleta(1));
+		
 	}
 }

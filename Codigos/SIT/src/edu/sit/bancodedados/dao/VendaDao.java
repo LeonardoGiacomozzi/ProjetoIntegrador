@@ -10,7 +10,6 @@ import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
-import edu.sit.model.Fornecedor;
 import edu.sit.model.Venda;
 
 public class VendaDao implements IDao<Venda>, IInstaladorDao {
@@ -56,8 +55,8 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 			return rs.first()
-					? Venda.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"),
-							rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato"))
+					? Venda.consultaVendaBanco(rs.getInt("idVenda"), rs.getDouble("Valor"), 
+							rs.getInt("Funcionario_idCadastro_Funcionario"), rs.getInt("Nota_Fiscal_idNota_Fiscal"))
 					: null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -66,10 +65,11 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 		}
 	}
 
-	public Fornecedor consultaCompleta(Integer id) throws DaoException, ConexaoException {
-		Fornecedor fornecedor = consulta(id);
-		fornecedor.setContato(new ContatoDao().consulta(fornecedor.getContatoid()));
-		return fornecedor;
+	public Venda consultaCompleta(Integer id) throws DaoException, ConexaoException {
+		Venda venda = consulta(id);
+		venda.setFuncionario(new FuncionarioDao().consulta(venda.getFuncionarioId()));
+		venda.setNotaFiscal(new NotaFiscalDao().consulta(venda.getNotaFiscalId()));
+		return venda;
 	}
 
 	@Override

@@ -1,6 +1,8 @@
 package edu.sit.bancodedados.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.List;
 
@@ -8,6 +10,7 @@ import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
+import edu.sit.model.Fornecedor;
 import edu.sit.model.Produto;
 
 public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
@@ -44,7 +47,24 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 
 	@Override
 	public Produto consulta(Integer codigo) throws DaoException, ConexaoException {
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Produtos WHERE idProdutos = ?;");
+			pst.setInt(1, codigo);
+			ResultSet rs = pst.executeQuery();
+			return rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"),
+					rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")) : null;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}
+	
+	public Fornecedor consultaCompleta(Integer id) throws DaoException, ConexaoException {
+		Fornecedor fornecedor = consulta(id);
+		fornecedor.setContato(new ContatoDao().consulta(fornecedor.getContatoid()));
+		return fornecedor; 
 	}
 
 	@Override
