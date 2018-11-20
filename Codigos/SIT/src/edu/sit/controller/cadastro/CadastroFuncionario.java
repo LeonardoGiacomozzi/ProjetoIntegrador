@@ -6,11 +6,11 @@ import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
+import edu.sit.erro.leitura.LeituraEsception;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.ECargo;
 import edu.sit.model.Funcionario;
 import edu.sit.uteis.Leitor;
-import edu.sit.view.menu.LeituraException;
 
 public class CadastroFuncionario {
 
@@ -26,7 +26,7 @@ public class CadastroFuncionario {
 			try {
 				System.out.print("Nome:\t");
 				nome = Leitor.leString();
-			} catch (LeituraException e) {
+			} catch (LeituraEsception e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -36,7 +36,7 @@ public class CadastroFuncionario {
 				System.out.print("Cargo:\t");
 				
 				cargo = ECargo.values()[Leitor.leInteger()];
-			} catch (LeituraException e) {
+			} catch (LeituraEsception e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -45,7 +45,7 @@ public class CadastroFuncionario {
 			try {
 				System.out.print("Cpf:\t");
 				cpf = Leitor.leCpf();
-			} catch (LeituraException e) {
+			} catch (LeituraEsception e) {
 				System.out.println(e.getMessage());
 			}
 		}

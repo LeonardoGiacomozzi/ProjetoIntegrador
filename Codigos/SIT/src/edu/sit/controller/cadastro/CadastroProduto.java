@@ -17,6 +17,7 @@ import edu.sit.model.Produto;
 import edu.sit.uteis.Leitor;
 
 public class CadastroProduto {
+	
 	public boolean CadastraProduto() throws ConexaoException, CadastroExeption, DaoException {
 
 		String nome = null;
