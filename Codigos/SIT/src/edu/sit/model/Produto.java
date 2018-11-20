@@ -142,8 +142,8 @@ public class Produto {
 		return true;
 	}
 	
-	public boolean criaProdutoBanco() {
-		return true;
+	public static Produto criaProdutoBanco(String nome, Integer categoria,Integer fornedcedor,Integer quantidade,Double vaorUnitario ) {
+		return new Produto(nome,categoria,fornedcedor,quantidade,vaorUnitario);
 	}
 
 	
