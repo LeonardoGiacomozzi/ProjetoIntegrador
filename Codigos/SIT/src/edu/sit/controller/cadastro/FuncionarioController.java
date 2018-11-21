@@ -12,7 +12,7 @@ import edu.sit.model.ECargo;
 import edu.sit.model.Funcionario;
 import edu.sit.uteis.Leitor;
 
-public class CadastroFuncionario {
+public class FuncionarioController {
 
 	public boolean CadastraFuncionario() throws ConexaoException, CadastroExeption {
 
@@ -49,7 +49,7 @@ public class CadastroFuncionario {
 				System.out.println(e.getMessage());
 			}
 		}
-		if (CadastroContato.cadastraContato()) {
+		if (ContatoController.cadastraContato()) {
 
 			try {
 				Funcionario funcionario =	Funcionario.criaFuncionarioBanco(nome, cpf, cargo, new ContatoDao().pegaUltimoID());

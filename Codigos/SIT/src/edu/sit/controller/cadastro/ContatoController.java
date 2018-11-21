@@ -9,7 +9,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Contato;
 import edu.sit.uteis.Leitor;
 
-public class CadastroContato {
+public class ContatoController {
 
 	public static boolean cadastraContato() throws CadastroExeption, ConexaoException {
 		String email = null;

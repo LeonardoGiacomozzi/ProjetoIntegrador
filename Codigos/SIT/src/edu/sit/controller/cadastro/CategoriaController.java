@@ -9,7 +9,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Categoria;
 import edu.sit.uteis.Leitor;
 
-public class CadastroCategoria {
+public class CategoriaController {
 
 	public static boolean cadastraCategoria() throws CadastroExeption, ConexaoException {
 		String nome = null;

@@ -10,7 +10,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Fornecedor;
 import edu.sit.uteis.Leitor;
 
-public class CadastroFornecedor {
+public class FornecedorController {
 	
 
 	public static boolean CadastraFornecedor() throws ConexaoException, CadastroExeption {
@@ -44,7 +44,7 @@ public class CadastroFornecedor {
 				System.out.println(e.getMessage());
 			}
 		}
-		if (CadastroContato.cadastraContato()) {
+		if (ContatoController.cadastraContato()) {
 
 			try {
 				Fornecedor fornecedor = Fornecedor.criaFornecedorFull(nome, cnpj, pessoaResponsavel,

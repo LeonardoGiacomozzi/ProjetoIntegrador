@@ -13,7 +13,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Cliente;
 import edu.sit.uteis.Leitor;
 
-public class CadastroCliente {
+public class ClienteController {
 
 	public boolean CadastraCliente() throws ConexaoException, CadastroExeption {
 
@@ -56,7 +56,7 @@ public class CadastroCliente {
 				System.out.println(e.getMessage());
 			}
 		}
-		if (CadastroContato.cadastraContato()) {
+		if (ContatoController.cadastraContato()) {
 
 			try {
 				Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf, new ContatoDao().pegaUltimoID());

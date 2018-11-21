@@ -16,7 +16,7 @@ import edu.sit.model.Fornecedor;
 import edu.sit.model.Produto;
 import edu.sit.uteis.Leitor;
 
-public class CadastroProduto {
+public class ProdutoController {
 	
 	public boolean CadastraProduto() throws ConexaoException, CadastroExeption, DaoException {
 
@@ -106,7 +106,7 @@ public class CadastroProduto {
 				System.out.println("0 --- CADASTRAR CATEGORIA");
 				categoriaId = Leitor.leInteger();
 				if (categoriaId == 0) {
-					System.out.println(CadastroCategoria.cadastraCategoria() ? "Categoria cadastrada\n"
+					System.out.println(CategoriaController.cadastraCategoria() ? "Categoria cadastrada\n"
 							: "Erro ao cadastrar categoria");
 					categoriaId = new CategoriaDao().pegaUltimoID();
 				}
@@ -144,7 +144,7 @@ public class CadastroProduto {
 				System.out.println("0 --- CADASTRAR FORNECEDOR");
 				fornecedorId = Leitor.leInteger();
 				if (fornecedorId == 0) {
-					System.out.println(CadastroFornecedor.CadastraFornecedor() ? "Fornecedor cadastrada\n"
+					System.out.println(FornecedorController.CadastraFornecedor() ? "Fornecedor cadastrada\n"
 							: "Erro ao cadastrar categoria");
 					fornecedorId = new FornecedorDao().pegaUltimoID();
 				}
