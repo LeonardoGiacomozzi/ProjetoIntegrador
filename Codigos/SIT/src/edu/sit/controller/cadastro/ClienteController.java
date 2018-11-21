@@ -8,7 +8,7 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
-import edu.sit.erro.leitura.LeituraEsception;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Cliente;
 import edu.sit.uteis.Leitor;
@@ -27,7 +27,7 @@ public class ClienteController {
 			try {
 				System.out.print("Nome:\t");
 				nome = Leitor.leString();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -36,7 +36,7 @@ public class ClienteController {
 			try {
 				System.out.print("Cpf:\t");
 				cpf = Leitor.leCpf();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -44,7 +44,7 @@ public class ClienteController {
 			try {
 				System.out.print("Endereço:\t");
 				endereco = Leitor.leString();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -52,7 +52,7 @@ public class ClienteController {
 			try {
 				System.out.print("Data de Nascimento (dd/mm/aaaa):\t");
 				dataNascimento = Leitor.leData();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}

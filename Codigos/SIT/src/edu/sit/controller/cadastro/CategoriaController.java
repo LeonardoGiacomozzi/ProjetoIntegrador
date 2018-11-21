@@ -4,7 +4,7 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
-import edu.sit.erro.leitura.LeituraEsception;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Categoria;
 import edu.sit.uteis.Leitor;
@@ -19,7 +19,7 @@ public class CategoriaController {
 			try {
 				System.out.print("Nome:\t");
 				nome = Leitor.leString();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}

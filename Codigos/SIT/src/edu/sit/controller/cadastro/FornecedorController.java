@@ -5,7 +5,7 @@ import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
-import edu.sit.erro.leitura.LeituraEsception;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Fornecedor;
 import edu.sit.uteis.Leitor;
@@ -23,7 +23,7 @@ public class FornecedorController {
 			try {
 				System.out.print("Nome:\t");
 				nome = Leitor.leString();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -32,7 +32,7 @@ public class FornecedorController {
 			try {
 				System.out.print("Cnpj:\t");
 				cnpj = Leitor.leCnpj();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -40,7 +40,7 @@ public class FornecedorController {
 			try {
 				System.out.print("Nome da pessoa responsavel:\t");
 				pessoaResponsavel = Leitor.leString();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}

@@ -9,7 +9,7 @@ import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
-import edu.sit.erro.leitura.LeituraEsception;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Categoria;
 import edu.sit.model.Fornecedor;
@@ -110,7 +110,7 @@ public class ProdutoController {
 							: "Erro ao cadastrar categoria");
 					categoriaId = new CategoriaDao().pegaUltimoID();
 				}
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -125,7 +125,7 @@ public class ProdutoController {
 			try {
 				System.out.print("Nome:\t");
 				nome = Leitor.leString();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -148,7 +148,7 @@ public class ProdutoController {
 							: "Erro ao cadastrar categoria");
 					fornecedorId = new FornecedorDao().pegaUltimoID();
 				}
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -164,7 +164,7 @@ public class ProdutoController {
 			try {
 				System.out.print("Quantidade:\t");
 				quantidade = Leitor.leInteger();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -180,7 +180,7 @@ public class ProdutoController {
 			try {
 				System.out.print("Valor Unitario:\t");
 				valorUnitario = Leitor.leDouble();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}

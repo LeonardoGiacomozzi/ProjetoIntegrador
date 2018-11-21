@@ -4,7 +4,7 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
-import edu.sit.erro.leitura.LeituraEsception;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Contato;
 import edu.sit.uteis.Leitor;
@@ -20,7 +20,7 @@ public class ContatoController {
 			try {
 				System.out.print("Telefone:\t");
 				tel = Leitor.leString();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -28,7 +28,7 @@ public class ContatoController {
 			try {
 				System.out.print("Email:\t");
 				email = Leitor.leString();
-			} catch (LeituraEsception e) {
+			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
 		}
