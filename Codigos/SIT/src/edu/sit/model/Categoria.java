@@ -4,6 +4,7 @@ public class Categoria {
 
 	private Integer id;
 	private String nome;
+	
 	public Integer getId() {
 		return id;
 	}
