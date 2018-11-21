@@ -2,19 +2,14 @@ package edu.sit.controller.cadastro;
 
 
 import edu.sit.bancodedados.conexao.ConexaoException;
-import edu.sit.bancodedados.dao.CategoriaDao;
-import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
-import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
-import edu.sit.model.Categoria;
-import edu.sit.model.Fornecedor;
 import edu.sit.model.Produto;
-import edu.sit.uteis.Leitor;
+import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class ProdutoController {
 	
@@ -28,11 +23,11 @@ public class ProdutoController {
 
 		System.out.println("*****CADASTRO DE PRODUTO*****");
 
-		categoriaId = pedeCategoria();
-		nome = pedeNome();
-		fornecedorId = pedeFornecedor();
-		quantidade = pedeQuantidade();
-		valorUnitario = pedeValorUnitario();
+		categoriaId = UtilCadastro.pedeCategoria();
+		nome = UtilCadastro.pedeNome();
+		fornecedorId = UtilCadastro.pedeFornecedor();
+		quantidade = UtilCadastro.pedeQuantidade();
+		valorUnitario = UtilCadastro.pedeValorUnitario();
 
 		try {
 			Produto produto = Produto.criaProdutoBanco(nome, categoriaId, fornecedorId, quantidade, valorUnitario);
@@ -62,17 +57,17 @@ public class ProdutoController {
 
 				switch (opcao) {
 				case 1:
-					produtoBanco.setNome(pedeNome());
+					produtoBanco.setNome(UtilCadastro.pedeNome());
 
 					break;
 				case 2:
-					produtoBanco.setCategoriaId(pedeCategoria());
+					produtoBanco.setCategoriaId(UtilCadastro.pedeCategoria());
 					break;
 				case 3:
-					produtoBanco.setFornecedorId(pedeFornecedor());
+					produtoBanco.setFornecedorId(UtilCadastro.pedeFornecedor());
 					break;
 				case 4:
-					produtoBanco.setValorUnitario(pedeValorUnitario());
+					produtoBanco.setValorUnitario(UtilCadastro.pedeValorUnitario());
 					break;
 				case 0:
 					try {
@@ -94,97 +89,11 @@ public class ProdutoController {
 
 	}
 
-	private Integer pedeCategoria() throws DaoException, ConexaoException, CadastroExeption {
-		Integer categoriaId = null;
+	
+	
 
-		while (categoriaId == null) {
-			try {
-				System.out.println("Categoria:\t");
-				for (Categoria categoria : new CategoriaDao().consultaTodos()) {
-					System.out.println("ID\t: " + categoria.getId() + "Nome\t: " + categoria.getNome());
-				}
-				System.out.println("0 --- CADASTRAR CATEGORIA");
-				categoriaId = Leitor.leInteger();
-				if (categoriaId == 0) {
-					System.out.println(CategoriaController.cadastraCategoria() ? "Categoria cadastrada\n"
-							: "Erro ao cadastrar categoria");
-					categoriaId = new CategoriaDao().pegaUltimoID();
-				}
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return categoriaId;
+	
+	
 
-	}
-
-	private String pedeNome() {
-		String nome = null;
-
-		while (nome == null) {
-			try {
-				System.out.print("Nome:\t");
-				nome = Leitor.leString();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return nome;
-	}
-
-	private Integer pedeFornecedor() throws DaoException, ConexaoException, CadastroExeption {
-		Integer fornecedorId = null;
-
-		while (fornecedorId == null) {
-			try {
-				System.out.println("Fornecedor:\t");
-				for (Fornecedor fornecedor : new FornecedorDao().consultaTodos()) {
-					System.out.println("ID\t: " + fornecedor.getId() + "Nome\t: " + fornecedor.getNome());
-				}
-				System.out.println("0 --- CADASTRAR FORNECEDOR");
-				fornecedorId = Leitor.leInteger();
-				if (fornecedorId == 0) {
-					System.out.println(FornecedorController.CadastraFornecedor() ? "Fornecedor cadastrada\n"
-							: "Erro ao cadastrar categoria");
-					fornecedorId = new FornecedorDao().pegaUltimoID();
-				}
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return fornecedorId;
-
-	}
-
-	private Integer pedeQuantidade() {
-
-		Integer quantidade = null;
-
-		while (quantidade == null) {
-			try {
-				System.out.print("Quantidade:\t");
-				quantidade = Leitor.leInteger();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return quantidade;
-
-	}
-
-	private Double pedeValorUnitario() {
-
-		Double valorUnitario = null;
-
-		while (valorUnitario == null) {
-			try {
-				System.out.print("Valor Unitario:\t");
-				valorUnitario = Leitor.leDouble();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		return valorUnitario;
-
-	}
+	
 }
