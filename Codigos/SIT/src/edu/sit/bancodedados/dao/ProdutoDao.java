@@ -247,7 +247,6 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 		return true;
 	}
 
-	@Override
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;

@@ -114,7 +114,6 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 		return false;
 	}
 
-	@Override
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;

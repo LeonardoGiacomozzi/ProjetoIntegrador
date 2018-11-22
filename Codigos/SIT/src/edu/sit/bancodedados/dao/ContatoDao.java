@@ -206,7 +206,6 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 		return true;
 	}
 	
-	@Override
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {

@@ -23,6 +23,4 @@ public interface IDao<T> {
 	
 	public abstract boolean exclui(Integer... codigos) throws DaoException, ConexaoException;
 	
-	public abstract Integer pegaUltimoID() throws DaoException, ConexaoException;
-
 }

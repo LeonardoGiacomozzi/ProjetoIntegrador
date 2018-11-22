@@ -90,7 +90,6 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 		return false;
 	}
 
-	@Override
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;

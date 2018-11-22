@@ -3,7 +3,9 @@ package edu.sit.bancodedados.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.sit.bancodedados.conexao.Conexao;
@@ -11,7 +13,6 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.Categoria;
-import edu.sit.model.Cliente;
 
 public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 
@@ -20,11 +21,10 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Cliente (" + " idCliente INT NOT NULL AUTO_INCREMENT,"
-					+ " Nome VARCHAR(45) NOT NULL," + " CPF VARCHAR(14) NOT NULL,"
-					+ " Data_Nascimento DATE NOT NULL," + " Endereco VARCHAR(45) NOT NULL,"
-					+ " Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCliente),"
-					+ " INDEX fk_Cliente_Contato1_idx (Contato_idContato ASC))" + "ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Categoria (" + 
+					"idCategoria INT NOT NULL AUTO_INCREMENT," + 
+					"Nome VARCHAR(45) NOT NULL," + 
+					"PRIMARY KEY (idCategoria)) ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -48,7 +48,7 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 	}
 	
 	@Override
-	public Categoria consulta(Integer codigo) throws DaoException, ConexaoException {
+	public Categoria consulta(Integer idCategoria) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Categoria WHERE idCategoria = ?;");
@@ -64,50 +64,154 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 
 	@Override
 	public List<Categoria> consultaTodos() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM Categoria;");
+			while (rs.next()) {
+				categorias.add(Categoria.criaCategoriaId(rs.getInt("idCategoria"), rs.getString("Nome")));
+			}
+			return categorias;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
-	public List<Categoria> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Categoria> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		List<Categoria> categorias = new ArrayList<Categoria>();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Categoria WHERE idCategoria = ?;");
+			for (Integer codigo : codigos) {
+				try {
+					pst.setInt(1, codigo);
+					ResultSet rs = pst.executeQuery();
+					if (rs.first()) {
+						categorias.add(Categoria.criaCategoriaId(rs.getInt("idCategoria"), rs.getString("Nome")));
+					}
+				} catch (Exception c) {
+					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
+				}
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return categorias;
 	}
 
 	@Override
 	public boolean insere(Categoria objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"INSERT INTO Categoria (Nome) values (?);");
+			pst.setString(1, objeto.getNome());
+			return pst.executeUpdate() > 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public List<Categoria> insereVarios(List<Categoria> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		List<Categoria> falhados = new ArrayList<>();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"INSERT INTO Categoria (Nome) values (?);");
+			for (Categoria categoria : objetos) {
+				try {
+					pst.setString(1, categoria.getNome());
+					pst.executeUpdate();
+				} catch (SQLException i) {
+					new DaoException(EErrosDao.INSERE_DADO, i.getMessage(), this.getClass());
+					falhados.add(categoria);
+				}
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return falhados;
 	}
 
 	@Override
 	public boolean insereVariosTransacao(List<Categoria> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			conexao.setAutoCommit(false);
+			PreparedStatement pst = conexao.prepareStatement(
+					"INSERT INTO Categorias (Nome) values (?);");
+			for (Categoria categoria : objetos) {
+				pst.setString(1, categoria.getNome());
+				pst.executeUpdate();
+			}
+			conexao.commit();
+			return true;
+		} catch (Exception e) {
+			try {
+				conexao.rollback();
+			} catch (Exception r) {
+				throw new DaoException(EErrosDao.ROLLBACK, e.getMessage(), this.getClass());
+			}
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public boolean altera(Categoria objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"UPDATE Categoria SET Nome = ? WHERE idCategoria = ?;");
+			pst.setString(1, objeto.getNome());
+			pst.setInt(2, objeto.getId());
+			return pst.executeUpdate() > 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.ALTERA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 
 	@Override
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Categoria WHERE idCategoria = ?;");
+			for (Integer novo : codigos) {
+				pst.setInt(1, novo);
+				pst.execute();
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return true;
 	}
-
-	@Override
+	
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery("SELECT MAX(idCategoria) FROM Categoria;");
+			return rs.first() ? rs.getInt(1) : 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
-
 }

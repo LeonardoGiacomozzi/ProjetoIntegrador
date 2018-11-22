@@ -242,7 +242,6 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		return true;
 	}
 
-	@Override
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
