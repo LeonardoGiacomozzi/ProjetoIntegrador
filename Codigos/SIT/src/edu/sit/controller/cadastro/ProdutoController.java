@@ -13,7 +13,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class ProdutoController {
 	
-	public boolean CadastraProduto() throws ConexaoException, CadastroExeption, DaoException {
+	public boolean cadastro() throws CadastroExeption {
 
 		String nome = null;
 		Integer categoriaId = null;
@@ -32,14 +32,15 @@ public class ProdutoController {
 		try {
 			Produto produto = Produto.criaProdutoBanco(nome, categoriaId, fornecedorId, quantidade, valorUnitario);
 			System.out.println(new ProdutoDao().insere(produto) ? "Funcionario cadastrado com sucesso" : "Falha");
-		} catch (DaoException e) {
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
 			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_PRODUTO);
 		}
 
 		return true;
 	}
 
-	public boolean EditaProduto(Integer idProduto) throws EdicaoException, CadastroExeption {
+	public boolean editar(Integer idProduto) throws EdicaoException{
 		Produto produtoBanco = null;
 		try {
 			produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
@@ -75,12 +76,13 @@ public class ProdutoController {
 						System.out.println(
 								new ProdutoDao().altera(produtoBanco) ? "Funcionario cadastrado com sucesso" : "Falha");
 					} catch (DaoException e) {
+						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_PRODUTO);
 					}
 					break;
 				}
 			}
-		} catch (DaoException | ConexaoException e) {
+		} catch (DaoException | ConexaoException | CadastroExeption e) {
 			System.out.println("Não foi possivel buscat o produto informado\nErro " + e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_PRODUTO);
 		}

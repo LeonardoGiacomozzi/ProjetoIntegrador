@@ -29,7 +29,7 @@ public class UtilCadastro {
 		return nome;
 	}
 	
-	public static Integer pedeFornecedor() throws DaoException, ConexaoException, CadastroExeption {
+	public static Integer pedeFornecedor() throws CadastroExeption {
 		Integer fornecedorId = null;
 
 		while (fornecedorId == null) {
@@ -45,7 +45,7 @@ public class UtilCadastro {
 							: "Erro ao cadastrar categoria");
 					fornecedorId = new FornecedorDao().pegaUltimoID();
 				}
-			} catch (LeituraException e) {
+			} catch (LeituraException | ConexaoException | DaoException e) {
 				System.out.println(e.getMessage());
 			}
 		}
@@ -53,7 +53,7 @@ public class UtilCadastro {
 
 	}
 
-	public static Integer pedeCategoria() throws DaoException, ConexaoException, CadastroExeption {
+	public static Integer pedeCategoria() throws  CadastroExeption {
 		Integer categoriaId = null;
 
 		while (categoriaId == null) {
@@ -69,7 +69,7 @@ public class UtilCadastro {
 							: "Erro ao cadastrar categoria");
 					categoriaId = new CategoriaDao().pegaUltimoID();
 				}
-			} catch (LeituraException e) {
+			} catch (LeituraException | ConexaoException | DaoException e) {
 				System.out.println(e.getMessage());
 			}
 		}

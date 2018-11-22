@@ -21,6 +21,7 @@ public class CategoriaController {
 			new CategoriaDao().insere(categoria);
 			
 		} catch (DaoException e) {
+			System.out.println(e.getMessage());
 			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
 		}
 		return false;
@@ -36,6 +37,7 @@ public class CategoriaController {
 				new CategoriaDao().altera(categoriaBanco);
 				
 			} catch (DaoException e) {
+				System.out.println(e.getMessage());
 				throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
 			}
 			return true;
