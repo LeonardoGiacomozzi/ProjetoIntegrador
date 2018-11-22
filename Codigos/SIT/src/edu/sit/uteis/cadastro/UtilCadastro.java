@@ -156,5 +156,33 @@ public class UtilCadastro {
 		return dataNascimento;
 	}
 
-
+	public static String pedeTelefone() {
+		
+		String tel = null;
+		while (tel == null) {
+			try {
+				System.out.print("Telefone:\t");
+				tel = Leitor.leString();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return tel;
+	}
+	
+	public static String pedeEmail() {
+		
+		String email = null;
+		
+		while (email == null) {
+			try {
+				System.out.print("Email:\t");
+				email = Leitor.leString();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		return email;
+	}
 }

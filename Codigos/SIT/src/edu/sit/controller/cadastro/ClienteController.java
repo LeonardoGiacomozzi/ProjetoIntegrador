@@ -51,7 +51,7 @@ public class ClienteController {
 	public static boolean editar(Integer codigo) throws EdicaoException {
 
 		try {
-			Cliente clienteBanco = new ClienteDao().consulta(codigo);
+			Cliente clienteBanco = new ClienteDao().consultaCompleta(codigo);
 
 			Integer opcao = 99;
 			System.out.print("*****EDITOR DE CLIENTE*****");
@@ -59,6 +59,7 @@ public class ClienteController {
 				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
 				System.out.println("\n\t\t1----------NOME\t" + clienteBanco.getNome());
 				System.out.println("\n\t\t2----------ENDEREÇO\t" + clienteBanco.getEndereco());
+				System.out.println("\n\t\t3----------CONTATO\t" + clienteBanco.getContato().toString());
 				System.out.println("\n\t\t0----------FINALIZAR");
 				System.out.println("\n\n\t\t---:");
 				opcao = Leitor.leInteger();
@@ -68,7 +69,9 @@ public class ClienteController {
 					break;
 				case 2:
 					clienteBanco.setEndereco(UtilCadastro.pedeEndereco());
-					;
+					break;
+				case 3:
+					ContatoController.editar(clienteBanco.getContatoid());
 					break;
 				case 0:
 					try {
