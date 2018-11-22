@@ -12,7 +12,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class CategoriaController {
 
-	public static boolean cadastraCategoria() throws CadastroExeption, ConexaoException {
+	public static boolean cadastraCategoria() throws CadastroExeption {
 		String nome = null;
 		System.out.print("*****CADASTRO DE CATEGORIA*****");
 		nome = UtilCadastro.pedeNome();
@@ -20,7 +20,7 @@ public class CategoriaController {
 			Categoria categoria = Categoria.criaCategoria(nome);
 			new CategoriaDao().insere(categoria);
 			
-		} catch (DaoException e) {
+		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
 		}
