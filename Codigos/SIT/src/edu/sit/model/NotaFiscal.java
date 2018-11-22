@@ -11,6 +11,14 @@ public class NotaFiscal implements Serializable {
 	private Calendar dataEmissao;
 	private Double total = 0.0;
 	
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+
 	public Venda getVenda() {
 		return venda;
 	}
@@ -29,14 +37,6 @@ public class NotaFiscal implements Serializable {
 
 	public Calendar getDataEmissao() {
 		return dataEmissao;
-	}
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
 	}
 
 	private NotaFiscal(Venda venda) {

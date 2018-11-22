@@ -10,8 +10,6 @@ public class Venda {
 	private ArrayList<Produto> produtos;
 	private Integer funcionarioId;
 	private Funcionario funcionario;
-	private Integer notaFiscalId;
-	private NotaFiscal notaFiscal;
 
 	public Integer getId() {
 		return id;
@@ -52,14 +50,6 @@ public class Venda {
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-
-	public NotaFiscal getNotaFiscal() {
-		return notaFiscal;
-	}
-
-	public void setNotaFiscal(NotaFiscal notaFiscal) {
-		this.notaFiscal = notaFiscal;
-	}
 	
 	public Integer getClienteId() {
 		return clienteId;
@@ -75,14 +65,6 @@ public class Venda {
 
 	public void setFuncionarioId(Integer funcionarioId) {
 		this.funcionarioId = funcionarioId;
-	}
-
-	public Integer getNotaFiscalId() {
-		return notaFiscalId;
-	}
-
-	public void setNotaFiscalId(Integer notaFiscalId) {
-		this.notaFiscalId = notaFiscalId;
 	}
 
 	public Double getValorCompra() {
@@ -124,19 +106,19 @@ public class Venda {
 		setProdutos(produtos);
 	}
 	
-	private Venda(Integer id, Double valor, Integer funcionarioId, Integer notaFiscalId) {
+	private Venda(Integer id, Double valor, Integer funcionarioId, Integer clienteid) {
 		setId(id);
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
-		setNotaFiscalId(notaFiscalId);
+		setClienteId(clienteid);
 	}
 
 	public static Venda criaVenda(Cliente cliente, ArrayList<Produto> produtos, Funcionario funcionario) {
 		return new Venda(cliente, produtos, funcionario);
 	}
 	
-	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer notaFiscalId) {
-		return new Venda(id, valor, funcionarioId, notaFiscalId);
+	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer clienteid) {
+		return new Venda(id, valor, funcionarioId, clienteid);
 	}
 
 	@Override

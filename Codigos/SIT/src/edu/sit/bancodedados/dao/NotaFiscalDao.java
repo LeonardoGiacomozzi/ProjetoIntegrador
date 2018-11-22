@@ -17,9 +17,8 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Nota_Fiscal (" + " idNota_Fiscal INT NOT NULL AUTO_INCREMENT," + 
-					" Numero_Nota BLOB NOT NULL," + " PRIMARY KEY (idNota_Fiscal))" + 
-					"ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE NotaFiscal (" + "idNotaFiscal INT NOT NULL AUTO_INCREMENT," +
+							 "NumeroNota BLOB NOT NULL," + "PRIMARY KEY (idNotaFiscal))	ENGINE = InnoDB");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

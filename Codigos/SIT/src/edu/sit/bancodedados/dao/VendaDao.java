@@ -56,8 +56,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 			ResultSet rs = pst.executeQuery();
 			return rs.first()
 					? Venda.consultaVendaBanco(rs.getInt("idVenda"), rs.getDouble("Valor"), 
-							rs.getInt("Funcionario_idCadastro_Funcionario"), rs.getInt("Nota_Fiscal_idNota_Fiscal"))
-					: null;
+							rs.getInt("Funcionario_idCadastro_Funcionario"), rs.getInt("ClienteidCLiente")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -68,7 +67,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	public Venda consultaCompleta(Integer id) throws DaoException, ConexaoException {
 		Venda venda = consulta(id);
 		venda.setFuncionario(new FuncionarioDao().consulta(venda.getFuncionarioId()));
-		venda.setNotaFiscal(new NotaFiscalDao().consulta(venda.getNotaFiscalId()));
+		venda.setCliente(new ClienteDao().consulta(venda.getClienteId()));
 		return venda;
 	}
 
