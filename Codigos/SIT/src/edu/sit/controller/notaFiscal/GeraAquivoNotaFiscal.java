@@ -18,13 +18,13 @@ public class GeraAquivoNotaFiscal {
 		List<String> palavras = new ArrayList<String>();
 		palavras.add("-------------------------------------------------------------------------------------------");
 		palavras.add("Cliente:");
-		palavras.add("Nome:\t"+nota.getCliente().getNome()+"\tCPF:\t"+nota.getCliente().getCpf());
+		palavras.add("Nome:\t"+nota.getVenda().getCliente().getNome()+"\tCPF:\t"+nota.getVenda().getCliente().getCpf());
 		palavras.add("-------------------------------------------------------------------------------------------");
 		palavras.add("Funcionario:");
-		palavras.add("Nome:\t"+nota.getFuncionario().getNome()+"\tCargo:\t"+nota.getFuncionario().getCargo().getDescricao());
+		palavras.add("Nome:\t"+nota.getVenda().getFuncionario().getNome()+"\tCargo:\t"+nota.getVenda().getFuncionario().getCargo().getDescricao());
 		palavras.add("-------------------------------------------------------------------------------------------");
 		palavras.add("Produtos:");
-		for (Produto produto : nota.getProdutos()) {
+		for (Produto produto : nota.getVenda().getProdutos()) {
 			palavras.add(produto.getNome()+"\t\tR$"+produto.getValorUnitario());
 			
 		}

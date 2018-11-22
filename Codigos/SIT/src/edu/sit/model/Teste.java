@@ -1,5 +1,8 @@
 package edu.sit.model;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
@@ -12,7 +15,8 @@ import edu.sit.erros.dao.DaoException;
 public class Teste {	 
 	public static void main(String[] args) throws DaoException, ConexaoException {
 		
-//		//Cria Tabela Banco
+
+		//Cria Tabela Banco
 		ClienteDao teste = new ClienteDao();
 //		try {
 //			//System.out.println(teste.criaTabela());
@@ -81,7 +85,7 @@ public class Teste {
 //		//System.out.println(teste3.criaTabela());
 //		
 		FornecedorDao teste4 = new FornecedorDao();
-		System.out.println(teste4.criaTabela());
+		//System.out.println(teste4.criaTabela());
 //		//System.out.println(teste4.excluiTabela());
 		//System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs", "xx.xxx.xxx/xxxx-xx", "Jose", new ContatoDao().pegaUltimoID())));
 		//System.out.println(teste4.consultaTodos());

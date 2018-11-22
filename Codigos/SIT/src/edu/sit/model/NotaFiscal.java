@@ -1,65 +1,53 @@
 package edu.sit.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Calendar;
-
 
 public class NotaFiscal implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private Funcionario funcionario;
-	private Cliente cliente;
-	private ArrayList<Produto> produtos;
+	private Venda venda;
 	private Calendar dataEmissao;
-	private Double total=0.0;
-
+	private Double total = 0.0;
 	
+	public Venda getVenda() {
+		return venda;
+	}
+
+	public void setVenda(Venda venda) {
+		this.venda = venda;
+	}
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	public Calendar getDataEmissao() {
 		return dataEmissao;
 	}
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	public ArrayList<Produto> getProdutos() {
-		return produtos;
-	}
-	public void setProdutos(ArrayList<Produto> produtos) {
-		this.produtos = produtos;
-	}
+
 	public Double getTotal() {
 		return total;
 	}
+
 	public void setTotal(Double total) {
 		this.total = total;
 	}
-	private NotaFiscal(Funcionario funcionario, Cliente cliente, ArrayList<Produto> produtos) {
-	
-		setCliente(cliente);
-		setFuncionario(funcionario);
-		setProdutos(produtos);
+
+	private NotaFiscal(Venda venda) {
+		setVenda(venda);
 		this.dataEmissao = Calendar.getInstance();
 	}
-	public static NotaFiscal criaNotaFiscal (Funcionario funcionario, Cliente cliente, ArrayList<Produto> produtos) {
-	
-		return new NotaFiscal(funcionario,cliente,produtos);
+
+	public static NotaFiscal criaNotaFiscal(Venda venda) {
+		return new NotaFiscal(venda);
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -67,6 +55,7 @@ public class NotaFiscal implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -83,20 +72,16 @@ public class NotaFiscal implements Serializable {
 			return false;
 		return true;
 	}
+
 	@Override
-	public String toString() {///<sumary> Nota#Cliente#Funcionario#Lista de Produtos#Data de emissão
-		String produtos="";
-		for (Produto produto : getProdutos()) {
-			produtos+="#"+produto.getId();
+	public String toString() {/// <sumary> Nota#Cliente#Funcionario#Lista de Produtos#Data de emissão
+		String produtos = "";
+		for (Produto produto : getVenda().getProdutos()) {
+			produtos += "#" + produto.getId();
 		}
-		
-		return getId()+"#"+getCliente().getId()+"#"+getFuncionario().getId()+produtos+"#"+getDataEmissao();
+
+		return getId() + "#" + getVenda().getCliente().getId() + "#" + getVenda().getFuncionario().getId() + produtos + "#"
+				+ getDataEmissao();
 	}
-	
-	
-	
-	
+
 }
-	
-
-

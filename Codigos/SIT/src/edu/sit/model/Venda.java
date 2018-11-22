@@ -131,7 +131,7 @@ public class Venda {
 		setNotaFiscalId(notaFiscalId);
 	}
 
-	public Venda criaVenda(Cliente cliente, ArrayList<Produto> produtos, Funcionario funcionario) {
+	public static Venda criaVenda(Cliente cliente, ArrayList<Produto> produtos, Funcionario funcionario) {
 		return new Venda(cliente, produtos, funcionario);
 	}
 	
