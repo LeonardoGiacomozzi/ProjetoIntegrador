@@ -63,7 +63,7 @@ public class Categoria {
 		return new Categoria(nome);
 	}
 	
-	public static Categoria criaCategoriaBd(Integer id,String nome) {
+	public static Categoria criaCategoriaId(Integer id,String nome) {
 		return new Categoria(id,nome);
 	}
 }

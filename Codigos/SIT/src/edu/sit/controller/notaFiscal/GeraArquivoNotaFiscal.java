@@ -11,7 +11,7 @@ import edu.sit.model.NotaFiscal;
 import edu.sit.model.Produto;
 import edu.sit.uteis.Arquivo;
 
-public class GeraAquivoNotaFiscal {
+public class GeraArquivoNotaFiscal {
 	
 	public static boolean geraArquivo(NotaFiscal nota,String local) throws NotaFiscalException {
 		
