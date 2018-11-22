@@ -55,7 +55,7 @@ public class CategoriaController {
 
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
-						throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
+						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_CATEGORIA);
 					}
 					break;
 				default:
@@ -65,7 +65,7 @@ public class CategoriaController {
 				}
 
 			}
-		} catch (DaoException | ConexaoException | CadastroExeption | LeituraException e) {
+		} catch (DaoException | ConexaoException | LeituraException e) {
 			System.out.println(e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
 		}

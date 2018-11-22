@@ -185,4 +185,35 @@ public class UtilCadastro {
 		
 		return email;
 	}
+
+	public static String pedeCnpj() {
+		String cnpj = null;
+
+		while (cnpj == null) {
+			
+			try {
+				System.out.print("Cnpj:\t");
+				cnpj = Leitor.leCnpj();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	return cnpj;
+	}
+
+	public static String pedePessoaResponsavel() {
+		
+		String pessoaResponsavel = null;
+
+		while (pessoaResponsavel == null) {
+			try {
+				System.out.print("Nome da pessoa responsavel:\t");
+				pessoaResponsavel = Leitor.leString();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return pessoaResponsavel;
+	}
+
 }
