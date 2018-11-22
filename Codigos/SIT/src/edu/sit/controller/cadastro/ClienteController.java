@@ -10,8 +10,10 @@ import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Cliente;
+import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class ClienteController {
@@ -51,7 +53,15 @@ public class ClienteController {
 		try {
 			Cliente clienteBanco = new ClienteDao().consulta(codigo);
 			
+			Integer opcao = 99;
 			System.out.print("*****EDITOR DE CLIENTE*****");
+			while (opcao != 0) {
+				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
+				System.out.println("\n\t\t1----------NOME\t"+clienteBanco.getNome());
+				System.out.println("\n\t\t2----------ENDEREÇO\t"+clienteBanco.getEndereco());
+				System.out.println("\n\t\t0----------FINALIZAR");
+				System.out.println("\n\n\t\t---:");
+				opcao = Leitor.leInteger();
 			clienteBanco.setNome(UtilCadastro.pedeNome());
 			clienteBanco.setContato(ContatoController.editar(clienteBanco.getContatoid()));
 			clienteBanco.setCpf(UtilCadastro.pedeCpf());
@@ -64,8 +74,9 @@ public class ClienteController {
 				System.out.println(e.getMessage());
 				throw new EdicaoException(EErroEdicao.ERRO_EDICAO_CATEGORIA);
 			}
+			}
 			return true;
-		} catch (DaoException | ConexaoException | EdicaoException e) {
+		} catch (DaoException | ConexaoException | EdicaoException | LeituraException e) {
 			System.out.println(e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
 		}
