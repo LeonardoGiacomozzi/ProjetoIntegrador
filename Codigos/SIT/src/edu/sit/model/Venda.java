@@ -139,19 +139,13 @@ public class Venda {
 		return new Venda(id, valor, funcionarioId, notaFiscalId);
 	}
 
-//	@Override
-//	public String toString() {
-//		String listaProdutos = "";
-//		for (Produto produto : produtos) {
-//			listaProdutos += produto.toString() + "\n";
-//		}
-//		return "Funcionário:\t\t" + getFuncionario() + "\nCliente:\t\t" + getCliente() + "\nValor:\t\t" + getValor()
-//				+ "\nProdutos:\t\t" + listaProdutos;
-//	}
-	
 	@Override
 	public String toString() {
-		return "ID: \t\t" + getId() + "\nValor: \t\t" + getValor() + "\nFuncionario: \t" + getFuncionarioId() + 
-				"\nNota Fiscal: \t" + getNotaFiscalId();
+		String listaProdutos = "";
+		for (Produto produto : produtos) {
+			listaProdutos += produto.toString() + "\n";
+		}
+		return "Funcionário:\t\t" + getFuncionario() + "\nCliente:\t\t" + getCliente() + "\nValor:\t\t" + getValor()
+				+ "\nProdutos:\t\t" + listaProdutos;
 	}
 }
