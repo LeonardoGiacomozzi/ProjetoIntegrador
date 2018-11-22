@@ -1,5 +1,6 @@
 package edu.sit.controller.cadastro;
 
+
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.erro.cadastro.CadastroExeption;
@@ -56,6 +57,10 @@ public class CategoriaController {
 						System.out.println(e.getMessage());
 						throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
 					}
+					break;
+				default:
+					System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
+					break;
 
 				}
 
