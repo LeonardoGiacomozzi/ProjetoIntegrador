@@ -12,7 +12,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class CategoriaController {
 
-	public static boolean cadastraCategoria() throws CadastroExeption {
+	public static boolean cadastro() throws CadastroExeption {
 		String nome = null;
 		System.out.print("*****CADASTRO DE CATEGORIA*****");
 		nome = UtilCadastro.pedeNome();
@@ -27,11 +27,31 @@ public class CategoriaController {
 		return false;
 	}
 	
-	public static boolean editaCategoria(Integer codigo) throws EdicaoException {
+	public static boolean editar(Integer codigo) throws EdicaoException {
 		try {
 			Categoria categoriaBanco = new CategoriaDao().consulta(codigo);
 			
-			System.out.print("*****EDITOR DE CATEGORIA*****");
+			System.out.print("*****EDITOR DE CATEGORIA*****");	Integer opcao = 99;
+			while (opcao != 0) {
+				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
+				System.out.println("\n\t\t1----------NOME\t"+categoriaBanco.getNome());
+				System.out.println("\n\t\t0----------FINALIZAR");
+				System.out.println("\n\n\t\t---:");
+
+				switch (opcao) {
+				case 1:
+					produtoBanco.setNome(UtilCadastro.pedeNome());
+
+					break;
+				case 2:
+					produtoBanco.setCategoriaId(UtilCadastro.pedeCategoria());
+					break;
+				case 3:
+					produtoBanco.setFornecedorId(UtilCadastro.pedeFornecedor());
+					break;
+				case 4:
+					produtoBanco.setValorUnitario(UtilCadastro.pedeValorUnitario());
+					break;
 			categoriaBanco.setNome(UtilCadastro.pedeNome());
 			try {
 				new CategoriaDao().altera(categoriaBanco);

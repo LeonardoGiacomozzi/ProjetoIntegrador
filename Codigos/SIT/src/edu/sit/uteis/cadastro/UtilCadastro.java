@@ -1,5 +1,7 @@
 package edu.sit.uteis.cadastro;
 
+import java.time.LocalDate;
+
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
@@ -65,7 +67,7 @@ public class UtilCadastro {
 				System.out.println("0 --- CADASTRAR CATEGORIA");
 				categoriaId = Leitor.leInteger();
 				if (categoriaId == 0) {
-					System.out.println(CategoriaController.cadastraCategoria() ? "Categoria cadastrada\n"
+					System.out.println(CategoriaController.cadastro() ? "Categoria cadastrada\n"
 							: "Erro ao cadastrar categoria");
 					categoriaId = new CategoriaDao().pegaUltimoID();
 				}
@@ -108,5 +110,51 @@ public class UtilCadastro {
 		return valorUnitario;
 
 	}
+
+	public static String pedeCpf() {
+	
+		String cpf = null;
+		while (cpf == null) {
+			try {
+				System.out.print("Cpf:\t");
+				cpf = Leitor.leCpf();
+
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+
+			}
+		}
+		return cpf;
+	}
+
+	public static String pedeEndereco() {
+		
+		String endereco = null;
+		while (endereco == null) {
+			try {
+				System.out.print("Endereço:\t");
+				endereco = Leitor.leString();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return endereco;
+		
+	}
+
+	public static LocalDate pedeDataNascimento() {
+		
+		LocalDate dataNascimento = null;
+		while (dataNascimento == null) {
+			try {
+				System.out.print("Data de Nascimento (dd/mm/aaaa):\t");
+				dataNascimento = Leitor.leData();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return dataNascimento;
+	}
+
 
 }

@@ -7,13 +7,15 @@ import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Produto;
+import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class ProdutoController {
 	
-	public boolean cadastro() throws CadastroExeption {
+	public static boolean cadastro() throws CadastroExeption {
 
 		String nome = null;
 		Integer categoriaId = null;
@@ -40,7 +42,7 @@ public class ProdutoController {
 		return true;
 	}
 
-	public boolean editar(Integer idProduto) throws EdicaoException{
+	public static boolean editar(Integer idProduto) throws EdicaoException{
 		Produto produtoBanco = null;
 		try {
 			produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
@@ -55,7 +57,7 @@ public class ProdutoController {
 				System.out.println("\n\t\t4----------VALOR UNITARIO\tR$ "+produtoBanco.getValorUnitario());
 				System.out.println("\n\t\t0----------FINALIZAR");
 				System.out.println("\n\n\t\t---:");
-
+				opcao = Leitor.leInteger();
 				switch (opcao) {
 				case 1:
 					produtoBanco.setNome(UtilCadastro.pedeNome());
@@ -82,7 +84,7 @@ public class ProdutoController {
 					break;
 				}
 			}
-		} catch (DaoException | ConexaoException | CadastroExeption e) {
+		} catch (DaoException | ConexaoException | CadastroExeption | LeituraException e) {
 			System.out.println("Não foi possivel buscat o produto informado\nErro " + e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_PRODUTO);
 		}

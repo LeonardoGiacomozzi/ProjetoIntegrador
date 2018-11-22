@@ -8,14 +8,15 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.erro.cadastro.CadastroExeption;
 import edu.sit.erro.cadastro.EErroCadastro;
-import edu.sit.erro.leitura.LeituraException;
+import edu.sit.erro.editor.EErroEdicao;
+import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Cliente;
-import edu.sit.uteis.Leitor;
+import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class ClienteController {
 
-	public boolean CadastraCliente() throws ConexaoException, CadastroExeption {
+	public static boolean cadastro() throws CadastroExeption {
 
 		String nome = null;
 		String cpf = null;
@@ -23,49 +24,51 @@ public class ClienteController {
 		LocalDate dataNascimento = null;
 		System.out.println("*****CADASTRO DE CLIENTE*****");
 
-		while (nome == null) {
-			try {
-				System.out.print("Nome:\t");
-				nome = Leitor.leString();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-		}
+		nome = UtilCadastro.pedeNome();
+		cpf = UtilCadastro.pedeCpf();
+		endereco = UtilCadastro.pedeEndereco();
+		dataNascimento = UtilCadastro.pedeDataNascimento();
+		
+		try {
+			if (ContatoController.cadastraContato()) {
 
-		while (cpf == null) {
-			try {
-				System.out.print("Cpf:\t");
-				cpf = Leitor.leCpf();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
+				try {
+					Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf, new ContatoDao().pegaUltimoID());
+					System.out.println(new ClienteDao().insere(cliente) ? "Cliente cadastrado com sucesso" : "Falha");
+				} catch (DaoException e) {
+					System.out.println(e.getMessage());
+				}
 			}
-		}
-		while (endereco == null) {
-			try {
-				System.out.print("Endereço:\t");
-				endereco = Leitor.leString();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		while (dataNascimento == null) {
-			try {
-				System.out.print("Data de Nascimento (dd/mm/aaaa):\t");
-				dataNascimento = Leitor.leData();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-		if (ContatoController.cadastraContato()) {
-
-			try {
-				Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf, new ContatoDao().pegaUltimoID());
-				System.out.println(new ClienteDao().insere(cliente) ? "Cliente cadastrado com sucesso" : "Falha");
-			} catch (DaoException e) {
-				throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CLIENTE);
-			}
+		} catch (ConexaoException e) {
+			System.out.println(e.getMessage());
+			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CLIENTE);
 		}
 		return true;
 	}
 
+	public static boolean editar(Integer codigo) throws EdicaoException {
+		
+		try {
+			Cliente clienteBanco = new ClienteDao().consulta(codigo);
+			
+			System.out.print("*****EDITOR DE CLIENTE*****");
+			clienteBanco.setNome(UtilCadastro.pedeNome());
+			clienteBanco.setContato(ContatoController.editar(clienteBanco.getContatoid()));
+			clienteBanco.setCpf(UtilCadastro.pedeCpf());
+			clienteBanco.setDataDeNascimento(UtilCadastro.pedeDataNascimento());
+			clienteBanco.setEndereco(UtilCadastro.pedeEndereco());;
+			try {
+				new ClienteDao().altera(clienteBanco);
+				
+			} catch (DaoException e) {
+				System.out.println(e.getMessage());
+				throw new EdicaoException(EErroEdicao.ERRO_EDICAO_CATEGORIA);
+			}
+			return true;
+		} catch (DaoException | ConexaoException | EdicaoException e) {
+			System.out.println(e.getMessage());
+			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
+		}
+		
+	}
 }

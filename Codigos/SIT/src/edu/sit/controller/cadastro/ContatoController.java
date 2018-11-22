@@ -40,4 +40,9 @@ public class ContatoController {
 		}
 		return false;
 	}
+
+	public static Contato editar(Integer contatoid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
