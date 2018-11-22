@@ -82,6 +82,9 @@ public class ProdutoController {
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_PRODUTO);
 					}
 					break;
+				default:
+					System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
+					break;
 				}
 			}
 		} catch (DaoException | ConexaoException | CadastroExeption | LeituraException e) {
