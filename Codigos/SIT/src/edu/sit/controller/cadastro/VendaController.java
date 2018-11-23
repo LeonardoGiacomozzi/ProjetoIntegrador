@@ -53,7 +53,7 @@ public class VendaController {
 				System.out.println(e.getMessage());
 			}
 		} catch (DaoException | ConexaoException e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
 
 		return true;
