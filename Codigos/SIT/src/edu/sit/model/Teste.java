@@ -98,7 +98,7 @@ public class Teste {
 		//System.out.println(teste4.consultaTodos());
 //		
 		ProdutoDao teste5 = new ProdutoDao();
-		//System.out.println(teste5.criaTabela());
+		System.out.println(teste5.criaTabela());
 //		
 		VendaDao teste6 = new VendaDao();
 //		//System.out.println(teste6.criaTabela());
@@ -109,6 +109,6 @@ public class Teste {
 		
 		NotaFiscalDao teste8 = new NotaFiscalDao();
 		//System.out.println(teste8.criaTabela());
-		System.out.println(teste8.consulta(1));
+		//System.out.println(teste8.consulta(1));
 	}
 }
