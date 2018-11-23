@@ -120,7 +120,7 @@ public class Venda {
 			try {
 				produtosNovo.add(new ProdutoDao().consulta(produto));
 			} catch (DaoException | ConexaoException e) {
-				System.out.println(e.getMessage() + "\n\tErro ao gerara a venda");
+				System.out.println(e.getMessage() + "\n\tErro ao gerar a venda");
 			}
 		}
 		setProdutos(produtosNovo);
@@ -141,7 +141,7 @@ public class Venda {
 	}
 	
 	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer clienteid, ArrayList<Integer>produtos) {
-		return new Venda(id, valor, funcionarioId, clienteid,produtos);
+		return new Venda(id, valor, funcionarioId, clienteid, produtos);
 	}
 
 	@Override

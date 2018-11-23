@@ -4,12 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
+import edu.sit.model.Produto;
 import edu.sit.model.Venda;
 
 public class VendaDao implements IDao<Venda>, IInstaladorDao {
