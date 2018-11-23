@@ -24,13 +24,13 @@ import edu.sit.uteis.Leitor;
 
 public class VendaController {
 
+	private static Double valor = 0.0;
 	public boolean EfetuaVenda() {
-
+		
 		Integer funcionario = null;
 		Integer cliente = null;
 		ArrayList<Produto> produtos= null;
-		Double valor = null;
-		
+		valor=0.0;
 		System.out.print("*****GERAR VENDA*****");
 
 		try {
@@ -167,8 +167,9 @@ public class VendaController {
 	}
 
 	private static Double precoAtual(Double valorUnitario, Integer quantidade) {
-		// TODO Auto-generated method stub
-		return null;
+
+		valor= valor+(valorUnitario!=null?valorUnitario:0)*(quantidade!=null?quantidade:0);
+		return valor;
 	}
 
 }
