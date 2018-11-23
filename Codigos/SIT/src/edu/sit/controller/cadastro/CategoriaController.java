@@ -65,11 +65,11 @@ public class CategoriaController {
 				}
 
 			}
+			return true;
 		} catch (DaoException | ConexaoException | LeituraException e) {
 			System.out.println(e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
 		}
-		return true;
 
 	}
 

@@ -88,7 +88,7 @@ public class ProdutoController {
 				}
 			}
 		} catch (DaoException | ConexaoException | CadastroExeption | LeituraException e) {
-			System.out.println("Não foi possivel buscat o produto informado\nErro " + e.getMessage());
+			System.out.println("Não foi possivel buscar o produto informado\nErro " + e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_PRODUTO);
 		}
 
