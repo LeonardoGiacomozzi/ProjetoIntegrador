@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Calendar;
 import java.util.List;
 
 import edu.sit.bancodedados.conexao.Conexao;
@@ -52,7 +51,7 @@ public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM NotaFiscal WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? NotaFiscal.consultaNotaBanco(rs.getInt("id"), Calendar.getInstance(), 
+			return rs.first() ? NotaFiscal.consultaNotaBanco(rs.getInt("id"), rs.getDate("DataEmissao"), 
 					rs.getDouble("Total"), rs.getInt("Venda")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
