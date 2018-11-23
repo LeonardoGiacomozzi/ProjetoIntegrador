@@ -9,6 +9,7 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
+import edu.sit.bancodedados.dao.NotaFiscalDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.erros.dao.DaoException;
@@ -105,5 +106,9 @@ public class Teste {
 		
 		CategoriaDao teste7 = new CategoriaDao();
 		//System.out.println(teste7.criaTabela());
+		
+		NotaFiscalDao teste8 = new NotaFiscalDao();
+		//System.out.println(teste8.criaTabela());
+		System.out.println(teste8.consulta(1));
 	}
 }

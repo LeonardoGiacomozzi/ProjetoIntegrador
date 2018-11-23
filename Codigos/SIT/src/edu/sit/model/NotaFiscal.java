@@ -8,9 +8,18 @@ public class NotaFiscal implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Venda venda;
+	private Integer vendaid;
 	private Calendar dataEmissao;
 	private Double total = 0.0;
-	
+
+	public Integer getVendaid() {
+		return vendaid;
+	}
+
+	public void setVendaid(Integer vendaid) {
+		this.vendaid = vendaid;
+	}
+
 	public Double getTotal() {
 		return total;
 	}
@@ -43,9 +52,20 @@ public class NotaFiscal implements Serializable {
 		setVenda(venda);
 		this.dataEmissao = Calendar.getInstance();
 	}
+	
+	private NotaFiscal(Integer id, Calendar dataEmissao, Double total, Integer vendaid) {
+		setId(vendaid);
+		this.dataEmissao = dataEmissao;
+		setTotal(total);
+		setVendaid(vendaid);
+	}
 
 	public static NotaFiscal criaNotaFiscal(Venda venda) {
 		return new NotaFiscal(venda);
+	}
+	
+	public static NotaFiscal consultaNotaBanco(Integer id, Calendar dataEmissao, Double total, Integer vendaid) {
+		return new NotaFiscal(id, dataEmissao, total, vendaid);
 	}
 
 	@Override
@@ -73,15 +93,21 @@ public class NotaFiscal implements Serializable {
 		return true;
 	}
 
-	@Override
-	public String toString() {/// <sumary> Nota#Cliente#Funcionario#Lista de Produtos#Data de emissão
-		String produtos = "";
-		for (Produto produto : getVenda().getProdutos()) {
-			produtos += "#" + produto.getId();
-		}
+	//@Override
+	//public String toString() {/// <sumary> Nota#Cliente#Funcionario#Lista de Produtos#Data de emissão
+	//	String produtos = "";
+	//	for (Produto produto : getVenda().getProdutos()) {
+	//		produtos += "#" + produto.getId();
+	//	}
 
-		return getId() + "#" + getVenda().getCliente().getId() + "#" + getVenda().getFuncionario().getId() + produtos + "#"
-				+ getDataEmissao();
+	//	return getId() + "#" + getVenda().getCliente().getId() + "#" + getVenda().getFuncionario().getId() + produtos
+	//			+ "#" + getDataEmissao();
+	//}
+	
+	@Override
+	public String toString() {
+		return "\nID: \t\t" + getId() + "\nData Emissão: \t" + getDataEmissao() + "\nTotal: \t\t" + getTotal() + getVenda();
+				
 	}
 
 }
