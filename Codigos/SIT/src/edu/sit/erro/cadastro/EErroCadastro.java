@@ -14,7 +14,7 @@ public enum EErroCadastro {
 		return mensage;
 	}
 	private EErroCadastro(String mensage) {
-		// TODO Auto-generated constructor stub
+		this.mensage = mensage;
 	}
 
 }

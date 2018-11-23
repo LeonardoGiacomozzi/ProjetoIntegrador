@@ -16,7 +16,7 @@ public enum EErroLeitura {
 		return mensage;
 	}
 	private EErroLeitura(String mensage) {
-		
+		this.mensage = mensage;
 	}
 	
 }

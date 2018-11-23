@@ -13,7 +13,7 @@ public enum EErroNotaFiscal {
 	}
 	
 	private EErroNotaFiscal(String mensage) {
-		
+		this.mensage = mensage;
 	}
 
 }

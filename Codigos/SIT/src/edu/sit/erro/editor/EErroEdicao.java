@@ -20,7 +20,6 @@ public enum EErroEdicao {
 		return mensage;
 	}
 	private EErroEdicao(String mensage) {
-		// TODO Auto-generated constructor stub
 	}
 
 }
