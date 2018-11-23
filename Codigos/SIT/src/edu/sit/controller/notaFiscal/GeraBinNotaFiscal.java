@@ -10,12 +10,12 @@ import edu.sit.model.NotaFiscal;
 
 public class GeraBinNotaFiscal {
 
-	public static boolean geraBin(NotaFiscal nota,String caminho) throws NotaFiscalException {
+	public static boolean geraBin(NotaFiscal nota) throws NotaFiscalException {
 		
 		ObjectOutputStream grava;
 		
 		try {
-			grava = new ObjectOutputStream(new FileOutputStream(caminho));
+			grava = new ObjectOutputStream(new FileOutputStream(System.getProperty("User.dir")+"/NotasBin/nota"+nota.getId()+".bin"));
 			grava.writeObject(nota.toString());
 			grava.flush();
 			grava.close();

@@ -13,7 +13,7 @@ import edu.sit.uteis.Arquivo;
 
 public class GeraArquivoNotaFiscal {
 	
-	public static boolean geraArquivo(NotaFiscal nota,String local) throws NotaFiscalException {
+	public static boolean geraArquivo(NotaFiscal nota) throws NotaFiscalException {
 		
 		List<String> palavras = new ArrayList<String>();
 		palavras.add("-------------------------------------------------------------------------------------------");
@@ -38,7 +38,7 @@ public class GeraArquivoNotaFiscal {
 		palavras.add("-------------------------------------------------------------------------------------------");
 		
 		try {
-			Arquivo.gravaArquivo(local, palavras, false);
+			Arquivo.gravaArquivo(System.getProperty("caminho.nota"), palavras, false);
 		} catch (IOException e) {
 			
 			throw new NotaFiscalException(EErroNotaFiscal.ERRO_GRAVA_ARQUIVO);

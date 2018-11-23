@@ -2,6 +2,10 @@ package edu.sit.model;
 
 import java.util.ArrayList;
 
+import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.ProdutoDao;
+import edu.sit.erros.dao.DaoException;
+
 public class Venda {
 	private Integer id;
 	private Double valor;
@@ -106,19 +110,38 @@ public class Venda {
 		setProdutos(produtos);
 	}
 	
-	private Venda(Integer id, Double valor, Integer funcionarioId, Integer clienteid) {
+	private Venda(Integer id, Double valor, Integer funcionarioId, Integer clienteid,ArrayList<Integer>produtos) {
 		setId(id);
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
+		ArrayList<Produto> produtosNovo =  new ArrayList<Produto>();
+		for (Integer produto : produtos) {
+			try {
+				produtosNovo.add(new ProdutoDao().consulta(produto));
+			} catch (DaoException | ConexaoException e) {
+				System.out.println(e.getMessage() + "\n\tErro ao gerara a venda");
+			}
+		}
+		setProdutos(produtosNovo);
 	}
 
+	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor) {
+		setValor(valor);
+		setFuncionarioId(funcionarioId);
+		setClienteId(clienteid);
+		setProdutos(produtos);
+	}
 	public static Venda criaVenda(Cliente cliente, ArrayList<Produto> produtos, Funcionario funcionario) {
 		return new Venda(cliente, produtos, funcionario);
 	}
 	
-	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer clienteid) {
-		return new Venda(id, valor, funcionarioId, clienteid);
+	public static Venda criaVenda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor)	{
+		return new Venda(clienteid, funcionarioId, produtos, valor);
+	}
+	
+	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer clienteid, ArrayList<Integer>produtos) {
+		return new Venda(id, valor, funcionarioId, clienteid,produtos);
 	}
 
 	@Override

@@ -16,6 +16,7 @@ public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException {
 		
 
+		System.out.println(System.getProperty("user.dir"));
 		//Cria Tabela Banco
 		ClienteDao teste = new ClienteDao();
 //		try {
