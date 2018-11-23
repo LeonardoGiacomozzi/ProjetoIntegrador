@@ -23,7 +23,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		try {
 			Statement st = conexao.createStatement();
 			st.executeUpdate("CREATE TABLE Funcionario (" + "id INT NOT NULL AUTO_INCREMENT," + "Nome VARCHAR(45) NOT NULL," +
-					  "CPF VARCHAR(45) NOT NULL," + "Salario DOUBLE NOT NULL," + "Cargo VARCHAR(45) NOT NULL," +
+					  "CPF VARCHAR(45) NOT NULL," + "Cargo VARCHAR(45) NOT NULL," +
 					  "Contato INT NOT NULL," + "PRIMARY KEY (id)," + "INDEX fk_Funcionario_Contato1_idx (Contato ASC))" + 
 					  "ENGINE = InnoDB" + "DEFAULT CHARACTER SET = armscii8;");
 			return true;
@@ -78,8 +78,8 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Funcionario;");
 			while (rs.next()) {
-				funcionarios.add(Funcionario.consultaFuncionarioBanco(rs.getInt("idCadastro_Funcionario"), rs.getString("Nome"),
-								rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato_idContato")));
+				funcionarios.add(Funcionario.consultaFuncionarioBanco(rs.getInt("id"), rs.getString("Nome"),
+								rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato")));
 			}
 			return funcionarios;
 		} catch (Exception e) {
@@ -103,14 +103,14 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		List<Funcionario> funcionario = new ArrayList<Funcionario>();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Funcionario WHERE idCadastro_Funcionario = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Funcionario WHERE id = ?;");
 			for (Integer codigo : codigos) {
 				try {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						funcionario.add(Funcionario.consultaFuncionarioBanco(rs.getInt("idCadastro_Funcionario"), rs.getString("Nome"),
-								rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato_idContato")));
+						funcionario.add(Funcionario.consultaFuncionarioBanco(rs.getInt("id"), rs.getString("Nome"),
+								rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato")));
 					}
 				} catch (Exception c) {
 					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
@@ -138,7 +138,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Funcionario (Nome, CPF, Cargo, Contato_idContato) values (?, ?, ?, ?);");
+					"INSERT INTO Funcionario (Nome, CPF, Cargo, Contato) values (?, ?, ?, ?);");
 			pst.setString(1, objeto.getNome());
 			pst.setString(2, objeto.getCpf());
 			pst.setInt(3, objeto.getCargo().ordinal());
@@ -157,7 +157,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		List<Funcionario> falhados = new ArrayList<>();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Funcionario (Nome, CPF, Cargo, Contato_idContato) values (?, ?, ?, ?);");
+					"INSERT INTO Funcionario (Nome, CPF, Cargo, Contato) values (?, ?, ?, ?);");
 			for (Funcionario funcionario : objetos) {
 				try {
 					pst.setString(1, funcionario.getNome());
@@ -184,7 +184,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		try {
 			conexao.setAutoCommit(false);
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Funcionario (Nome, CPF, Cargo, Contato_idContato) values (?, ?, ?, ?);");
+					"INSERT INTO Funcionario (Nome, CPF, Cargo, Contato) values (?, ?, ?, ?);");
 			for (Funcionario funcionario : objetos) {
 				pst.setString(1, funcionario.getNome());
 				pst.setString(2, funcionario.getCpf());
@@ -211,7 +211,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"UPDATE Funcionario SET Nome = ?, CPF = ?, Cargo = ?  WHERE idCadastro_Funcionario = ?;");
+					"UPDATE Funcionario SET Nome = ?, CPF = ?, Cargo = ?  WHERE id = ?;");
 			pst.setString(1, objeto.getNome());
 			pst.setString(2, objeto.getCpf());
 			pst.setInt(3, objeto.getCargo().ordinal());
@@ -228,7 +228,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Funcionario WHERE idCadastro_Funcionario = ?;");
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Funcionario WHERE id = ?;");
 			for (Integer novo : codigos) {
 				pst.setInt(1, novo);
 				pst.execute();
@@ -245,7 +245,7 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			ResultSet rs = st.executeQuery("SELECT MAX(idCadastro_Funcionario) FROM Funcionario;");
+			ResultSet rs = st.executeQuery("SELECT MAX(id) FROM Funcionario;");
 			return rs.first() ? rs.getInt(1) : 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());

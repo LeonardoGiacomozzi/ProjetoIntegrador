@@ -59,8 +59,8 @@ public class Funcionario {
 
 	@Override
 	public String toString() {
-		return "Funcionario: \t" + getNome() + "\nCPF: \t\t" + getCpf() + "\nCargo: \t\t" + getCargo() + 
-				(getContato() == null ? "\nContatoID: \t" + getContatoid() : getContato().toString());
+		return "Funcionario: \t" + getNome() + "\nCPF: \t\t" + getCpf() + "\nCargo: \t\t" + getCargo() 
+				+ (getContato() == null ? "\nContatoID: \t" + getContatoid() : getContato().toString());
 	}
 
 	@Override
@@ -99,29 +99,30 @@ public class Funcionario {
 		setCpf(cpf);
 		setCargo(cargo);
 	}
-	
+
 	private Funcionario(Integer id, String nome, String cpf, ECargo cargo, Integer contato) {
 		setId(id);
 		setNome(nome);
 		setCpf(cpf);
 		setContatoid(contato);
 	}
-	
+
 	private Funcionario(String nome, String cpf, ECargo cargo, Integer contato) {
 		setNome(nome);
 		setCpf(cpf);
 		setContatoid(contato);
 	}
-	
+
 	public static Funcionario criaFuncionario(String nome, String cpf, ECargo cargo, Contato contato) {
 		return new Funcionario(nome, cpf, cargo, contato);
 	}
-	
+
 	public static Funcionario criaFuncionarioBanco(String nome, String cpf, ECargo cargo, Integer contato) {
 		return new Funcionario(nome, cpf, cargo, contato);
 	}
-	
-	public static Funcionario consultaFuncionarioBanco(Integer id, String nome, String cpf, ECargo cargo, Integer contato) {
-		return new Funcionario (id, nome, cpf, cargo, contato);
+
+	public static Funcionario consultaFuncionarioBanco(Integer id, String nome, String cpf, ECargo cargo,
+			Integer contato) {
+		return new Funcionario(id, nome, cpf, cargo, contato);
 	}
 }
