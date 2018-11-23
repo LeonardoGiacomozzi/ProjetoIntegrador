@@ -43,7 +43,7 @@ public class UtilCadastro {
 				System.out.println("0 --- CADASTRAR FORNECEDOR");
 				fornecedorId = Leitor.leInteger();
 				if (fornecedorId == 0) {
-					System.out.println(FornecedorController.CadastraFornecedor() ? "Fornecedor cadastrada\n"
+					System.out.println(FornecedorController.cadastro() ? "Fornecedor cadastrada\n"
 							: "Erro ao cadastrar categoria");
 					fornecedorId = new FornecedorDao().pegaUltimoID();
 				}
