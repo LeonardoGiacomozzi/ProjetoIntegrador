@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
@@ -18,9 +19,9 @@ public class Teste {
 
 		System.out.println(System.getProperty("user.dir"));
 		//Cria Tabela Banco
-		ClienteDao teste = new ClienteDao();
+		//ClienteDao teste = new ClienteDao();
 //		try {
-//			//System.out.println(teste.criaTabela());
+		//	System.out.println(teste.criaTabela());
 //		//Exclui tabela
 //			//System.out.println(teste.excluiTabela()); 
 //		} catch (Exception e) {
@@ -59,7 +60,7 @@ public class Teste {
 //		
 //		
 		ContatoDao teste1 = new ContatoDao();
-//		//teste1.criaTabela();
+		//teste1.criaTabela();
 //		//System.out.println(teste1.insere(Contato.criaContato("3336-2333", "hericles_peixer@hotmail.com")));
 		//teste1.insere(Contato.criaContato("1111-1111", "22222@hotmail.com"));
 //		//List<Contato> teste2 = new ArrayList<>();
@@ -87,7 +88,7 @@ public class Teste {
 //		
 		FornecedorDao teste4 = new FornecedorDao();
 		//System.out.println(teste4.criaTabela());
-//		//System.out.println(teste4.excluiTabela());
+		//System.out.println(teste4.excluiTabela());
 		//System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs", "xx.xxx.xxx/xxxx-xx", "Jose", new ContatoDao().pegaUltimoID())));
 		//System.out.println(teste4.consultaTodos());
 		//System.out.println(teste4.exclui(1));
@@ -102,5 +103,7 @@ public class Teste {
 //		//System.out.println(teste6.criaTabela());
 		//System.out.println(teste6.consultaCompleta(1));
 		
+		CategoriaDao teste7 = new CategoriaDao();
+		//System.out.println(teste7.criaTabela());
 	}
 }

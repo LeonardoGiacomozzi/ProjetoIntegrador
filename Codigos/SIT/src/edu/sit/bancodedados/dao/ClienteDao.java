@@ -21,11 +21,10 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Cliente (" + " idCliente INT NOT NULL AUTO_INCREMENT,"
-					+ " Nome VARCHAR(45) NOT NULL," + " CPF VARCHAR(14) NOT NULL,"
-					+ " Data_Nascimento DATE NOT NULL," + " Endereco VARCHAR(45) NOT NULL,"
-					+ " Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCliente),"
-					+ " INDEX fk_Cliente_Contato1_idx (Contato_idContato ASC))" + "ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Cliente (" + "id INT NOT NULL AUTO_INCREMENT," +
+					  "Nome VARCHAR(45) NOT NULL," + "CPF VARCHAR(14) NOT NULL," + "DataNascimento DATE NOT NULL," +
+					  "Endereco VARCHAR(45) NOT NULL," + "Contato INT NOT NULL," + "PRIMARY KEY (id)," +
+					  "INDEX fk_Cliente_Contato1_idx (Contato ASC)) ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -52,12 +51,12 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	public Cliente consulta(Integer idCliente) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE idCliente = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE id = ?;");
 			pst.setInt(1, idCliente);
 			ResultSet rs = pst.executeQuery();
 			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("idCliente"), rs.getString("Nome"),
-					rs.getDate("Data_Nascimento").toLocalDate(), rs.getString("CPF"), rs.getString("Endereco"),
-					rs.getInt("Contato_idContato")) : null;
+					rs.getDate("DataNascimento").toLocalDate(), rs.getString("CPF"), rs.getString("Endereco"),
+					rs.getInt("Contato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -77,9 +76,9 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE CPF = ?;");
 			pst.setString(1, cpf);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("idCliente"), rs.getString("Nome"),
-					rs.getDate("Data_Nascimento").toLocalDate(), rs.getString("CPF"), rs.getString("Endereco"),
-					rs.getInt("Contato_idContato")) : null;
+			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
+					rs.getDate("DataNascimento").toLocalDate(), rs.getString("CPF"), rs.getString("Endereco"),
+					rs.getInt("Contato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -95,9 +94,9 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Cliente;");
 			while (rs.next()) {
-				clientes.add(Cliente.consultaClienteBanco(rs.getInt("idCliente"), rs.getString("Nome"),
-								rs.getDate("Data_Nascimento").toLocalDate(), rs.getString("CPF"),
-								rs.getString("Endereco"), rs.getInt("Contato_idContato")));
+				clientes.add(Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
+								rs.getDate("DataNascimento").toLocalDate(), rs.getString("CPF"),
+								rs.getString("Endereco"), rs.getInt("Contato")));
 			}
 			return clientes;
 		} catch (Exception e) {
@@ -121,15 +120,15 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		List<Cliente> cliente = new ArrayList<Cliente>();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE idCliente = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE id = ?;");
 			for (Integer codigo : codigos) {
 				try {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						cliente.add(Cliente.consultaClienteBanco(rs.getInt("idCliente"), rs.getString("Nome"),
-								rs.getDate("Data_Nascimento").toLocalDate(), rs.getString("CPF"),
-								rs.getString("Endereco"), rs.getInt("Contato_idContato")));
+						cliente.add(Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
+								rs.getDate("DataNascimento").toLocalDate(), rs.getString("CPF"),
+								rs.getString("Endereco"), rs.getInt("Contato")));
 					}
 				} catch (Exception c) {
 					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
@@ -157,7 +156,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Cliente (Nome, Data_Nascimento, CPF, Endereco, Contato_idContato) values (?, ?, ?, ?, ?);");
+					"INSERT INTO Cliente (Nome, DataNascimento, CPF, Endereco, Contato) values (?, ?, ?, ?, ?);");
 			pst.setString(1, objeto.getNome());
 			pst.setDate(2, java.sql.Date.valueOf(objeto.getDataDeNascimento()));
 			pst.setString(3, objeto.getCpf());
@@ -177,7 +176,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		List<Cliente> falhados = new ArrayList<>();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Cliente (Nome, Data_Nascimento, CPF, Endereco, Contato_idContato) values (?, ?, ?, ?, ?);");
+					"INSERT INTO Cliente (Nome, DataNascimento, CPF, Endereco, Contato) values (?, ?, ?, ?, ?);");
 			for (Cliente cliente : objetos) {
 				try {
 					pst.setString(1, cliente.getNome());
@@ -205,7 +204,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		try {
 			conexao.setAutoCommit(false);
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Cliente (Nome, Data_Nascimento, CPF, Endereco, Contato_idContato) values (?, ?, ?, ?, ?);");
+					"INSERT INTO Cliente (Nome, DataNascimento, CPF, Endereco, Contato) values (?, ?, ?, ?, ?);");
 			for (Cliente cliente : objetos) {
 				pst.setString(1, cliente.getNome());
 				pst.setDate(2, java.sql.Date.valueOf(cliente.getDataDeNascimento()));
@@ -233,7 +232,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"UPDATE Cliente SET Nome = ?, Data_Nascimento = ?, CPF = ?, Endereco = ?  WHERE idCliente = ?;");
+					"UPDATE Cliente SET Nome = ?, DataNascimento = ?, CPF = ?, Endereco = ?  WHERE id = ?;");
 			pst.setString(1, objeto.getNome());
 			pst.setDate(2, java.sql.Date.valueOf(objeto.getDataDeNascimento()));
 			pst.setString(3, objeto.getCpf());
@@ -250,7 +249,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 	public boolean exclui (Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Cliente WHERE idCliente = ?;");
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Cliente WHERE id = ?;");
 			for (Integer novo : codigos) {
 				pst.setInt(1, novo);
 				pst.execute();
@@ -267,7 +266,7 @@ public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			ResultSet rs = st.executeQuery("SELECT MAX(idCliente) FROM Cliente;");
+			ResultSet rs = st.executeQuery("SELECT MAX(id) FROM Cliente;");
 			return rs.first() ? rs.getInt(1) : 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());

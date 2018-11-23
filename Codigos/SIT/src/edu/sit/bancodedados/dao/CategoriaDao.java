@@ -22,9 +22,9 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 		try {
 			Statement st = conexao.createStatement();
 			st.executeUpdate("CREATE TABLE Categoria (" + 
-					"idCategoria INT NOT NULL AUTO_INCREMENT," + 
+					"id INT NOT NULL AUTO_INCREMENT," + 
 					"Nome VARCHAR(45) NOT NULL," + 
-					"PRIMARY KEY (idCategoria)) ENGINE = InnoDB;");
+					"PRIMARY KEY (id)) ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -51,10 +51,10 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 	public Categoria consulta(Integer idCategoria) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Categoria WHERE idCategoria = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Categoria WHERE id = ?;");
 			pst.setInt(1, idCategoria);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Categoria.criaCategoriaId(rs.getInt("idCategoria"), rs.getString("Nome")) : null;
+			return rs.first() ? Categoria.criaCategoriaId(rs.getInt("id"), rs.getString("Nome")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -70,7 +70,7 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Categoria;");
 			while (rs.next()) {
-				categorias.add(Categoria.criaCategoriaId(rs.getInt("idCategoria"), rs.getString("Nome")));
+				categorias.add(Categoria.criaCategoriaId(rs.getInt("id"), rs.getString("Nome")));
 			}
 			return categorias;
 		} catch (Exception e) {
@@ -85,13 +85,13 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		List<Categoria> categorias = new ArrayList<Categoria>();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Categoria WHERE idCategoria = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Categoria WHERE id = ?;");
 			for (Integer codigo : codigos) {
 				try {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						categorias.add(Categoria.criaCategoriaId(rs.getInt("idCategoria"), rs.getString("Nome")));
+						categorias.add(Categoria.criaCategoriaId(rs.getInt("id"), rs.getString("Nome")));
 					}
 				} catch (Exception c) {
 					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
@@ -174,7 +174,7 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"UPDATE Categoria SET Nome = ? WHERE idCategoria = ?;");
+					"UPDATE Categoria SET Nome = ? WHERE id = ?;");
 			pst.setString(1, objeto.getNome());
 			pst.setInt(2, objeto.getId());
 			return pst.executeUpdate() > 0;
@@ -189,7 +189,7 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Categoria WHERE idCategoria = ?;");
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Categoria WHERE id = ?;");
 			for (Integer novo : codigos) {
 				pst.setInt(1, novo);
 				pst.execute();
@@ -206,7 +206,7 @@ public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			ResultSet rs = st.executeQuery("SELECT MAX(idCategoria) FROM Categoria;");
+			ResultSet rs = st.executeQuery("SELECT MAX(id) FROM Categoria;");
 			return rs.first() ? rs.getInt(1) : 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());

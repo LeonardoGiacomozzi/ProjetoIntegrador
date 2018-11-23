@@ -21,10 +21,10 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Fornecedor (" + " idCadastro_Fornecedor INT NOT NULL AUTO_INCREMENT," + 
-					" Nome VARCHAR(45) NOT NULL," + " CNPJ VARCHAR(45) NOT NULL," + " Pessoa_Responsavel VARCHAR(50) NOT NULL," + 
-					" Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCasdastro_Fornecedor)," + 
-					" INDEX fk_Fornecedor_Contato1_idx (Contato_idContato ASC))" + " ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Fornecedor (" + "id INT NOT NULL AUTO_INCREMENT," + 
+					  "Nome VARCHAR(45) NOT NULL," + "CNPJ VARCHAR(45) NOT NULL," + 
+					  "PessoaResponsavel VARCHAR(45) NOT NULL," + "Contato INT NOT NULL," +
+					  "PRIMARY KEY (id)," + "INDEX fk_Fornecedor_Contato1_idx (Contato ASC)) ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -51,11 +51,11 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 	public Fornecedor consulta(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor WHERE idCadastro_Fornecedor = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"),
-					rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")) : null;
+			return rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"),
+					rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -75,8 +75,8 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor Where CNPJ = ?;");
 			pst.setString(1, cnpj);
 			ResultSet rs = pst.executeQuery();
-			Fornecedor fornecedor = rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"),
-					rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")) : null;
+			Fornecedor fornecedor = rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"),
+					rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")) : null;
 			return consultaCompleta(fornecedor.getId());
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -93,8 +93,8 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Fornecedor;");
 			while (rs.next()) {
-				fornecedores.add(Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"), 
-								rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")));
+				fornecedores.add(Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"), 
+								rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")));
 			}
 			return fornecedores;
 		} catch (Exception e) {
@@ -118,14 +118,14 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		List<Fornecedor> fornecedor = new ArrayList<Fornecedor>();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor WHERE idCadastro_Fornecedor = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor WHERE id = ?;");
 			for (Integer codigo : codigos) {
 				try {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						fornecedor.add(Fornecedor.consultaFornecedorBanco(rs.getInt("idCadastro_Fornecedor"), rs.getString("Nome"), 
-								rs.getString("CNPJ"), rs.getString("Pessoa_Responsavel"), rs.getInt("Contato_idContato")));
+						fornecedor.add(Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"), 
+								rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")));
 					}
 				} catch (Exception c) {
 					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
@@ -153,7 +153,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Fornecedor (Nome, CNPJ, Pessoa_Responsavel, Contato_idContato) values (?, ?, ?, ?);");
+					"INSERT INTO Fornecedor (Nome, CNPJ, PessoaResponsavel, Contato) values (?, ?, ?, ?);");
 			pst.setString(1, objeto.getNome());
 			pst.setString(2, objeto.getCNPJ());
 			pst.setString(3, objeto.getPessoaResponsavel());
@@ -172,7 +172,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		List<Fornecedor> falhados = new ArrayList<>();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Fornecedor (Nome, CPNJ, Pessoa_Responsavel, Contato_idContato) values (?, ?, ?, ?);");
+					"INSERT INTO Fornecedor (Nome, CPNJ, PessoaResponsavel, Contato) values (?, ?, ?, ?);");
 			for (Fornecedor fornecedor : objetos) {
 				try {
 					pst.setString(1, fornecedor.getNome());
@@ -199,7 +199,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		try {
 			conexao.setAutoCommit(false);
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Fornecedor (Nome, CNPJ, Pessoa_Responsavel, Contato_idContato) values (?, ?, ?, ?);");
+					"INSERT INTO Fornecedor (Nome, CNPJ, PessoaResponsavel, Contato) values (?, ?, ?, ?);");
 			for (Fornecedor fornecedor : objetos) {
 				pst.setString(1, fornecedor.getNome());
 				pst.setString(2, fornecedor.getCNPJ());
@@ -226,11 +226,11 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"UPDATE Fornecedor SET Nome = ?, CNPJ = ?, Pessoa_Responsavel = ?  WHERE idCadastro_Fornecedor = ?;");
+					"UPDATE Fornecedor SET Nome = ?, CNPJ = ?, PessoaResponsavel = ?  WHERE id = ?;");
 			pst.setString(1, objeto.getNome());
 			pst.setString(2, objeto.getCNPJ());
 			pst.setString(3, objeto.getPessoaResponsavel());
-			pst.setInt(5, objeto.getId());
+			pst.setInt(4, objeto.getId());
 			return pst.executeUpdate() > 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.ALTERA_DADO, e.getMessage(), this.getClass());
@@ -243,7 +243,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Fornecedor WHERE idCadastro_Fornecedor = ?;");
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Fornecedor WHERE id = ?;");
 			for (Integer novo : codigos) {
 				pst.setInt(1, novo);
 				pst.execute();
@@ -260,7 +260,7 @@ public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			ResultSet rs = st.executeQuery("SELECT MAX(idCadastro_Fornecedor) FROM Fornecedor;");
+			ResultSet rs = st.executeQuery("SELECT MAX(id) FROM Fornecedor;");
 			return rs.first() ? rs.getInt(1) : 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());

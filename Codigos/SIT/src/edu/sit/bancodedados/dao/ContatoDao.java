@@ -21,9 +21,9 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Contato (" + " idContato INT NOT NULL AUTO_INCREMENT," + 
-					" Telefone VARCHAR(15) NOT NULL," + " Email VARCHAR(45) NOT NULL," + 
-					" PRIMARY KEY (idContato))" + " ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Contato (" + "id INT NOT NULL AUTO_INCREMENT," +
+					  "Telefone VARCHAR(15) NOT NULL," + "Email VARCHAR(45) NOT NULL," +
+					  "PRIMARY KEY (id)) ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -50,10 +50,10 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 	public Contato consulta(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Contato WHERE idContato = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Contato WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Contato.consultaContatoBanco(rs.getInt("idContato"), 
+			return rs.first() ? Contato.consultaContatoBanco(rs.getInt("id"), 
 					rs.getString("Telefone"), rs.getString("Email")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -70,7 +70,7 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Contato;");
 			while (rs.next()) {
-				contatos.add(Contato.consultaContatoBanco(rs.getInt("idContato"), rs.getString("Telefone"), rs.getString("Email")));
+				contatos.add(Contato.consultaContatoBanco(rs.getInt("id"), rs.getString("Telefone"), rs.getString("Email")));
 			}
 			return contatos;
 		} catch (Exception e) {
@@ -85,13 +85,13 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		List<Contato> contato = new ArrayList<Contato>();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Contato WHERE idContato = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Contato WHERE id = ?;");
 			for (Integer codigo : codigos) {
 				try {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						contato.add(Contato.consultaContatoBanco(rs.getInt("idContato"), rs.getString("Telefone"), rs.getString("Email")));
+						contato.add(Contato.consultaContatoBanco(rs.getInt("id"), rs.getString("Telefone"), rs.getString("Email")));
 					}
 				} catch (Exception c) {
 					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
@@ -177,7 +177,7 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"UPDATE Contato SET Telefone = ?, Email = ? WHERE idContato = ?;");
+					"UPDATE Contato SET Telefone = ?, Email = ? WHERE id = ?;");
 			pst.setString(1, objeto.getTelefone());
 			pst.setString(2, objeto.getEmail());
 			pst.setInt(3, objeto.getId());
@@ -193,7 +193,7 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Contato WHERE idContato = ?;");
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Contato WHERE id = ?;");
 			for (Integer novo : codigos) {
 				pst.setInt(1, novo);
 				pst.execute();
@@ -210,7 +210,7 @@ public class ContatoDao implements IDao<Contato>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			ResultSet rs = st.executeQuery("SELECT MAX(idContato) FROM Contato;");
+			ResultSet rs = st.executeQuery("SELECT MAX(id) FROM Contato;");
 			return rs.first() ? rs.getInt(1) : 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());

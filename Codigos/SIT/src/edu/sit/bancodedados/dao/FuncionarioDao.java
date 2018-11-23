@@ -22,11 +22,10 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Funcionario (" + " idCadastro_Funcionario INT NOT NULL AUTO_INCREMENT," + 
-					" Nome VARCHAR(45) NOT NULL," + " Cargo VARCHAR(45) NOT NULL," + " Salario DOUBLE NOT NULL," + 
-					" Contato_idContato INT NOT NULL," + " PRIMARY KEY (idCadastro_Funcionario)," + 
-					" INDEX fk_Funcionario_Contato1_idx (Contato_idContato ASC))" + "ENGINE = InnoDB" + 
-					" DEFAULT CHARACTER SET = armscii8;");
+			st.executeUpdate("CREATE TABLE Funcionario (" + "id INT NOT NULL AUTO_INCREMENT," + "Nome VARCHAR(45) NOT NULL," +
+					  "CPF VARCHAR(45) NOT NULL," + "Salario DOUBLE NOT NULL," + "Cargo VARCHAR(45) NOT NULL," +
+					  "Contato INT NOT NULL," + "PRIMARY KEY (id)," + "INDEX fk_Funcionario_Contato1_idx (Contato ASC))" + 
+					  "ENGINE = InnoDB" + "DEFAULT CHARACTER SET = armscii8;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
@@ -53,11 +52,11 @@ public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
 	public Funcionario consulta(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Funcionario WHERE idCadastro_Funcionario = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Funcionario WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Funcionario.consultaFuncionarioBanco(rs.getInt("idCadastro_Funcionario"), rs.getString("Nome"), 
-					rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato_idContato")) : null;
+			return rs.first() ? Funcionario.consultaFuncionarioBanco(rs.getInt("id"), rs.getString("Nome"), 
+					rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
