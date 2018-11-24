@@ -1,7 +1,5 @@
 package edu.sit.model;
 
-import java.time.LocalDate;
-import java.util.Date;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
@@ -12,12 +10,21 @@ import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.NotaFiscalDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.VendaDao;
+import edu.sit.erro.instalacao.InstalacaoException;
 import edu.sit.erros.dao.DaoException;
+import edu.sit.installer.populador.Populador;
 
 public class Teste {	 
 	public static void main(String[] args) throws DaoException, ConexaoException {
 		
 
+		try {
+			System.out.println(Populador.cliente()?"foi":"nãoFoi");
+			System.out.println(Populador.funcionario()?"foi":"nãoFoi");
+		} catch (InstalacaoException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
 		//System.out.println(System.getProperty("user.dir"));
 		//Cria Tabela Banco
 		ClienteDao teste = new ClienteDao();
@@ -30,9 +37,9 @@ public class Teste {
 //		}
 //		
 //		//Insere 1 por 1
-////		System.out.println(teste.insere(Cliente.criaClienteBanco("Maria", LocalDate.parse("25/06/1998", DateTimeFormatter.ofPattern(
-////			"dd/MM/yyyy")), "Rua", "111.111.111-11", new ContatoDao().pegaUltimoID())));
-//		
+//		System.out.println(teste.insere(Cliente.criaClienteBanco("Maria", LocalDate.parse("25/06/1998", DateTimeFormatter.ofPattern(
+//				"dd/MM/yyyy")), "Rua", "111.111.111-11", new ContatoDao().pegaUltimoID())));
+		
 //		//Insere Varios por Lista
 //		//List<Cliente> lcliente = new ArrayList<>();
 //		//lcliente.add(Cliente.criaClienteBanco("Roberto", LocalDate.parse("12/09/1984", DateTimeFormatter.ofPattern("dd/MM/yyyy")), 

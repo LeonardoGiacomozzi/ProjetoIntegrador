@@ -105,12 +105,15 @@ public class Funcionario {
 		setNome(nome);
 		setCpf(cpf);
 		setContatoid(contato);
+		setCargo(cargo);
 	}
 
 	private Funcionario(String nome, String cpf, ECargo cargo, Integer contato) {
 		setNome(nome);
 		setCpf(cpf);
 		setContatoid(contato);
+		setCargo(cargo);
+
 	}
 
 	public static Funcionario criaFuncionario(String nome, String cpf, ECargo cargo, Contato contato) {
@@ -125,4 +128,6 @@ public class Funcionario {
 			Integer contato) {
 		return new Funcionario(id, nome, cpf, cargo, contato);
 	}
+	public static Funcionario criaFuncionario(String nome, String cpf, ECargo cargo, Integer contato) {
+		return new Funcionario(nome, cpf, cargo, contato);}
 }
