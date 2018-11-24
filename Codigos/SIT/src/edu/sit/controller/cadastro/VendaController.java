@@ -25,7 +25,7 @@ import edu.sit.uteis.Leitor;
 public class VendaController {
 
 	private static Double valor = 0.0;
-	public boolean EfetuaVenda() {
+	public boolean efetuaVenda() {
 		
 		Integer funcionario = null;
 		Integer cliente = null;
