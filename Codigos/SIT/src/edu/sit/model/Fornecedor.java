@@ -120,7 +120,7 @@ public class Fornecedor {
 	@Override
 	public String toString() {
 		return "\nFornecedor:\t" + getNome() + "\nCPNJ: \t\t" + getCNPJ() + "\nResponsável: \t" + 
-				getPessoaResponsavel() + (getContato() == null ? "\nContato: \tNão Preenchido " + getContatoid() : getContato().toString());
+				getPessoaResponsavel() + (getContatoid() == null ? "\nContato: \tNão Preenchido " : getContato());
 	}
 
 }
