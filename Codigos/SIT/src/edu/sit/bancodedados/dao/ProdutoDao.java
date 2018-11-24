@@ -66,7 +66,7 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 	
 	public Produto consultaCompleta(Integer id) throws DaoException, ConexaoException {
 		Produto produto = consulta(id);
-		produto.setFornecedor(new FornecedorDao().consulta(produto.getFornecedorId()));
+		produto.setFornecedor(new FornecedorDao().consultaCompleta(produto.getFornecedorId()));
 		produto.setCategoria(new CategoriaDao().consulta(produto.getCategoriaId()));
 		return produto; 
 	}
