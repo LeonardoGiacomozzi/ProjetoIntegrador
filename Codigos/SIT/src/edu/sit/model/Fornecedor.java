@@ -119,8 +119,8 @@ public class Fornecedor {
 
 	@Override
 	public String toString() {
-		return "ID: \t\t" + getId() + "\nFornecedor:\t" + getNome() + "\nCPNJ: \t\t" + getCNPJ() + "\nResponsável: \t" + 
-				getPessoaResponsavel() + getContato();
+		return "\nFornecedor:\t" + getNome() + "\nCPNJ: \t\t" + getCNPJ() + "\nResponsável: \t" + 
+				getPessoaResponsavel() + (getContato() == null ? "\nContato: \tNão Preenchido " + getContatoid() : getContato().toString());
 	}
 
 }

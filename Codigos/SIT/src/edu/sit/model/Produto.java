@@ -123,9 +123,10 @@ public class Produto {
 
 	@Override
 	public String toString() {
-		return "Produto " + "\n\tId\t:" + getId() + "\n\tNome\t/:" + getNome() + "\n\tCategoria\t:" + getCategoria()
-				+ "\n\tFornecedor\t:" + getFornecedor() + "\n\tQuantidade\t:" + getQuantidade()
-				+ "\n\tValor Unitario\t:" + getValorUnitario();
+		return "ID:\t\t" + getId() + "\nNome:\t\t" + getNome() +  
+				(getCategoria() == null ? "\nCategoria: \tNão Preenchido " + getCategoriaId() : getCategoria().toString()) +
+				(getFornecedor() == null ? "\nFornecedor: \tNão Preenchido " + getFornecedorId() : getFornecedor()) + 
+				"\nQuantidade:\t" + getQuantidade() + "\nValor Unitário:\t" + getValorUnitario();
 	}
 
 	@Override

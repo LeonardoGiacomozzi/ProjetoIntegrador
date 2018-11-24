@@ -46,10 +46,7 @@ public class Categoria {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "Caracteristica Id=" + getId() + " Nome=" + getNome();
-	}
+	
 	private Categoria(String nome) {
 		setNome(nome);
 	}
@@ -65,5 +62,10 @@ public class Categoria {
 	
 	public static Categoria criaCategoriaId(Integer id,String nome) {
 		return new Categoria(id,nome);
+	}
+	
+	@Override
+	public String toString() {
+		return "\nCategoria: \t" + getNome();
 	}
 }

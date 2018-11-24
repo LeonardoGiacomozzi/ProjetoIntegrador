@@ -18,9 +18,9 @@ public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException {
 		
 
-		System.out.println(System.getProperty("user.dir"));
+		//System.out.println(System.getProperty("user.dir"));
 		//Cria Tabela Banco
-		//ClienteDao teste = new ClienteDao();
+		ClienteDao teste = new ClienteDao();
 //		try {
 		//	System.out.println(teste.criaTabela());
 //		//Exclui tabela
@@ -93,12 +93,14 @@ public class Teste {
 		//System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs", "xx.xxx.xxx/xxxx-xx", "Jose", new ContatoDao().pegaUltimoID())));
 		//System.out.println(teste4.consultaTodos());
 		//System.out.println(teste4.exclui(1));
-		//System.out.println(teste4.consultaCompleta(2));
+		System.out.println(teste4.consultaCompleta(1));
 		//System.out.println(teste4.consultaCNPJ("xx.xxx.xxx/xxxx-xx"));
 		//System.out.println(teste4.consultaTodos());
 //		
 		ProdutoDao teste5 = new ProdutoDao();
-		System.out.println(teste5.criaTabela());
+		//System.out.println(teste5.criaTabela());
+		//System.out.println(teste5.consulta(1));
+		System.out.println(teste5.consultaCompleta(1));
 //		
 		VendaDao teste6 = new VendaDao();
 //		//System.out.println(teste6.criaTabela());
@@ -106,6 +108,7 @@ public class Teste {
 		
 		CategoriaDao teste7 = new CategoriaDao();
 		//System.out.println(teste7.criaTabela());
+		//System.out.println(teste7.consulta(1));
 		
 		NotaFiscalDao teste8 = new NotaFiscalDao();
 		//System.out.println(teste8.criaTabela());
