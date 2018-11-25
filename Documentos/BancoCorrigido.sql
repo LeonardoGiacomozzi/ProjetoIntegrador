@@ -1,4 +1,4 @@
-CREATE SCHEMA IF NOT EXISTS `Tabacaria` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `Tabacaria`  DEFAULT CHARACTER SET utf8 ;
 USE `Tabacaria` ;
 
 -- -----------------------------------------------------
