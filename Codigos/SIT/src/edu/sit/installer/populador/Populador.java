@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
@@ -12,6 +13,7 @@ import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.erro.instalacao.EErroInstalacao;
 import edu.sit.erro.instalacao.InstalacaoException;
 import edu.sit.erros.dao.DaoException;
+import edu.sit.model.Categoria;
 import edu.sit.model.Cliente;
 import edu.sit.model.Contato;
 import edu.sit.model.ECargo;
@@ -70,6 +72,22 @@ public class Populador {
 		} catch (DaoException | ConexaoException | IOException e) {
 			System.out.println(e.getMessage());
 			throw new InstalacaoException(EErroInstalacao.ERRO_POPULAR_FORNECEDOR);
+		}
+		
+	}
+	
+	public static boolean categoria () throws InstalacaoException {
+		
+		try {
+		List<String> categoriaTxt = (List<String>) Arquivo.leArquivo(System.getProperty("user.dir") + "/populador/categoria.txt");
+		for (String categoria : categoriaTxt) {
+			String[] dados = categoria.split(";");
+				new CategoriaDao().insere(Categoria.criaCategoria(dados[0]));
+		}
+		return true;
+		} catch (DaoException | ConexaoException | IOException e) {
+			System.out.println(e.getMessage());
+			throw new InstalacaoException(EErroInstalacao.ERRO_POPULAR_CATEGORIA);
 		}
 		
 	}
