@@ -23,6 +23,7 @@ public class Teste {
 			System.out.println(Populador.funcionario()?"foi":"nãoFoi");
 			System.out.println(Populador.categoria()?"foi":"nãoFoi");
 			System.out.println(Populador.fornecedor()?"foi":"nãoFoi");
+			System.out.println(Populador.produto()?"foi":"nãoFoi");
 		} catch (InstalacaoException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());

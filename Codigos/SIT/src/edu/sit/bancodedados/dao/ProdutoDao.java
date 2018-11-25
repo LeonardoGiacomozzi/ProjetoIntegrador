@@ -141,7 +141,7 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Produto (Nome, Quantidade, Valor, Forncedor, Categoria) values (?, ?, ?, ?, ?);");
+					"INSERT INTO Produtos (Nome, Quantidade, Valor, Fornecedor, Categoria) values (?, ?, ?, ?, ?);");
 			pst.setString(1, objeto.getNome());
 			pst.setInt(2, objeto.getQuantidade());
 			pst.setDouble(3, objeto.getValorUnitario());
@@ -161,7 +161,7 @@ public class ProdutoDao implements IDao<Produto>, IInstaladorDao {
 		List<Produto> falhados = new ArrayList<>();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Produto (Nome, Quantidade, Valor, Forncedor, Categoria) values (?, ?, ?, ?, ?);");
+					"INSERT INTO Produto (Nome, Quantidade, Valor, Fornecedor, Categoria) values (?, ?, ?, ?, ?);");
 			for (Produto produto : objetos) {
 				try {
 					pst.setString(1, produto.getNome());
