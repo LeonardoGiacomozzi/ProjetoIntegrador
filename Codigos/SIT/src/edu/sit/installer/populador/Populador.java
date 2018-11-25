@@ -7,6 +7,7 @@ import java.util.List;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
+import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.erro.instalacao.EErroInstalacao;
 import edu.sit.erro.instalacao.InstalacaoException;
@@ -14,6 +15,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Cliente;
 import edu.sit.model.Contato;
 import edu.sit.model.ECargo;
+import edu.sit.model.Fornecedor;
 import edu.sit.model.Funcionario;
 import edu.sit.uteis.Arquivo;
 
@@ -45,12 +47,29 @@ public class Populador {
 		for (String funcionario : funcionarioTxt) {
 			String[] dados = funcionario.split(";");
 				new ContatoDao().insere(Contato.criaContato(dados[3],dados[4]));
-				new FuncionarioDao().insere(Funcionario.criaFuncionario(dados[0], dados[1],ECargo.valueOf(dados[2]),new ContatoDao().pegaUltimoID()));
+				new FuncionarioDao().insere(Funcionario.criaFuncionario(dados[0], dados[1],ECargo.values()[Integer.parseInt(dados[2])],new ContatoDao().pegaUltimoID()));
 		}
 		return true;
 		} catch (DaoException | ConexaoException | IOException e) {
 			System.out.println(e.getMessage());
 			throw new InstalacaoException(EErroInstalacao.ERRO_POPULAR_FUNCIONARIO);
+		}
+		
+	}
+	
+	public static boolean fornecedor () throws InstalacaoException {
+		
+		try {
+		List<String> fornededorTxt = (List<String>) Arquivo.leArquivo(System.getProperty("user.dir") + "/populador/fornecedor.txt");
+		for (String fornecedor : fornededorTxt) {
+			String[] dados = fornecedor.split(";");
+				new ContatoDao().insere(Contato.criaContato(dados[3],dados[4]));
+				new FornecedorDao().insere(Fornecedor.criaFornecedorFull(dados[0], dados[1],dados[2],new ContatoDao().pegaUltimoID()));
+		}
+		return true;
+		} catch (DaoException | ConexaoException | IOException e) {
+			System.out.println(e.getMessage());
+			throw new InstalacaoException(EErroInstalacao.ERRO_POPULAR_FORNECEDOR);
 		}
 		
 	}

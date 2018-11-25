@@ -21,6 +21,7 @@ public class Teste {
 		try {
 			System.out.println(Populador.cliente()?"foi":"nãoFoi");
 			System.out.println(Populador.funcionario()?"foi":"nãoFoi");
+			System.out.println(Populador.fornecedor()?"foi":"nãoFoi");
 		} catch (InstalacaoException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
