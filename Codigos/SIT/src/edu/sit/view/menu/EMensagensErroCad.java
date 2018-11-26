@@ -8,7 +8,8 @@ public enum EMensagensErroCad {
 	ERRO_FORNECEDOR("ESTA ERRADO"),
 	ERRO_VENDAS("VENDA ERRADA"),
 	ERRO_CONTROLE_VENDA("ERRADO"),
-	ERRO_ESTOQUE("TO ERRADO");
+	ERRO_ESTOQUE("TO ERRADO"),
+	ERRO_ESCRITA("Opção Inválida! Escolha apenas Números que contém nas opções acima.");
 	
 	
 	private final String descricao;

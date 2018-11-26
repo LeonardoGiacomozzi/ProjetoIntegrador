@@ -8,11 +8,12 @@ public class MenuPrincipal {
 
 	public static void menuGeral() {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println(" *** MENU TABACARIA *** ");
+		System.out.println("**** MENU TABACARIA ****");
 		System.out.println("1 - Efetuar Cadastros");
 		System.out.println("2 - Efetuar Vendas");
 		System.out.println("3 - Gerenciamento");
 		System.out.println("4 - Configurações");
+		System.out.println("0 - Sair");
 
 		String escolha = "";
 
