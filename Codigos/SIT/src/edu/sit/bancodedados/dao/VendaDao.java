@@ -95,7 +95,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao
-					.prepareStatement("INSERT INTO Venda (Cliente, Funcionario,Valor) values (?, ?, ?);");
+					.prepareStatement("INSERT INTO Venda (Cliente, Funcionario, Valor) values (?, ?, ?);");
 			pst.setInt(1, objeto.getClienteId());
 			pst.setInt(2, objeto.getFuncionarioId());
 			pst.setDouble(3, objeto.getValor());
@@ -103,7 +103,7 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 			for (Produto produto : objeto.getProdutos()) {
 
 				PreparedStatement pst2 = conexao
-						.prepareStatement("INSERT INTO ItensPedido (venda,Produtos) values (?, ?);");
+						.prepareStatement("INSERT INTO ItensPedido (venda, Produtos) values (?, ?);");
 				pst2.setInt(1, pegaUltimoID());
 				pst2.setInt(2, produto.getId());
 				System.out.println(pst2.executeUpdate() > 0

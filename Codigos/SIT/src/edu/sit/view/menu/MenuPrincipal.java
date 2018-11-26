@@ -8,10 +8,10 @@ public class MenuPrincipal {
 
 	public static void menuGeral() {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println(" *** Menu Tabacaria *** ");
-		System.out.println("1 - Cadastrar");
-		System.out.println("2 - Vendas");
-		System.out.println("3 - Gerenciar");
+		System.out.println(" *** MENU TABACARIA *** ");
+		System.out.println("1 - Efetuar Cadastros");
+		System.out.println("2 - Efetuar Vendas");
+		System.out.println("3 - Gerenciamento");
 		System.out.println("4 - Configurações");
 
 		String escolha = "";
@@ -19,7 +19,7 @@ public class MenuPrincipal {
 		try {
 			escolha = teclado.readLine();
 		} catch (IOException e) {
-			System.out.println("TNC");
+			System.out.println(e.getMessage());
 			
 		}
 
@@ -29,19 +29,19 @@ public class MenuPrincipal {
 			break;
 			
 		case "2":
-			System.out.println("VENDAS");
+			System.out.println("*** VENDAS ****");
 			break;
 			
 		case "3":
-			System.out.println("Gerenciar");
+			System.out.println("*** GERENCIAMENTO ***");
 			break;
 			
 		case "4":
-			System.out.println("Configurações");
+			System.out.println("*** CONFIGURAÇÕES ***");
 			break;
 			
 		default:
-			System.out.println("Sair");
+			System.out.println("*** VOCÊ SAIU ***");
 			break;
 		}
 
