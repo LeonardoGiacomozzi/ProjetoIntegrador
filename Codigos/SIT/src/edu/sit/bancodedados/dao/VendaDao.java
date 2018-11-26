@@ -53,12 +53,20 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao
-					.prepareStatement("SELECT * FROM Venda WHERE idVenda = ?;");
+					.prepareStatement("SELECT * FROM venda v left "
+							+ "join itenspedido"
+							+ " on(select produtos "
+							+ "from itenspedido "
+							+ "where v.id = venda )"
+							+ " where id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
+			
 			return rs.first()
-					? Venda.consultaVendaBanco(rs.getInt("idVenda"), rs.getDouble("Valor"), 
-							rs.getInt("Funcionario_idCadastro_Funcionario"), rs.getInt("ClienteidCLiente")) : null;
+					? Venda.consultaVendaBanco(rs.getInt("id"),
+							rs.getDouble("Valor"), 
+							rs.getInt("Funcionario"),
+							rs.getInt("Cliente")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -87,7 +95,29 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 
 	@Override
 	public boolean insere(Venda objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"INSERT INTO Venda (Cliente, Funcionario,Valor, Contato) values (?, ?, ?);");
+			pst.setInt(1, objeto.getClienteId());
+			pst.setInt(1, objeto.getFuncionarioId());
+			pst.setDouble(1,objeto.getValor());
+			System.out.println(pst.executeUpdate() > 0?"Venda inserida com sucesso":"Erro ao inserir venda");
+			for (Produto produto :objeto.getProdutos()) {
+				
+			PreparedStatement pst2 = conexao.prepareStatement(
+					"INSERT INTO ItensPedido (venda,Produto) values (?, ?);");
+			pst2.setInt(1, pegaUltimoID());
+			pst2.setInt(1, produto.getId());
+			System.out.println(pst.executeUpdate() > 0?"produto"+produto.getNome()+
+					"da venda "+objeto.getId()+" Inserido com sucesso!":"Erro ao inserir produto"+produto.getNome());
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		
 		return false;
 	}
 
