@@ -147,7 +147,7 @@ public class UtilCadastro {
 		LocalDate dataNascimento = null;
 		while (dataNascimento == null) {
 			try {
-				System.out.print("Data de Nascimento (dd/mm/aaaa): ");
+				System.out.print("Data de Nascimento (dd/mm/aaaa):");
 				dataNascimento = Leitor.leData();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -161,8 +161,8 @@ public class UtilCadastro {
 		String tel = null;
 		while (tel == null) {
 			try {
-				System.out.print("Telefone:\t");
-				tel = Leitor.leString();
+				System.out.print("Telefone:\t\t\t");
+				tel = Leitor.leFone();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
@@ -176,7 +176,7 @@ public class UtilCadastro {
 		
 		while (email == null) {
 			try {
-				System.out.print("Email:\t");
+				System.out.print("Email:\t\t\t\t");
 				email = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -192,7 +192,7 @@ public class UtilCadastro {
 		while (cnpj == null) {
 			
 			try {
-				System.out.print("Cnpj:\t");
+				System.out.print("CNPJ:\t");
 				cnpj = Leitor.leCnpj();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
