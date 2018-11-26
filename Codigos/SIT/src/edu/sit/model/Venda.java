@@ -132,8 +132,20 @@ public class Venda {
 		setClienteId(clienteid);
 		setProdutos(produtos);
 	}
+	
+	private Venda(Integer id,Integer clienteid,Integer funcionarioId,Double valor) {
+		setId(id);
+		setValor(valor);
+		setFuncionarioId(funcionarioId);
+		setClienteId(clienteid);
+	}
+	
 	public static Venda criaVenda(Cliente cliente, ArrayList<Produto> produtos, Funcionario funcionario) {
 		return new Venda(cliente, produtos, funcionario);
+	}
+	
+	public static Venda criaVenda(Integer id,Integer cliente, Integer funcionario,Double valor) {
+		return new Venda(id,cliente,funcionario,valor);
 	}
 	
 	public static Venda criaVenda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor)	{

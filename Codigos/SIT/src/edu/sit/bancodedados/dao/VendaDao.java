@@ -52,17 +52,12 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	public Venda consulta(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM venda v left "
-					+ "join itenspedido"
-					+ " on(select produtos " 
-					+ "from itenspedido " 
-					+ "where v.id = venda )"
-					+ " where id = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM venda  where id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 			
-			return rs.first() ? Venda.consultaVendaBanco(rs.getInt("id"), rs.getDouble("Valor"),
-					rs.getInt("Funcionario"), rs.getInt("Cliente")) : null;
+			return rs.first() ? Venda.criaVenda(rs.getInt("id"),rs.getInt("Cliente"), 
+					rs.getInt("Funcionario"),rs.getDouble("Valor")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -155,4 +150,24 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 			Conexao.fechaConexao();
 		}
 	}
+
+	public ArrayList<Produto> listaProdutoVenda(Integer codigo) throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM itensPedido  where venda = ?;");
+			pst.setInt(1, codigo);
+			ResultSet rs = pst.executeQuery();
+			ArrayList<Produto> itensPedido = new ArrayList<Produto>();
+			while (rs.next()) {
+				itensPedido.add(new ProdutoDao().consulta(rs.getInt("produtos")));
+			}
+			return itensPedido;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}
+
+
 }
