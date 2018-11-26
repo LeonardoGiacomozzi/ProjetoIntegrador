@@ -52,21 +52,17 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	public Venda consulta(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao
-					.prepareStatement("SELECT * FROM venda v left "
-							+ "join itenspedido"
-							+ " on(select produtos "
-							+ "from itenspedido "
-							+ "where v.id = venda )"
-							+ " where id = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM venda v left "
+					+ "join itenspedido"
+					+ " on(select produtos " 
+					+ "from itenspedido " 
+					+ "where v.id = venda )"
+					+ " where id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 			
-			return rs.first()
-					? Venda.consultaVendaBanco(rs.getInt("id"),
-							rs.getDouble("Valor"), 
-							rs.getInt("Funcionario"),
-							rs.getInt("Cliente")) : null;
+			return rs.first() ? Venda.consultaVendaBanco(rs.getInt("id"), rs.getDouble("Valor"),
+					rs.getInt("Funcionario"), rs.getInt("Cliente")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -95,29 +91,31 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 
 	@Override
 	public boolean insere(Venda objeto) throws DaoException, ConexaoException {
+
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Venda (Cliente, Funcionario,Valor, Contato) values (?, ?, ?);");
+			PreparedStatement pst = conexao
+					.prepareStatement("INSERT INTO Venda (Cliente, Funcionario,Valor) values (?, ?, ?);");
 			pst.setInt(1, objeto.getClienteId());
-			pst.setInt(1, objeto.getFuncionarioId());
-			pst.setDouble(1,objeto.getValor());
-			System.out.println(pst.executeUpdate() > 0?"Venda inserida com sucesso":"Erro ao inserir venda");
-			for (Produto produto :objeto.getProdutos()) {
-				
-			PreparedStatement pst2 = conexao.prepareStatement(
-					"INSERT INTO ItensPedido (venda,Produto) values (?, ?);");
-			pst2.setInt(1, pegaUltimoID());
-			pst2.setInt(1, produto.getId());
-			System.out.println(pst.executeUpdate() > 0?"produto"+produto.getNome()+
-					"da venda "+objeto.getId()+" Inserido com sucesso!":"Erro ao inserir produto"+produto.getNome());
+			pst.setInt(2, objeto.getFuncionarioId());
+			pst.setDouble(3, objeto.getValor());
+			System.out.println(pst.executeUpdate() > 0 ? "Venda inserida com sucesso" : "Erro ao inserir venda");
+			for (Produto produto : objeto.getProdutos()) {
+
+				PreparedStatement pst2 = conexao
+						.prepareStatement("INSERT INTO ItensPedido (venda,Produtos) values (?, ?);");
+				pst2.setInt(1, pegaUltimoID());
+				pst2.setInt(2, produto.getId());
+				System.out.println(pst2.executeUpdate() > 0
+						? "produto " + produto.getNome() + " da venda " + pegaUltimoID() + " Inserido com sucesso!"
+						: "Erro ao inserir produto" + produto.getNome());
 			}
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();
 		}
-		
+
 		return false;
 	}
 
@@ -146,7 +144,15 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 	}
 
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery("SELECT MAX(id) FROM Venda;");
+			return rs.first() ? rs.getInt(1) : 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 }
