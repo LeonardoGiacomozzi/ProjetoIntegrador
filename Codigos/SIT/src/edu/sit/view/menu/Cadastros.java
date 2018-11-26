@@ -1,8 +1,9 @@
 package edu.sit.view.menu;
 
 public class Cadastros {
+	
 	public static void montaMenuCadastroCliente() throws TabacariaException {
-
+	
 	}
 
 	public static void montaMenuFuncionario() throws TabacariaException {
@@ -18,7 +19,7 @@ public class Cadastros {
 	}
 
 	public static void montaMenuVendas() throws TabacariaException {
-		
+
 	}
 
 }
