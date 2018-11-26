@@ -4,12 +4,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class MenuCadastro {
+public class MenuVendas {
+	
+	public static void menuVendas() {
 
-	public static void menuCadastro() {
-		
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("**** CADASTROS TABACARIA ****");
+		System.out.println("**** VENDAS ****");
 		System.out.println("1 - Cadastrar Cliente");
 		System.out.println("2 - Cadastrar Funcionário");
 		System.out.println("3 - Cadastrar Produtos");
@@ -26,7 +26,7 @@ public class MenuCadastro {
 		switch (escolha) {
 		case "0":
 			MenuPrincipal.menuGeral();
-		
+
 		case "1":
 			System.out.println("*** CADASTRAR CLIENTE ***");
 			try {
@@ -39,7 +39,7 @@ public class MenuCadastro {
 		case "2":
 			System.out.println("*** CADASTRAR FUNCIONÁRIO ***");
 			try {
-				Cadastros.montaMenuFuncionario(); 
+				Cadastros.montaMenuFuncionario();
 			} catch (TabacariaException e) {
 				System.out.println(EMensagensErroCad.ERRO_FUNCIONARIO);
 			}
