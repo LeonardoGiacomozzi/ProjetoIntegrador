@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import edu.sit.controller.cadastro.ClienteController;
+import edu.sit.controller.cadastro.FuncionarioController;
+import edu.sit.controller.cadastro.ProdutoController;
 import edu.sit.erro.cadastro.CadastroException;
 
 public class MenuCadastro {
@@ -42,8 +44,8 @@ public class MenuCadastro {
 		case "2":
 			System.out.println("*** CADASTRAR FUNCIONÁRIO ***");
 			try {
-				Cadastros.montaMenuFuncionario(); 
-			} catch (TabacariaException e) {
+				FuncionarioController.cadastro();
+			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_FUNCIONARIO);
 			}
 			break;
@@ -51,8 +53,8 @@ public class MenuCadastro {
 		case "3":
 			System.out.println("*** CADASTRAR PRODUTO ***");
 			try {
-				Cadastros.montaMenuProduto();
-			} catch (TabacariaException e) {
+				ProdutoController.cadastro();
+			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_PRODUTO);
 			}
 			break;

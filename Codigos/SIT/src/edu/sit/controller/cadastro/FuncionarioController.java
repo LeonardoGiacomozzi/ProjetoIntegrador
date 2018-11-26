@@ -22,8 +22,6 @@ public class FuncionarioController {
 		ECargo cargo = null;
 		String cpf = null;
 
-		System.out.println("*****CADASTRO DE FUNCIONARIO*****");
-
 		nome = UtilCadastro.pedeNome();
 		cargo = pedeCargo();
 		cpf = UtilCadastro.pedeCpf();
@@ -34,7 +32,7 @@ public class FuncionarioController {
 				Funcionario funcionario = Funcionario.criaFuncionarioBanco(nome, cpf, cargo,
 						new ContatoDao().pegaUltimoID());
 				System.out.println(
-						new FuncionarioDao().insere(funcionario) ? "Funcionario cadastrado com sucesso" : "Falha");
+						new FuncionarioDao().insere(funcionario) ? "Funcionário cadastrado com SUCESSO!" : "Falha");
 			} catch (DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());
 				throw new CadastroException(EErroCadastro.ERRO_CADASTRO_FUNCIONARIO);
@@ -98,8 +96,8 @@ public class FuncionarioController {
 		while (cargo == null) {
 			try {
 				System.out.print("Cargo:\t");
-				System.out.println(ECargo.GERENTE.ordinal() + "--Gerente");
-				System.out.println(ECargo.VENDEDOR.ordinal() + "--Vendedors");
+				System.out.println(ECargo.GERENTE.ordinal() + " - Gerente");
+				System.out.print("\t" + ECargo.VENDEDOR.ordinal() + " - Vendedor\n\t");
 				cargo = ECargo.values()[Leitor.leInteger()];
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());

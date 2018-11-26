@@ -23,8 +23,6 @@ public class ProdutoController {
 		Integer quantidade = null;
 		Double valorUnitario = null;
 
-		System.out.println("*****CADASTRO DE PRODUTO*****");
-
 		categoriaId = UtilCadastro.pedeCategoria();
 		nome = UtilCadastro.pedeNome();
 		fornecedorId = UtilCadastro.pedeFornecedor();
@@ -33,7 +31,7 @@ public class ProdutoController {
 
 		try {
 			Produto produto = Produto.criaProdutoBanco(nome, categoriaId, fornecedorId, quantidade, valorUnitario);
-			System.out.println(new ProdutoDao().insere(produto) ? "Funcionario cadastrado com sucesso" : "Falha");
+			System.out.println(new ProdutoDao().insere(produto) ? "Produto cadastrado com SUCESSO!" : "Falha");
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new CadastroException(EErroCadastro.ERRO_CADASTRO_PRODUTO);
@@ -48,7 +46,7 @@ public class ProdutoController {
 			produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
 
 			Integer opcao = 99;
-			System.out.println("*****EDITO DE PRODUTO*****");
+			System.out.println("**** EDITAR DE PRODUTO ****");
 			while (opcao != 0) {
 				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
 				System.out.println("\n\t\t1----------NOME\t"+produtoBanco.getNome());

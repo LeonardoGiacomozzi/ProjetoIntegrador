@@ -15,8 +15,7 @@ import edu.sit.model.Fornecedor;
 import edu.sit.uteis.Leitor;
 
 public class UtilCadastro {
-	
-	
+
 	public static String pedeNome() {
 		String nome = null;
 
@@ -30,7 +29,7 @@ public class UtilCadastro {
 		}
 		return nome;
 	}
-	
+
 	public static Integer pedeFornecedor() throws CadastroException {
 		Integer fornecedorId = null;
 
@@ -55,20 +54,24 @@ public class UtilCadastro {
 
 	}
 
-	public static Integer pedeCategoria() throws  CadastroException {
+	public static Integer pedeCategoria() throws CadastroException {
 		Integer categoriaId = null;
 
 		while (categoriaId == null) {
 			try {
 				System.out.println("Categoria: \t");
-				for (Categoria categoria : new CategoriaDao().consultaTodos()) {
-					System.out.println("ID\t: " + categoria.getId() + "Nome\t: " + categoria.getNome());
+				try {
+					for (Categoria categoria : new CategoriaDao().consultaTodos()) {
+						System.out.println("ID\t: " + categoria.getId() + "Nome\t: " + categoria.getNome());
+					}
+				} catch (DaoException | ConexaoException k) {
+					System.out.println(k.getMessage());
 				}
 				System.out.println("0 --- CADASTRAR CATEGORIA");
 				categoriaId = Leitor.leInteger();
 				if (categoriaId == 0) {
-					System.out.println(CategoriaController.cadastro() ? "Categoria cadastrada\n"
-							: "Erro ao cadastrar categoria");
+					System.out.println(
+							CategoriaController.cadastro() ? "Categoria cadastrada\n" : "Erro ao cadastrar categoria");
 					categoriaId = new CategoriaDao().pegaUltimoID();
 				}
 			} catch (LeituraException | ConexaoException | DaoException e) {
@@ -112,7 +115,7 @@ public class UtilCadastro {
 	}
 
 	public static String pedeCpf() {
-	
+
 		String cpf = null;
 		while (cpf == null) {
 			try {
@@ -128,7 +131,7 @@ public class UtilCadastro {
 	}
 
 	public static String pedeEndereco() {
-		
+
 		String endereco = null;
 		while (endereco == null) {
 			try {
@@ -139,11 +142,11 @@ public class UtilCadastro {
 			}
 		}
 		return endereco;
-		
+
 	}
 
 	public static LocalDate pedeDataNascimento() {
-		
+
 		LocalDate dataNascimento = null;
 		while (dataNascimento == null) {
 			try {
@@ -157,7 +160,7 @@ public class UtilCadastro {
 	}
 
 	public static String pedeTelefone() {
-		
+
 		String tel = null;
 		while (tel == null) {
 			try {
@@ -169,11 +172,11 @@ public class UtilCadastro {
 		}
 		return tel;
 	}
-	
+
 	public static String pedeEmail() {
-		
+
 		String email = null;
-		
+
 		while (email == null) {
 			try {
 				System.out.print("Email:\t\t\t\t");
@@ -182,7 +185,7 @@ public class UtilCadastro {
 				System.out.println(e.getMessage());
 			}
 		}
-		
+
 		return email;
 	}
 
@@ -190,7 +193,7 @@ public class UtilCadastro {
 		String cnpj = null;
 
 		while (cnpj == null) {
-			
+
 			try {
 				System.out.print("CNPJ:\t");
 				cnpj = Leitor.leCnpj();
@@ -198,11 +201,11 @@ public class UtilCadastro {
 				System.out.println(e.getMessage());
 			}
 		}
-	return cnpj;
+		return cnpj;
 	}
 
 	public static String pedePessoaResponsavel() {
-		
+
 		String pessoaResponsavel = null;
 
 		while (pessoaResponsavel == null) {
