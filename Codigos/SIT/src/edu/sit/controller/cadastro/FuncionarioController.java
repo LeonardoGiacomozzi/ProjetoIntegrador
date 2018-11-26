@@ -3,7 +3,7 @@ package edu.sit.controller.cadastro;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
-import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
@@ -16,7 +16,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class FuncionarioController {
 
-	public static boolean cadastro() throws  CadastroExeption {
+	public static boolean cadastro() throws  CadastroException {
 
 		String nome = null;
 		ECargo cargo = null;
@@ -37,7 +37,7 @@ public class FuncionarioController {
 						new FuncionarioDao().insere(funcionario) ? "Funcionario cadastrado com sucesso" : "Falha");
 			} catch (DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());
-				throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_FUNCIONARIO);
+				throw new CadastroException(EErroCadastro.ERRO_CADASTRO_FUNCIONARIO);
 			}
 		}
 

@@ -3,7 +3,7 @@ package edu.sit.controller.cadastro;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
-import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
@@ -16,7 +16,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 public class FornecedorController {
 	
 
-	public static boolean cadastro() throws CadastroExeption {
+	public static boolean cadastro() throws CadastroException {
 		String nome = null;
 		String cnpj = null;
 		String pessoaResponsavel = null;
@@ -35,7 +35,7 @@ public class FornecedorController {
 						new FornecedorDao().insere(fornecedor) ? "Fornecedor cadastrado com sucesso" : "Falha");
 			} catch (DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());
-				throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_FORNECEDOR);
+				throw new CadastroException(EErroCadastro.ERRO_CADASTRO_FORNECEDOR);
 			}
 		}
 		return true;

@@ -7,7 +7,7 @@ import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.controller.cadastro.CategoriaController;
 import edu.sit.controller.cadastro.FornecedorController;
-import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Categoria;
@@ -31,7 +31,7 @@ public class UtilCadastro {
 		return nome;
 	}
 	
-	public static Integer pedeFornecedor() throws CadastroExeption {
+	public static Integer pedeFornecedor() throws CadastroException {
 		Integer fornecedorId = null;
 
 		while (fornecedorId == null) {
@@ -55,7 +55,7 @@ public class UtilCadastro {
 
 	}
 
-	public static Integer pedeCategoria() throws  CadastroExeption {
+	public static Integer pedeCategoria() throws  CadastroException {
 		Integer categoriaId = null;
 
 		while (categoriaId == null) {

@@ -9,7 +9,7 @@ import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
 import edu.sit.controller.notaFiscal.GeraBinNotaFiscal;
-import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.erro.venda.EErrosVenda;
@@ -100,7 +100,7 @@ public class VendaController {
 					System.out.println(ClienteController.cadastro() ? "Cliente cadastrado com sucesso" : "Falha");
 					clienteId = new ClienteDao().pegaUltimoID();
 				}
-			} catch (ConexaoException | DaoException | LeituraException | CadastroExeption e) {
+			} catch (ConexaoException | DaoException | LeituraException | CadastroException e) {
 				System.out.println(e.getMessage());
 				throw new VendaException(EErrosVenda.BUSCA_LISTA_CLIENTE);
 			}

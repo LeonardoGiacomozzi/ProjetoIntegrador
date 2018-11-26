@@ -3,7 +3,7 @@ package edu.sit.controller.cadastro;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ProdutoDao;
-import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
@@ -15,7 +15,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class ProdutoController {
 	
-	public static boolean cadastro() throws CadastroExeption {
+	public static boolean cadastro() throws CadastroException {
 
 		String nome = null;
 		Integer categoriaId = null;
@@ -36,7 +36,7 @@ public class ProdutoController {
 			System.out.println(new ProdutoDao().insere(produto) ? "Funcionario cadastrado com sucesso" : "Falha");
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
-			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_PRODUTO);
+			throw new CadastroException(EErroCadastro.ERRO_CADASTRO_PRODUTO);
 		}
 
 		return true;
@@ -87,7 +87,7 @@ public class ProdutoController {
 					break;
 				}
 			}
-		} catch (DaoException | ConexaoException | CadastroExeption | LeituraException e) {
+		} catch (DaoException | ConexaoException | CadastroException | LeituraException e) {
 			System.out.println("Não foi possivel buscar o produto informado\nErro " + e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_PRODUTO);
 		}

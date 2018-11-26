@@ -2,7 +2,7 @@ package edu.sit.controller.cadastro;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ContatoDao;
-import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
@@ -14,7 +14,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class ContatoController {
 
-	public static boolean cadastraContato() throws CadastroExeption {
+	public static boolean cadastraContato() throws CadastroException {
 		String email = null;
 		String tel = null;
 		System.out.print("*****CADASTRO DE CONTATO*****");
@@ -26,7 +26,7 @@ public class ContatoController {
 			new ContatoDao().insere(contato);
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
-			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CONTATO);
+			throw new CadastroException(EErroCadastro.ERRO_CADASTRO_CONTATO);
 		}
 		return true;
 	}

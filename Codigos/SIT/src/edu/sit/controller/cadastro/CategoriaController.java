@@ -3,7 +3,7 @@ package edu.sit.controller.cadastro;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
-import edu.sit.erro.cadastro.CadastroExeption;
+import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
@@ -15,7 +15,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class CategoriaController {
 
-	public static boolean cadastro() throws CadastroExeption {
+	public static boolean cadastro() throws CadastroException {
 		String nome = null;
 		System.out.print("*****CADASTRO DE CATEGORIA*****");
 		nome = UtilCadastro.pedeNome();
@@ -25,7 +25,7 @@ public class CategoriaController {
 
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
-			throw new CadastroExeption(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
+			throw new CadastroException(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
 		}
 		return true;
 	}
