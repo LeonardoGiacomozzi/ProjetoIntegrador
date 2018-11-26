@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,14 +52,14 @@ public class Leitor {
 			DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			LocalDate ld = LocalDate.parse(teclado.readLine(), formatador);
 			return ld;
-		} catch (IOException e) {
+		} catch (IOException | DateTimeParseException e) {
 			throw new LeituraException(EErroLeitura.ERRO_LER_DATA);
 		}
 
 	}
 
 	public static String leCpf() throws LeituraException {
-		Pattern padrao = Pattern.compile("[0-9].[0-9].[0-9]-[0-9]{3,3,3,2}");
+		Pattern padrao = Pattern.compile("(^\\d{3}.\\d{3}.\\d{3}-\\d{2}$)");
 		String cpf = leString();
 		Matcher matcher = padrao.matcher(cpf);
 		if (matcher.matches()) {

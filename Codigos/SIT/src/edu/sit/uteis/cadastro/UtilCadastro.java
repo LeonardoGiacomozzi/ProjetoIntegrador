@@ -22,7 +22,7 @@ public class UtilCadastro {
 
 		while (nome == null) {
 			try {
-				System.out.print("Nome:\t");
+				System.out.print("Nome: \t\t\t\t");
 				nome = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -36,7 +36,7 @@ public class UtilCadastro {
 
 		while (fornecedorId == null) {
 			try {
-				System.out.println("Fornecedor:\t");
+				System.out.println("Fornecedor: \t");
 				for (Fornecedor fornecedor : new FornecedorDao().consultaTodos()) {
 					System.out.println("ID\t: " + fornecedor.getId() + "Nome\t: " + fornecedor.getNome());
 				}
@@ -60,7 +60,7 @@ public class UtilCadastro {
 
 		while (categoriaId == null) {
 			try {
-				System.out.println("Categoria:\t");
+				System.out.println("Categoria: \t");
 				for (Categoria categoria : new CategoriaDao().consultaTodos()) {
 					System.out.println("ID\t: " + categoria.getId() + "Nome\t: " + categoria.getNome());
 				}
@@ -85,7 +85,7 @@ public class UtilCadastro {
 
 		while (quantidade == null) {
 			try {
-				System.out.print("Quantidade:\t");
+				System.out.print("Quantidade: \t");
 				quantidade = Leitor.leInteger();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -101,7 +101,7 @@ public class UtilCadastro {
 
 		while (valorUnitario == null) {
 			try {
-				System.out.print("Valor Unitário:\t");
+				System.out.print("Valor Unitário: \t");
 				valorUnitario = Leitor.leDouble();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -116,7 +116,7 @@ public class UtilCadastro {
 		String cpf = null;
 		while (cpf == null) {
 			try {
-				System.out.print("CPF:\t");
+				System.out.print("CPF: \t\t\t\t");
 				cpf = Leitor.leCpf();
 
 			} catch (LeituraException e) {
@@ -132,7 +132,7 @@ public class UtilCadastro {
 		String endereco = null;
 		while (endereco == null) {
 			try {
-				System.out.print("Endereço:\t");
+				System.out.print("Endereço: \t\t\t");
 				endereco = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -147,7 +147,7 @@ public class UtilCadastro {
 		LocalDate dataNascimento = null;
 		while (dataNascimento == null) {
 			try {
-				System.out.print("Data de Nascimento (dd/mm/aaaa):\t");
+				System.out.print("Data de Nascimento (dd/mm/aaaa): ");
 				dataNascimento = Leitor.leData();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());

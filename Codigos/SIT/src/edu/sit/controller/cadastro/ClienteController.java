@@ -53,7 +53,7 @@ public class ClienteController {
 			Cliente clienteBanco = new ClienteDao().consultaCompleta(codigo);
 
 			Integer opcao = 99;
-			System.out.print("*****EDITOR DE CLIENTE*****");
+			System.out.print("**** EDITOR DE CLIENTE ****");
 			while (opcao != 0) {
 				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
 				System.out.println("\n\t\t1----------NOME\t" + clienteBanco.getNome());
