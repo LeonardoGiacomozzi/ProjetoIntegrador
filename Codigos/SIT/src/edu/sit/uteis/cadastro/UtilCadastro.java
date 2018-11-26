@@ -101,7 +101,7 @@ public class UtilCadastro {
 
 		while (valorUnitario == null) {
 			try {
-				System.out.print("Valor Unitario:\t");
+				System.out.print("Valor Unitário:\t");
 				valorUnitario = Leitor.leDouble();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -116,7 +116,7 @@ public class UtilCadastro {
 		String cpf = null;
 		while (cpf == null) {
 			try {
-				System.out.print("Cpf:\t");
+				System.out.print("CPF:\t");
 				cpf = Leitor.leCpf();
 
 			} catch (LeituraException e) {

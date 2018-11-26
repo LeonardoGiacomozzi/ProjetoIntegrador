@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import edu.sit.controller.cadastro.ClienteController;
+import edu.sit.erro.cadastro.CadastroException;
+
 public class MenuCadastro {
 
 	public static void menuCadastro() {
@@ -30,8 +33,8 @@ public class MenuCadastro {
 		case "1":
 			System.out.println("*** CADASTRAR CLIENTE ***");
 			try {
-				Cadastros.montaMenuCadastroCliente();
-			} catch (TabacariaException e) {
+				ClienteController.cadastro();
+			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_CLIENTE);
 			}
 			break;

@@ -23,7 +23,6 @@ public class ClienteController {
 		String cpf = null;
 		String endereco = null;
 		LocalDate dataNascimento = null;
-		System.out.println("*****CADASTRO DE CLIENTE*****");
 
 		nome = UtilCadastro.pedeNome();
 		cpf = UtilCadastro.pedeCpf();
