@@ -48,4 +48,22 @@ public class UsuarioController {
 		}
 	}
 
+	public static boolean trocaSenha(Usuario usuario) {
+		String senha1 = null;
+		String senha2 = "zz";
+		
+		System.out.println("senha mestre do sistema\t:");
+		senha1 = UtilCadastro.pedeSenha();
+		if ("@ADM".equals(senha1)) {
+			while (!senha1.equals(senha2)) {
+				System.out.println("Informe nova senha");
+				senha1 = UtilCadastro.pedeSenha();
+				System.out.println("Informe novamente");
+				senha2 = UtilCadastro.pedeSenha();
+				
+			}
+			return true;
+		}
+		return false;
+	}
 }
