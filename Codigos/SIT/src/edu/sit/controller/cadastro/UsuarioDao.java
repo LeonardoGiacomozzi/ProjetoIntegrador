@@ -28,7 +28,11 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public Usuario consulta(String login) throws DaoException, ConexaoException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public List<Usuario> consultaTodos() throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
