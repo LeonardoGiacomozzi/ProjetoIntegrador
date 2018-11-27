@@ -1,6 +1,7 @@
 package edu.sit.controller.cadastro;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.UsuarioDao;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erros.dao.DaoException;

@@ -1,9 +1,17 @@
 package edu.sit.model;
 
 public class Usuario {
+	private Integer id;
 	private String login;
 	private String senha;
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	public void setSenha(String senha) {
 		this.senha = senha;
@@ -68,6 +76,11 @@ public class Usuario {
 		setSenha(senha);
 	}
 	
+	private Usuario(Integer id,String login,String senha) {
+		setLogin(login);
+		setSenha(senha);
+		setId(id);
+	}
 	
 	public static Usuario criaUsuario(String login) {
 		return new Usuario(login);
@@ -76,5 +89,10 @@ public class Usuario {
 	public static Usuario criaUsuario(String login,String senha) {
 		return new Usuario(login,senha);
 	}
+	
+	public static Usuario criaUsuario(Integer id,String login,String senha) {
+		return new Usuario(id,login,senha);
+	}
+	
 	
 }
