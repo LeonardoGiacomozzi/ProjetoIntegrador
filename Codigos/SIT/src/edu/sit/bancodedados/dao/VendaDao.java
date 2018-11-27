@@ -26,6 +26,10 @@ public class VendaDao implements IDao<Venda>, IInstaladorDao {
 					+ " Nota_Fiscal_idNota_Fiscal INT NOT NULL," + " PRIMARY KEY (idVenda),"
 					+ " INDEX fk_Venda_Funcionário1_idx (Funcionario_idCadastro_Funcionario ASC),"
 					+ " INDEX fk_Venda_Nota_Fiscal1_idx (Nota_Fiscal_idNota_Fiscal ASC))" + " ENGINE = InnoDB;");
+			
+			st.executeUpdate("CREATE TABLE ItensPedido (" + "Produtos INT NOT NULL," + "Venda INT NOT NULL,"
+					+ " PRIMARY KEY (Produtos, Venda)," + " INDEX fk_Produtos_has_Venda_Venda1_idx (Venda ASC)," 
+					+ "	INDEX fk_Produtos_has_Venda_Produtos1_idx (Produtos ASC))" + "ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

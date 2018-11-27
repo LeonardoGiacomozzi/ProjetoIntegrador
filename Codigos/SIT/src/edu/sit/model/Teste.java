@@ -18,17 +18,17 @@ public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException {
 		
 
-		try {
-			System.out.println(Populador.cliente()?"foi":"nãoFoi");
-			System.out.println(Populador.funcionario()?"foi":"nãoFoi");
-			System.out.println(Populador.categoria()?"foi":"nãoFoi");
-			System.out.println(Populador.fornecedor()?"foi":"nãoFoi");
-			System.out.println(Populador.produto()?"foi":"nãoFoi");
-			System.out.println(Populador.venda()?"foi":"nãoFoi");
-		} catch (InstalacaoException e) {
+		//try {
+			//System.out.println(Populador.cliente()?"foi":"nãoFoi");
+			//System.out.println(Populador.funcionario()?"foi":"nãoFoi");
+			//System.out.println(Populador.categoria()?"foi":"nãoFoi");
+			//System.out.println(Populador.fornecedor()?"foi":"nãoFoi");
+			//System.out.println(Populador.produto()?"foi":"nãoFoi");
+			//System.out.println(Populador.venda()?"foi":"nãoFoi");
+		//} catch (InstalacaoException e) {
 			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
+			//System.out.println(e.getMessage());
+		//}
 		//System.out.println(System.getProperty("user.dir"));
 		//Cria Tabela Banco
 		ClienteDao teste = new ClienteDao();
@@ -114,7 +114,7 @@ public class Teste {
 //		System.out.println(teste5.consultaCompleta(1));
 //		
 		VendaDao teste6 = new VendaDao();
-//		//System.out.println(teste6.criaTabela());
+		System.out.println(teste6.criaTabela());
 		//System.out.println(teste6.consultaCompleta(1));
 		
 		CategoriaDao teste7 = new CategoriaDao();
