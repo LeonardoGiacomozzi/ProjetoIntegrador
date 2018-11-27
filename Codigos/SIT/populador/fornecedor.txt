@@ -1,3 +1,3 @@
-ADALYA;63.829.090/0001-48;Camila Santos;47-988554362;contato@adalia.com
-ZOMO;32.296.911/0001-02;Marcia Freitas;47-36354888;contato@zomo.com
-MAZAY;68.031.656/0001-05;Antonia Silva;47-988728520;contato@mazay.com
+ADALYA;63.829.090/0001-48;Camila Santos;(47)98855-4362;contato@adalia.com
+ZOMO;32.296.911/0001-02;Marcia Freitas;(47)3635-4888;contato@zomo.com
+MAZAY;68.031.656/0001-05;Antonia Silva;(47)98872-8520;contato@mazay.com

@@ -1,6 +1,5 @@
 package edu.sit.model;
 
-
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.ClienteDao;
@@ -14,26 +13,24 @@ import edu.sit.erro.instalacao.InstalacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.installer.populador.Populador;
 
-public class Teste {	 
+public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException {
-		
 
-		//try {
-			//System.out.println(Populador.cliente()?"foi":"nãoFoi");
-			//System.out.println(Populador.funcionario()?"foi":"nãoFoi");
-			//System.out.println(Populador.categoria()?"foi":"nãoFoi");
-			//System.out.println(Populador.fornecedor()?"foi":"nãoFoi");
-			//System.out.println(Populador.produto()?"foi":"nãoFoi");
-			//System.out.println(Populador.venda()?"foi":"nãoFoi");
-		//} catch (InstalacaoException e) {
-			// TODO Auto-generated catch block
-			//System.out.println(e.getMessage());
-		//}
-		//System.out.println(System.getProperty("user.dir"));
-		//Cria Tabela Banco
+		try {
+			System.out.println(Populador.cliente() ? "foi" : "nãoFoi");
+			System.out.println(Populador.funcionario() ? "foi" : "nãoFoi");
+			System.out.println(Populador.categoria() ? "foi" : "nãoFoi");
+			System.out.println(Populador.fornecedor() ? "foi" : "nãoFoi");
+			System.out.println(Populador.produto() ? "foi" : "nãoFoi");
+			System.out.println(Populador.venda() ? "foi" : "nãoFoi");
+		} catch (InstalacaoException e) {
+			System.out.println(e.getMessage());
+		}
+		// System.out.println(System.getProperty("user.dir"));
+		// Cria Tabela Banco
 		ClienteDao teste = new ClienteDao();
 //		try {
-		//	System.out.println(teste.criaTabela());
+		// System.out.println(teste.criaTabela());
 //		//Exclui tabela
 //			//System.out.println(teste.excluiTabela()); 
 //		} catch (Exception e) {
@@ -43,7 +40,7 @@ public class Teste {
 //		//Insere 1 por 1
 //		System.out.println(teste.insere(Cliente.criaClienteBanco("Maria", LocalDate.parse("25/06/1998", DateTimeFormatter.ofPattern(
 //				"dd/MM/yyyy")), "Rua", "111.111.111-11", new ContatoDao().pegaUltimoID())));
-		
+
 //		//Insere Varios por Lista
 //		//List<Cliente> lcliente = new ArrayList<>();
 //		//lcliente.add(Cliente.criaClienteBanco("Roberto", LocalDate.parse("12/09/1984", DateTimeFormatter.ofPattern("dd/MM/yyyy")), 
@@ -55,15 +52,15 @@ public class Teste {
 //		//System.out.println(teste.insereVarios(lcliente));
 //		
 //		
-	   //System.out.println(teste.consulta(1));
-       //System.out.println(teste.getFullProperty(1));
+		// System.out.println(teste.consulta(1));
+		// System.out.println(teste.getFullProperty(1));
 //		
 //		//Consulta por id
 //		//System.out.println(teste.consulta(1));
 //		
 //		//Consulta todos
-		//System.out.println(teste.consultaTodos());
-		//System.out.println(teste.consultaCPF("111.111.111-11"));
+		// System.out.println(teste.consultaTodos());
+		// System.out.println(teste.consultaCPF("111.111.111-11"));
 //		
 //		
 //		//Exclui apenas 1 linha ou varias....
@@ -72,9 +69,9 @@ public class Teste {
 //		
 //		
 		ContatoDao teste1 = new ContatoDao();
-		//teste1.criaTabela();
+		// teste1.criaTabela();
 //		//System.out.println(teste1.insere(Contato.criaContato("3336-2333", "hericles_peixer@hotmail.com")));
-		//teste1.insere(Contato.criaContato("1111-1111", "22222@hotmail.com"));
+		// teste1.insere(Contato.criaContato("1111-1111", "22222@hotmail.com"));
 //		//List<Contato> teste2 = new ArrayList<>();
 //		//teste2.add(Contato.criaContato("4444-3232", "kkkkkk@hotmail.com"));
 //		//teste2.add(Contato.criaContato("5555-5555", "sssssss@hotmail.com"));
@@ -82,47 +79,48 @@ public class Teste {
 //		//System.out.println(teste1.insereVarios(teste2));
 //		//System.out.println(teste1.consulta(1));
 //		//System.out.println(teste1.consulta(3));
-		//System.out.println(teste1.consultaTodos());
+		// System.out.println(teste1.consultaTodos());
 //		//System.out.println(teste1.consultaFaixa(1,2,4));
 //		//Contato contato = new ContatoDao().consulta(1);
 //		//contato.setTelefone("xxxx-xxxx");
 //		//teste1.altera(contato);
 //		//System.out.println(teste1.exclui(2,4));
 //		//System.out.println(teste1.pegaUltimoID());
-		//System.out.println(teste1.pegaUltimoID());
+		// System.out.println(teste1.pegaUltimoID());
 //		
 		FuncionarioDao teste12 = new FuncionarioDao();
-		//System.out.println(teste12.criaTabela());
-		//System.out.println(teste12.excluiTabela());
+		// System.out.println(teste12.criaTabela());
+		// System.out.println(teste12.excluiTabela());
 //		
 //		NotaFiscalDao teste3 = new NotaFiscalDao();
 //		//System.out.println(teste3.criaTabela());
 //		
 		FornecedorDao teste4 = new FornecedorDao();
-		//System.out.println(teste4.criaTabela());
-		//System.out.println(teste4.excluiTabela());
-		//System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs", "xx.xxx.xxx/xxxx-xx", "Jose", new ContatoDao().pegaUltimoID())));
-		//System.out.println(teste4.consultaTodos());
-		//System.out.println(teste4.exclui(1));
-		//System.out.println(teste4.consultaCompleta(1));
-		//System.out.println(teste4.consultaCNPJ("xx.xxx.xxx/xxxx-xx"));
-		//System.out.println(teste4.consultaTodos());
+		// System.out.println(teste4.criaTabela());
+		// System.out.println(teste4.excluiTabela());
+		// System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs",
+		// "xx.xxx.xxx/xxxx-xx", "Jose", new ContatoDao().pegaUltimoID())));
+		// System.out.println(teste4.consultaTodos());
+		// System.out.println(teste4.exclui(1));
+		// System.out.println(teste4.consultaCompleta(1));
+		// System.out.println(teste4.consultaCNPJ("xx.xxx.xxx/xxxx-xx"));
+		// System.out.println(teste4.consultaTodos());
 //		
 		ProdutoDao teste5 = new ProdutoDao();
-		//System.out.println(teste5.criaTabela());
-		//System.out.println(teste5.consulta(1));
+		// System.out.println(teste5.criaTabela());
+		// System.out.println(teste5.consulta(1));
 //		System.out.println(teste5.consultaCompleta(1));
 //		
 		VendaDao teste6 = new VendaDao();
-		//System.out.println(teste6.criaTabela());
-		//System.out.println(teste6.consultaCompleta(1));
-		
+		// System.out.println(teste6.criaTabela());
+		// System.out.println(teste6.consultaCompleta(1));
+
 		CategoriaDao teste7 = new CategoriaDao();
-		//System.out.println(teste7.criaTabela());
-		//System.out.println(teste7.consulta(1));
-		
+		// System.out.println(teste7.criaTabela());
+		// System.out.println(teste7.consulta(1));
+
 		NotaFiscalDao teste8 = new NotaFiscalDao();
-		//System.out.println(teste8.criaTabela());
-		//System.out.println(teste8.consulta(1));
+		// System.out.println(teste8.criaTabela());
+		// System.out.println(teste8.consulta(1));
 	}
 }
