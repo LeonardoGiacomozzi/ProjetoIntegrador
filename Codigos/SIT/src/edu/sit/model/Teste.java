@@ -8,6 +8,7 @@ import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.NotaFiscalDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
+import edu.sit.bancodedados.dao.UsuarioDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.erro.instalacao.InstalacaoException;
 import edu.sit.erros.dao.DaoException;
@@ -16,16 +17,16 @@ import edu.sit.installer.populador.Populador;
 public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException {
 
-		try {
-			System.out.println(Populador.cliente() ? "foi" : "nãoFoi");
-			System.out.println(Populador.funcionario() ? "foi" : "nãoFoi");
-			System.out.println(Populador.categoria() ? "foi" : "nãoFoi");
-			System.out.println(Populador.fornecedor() ? "foi" : "nãoFoi");
-			System.out.println(Populador.produto() ? "foi" : "nãoFoi");
-			System.out.println(Populador.venda() ? "foi" : "nãoFoi");
-		} catch (InstalacaoException e) {
-			System.out.println(e.getMessage());
-		}
+		//try {
+		//System.out.println(Populador.cliente() ? "foi" : "nãoFoi");
+			//	System.out.println(Populador.funcionario() ? "foi" : "nãoFoi");
+		//	System.out.println(Populador.categoria() ? "foi" : "nãoFoi");
+		//	System.out.println(Populador.fornecedor() ? "foi" : "nãoFoi");
+		//System.out.println(Populador.produto() ? "foi" : "nãoFoi");
+		//System.out.println(Populador.venda() ? "foi" : "nãoFoi");
+		//} catch (InstalacaoException e) {
+		//System.out.println(e.getMessage());
+		//}
 		// System.out.println(System.getProperty("user.dir"));
 		// Cria Tabela Banco
 		ClienteDao teste = new ClienteDao();
@@ -122,5 +123,7 @@ public class Teste {
 		NotaFiscalDao teste8 = new NotaFiscalDao();
 		// System.out.println(teste8.criaTabela());
 		// System.out.println(teste8.consulta(1));
+		UsuarioDao novo = new UsuarioDao();
+		System.out.println(novo.criaTabela());
 	}
 }
