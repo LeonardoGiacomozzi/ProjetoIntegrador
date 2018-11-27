@@ -14,7 +14,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.Fornecedor;
 
-public class FornecedorDao implements IDao<Fornecedor>, IInstaladorDao {
+public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {

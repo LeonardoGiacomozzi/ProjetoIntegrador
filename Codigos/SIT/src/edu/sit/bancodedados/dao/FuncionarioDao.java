@@ -15,7 +15,7 @@ import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.ECargo;
 import edu.sit.model.Funcionario;
 
-public class FuncionarioDao implements IDao<Funcionario>, IInstaladorDao {
+public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {

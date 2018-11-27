@@ -14,7 +14,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.Categoria;
 
-public class CategoriaDao implements IDao<Categoria>, IInstaladorDao {
+public class CategoriaDao extends InstaladorDao implements IDao<Categoria> {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {

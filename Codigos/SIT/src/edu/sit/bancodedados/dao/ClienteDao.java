@@ -14,7 +14,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.Cliente;
 
-public class ClienteDao implements IDao<Cliente>, IInstaladorDao {
+public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {

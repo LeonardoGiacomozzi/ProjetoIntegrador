@@ -12,7 +12,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.NotaFiscal;
 
-public class NotaFiscalDao implements IDao<NotaFiscal>, IInstaladorDao {
+public class NotaFiscalDao extends InstaladorDao implements IDao<NotaFiscal> {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {
