@@ -37,6 +37,7 @@ public class UtilCadastro {
 			try {
 				System.out.println("\nLista de Fornecedor pré-cadastrados: \t");
 				for (Fornecedor fornecedor : new FornecedorDao().consultaTodos()) {
+					System.out.println("-----------------------------------------------");
 					System.out.println("ID: " + fornecedor.getId() + "\t\tNome: " + fornecedor.getNome());
 				}
 				System.out.println("\nEscolha um Fornecedor pelo ID ou digite 0 (zero) para cadastrar um novo Fornecedor...");
@@ -61,6 +62,7 @@ public class UtilCadastro {
 				System.out.println("\nLista de Categorias pré-cadastradas: \t");
 				try {
 					for (Categoria categoria : new CategoriaDao().consultaTodos()) {
+						System.out.println("-----------------------------------------------");
 						System.out.println("ID: " + categoria.getId() + "\t\tNome: " + categoria.getNome());
 					}
 				} catch (DaoException | ConexaoException k) {

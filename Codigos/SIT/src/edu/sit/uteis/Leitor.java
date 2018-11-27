@@ -27,7 +27,7 @@ public class Leitor {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			return Integer.parseInt(teclado.readLine());
-		} catch (IOException e) {
+		} catch (IOException | NumberFormatException e) {
 			throw new LeituraException(EErroLeitura.ERRO_LER_INTEGER);
 		}
 
@@ -37,8 +37,8 @@ public class Leitor {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		try {
 			return Double.parseDouble(teclado.readLine());
-		} catch (IOException e) {
-			throw new LeituraException(EErroLeitura.ERRO_LER_STRING);
+		} catch (IOException | NumberFormatException e) {
+			throw new LeituraException(EErroLeitura.ERRO_LER_DOUBLE);
 		}
 
 	}
@@ -84,5 +84,4 @@ public class Leitor {
 		}
 		throw new LeituraException(EErroLeitura.ERRO_LER_FONE);
 	}
-
 }
