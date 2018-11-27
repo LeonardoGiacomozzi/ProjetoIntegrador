@@ -31,7 +31,7 @@ public class VendaController {
 		Integer cliente = null;
 		ArrayList<Produto> produtos = null;
 		valor = 0.0;
-		System.out.print("\n*** EFETUAR VENDA ***");
+		System.out.print("\n*** EFETUAR VENDA ***\n");
 
 		try {
 			funcionario = pedeFuncionario();
@@ -65,11 +65,9 @@ public class VendaController {
 		while (funcionarioId == null) {
 
 			try {
-
+				System.out.println("\n************LISTA DE FUNCIONÁRIOS***************");
 				if (FuncionarioController.visualizar()) {
-
-					System.out.println("---------------------------------------------------------");
-					System.out.println("Informe o codigo do funcionario\t:");
+					System.out.print("\nInforme o código do funcionário: \t");
 					funcionarioId = Leitor.leInteger();
 				}
 			} catch (LeituraException | VisualizacaoException e) {
@@ -86,11 +84,10 @@ public class VendaController {
 		while (clienteId == null) {
 
 			try {
-
-				System.out.println(!ClienteController.visualizar()?"\nNão foi possivel carregar os clientes":"");
-				System.out.println("\n\t0 --------- CADASTRAR NOVO");
-				System.out.println("---------------------------------------------------------");
-				System.out.println("Informe o codigo do funcionario\t:");
+				System.out.println("\n\n****************LISTA DE CLIENTES***************");
+				System.out.print(!ClienteController.visualizar()?"\nNão foi possível carregar os clientes":"");
+				System.out.print("\n#0 ----------- CADASTRAR NOVO CLIENTE \n");
+				System.out.print("\nInforme o código do cliente: \t");
 				clienteId = Leitor.leInteger();
 				if (clienteId == 0) {
 					System.out.println(ClienteController.cadastro() ? "Cliente cadastrado com sucesso" : "Falha");
@@ -114,16 +111,14 @@ public class VendaController {
 			Integer quantidade = 0;
 			try {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
-				System.out.println("****************LISTA DE PRODUTOS****************");
-				System.out.println("-------------------------------------------------");
-				System.out.println("Codigo ----- Nome ----- Fornecedor ----- Categoria ----- Valor ----- Quantidade");
+				System.out.println("\n\n********************LISTA DE PRODUTOS********************");
+				System.out.println("Codigo--------Nome--------Fornecedor--------Categoria--------Valor--------Quantidade");
 				for (Produto produto : produtosBanco) {
-					System.out.println(produto.getId() + " ----- " + produto.getNome() + " ----- "
-							+ produto.getFornecedor().getNome() + " ----- " + produto.getCategoria().getNome()
-							+ " ----- " + produto.getValorUnitario() + " ----- " + produto.getQuantidade());
+					System.out.println("#" + produto.getId() + "--------" + produto.getNome() + "--------"
+							+ produto.getFornecedor().getNome() + "--------" + produto.getCategoria().getNome()
+							+ "--------" + produto.getValorUnitario() + "--------" + produto.getQuantidade());
 				}
 				System.out.println("o ----- FINALIZAR COMPRA");
-				System.out.println("-------------------------------------------------");
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
 
@@ -137,7 +132,7 @@ public class VendaController {
 								quantidade = Leitor.leInteger();
 
 								if (quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
-									System.out.println("\n\tQuantidade Indisponivel");
+									System.out.println("\n\tQuantidade Indisponível");
 								}
 							} catch (LeituraException e) {
 								System.out.println(e.getMessage());

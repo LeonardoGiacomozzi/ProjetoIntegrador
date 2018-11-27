@@ -31,6 +31,7 @@ public class GeraArquivoNotaFiscal {
 		palavras.add("-------------------------------------------------------------------------------------------");
 		palavras.add("Valor Tota--------------------------------------------------------------------------R$"+nota.getTotal());
 		palavras.add("-------------------------------------------------------------------------------------------");
+
 		palavras.add("Data de emissão:\t"+nota.getDataEmissao().get(Calendar.DAY_OF_MONTH)+
 				"/"+nota.getDataEmissao().get(Calendar.MONTH)+
 				"/"+nota.getDataEmissao().get(Calendar.YEAR)+

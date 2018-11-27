@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Calendar;
 import java.util.List;
 
 import edu.sit.bancodedados.conexao.Conexao;
@@ -47,11 +48,13 @@ public class NotaFiscalDao extends InstaladorDao implements IDao<NotaFiscal> {
 	@Override
 	public NotaFiscal consulta(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
+		Calendar dataLida = Calendar.getInstance();
 		try {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM NotaFiscal WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? NotaFiscal.consultaNotaBanco(rs.getInt("id"), rs.getDate("DataEmissao"), 
+			dataLida.setTime(rs.getDate("DataEmissao"));
+			return rs.first() ? NotaFiscal.consultaNotaBanco(rs.getInt("id"), dataLida, 
 					rs.getDouble("Total"), rs.getInt("Venda")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());

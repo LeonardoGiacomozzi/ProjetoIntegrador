@@ -122,8 +122,9 @@ public class Teste {
 
 		NotaFiscalDao teste8 = new NotaFiscalDao();
 		// System.out.println(teste8.criaTabela());
-		// System.out.println(teste8.consulta(1));
+		System.out.println(teste8.consulta(1));
+		
 		UsuarioDao novo = new UsuarioDao();
-		System.out.println(novo.criaTabela());
+		//System.out.println(novo.criaTabela());
 	}
 }

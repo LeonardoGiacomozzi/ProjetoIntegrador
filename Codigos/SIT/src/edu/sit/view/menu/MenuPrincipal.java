@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import edu.sit.controller.cadastro.VendaController;
+
 public class MenuPrincipal {
 
 	public static void menuGeral() {
@@ -30,7 +32,12 @@ public class MenuPrincipal {
 			break;
 			
 		case "2":
-			System.out.println("*** VENDAS ****");
+			try {
+				VendaController.efetuaVenda();
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
 			break;
 			
 		case "3":
