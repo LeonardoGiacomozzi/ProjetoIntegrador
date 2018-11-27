@@ -62,8 +62,7 @@ public class MenuCadastro {
 			}
 			break;
 
-		case "4":
-			System.out.println("\n*** CADASTRO FORNECEDOR ***");
+		case "4": //Cadastro de Fornecedor: Está comentando para não duplicar Títulos no Console!
 			try {
 				FornecedorController.cadastro();
 			} catch (CadastroException e) {

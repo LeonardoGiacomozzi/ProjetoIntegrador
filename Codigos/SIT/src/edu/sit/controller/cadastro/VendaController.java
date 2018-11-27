@@ -32,7 +32,7 @@ public class VendaController {
 		Integer cliente = null;
 		ArrayList<Produto> produtos = null;
 		valor = 0.0;
-		System.out.print("\n*** GERAR VENDA ***\n");
+		System.out.print("\n*** EFETUAR VENDA ***");
 
 		try {
 			funcionario = pedeFuncionario();

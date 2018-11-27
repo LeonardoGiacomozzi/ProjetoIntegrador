@@ -25,7 +25,7 @@ public class MenuPrincipal {
 		}
 
 		switch (escolha) {
-		case "1":
+		case "1": // Cadastros
 			MenuCadastro.menuCadastro();
 			break;
 			
