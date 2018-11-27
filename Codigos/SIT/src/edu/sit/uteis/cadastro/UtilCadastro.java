@@ -220,4 +220,20 @@ public class UtilCadastro {
 		return pessoaResponsavel;
 	}
 
+	public static String pedeSenha() {
+		String senha = null;
+		while (senha == null) {
+		
+			try {
+				senha =Leitor.leString();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		
+		}	
+		return senha;
+	}
+
+
+
 }
