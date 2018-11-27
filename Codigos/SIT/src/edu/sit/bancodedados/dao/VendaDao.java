@@ -94,7 +94,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao
-					.prepareStatement("INSERT INTO Venda (Cliente, Funcionario, Valor) values (?, ?, ?);");
+					.prepareStatement("INSERT INTO Venda (Cliente, Funcionario, Valor) VALUES (?, ?, ?);");
 			pst.setInt(1, objeto.getClienteId());
 			pst.setInt(2, objeto.getFuncionarioId());
 			pst.setDouble(3, objeto.getValor());
@@ -102,7 +102,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			for (Produto produto : objeto.getProdutos()) {
 
 				PreparedStatement pst2 = conexao
-						.prepareStatement("INSERT INTO ItensPedido (venda, Produtos) values (?, ?);");
+						.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos) VALUES (?, ?);");
 				pst2.setInt(1, pegaUltimoID());
 				pst2.setInt(2, produto.getId());
 				System.out.println(pst2.executeUpdate() > 0
@@ -126,8 +126,19 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 
 	@Override
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Venda WHERE id = ?;");
+			for (Integer novo : codigos) {
+				pst.setInt(1, novo);
+				pst.execute();
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return true;
 	}
 
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
@@ -160,6 +171,4 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			Conexao.fechaConexao();
 		}
 	}
-
-
 }

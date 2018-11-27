@@ -86,12 +86,31 @@ public class NotaFiscalDao extends InstaladorDao implements IDao<NotaFiscal> {
 
 	@Override
 	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("DELETE FROM NotaFiscal WHERE id = ?;");
+			for (Integer novo : codigos) {
+				pst.setInt(1, novo);
+				pst.execute();
+			}
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+		return true;
 	}
 
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Conexao.abreConexao();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery("SELECT MAX(id) FROM NotaFiscal;");
+			return rs.first() ? rs.getInt(1) : 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}
 }
