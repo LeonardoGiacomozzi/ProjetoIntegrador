@@ -6,16 +6,15 @@ import edu.sit.erro.propriedades.PropriedadesException;
 
 public class Testa {
 	public static void main(String[] args) throws IOException {
-		Configuracao arquivo2 = new Configuracao();
-		try {
-			arquivo2.gravaArquivo();
-		} catch (PropriedadesException e) {
-			System.out.println("ERRO");
-		}
-		System.out.println(System.getProperty("user.dir"));
-		System.out.println(System.getProperty("Usuario"));
-		System.out.println(System.getProperty("Senha"));
-		System.out.println(System.getProperty("Banco"));
+//		try {
+//			Configuracao.setPropriedades();
+//		} catch (PropriedadesException e) {
+//			System.out.println("ERRO");
+//		}
+		System.out.println(Configuracao.getPropriedade("banco"));
+		System.out.println(Configuracao.getPropriedade("usuario"));
+		System.out.println(Configuracao.getPropriedade("senha"));
+		System.out.println(Configuracao.getPropriedade("localNota"));
 		
 	}
 	}

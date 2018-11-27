@@ -1,0 +1,4 @@
+banco;tabacaria
+usuario;root
+senha;wircd123
+localNota;C:\notas
