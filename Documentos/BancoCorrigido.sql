@@ -134,5 +134,14 @@ CREATE TABLE IF NOT EXISTS `Tabacaria`.`ItensPedido` (
   INDEX `fk_Produtos_has_Venda_Produtos1_idx` (`Produtos` ASC) )
 ENGINE = InnoDB;
 
+-- -----------------------------------------------------
+-- Table `Tabacaria`.`ItensPedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Tabacaria`.`Usuarios` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `login` VARCHAR(45) NOT NULL,
+  `senha` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`)
+  );
 
 
