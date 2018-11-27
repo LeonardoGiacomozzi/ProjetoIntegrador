@@ -32,7 +32,7 @@ public class ClienteController {
 		dataNascimento = UtilCadastro.pedeDataNascimento();
 
 		try {
-			if (ContatoController.cadastraContato()) {
+			if (ContatoController.cadastro()) {
 
 				try {
 					Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf,

@@ -28,7 +28,7 @@ public class FornecedorController {
 		cnpj = UtilCadastro.pedeCnpj();
 		pessoaResponsavel = UtilCadastro.pedePessoaResponsavel();
 		
-		if (ContatoController.cadastraContato()) {
+		if (ContatoController.cadastro()) {
 
 			try {
 				Fornecedor fornecedor = Fornecedor.criaFornecedorFull(nome, cnpj, pessoaResponsavel,

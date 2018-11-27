@@ -28,7 +28,7 @@ public class FuncionarioController {
 		cargo = pedeCargo();
 		cpf = UtilCadastro.pedeCpf();
 		
-		if (ContatoController.cadastraContato()) {
+		if (ContatoController.cadastro()) {
 
 			try {
 				Funcionario funcionario = Funcionario.criaFuncionarioBanco(nome, cpf, cargo,

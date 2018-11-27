@@ -16,7 +16,7 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class ContatoController {
 
-	public static boolean cadastraContato() throws CadastroException {
+	public static boolean cadastro() throws CadastroException {
 		String email = null;
 		String tel = null;
 
