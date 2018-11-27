@@ -30,7 +30,7 @@ public class UsuarioController {
 
 	}
 
-	public static boolean efetuaLogin(Usuario entrando) {
+	public static boolean validaLogin(Usuario entrando) {
 
 		try {
 			Usuario doBanco = new UsuarioDao().consulta(entrando.getLogin());
@@ -67,4 +67,15 @@ public class UsuarioController {
 		}
 		return false;
 	}
+
+	public static boolean efetuaLogin() {
+		
+		String login = null;
+		String senha = null;
+		System.out.println("*********Login*********");
+		login = UtilCadastro.pedeNome();
+		senha = UtilCadastro.pedeSenha();
+		return validaLogin(Usuario.criaUsuario(login,senha));
+	} 
+
 }
