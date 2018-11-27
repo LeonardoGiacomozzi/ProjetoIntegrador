@@ -67,25 +67,13 @@ public class NotaFiscalDao extends InstaladorDao implements IDao<NotaFiscal> {
 	}
 
 	@Override
-	public List<NotaFiscal> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
+	public List<NotaFiscal> consultaVariosPorID(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean insere(NotaFiscal objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public List<NotaFiscal> insereVarios(List<NotaFiscal> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean insereVariosTransacao(List<NotaFiscal> objetos) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return false;
 	}

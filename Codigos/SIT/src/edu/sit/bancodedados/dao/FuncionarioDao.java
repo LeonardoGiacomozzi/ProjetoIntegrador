@@ -3,7 +3,6 @@ package edu.sit.bancodedados.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,7 +98,7 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 	}
 
 	@Override
-	public List<Funcionario> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {
+	public List<Funcionario> consultaVariosPorID(Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		List<Funcionario> funcionario = new ArrayList<Funcionario>();
 		try {
@@ -126,7 +125,7 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 	
 	public List<Funcionario> consultaFaixaCompleto(Integer... codigos) throws DaoException, ConexaoException {
 		List<Funcionario> funcionariosCompleto = new ArrayList<>();
-		List<Funcionario> funcionarios = consultaFaixa(codigos);
+		List<Funcionario> funcionarios = consultaVariosPorID(codigos);
 		for (Funcionario funcionario : funcionarios) {
 			funcionariosCompleto.add(consultaCompleta(funcionario.getId()));
 		}
@@ -145,61 +144,6 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 			pst.setInt(4, objeto.getContatoid());
 			return pst.executeUpdate() > 0;
 		} catch (Exception e) {
-			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
-		} finally {
-			Conexao.fechaConexao();
-		}
-	}
-
-	@Override
-	public List<Funcionario> insereVarios(List<Funcionario> objetos) throws DaoException, ConexaoException {
-		Connection conexao = Conexao.abreConexao();
-		List<Funcionario> falhados = new ArrayList<>();
-		try {
-			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Funcionario (Nome, CPF, Cargo, Contato) values (?, ?, ?, ?);");
-			for (Funcionario funcionario : objetos) {
-				try {
-					pst.setString(1, funcionario.getNome());
-					pst.setString(2, funcionario.getCpf());
-					pst.setInt(3, funcionario.getCargo().ordinal());
-					pst.setInt(4, funcionario.getContatoid());
-					pst.executeUpdate();
-				} catch (SQLException i) {
-					new DaoException(EErrosDao.INSERE_DADO, i.getMessage(), this.getClass());
-					falhados.add(funcionario);
-				}
-			}
-		} catch (Exception e) {
-			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
-		} finally {
-			Conexao.fechaConexao();
-		}
-		return falhados;
-	}
-
-	@Override
-	public boolean insereVariosTransacao(List<Funcionario> objetos) throws DaoException, ConexaoException {
-		Connection conexao = Conexao.abreConexao();
-		try {
-			conexao.setAutoCommit(false);
-			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Funcionario (Nome, CPF, Cargo, Contato) values (?, ?, ?, ?);");
-			for (Funcionario funcionario : objetos) {
-				pst.setString(1, funcionario.getNome());
-				pst.setString(2, funcionario.getCpf());
-				pst.setInt(3, funcionario.getCargo().ordinal());
-				pst.setInt(4, funcionario.getContatoid());
-				pst.executeUpdate();
-			}
-			conexao.commit();
-			return true;
-		} catch (Exception e) {
-			try {
-				conexao.rollback();
-			} catch (Exception r) {
-				throw new DaoException(EErrosDao.ROLLBACK, e.getMessage(), this.getClass());
-			}
 			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();

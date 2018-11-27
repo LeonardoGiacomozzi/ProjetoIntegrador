@@ -3,7 +3,6 @@ package edu.sit.bancodedados.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,7 +80,7 @@ public class ContatoDao extends InstaladorDao implements IDao<Contato> {
 	}
 
 	@Override
-	public List<Contato> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {
+	public List<Contato> consultaVariosPorID(Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		List<Contato> contato = new ArrayList<Contato>();
 		try {
@@ -115,57 +114,6 @@ public class ContatoDao extends InstaladorDao implements IDao<Contato> {
 			pst.setString(2, objeto.getEmail());
 			return pst.executeUpdate() > 0;
 		} catch (Exception e) {
-			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
-		} finally {
-			Conexao.fechaConexao();
-		}
-	}
-
-	@Override
-	public List<Contato> insereVarios(List<Contato> objetos) throws DaoException, ConexaoException {
-		Connection conexao = Conexao.abreConexao();
-		List<Contato> falhados = new ArrayList<>();
-		try {
-			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Contato (Telefone, Email) values (?, ?);");
-			for (Contato contato : objetos) {
-				try {
-					pst.setString(1, contato.getTelefone());
-					pst.setString(2, contato.getEmail());
-					pst.executeUpdate();
-				} catch (SQLException i) {
-					new DaoException(EErrosDao.INSERE_DADO, i.getMessage(), this.getClass());
-					falhados.add(contato);
-				}
-			}
-		} catch (Exception e) {
-			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
-		} finally {
-			Conexao.fechaConexao();
-		}
-		return falhados;
-	}
-
-	@Override
-	public boolean insereVariosTransacao(List<Contato> objetos) throws DaoException, ConexaoException {
-		Connection conexao = Conexao.abreConexao();
-		try {
-			conexao.setAutoCommit(false);
-			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Contato (Telefone, Email) values (?, ?);");
-			for (Contato contato : objetos) {
-				pst.setString(1, contato.getTelefone());
-				pst.setString(2, contato.getEmail());
-				pst.executeUpdate();
-			}
-			conexao.commit();
-			return true;
-		} catch (Exception e) {
-			try {
-				conexao.rollback();
-			} catch (Exception r) {
-				throw new DaoException(EErrosDao.ROLLBACK, e.getMessage(), this.getClass());
-			}
 			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();

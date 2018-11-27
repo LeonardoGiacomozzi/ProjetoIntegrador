@@ -11,13 +11,9 @@ public interface IDao<T> {
 
 	public abstract List<T> consultaTodos() throws DaoException, ConexaoException;
 
-	public abstract List<T> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException;
+	public abstract List<T> consultaVariosPorID(Integer... faixa) throws DaoException, ConexaoException;
 
 	public abstract boolean insere(T objeto) throws DaoException, ConexaoException;
-
-	public abstract List<T> insereVarios(List<T> objetos) throws DaoException, ConexaoException;
-
-	public abstract boolean insereVariosTransacao(List<T> objetos) throws DaoException, ConexaoException;
 	
 	public abstract boolean altera(T objeto) throws DaoException, ConexaoException;
 	

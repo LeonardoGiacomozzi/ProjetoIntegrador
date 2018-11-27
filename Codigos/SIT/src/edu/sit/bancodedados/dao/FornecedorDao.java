@@ -3,7 +3,6 @@ package edu.sit.bancodedados.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +113,7 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 	}
 
 	@Override
-	public List<Fornecedor> consultaFaixa(Integer... codigos) throws DaoException, ConexaoException {
+	public List<Fornecedor> consultaVariosPorID(Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		List<Fornecedor> fornecedor = new ArrayList<Fornecedor>();
 		try {
@@ -141,7 +140,7 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 	
 	public List<Fornecedor> consultaFaixaCompleto(Integer... codigos) throws DaoException, ConexaoException {
 		List<Fornecedor> fornecedoresCompleto = new ArrayList<>();
-		List<Fornecedor> fornecedores = consultaFaixa(codigos);
+		List<Fornecedor> fornecedores = consultaVariosPorID(codigos);
 		for (Fornecedor fornecedor : fornecedores) {
 			fornecedoresCompleto.add(consultaCompleta(fornecedor.getId()));
 		}
@@ -160,61 +159,6 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 			pst.setInt(4, objeto.getContatoid());
 			return pst.executeUpdate() > 0;
 		} catch (Exception e) {
-			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
-		} finally {
-			Conexao.fechaConexao();
-		}
-	}
-
-	@Override
-	public List<Fornecedor> insereVarios(List<Fornecedor> objetos) throws DaoException, ConexaoException {
-		Connection conexao = Conexao.abreConexao();
-		List<Fornecedor> falhados = new ArrayList<>();
-		try {
-			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Fornecedor (Nome, CPNJ, PessoaResponsavel, Contato) values (?, ?, ?, ?);");
-			for (Fornecedor fornecedor : objetos) {
-				try {
-					pst.setString(1, fornecedor.getNome());
-					pst.setString(2, fornecedor.getCNPJ());
-					pst.setString(3, fornecedor.getPessoaResponsavel());
-					pst.setInt(5, fornecedor.getContatoid());
-					pst.executeUpdate();
-				} catch (SQLException i) {
-					new DaoException(EErrosDao.INSERE_DADO, i.getMessage(), this.getClass());
-					falhados.add(fornecedor);
-				}
-			}
-		} catch (Exception e) {
-			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
-		} finally {
-			Conexao.fechaConexao();
-		}
-		return falhados;
-	}
-
-	@Override
-	public boolean insereVariosTransacao(List<Fornecedor> objetos) throws DaoException, ConexaoException {
-		Connection conexao = Conexao.abreConexao();
-		try {
-			conexao.setAutoCommit(false);
-			PreparedStatement pst = conexao.prepareStatement(
-					"INSERT INTO Fornecedor (Nome, CNPJ, PessoaResponsavel, Contato) values (?, ?, ?, ?);");
-			for (Fornecedor fornecedor : objetos) {
-				pst.setString(1, fornecedor.getNome());
-				pst.setString(2, fornecedor.getCNPJ());
-				pst.setString(3, fornecedor.getPessoaResponsavel());
-				pst.setInt(5, fornecedor.getContatoid());
-				pst.executeUpdate();
-			}
-			conexao.commit();
-			return true;
-		} catch (Exception e) {
-			try {
-				conexao.rollback();
-			} catch (Exception r) {
-				throw new DaoException(EErrosDao.ROLLBACK, e.getMessage(), this.getClass());
-			}
 			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();

@@ -83,7 +83,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 	}
 
 	@Override
-	public List<Venda> consultaFaixa(Integer... faixa) throws DaoException, ConexaoException {
+	public List<Venda> consultaVariosPorID(Integer... faixa) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -115,18 +115,6 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			Conexao.fechaConexao();
 		}
 
-		return false;
-	}
-
-	@Override
-	public List<Venda> insereVarios(List<Venda> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean insereVariosTransacao(List<Venda> objetos) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

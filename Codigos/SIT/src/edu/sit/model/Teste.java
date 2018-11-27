@@ -114,7 +114,7 @@ public class Teste {
 //		System.out.println(teste5.consultaCompleta(1));
 //		
 		VendaDao teste6 = new VendaDao();
-		System.out.println(teste6.criaTabela());
+		//System.out.println(teste6.criaTabela());
 		//System.out.println(teste6.consultaCompleta(1));
 		
 		CategoriaDao teste7 = new CategoriaDao();
