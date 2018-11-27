@@ -32,6 +32,7 @@ public class MenuCadastro {
 
 		switch (escolha) {
 		case "0":
+			System.out.print("\n");
 			MenuPrincipal.menuGeral();
 			break;
 		
