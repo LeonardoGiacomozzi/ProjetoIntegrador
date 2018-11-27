@@ -1,11 +1,7 @@
 package edu.sit.erro.propriedades;
 
 public enum EErroPropriedade {
-	ERRO_Grava_Arquivo("Falha ao Gravar Arquivo"), 
-	ERRO_ABRIR_ARQUIVO("Erro ao Abrir Arquivo"), 
-	ERRO_CARREGAR_ARQUIVO("Erro ao Carregar Arquivo"), 
-	ERRO_FECHAR_ARQUIVO("Erro ao Fechar Arquivo");
-	
+	ERRO_SALVAR_PROPRIEDADES("Erro ao salvar o arquivo de propriedades do sistema");
 	
 
 	private String mensage;

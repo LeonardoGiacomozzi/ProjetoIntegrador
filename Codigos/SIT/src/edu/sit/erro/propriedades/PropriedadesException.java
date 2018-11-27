@@ -2,11 +2,11 @@ package edu.sit.erro.propriedades;
 
 
 
-public class GravaArquivoException extends Exception{
+public class PropriedadesException extends Exception{
 
 	private static final long serialVersionUID = 1L;
 	
-	public GravaArquivoException(EErroPropriedade erro) {
+	public PropriedadesException(EErroPropriedade erro) {
 		super(erro.getMensage());
 	}
 
