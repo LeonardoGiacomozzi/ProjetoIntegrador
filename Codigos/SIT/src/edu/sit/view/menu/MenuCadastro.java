@@ -16,7 +16,7 @@ public class MenuCadastro {
 	public static void menuCadastro() {
 		
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println("**** CADASTROS TABACARIA ****");
+		System.out.println("\n**** CADASTROS TABACARIA ****");
 		System.out.println("1 - Cadastrar Cliente");
 		System.out.println("2 - Cadastrar Funcionário");
 		System.out.println("3 - Cadastrar Produtos");
@@ -33,9 +33,10 @@ public class MenuCadastro {
 		switch (escolha) {
 		case "0":
 			MenuPrincipal.menuGeral();
+			break;
 		
 		case "1":
-			System.out.println("*** CADASTRAR CLIENTE ***");
+			System.out.println("\n*** CADASTRAR CLIENTE ***");
 			try {
 				ClienteController.cadastro();
 			} catch (CadastroException e) {
@@ -44,7 +45,7 @@ public class MenuCadastro {
 			break;
 
 		case "2":
-			System.out.println("*** CADASTRAR FUNCIONÁRIO ***");
+			System.out.println("\n*** CADASTRAR FUNCIONÁRIO ***");
 			try {
 				FuncionarioController.cadastro();
 			} catch (CadastroException e) {
@@ -53,7 +54,7 @@ public class MenuCadastro {
 			break;
 
 		case "3":
-			System.out.println("*** CADASTRAR PRODUTO ***");
+			System.out.println("\n*** CADASTRAR PRODUTO ***");
 			try {
 				ProdutoController.cadastro();
 			} catch (CadastroException e) {
@@ -62,7 +63,7 @@ public class MenuCadastro {
 			break;
 
 		case "4":
-			System.out.println("*** CADASTRO FORNECEDOR ***");
+			System.out.println("\n*** CADASTRO FORNECEDOR ***");
 			try {
 				FornecedorController.cadastro();
 			} catch (CadastroException e) {
@@ -71,7 +72,7 @@ public class MenuCadastro {
 			break;
 
 		case "5":
-			System.out.println("*** CADASTRO VENDAS ***");
+			System.out.println("\n*** CADASTRO VENDAS ***");
 			try {
 				VendaController.efetuaVenda();
 			} catch (CadastroException e) {
@@ -80,7 +81,7 @@ public class MenuCadastro {
 			break;
 
 		default:
-			System.out.println("ERRO - Escolha uma opção válida!");
+			System.out.println("\nERRO - Escolha uma opção válida!\n");
 			MenuCadastro.menuCadastro();
 			break;
 		}

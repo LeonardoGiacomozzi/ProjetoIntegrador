@@ -23,15 +23,15 @@ public class ProdutoController {
 		Integer quantidade = null;
 		Double valorUnitario = null;
 
-		categoriaId = UtilCadastro.pedeCategoria();
 		nome = UtilCadastro.pedeNome();
-		fornecedorId = UtilCadastro.pedeFornecedor();
 		quantidade = UtilCadastro.pedeQuantidade();
 		valorUnitario = UtilCadastro.pedeValorUnitario();
-
+		categoriaId = UtilCadastro.pedeCategoria();
+		fornecedorId = UtilCadastro.pedeFornecedor();
+		
 		try {
 			Produto produto = Produto.criaProdutoBanco(nome, categoriaId, fornecedorId, quantidade, valorUnitario);
-			System.out.println(new ProdutoDao().insere(produto) ? "Produto cadastrado com SUCESSO!" : "Falha");
+			System.out.println(new ProdutoDao().insere(produto) ? "\nProduto cadastrado com SUCESSO!\n" : "\nFalha\n");
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new CadastroException(EErroCadastro.ERRO_CADASTRO_PRODUTO);

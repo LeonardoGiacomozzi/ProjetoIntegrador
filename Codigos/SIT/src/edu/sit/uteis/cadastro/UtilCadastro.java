@@ -21,7 +21,7 @@ public class UtilCadastro {
 
 		while (nome == null) {
 			try {
-				System.out.print("Nome: \t\t\t\t");
+				System.out.print("Nome: \t");
 				nome = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -35,15 +35,14 @@ public class UtilCadastro {
 
 		while (fornecedorId == null) {
 			try {
-				System.out.println("Fornecedor: \t");
+				System.out.println("\nLista de Fornecedor pré-cadastrados: \t");
 				for (Fornecedor fornecedor : new FornecedorDao().consultaTodos()) {
-					System.out.println("ID\t: " + fornecedor.getId() + "Nome\t: " + fornecedor.getNome());
+					System.out.println("ID: " + fornecedor.getId() + "\t\tNome: " + fornecedor.getNome());
 				}
-				System.out.println("0 --- CADASTRAR FORNECEDOR");
+				System.out.println("\nEscolha um Fornecedor pelo ID ou digite 0 (zero) para cadastrar um novo Fornecedor...");
 				fornecedorId = Leitor.leInteger();
 				if (fornecedorId == 0) {
-					System.out.println(FornecedorController.cadastro() ? "Fornecedor cadastrada\n"
-							: "Erro ao cadastrar categoria");
+					FornecedorController.cadastro();
 					fornecedorId = new FornecedorDao().pegaUltimoID();
 				}
 			} catch (LeituraException | ConexaoException | DaoException e) {
@@ -59,19 +58,19 @@ public class UtilCadastro {
 
 		while (categoriaId == null) {
 			try {
-				System.out.println("Categoria: \t");
+				System.out.println("\nLista de Categorias pré-cadastradas: \t");
 				try {
 					for (Categoria categoria : new CategoriaDao().consultaTodos()) {
-						System.out.println("ID\t: " + categoria.getId() + "Nome\t: " + categoria.getNome());
+						System.out.println("ID: " + categoria.getId() + "\t\tNome: " + categoria.getNome());
 					}
 				} catch (DaoException | ConexaoException k) {
 					System.out.println(k.getMessage());
 				}
-				System.out.println("0 --- CADASTRAR CATEGORIA");
+				System.out.println("\nEscolha uma categoria pelo ID ou digite 0 (zero) para cadastrar uma nova Categoria...");
 				categoriaId = Leitor.leInteger();
 				if (categoriaId == 0) {
 					System.out.println(
-							CategoriaController.cadastro() ? "Categoria cadastrada\n" : "Erro ao cadastrar categoria");
+							CategoriaController.cadastro() ? "Categoria cadastrada com SUCESSO!\n" : "Erro ao cadastrar categoria");
 					categoriaId = new CategoriaDao().pegaUltimoID();
 				}
 			} catch (LeituraException | ConexaoException | DaoException e) {
@@ -119,7 +118,7 @@ public class UtilCadastro {
 		String cpf = null;
 		while (cpf == null) {
 			try {
-				System.out.print("CPF: \t\t\t\t");
+				System.out.print("CPF: \t");
 				cpf = Leitor.leCpf();
 
 			} catch (LeituraException e) {
@@ -135,7 +134,7 @@ public class UtilCadastro {
 		String endereco = null;
 		while (endereco == null) {
 			try {
-				System.out.print("Endereço: \t\t\t");
+				System.out.print("Endereço: \t");
 				endereco = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -150,7 +149,7 @@ public class UtilCadastro {
 		LocalDate dataNascimento = null;
 		while (dataNascimento == null) {
 			try {
-				System.out.print("Data de Nascimento (dd/mm/aaaa):");
+				System.out.print("Data de Nascimento (dd/mm/aaaa): \t");
 				dataNascimento = Leitor.leData();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -164,7 +163,7 @@ public class UtilCadastro {
 		String tel = null;
 		while (tel == null) {
 			try {
-				System.out.print("Telefone:\t\t\t");
+				System.out.print("Telefone: \t");
 				tel = Leitor.leFone();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -179,7 +178,7 @@ public class UtilCadastro {
 
 		while (email == null) {
 			try {
-				System.out.print("Email:\t\t\t\t");
+				System.out.print("Email: \t");
 				email = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -195,7 +194,7 @@ public class UtilCadastro {
 		while (cnpj == null) {
 
 			try {
-				System.out.print("CNPJ:\t");
+				System.out.print("CNPJ: \t");
 				cnpj = Leitor.leCnpj();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -210,7 +209,7 @@ public class UtilCadastro {
 
 		while (pessoaResponsavel == null) {
 			try {
-				System.out.print("Nome da pessoa responsavel:\t");
+				System.out.print("Nome da pessoa responsável: \t");
 				pessoaResponsavel = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());

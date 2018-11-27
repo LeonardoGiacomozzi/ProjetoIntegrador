@@ -20,7 +20,7 @@ public class FornecedorController {
 		String nome = null;
 		String cnpj = null;
 		String pessoaResponsavel = null;
-		System.out.println("*****CADASTRO DE FOENECEDOR*****");
+		System.out.println("\n*** CADASTRO DE FORNECEDOR ***");
 
 		nome = UtilCadastro.pedeNome();
 		cnpj = UtilCadastro.pedeCnpj();
@@ -32,7 +32,7 @@ public class FornecedorController {
 				Fornecedor fornecedor = Fornecedor.criaFornecedorFull(nome, cnpj, pessoaResponsavel,
 						new ContatoDao().pegaUltimoID());
 				System.out.println(
-						new FornecedorDao().insere(fornecedor) ? "Fornecedor cadastrado com sucesso" : "Falha");
+						new FornecedorDao().insere(fornecedor) ? "\nFornecedor cadastrado com SUCESSO!\n" : "\nFalha\n");
 			} catch (DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());
 				throw new CadastroException(EErroCadastro.ERRO_CADASTRO_FORNECEDOR);

@@ -32,7 +32,7 @@ public class VendaController {
 		Integer cliente = null;
 		ArrayList<Produto> produtos = null;
 		valor = 0.0;
-		System.out.print("*****GERAR VENDA*****");
+		System.out.print("\n*** GERAR VENDA ***\n");
 
 		try {
 			funcionario = pedeFuncionario();
@@ -44,7 +44,7 @@ public class VendaController {
 		try {
 			Venda vendaNova = Venda.criaVenda(cliente, funcionario, produtos, valor);
 			System.out.println(new VendaDao().insere(vendaNova)
-					? "Venda efetuada com sucesso!!" + "\n\tGerando Nota Fiscal" + "\n\tAguarde"
+					? "\nVenda efetuada com SUCESSO!" + "\n\tGerando Nota Fiscal..." + "\n\tAguarde..."
 					: "Falha na venda");
 			try {
 				NotaFiscal notaFiscal = NotaFiscal.criaNotaFiscal(vendaNova);

@@ -17,7 +17,7 @@ public class CategoriaController {
 
 	public static boolean cadastro() throws CadastroException {
 		String nome = null;
-		System.out.print("*****CADASTRO DE CATEGORIA*****");
+		System.out.print("\n*** CADASTRO DE CATEGORIA ***\n");
 		nome = UtilCadastro.pedeNome();
 		try {
 			Categoria categoria = Categoria.criaCategoria(nome);

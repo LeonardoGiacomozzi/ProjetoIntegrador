@@ -35,7 +35,7 @@ public class ClienteController {
 				try {
 					Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf,
 							new ContatoDao().pegaUltimoID());
-					System.out.println(new ClienteDao().insere(cliente) ? "\nCliente cadastrado com SUCESSO!" : "Falha");
+					System.out.println(new ClienteDao().insere(cliente) ? "\nCliente cadastrado com SUCESSO!\n" : "\nFalha\n");
 				} catch (DaoException e) {
 					System.out.println(e.getMessage());
 				}
