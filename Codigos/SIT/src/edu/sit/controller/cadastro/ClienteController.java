@@ -10,6 +10,8 @@ import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
+import edu.sit.erro.visualizacao.EErroVisualizacao;
+import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Cliente;
 import edu.sit.uteis.Leitor;
@@ -35,7 +37,8 @@ public class ClienteController {
 				try {
 					Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf,
 							new ContatoDao().pegaUltimoID());
-					System.out.println(new ClienteDao().insere(cliente) ? "\nCliente cadastrado com SUCESSO!\n" : "\nFalha\n");
+					System.out.println(
+							new ClienteDao().insere(cliente) ? "\nCliente cadastrado com SUCESSO!\n" : "\nFalha\n");
 				} catch (DaoException e) {
 					System.out.println(e.getMessage());
 				}
@@ -92,5 +95,18 @@ public class ClienteController {
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
 		}
 
+	}
+
+	public static boolean visualizar() throws VisualizacaoException {
+
+		try {
+			for (Cliente cliente : new ClienteDao().consultaTodos()) {
+				System.out.println("#" + cliente.getId() + " ----------- " + cliente.getNome()+ " ----------- " + cliente.getCpf());
+			}
+			return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_CLIENTES);
+		}
 	}
 }

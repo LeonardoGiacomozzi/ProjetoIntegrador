@@ -8,6 +8,8 @@ import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
+import edu.sit.erro.visualizacao.EErroVisualizacao;
+import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.ECargo;
 import edu.sit.model.Funcionario;
@@ -107,4 +109,17 @@ public class FuncionarioController {
 		return cargo;
 	}
 
+	public static boolean visualizar() throws VisualizacaoException {
+
+		try {
+			for (Funcionario funcionario : new FuncionarioDao().consultaTodos()) {
+				System.out.println("#" + funcionario.getId() + " ----------- " + funcionario.getNome()+ " ----------- " + funcionario.getCpf());
+			}
+			return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_FUNCIONARIOS);
+		}
+	}
+	
 }

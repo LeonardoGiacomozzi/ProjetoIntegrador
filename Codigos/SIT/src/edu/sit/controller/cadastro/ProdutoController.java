@@ -8,6 +8,8 @@ import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
+import edu.sit.erro.visualizacao.EErroVisualizacao;
+import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Produto;
 import edu.sit.uteis.Leitor;
@@ -94,7 +96,19 @@ public class ProdutoController {
 
 	}
 
-	
+	public static boolean visualizar() throws VisualizacaoException {
+
+		try {
+			for (Produto produto : new ProdutoDao().consultaTodosCompleto()) {
+				System.out.println("#" + produto.getId() + " ----------- " + produto.getNome()+
+						"/"+produto.getFornecedor().getNome()+ " ----------- " + produto.getQuantidade());
+			}
+			return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_PRODUTOS);
+		}
+	}
 	
 
 	

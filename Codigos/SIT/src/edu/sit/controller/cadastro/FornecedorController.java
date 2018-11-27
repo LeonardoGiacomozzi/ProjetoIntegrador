@@ -8,6 +8,8 @@ import edu.sit.erro.cadastro.EErroCadastro;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
+import edu.sit.erro.visualizacao.EErroVisualizacao;
+import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Fornecedor;
 import edu.sit.uteis.Leitor;
@@ -91,4 +93,18 @@ public class FornecedorController {
 		return true;
 
 	}
+
+	public static boolean visualizar() throws VisualizacaoException {
+
+		try {
+			for (Fornecedor fornecedor : new FornecedorDao().consultaTodos()) {
+				System.out.println("#" + fornecedor.getId() + " ----------- " + fornecedor.getNome()+ " ----------- " + fornecedor.getCNPJ());
+			}
+			return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_FORNECEDORES);
+		}
+	}
+
 }
