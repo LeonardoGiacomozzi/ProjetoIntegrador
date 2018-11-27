@@ -24,7 +24,7 @@ public class FornecedorController {
 		String pessoaResponsavel = null;
 		System.out.println("\n*** CADASTRO DE FORNECEDOR ***");
 
-		nome = UtilCadastro.pedeNome();
+		nome = UtilCadastro.pedeNome("Nome");
 		cnpj = UtilCadastro.pedeCnpj();
 		pessoaResponsavel = UtilCadastro.pedePessoaResponsavel();
 		
@@ -60,7 +60,7 @@ public class FornecedorController {
 
 				switch (opcao) {
 				case 1:
-					fornecedorBanco.setNome(UtilCadastro.pedeNome());
+					fornecedorBanco.setNome(UtilCadastro.pedeNome("Nome"));
 					break;
 				case 2:
 					fornecedorBanco.setPessoaResponsavel(UtilCadastro.pedePessoaResponsavel());

@@ -26,7 +26,7 @@ public class ClienteController {
 		String endereco = null;
 		LocalDate dataNascimento = null;
 
-		nome = UtilCadastro.pedeNome();
+		nome = UtilCadastro.pedeNome("Nome");
 		cpf = UtilCadastro.pedeCpf();
 		endereco = UtilCadastro.pedeEndereco();
 		dataNascimento = UtilCadastro.pedeDataNascimento();
@@ -67,7 +67,7 @@ public class ClienteController {
 				opcao = Leitor.leInteger();
 				switch (opcao) {
 				case 1:
-					clienteBanco.setNome(UtilCadastro.pedeNome());
+					clienteBanco.setNome(UtilCadastro.pedeNome("Nome"));
 					break;
 				case 2:
 					clienteBanco.setEndereco(UtilCadastro.pedeEndereco());

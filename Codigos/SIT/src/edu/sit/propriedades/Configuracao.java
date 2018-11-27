@@ -1,70 +1,30 @@
 package edu.sit.propriedades;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Properties;
+import java.util.ArrayList;
 
-import edu.sit.erro.leitura.LeituraException;
-import edu.sit.propriedades.dao.EErroPropriedade;
-import edu.sit.propriedades.dao.GravaArquivoException;
-import edu.sit.uteis.Leitor;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
+
+import edu.sit.model.Produto;
+import edu.sit.uteis.Arquivo;
+import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class Configuracao {
 	
 	
-	public boolean gravaArquivo() throws GravaArquivoException {
-		
-		String caminho = System.getProperty("user.dir") + ".\\propertiers\\dados.propertiers";
-		
-		FileInputStream arquivoEntrada;
-		try {
-			arquivoEntrada = new FileInputStream(new File(caminho));
-		} catch (FileNotFoundException e1) {
-			throw new GravaArquivoException(EErroPropriedade.ERRO_ABRIR_ARQUIVO);
-		}
-		
-		Properties propriedades = new Properties();
-		
-		try {
-			propriedades.load(arquivoEntrada);
-		} catch (IOException e1) {
-			throw new GravaArquivoException(EErroPropriedade.ERRO_CARREGAR_ARQUIVO);
-		}
-		
-		try {
-			arquivoEntrada.close();
-		} catch (IOException e1) {
-			throw new GravaArquivoException(EErroPropriedade.ERRO_FECHAR_ARQUIVO);
-		}
+	public boolean setPropriedades() {
 		
 		
-		try {
+		String banco = "banco;"+UtilCadastro.pedeNome("Informe o nome do banco de dados");
+		String usuario = "usuario;"+UtilCadastro.pedeNome("Informe o nome do usuario do banco de dados");
+		String senha = "senha;"+UtilCadastro.pedeNome("Informe a senha de acesso");
+		String localNotas = "localNota;"+UtilCadastro.pedeNome("Informe o local onde deseja salvar as notas fiscais");
 		
-		System.out.print("Usuario: ");
-		propriedades.setProperty("Usuario", Leitor.leString());
-		System.out.print("Senha: ");
-		propriedades.setProperty("Senha", Leitor.leString());
-		System.out.print("Nome Banco :");
-		propriedades.setProperty("Banco", Leitor.leString());
-		System.out.print("Local:");
-		propriedades.setProperty("Local", Leitor.leString());
+		ArrayList<String> props = new ArrayList<>();
+		props.add(banco);
+		props.add(usuario);
+		props.add(senha);
+		props.add(localNotas);
 		
-			
-		}catch(LeituraException e) {
-			System.out.println(e.getMessage());
-		}
-		
-		try {
-		FileOutputStream arquivoSaida = new FileOutputStream(caminho);
-		propriedades.store(arquivoSaida, "----------");
-		arquivoSaida.close();
-		return true;
-		}catch(IOException e) {
-			throw new GravaArquivoException(EErroPropriedade.ERRO_Grava_Arquivo);
-		}
-
+		Arquivo.gravaArquivo("propiedades.txt",props, false);
 	}
 }

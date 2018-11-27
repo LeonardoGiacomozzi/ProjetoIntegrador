@@ -1,4 +1,4 @@
-package edu.sit.propriedades.dao;
+package edu.sit.erro.propriedades;
 
 public enum EErroPropriedade {
 	ERRO_Grava_Arquivo("Falha ao Gravar Arquivo"), 

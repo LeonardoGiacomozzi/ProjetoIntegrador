@@ -16,12 +16,12 @@ import edu.sit.uteis.Leitor;
 
 public class UtilCadastro {
 
-	public static String pedeNome() {
+	public static String pedeNome(String msg) {
 		String nome = null;
 
 		while (nome == null) {
 			try {
-				System.out.print("Nome: \t");
+				System.out.print(msg+": \t");
 				nome = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());

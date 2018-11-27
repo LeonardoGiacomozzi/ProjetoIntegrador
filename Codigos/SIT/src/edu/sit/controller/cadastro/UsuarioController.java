@@ -15,7 +15,7 @@ public class UsuarioController {
 		String login = null;
 		String senha = null;
 		System.out.println("*********CADASTRO DE USUARIO*********");
-		login = UtilCadastro.pedeNome();
+		login = UtilCadastro.pedeNome("Login");
 		senha = UtilCadastro.pedeSenha();
 
 		try {
@@ -73,7 +73,7 @@ public class UsuarioController {
 		String login = null;
 		String senha = null;
 		System.out.println("*********Login*********");
-		login = UtilCadastro.pedeNome();
+		login = UtilCadastro.pedeNome("Login");
 		senha = UtilCadastro.pedeSenha();
 		return validaLogin(Usuario.criaUsuario(login,senha));
 	} 

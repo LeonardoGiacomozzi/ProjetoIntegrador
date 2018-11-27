@@ -25,7 +25,7 @@ public class ProdutoController {
 		Integer quantidade = null;
 		Double valorUnitario = null;
 
-		nome = UtilCadastro.pedeNome();
+		nome = UtilCadastro.pedeNome("Nome");
 		quantidade = UtilCadastro.pedeQuantidade();
 		valorUnitario = UtilCadastro.pedeValorUnitario();
 		categoriaId = UtilCadastro.pedeCategoria();
@@ -60,7 +60,7 @@ public class ProdutoController {
 				opcao = Leitor.leInteger();
 				switch (opcao) {
 				case 1:
-					produtoBanco.setNome(UtilCadastro.pedeNome());
+					produtoBanco.setNome(UtilCadastro.pedeNome("Nome"));
 
 					break;
 				case 2:

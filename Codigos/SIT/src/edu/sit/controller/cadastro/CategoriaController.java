@@ -20,7 +20,7 @@ public class CategoriaController {
 	public static boolean cadastro() throws CadastroException {
 		String nome = null;
 		System.out.print("\n*** CADASTRO DE CATEGORIA ***\n");
-		nome = UtilCadastro.pedeNome();
+		nome = UtilCadastro.pedeNome("Nome");
 		try {
 			Categoria categoria = Categoria.criaCategoria(nome);
 			new CategoriaDao().insere(categoria);
@@ -47,7 +47,7 @@ public class CategoriaController {
 
 				switch (opcao) {
 				case 1:
-					categoriaBanco.setNome(UtilCadastro.pedeNome());
+					categoriaBanco.setNome(UtilCadastro.pedeNome("Nome"));
 					break;
 
 				case 0:

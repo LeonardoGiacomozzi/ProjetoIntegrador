@@ -2,7 +2,7 @@ package edu.sit.propriedades;
 
 import java.io.IOException;
 
-import edu.sit.propriedades.dao.GravaArquivoException;
+import edu.sit.erro.propriedades.GravaArquivoException;
 
 public class Testa {
 	public static void main(String[] args) throws IOException {

@@ -1,4 +1,4 @@
-package edu.sit.propriedades.dao;
+package edu.sit.erro.propriedades;
 
 
 

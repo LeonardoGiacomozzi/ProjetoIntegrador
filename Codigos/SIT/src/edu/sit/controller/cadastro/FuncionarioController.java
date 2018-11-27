@@ -24,7 +24,7 @@ public class FuncionarioController {
 		ECargo cargo = null;
 		String cpf = null;
 
-		nome = UtilCadastro.pedeNome();
+		nome = UtilCadastro.pedeNome("Nome");
 		cargo = pedeCargo();
 		cpf = UtilCadastro.pedeCpf();
 		
