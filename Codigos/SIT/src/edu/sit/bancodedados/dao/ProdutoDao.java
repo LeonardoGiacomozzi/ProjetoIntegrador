@@ -20,10 +20,16 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Produtos (" + "id INT NOT NULL AUTO_INCREMENT," + "Nome VARCHAR(45) NOT NULL," +
-					  "Quantidade INT(80) NOT NULL," + "Valor DOUBLE NOT NULL," + "Fornecedor INT NOT NULL," + 
-					  "Categoria INT NOT NULL," + " PRIMARY KEY (id)," + "INDEX fk_Produtos_Fornecedor1_idx (Fornecedor ASC)," +
-					  "INDEX fk_Produtos_Categoria1_idx (Categoria ASC)) ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Produtos (" + 
+					"id INT NOT NULL AUTO_INCREMENT," +
+					"Nome VARCHAR(45) NOT NULL," +
+					"Quantidade INT(80) NOT NULL," + 
+					"Valor DOUBLE NOT NULL," + 
+					"Fornecedor INT NOT NULL," + 
+					"Categoria INT NOT NULL," +
+					" PRIMARY KEY (id)," +
+					"INDEX fk_Produtos_Fornecedor1_idx (Fornecedor ASC)," +
+					"INDEX fk_Produtos_Categoria1_idx (Categoria ASC)) ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

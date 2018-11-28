@@ -20,9 +20,11 @@ public class ContatoDao extends InstaladorDao implements IDao<Contato> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Contato (" + "id INT NOT NULL AUTO_INCREMENT," +
-					  "Telefone VARCHAR(15) NOT NULL," + "Email VARCHAR(45) NOT NULL," +
-					  "PRIMARY KEY (id)) ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Contato (" 
+					+"id INT NOT NULL AUTO_INCREMENT,"
+					+"Telefone VARCHAR(15) NOT NULL," 
+					+"Email VARCHAR(45) NOT NULL," 
+					+"PRIMARY KEY (id)) ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

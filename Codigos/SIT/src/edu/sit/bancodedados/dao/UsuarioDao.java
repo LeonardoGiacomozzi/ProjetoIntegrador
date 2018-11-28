@@ -21,9 +21,11 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Usuarios (" + " id INT NOT NULL AUTO_INCREMENT," + 
-					" Login VARCHAR(45) NOT NULL," + " Senha VARCHAR(45) NOT NULL," + 
-					"  PRIMARY KEY (id));");
+			st.executeUpdate("CREATE TABLE Usuarios (" 
+					+ " id INT NOT NULL AUTO_INCREMENT," 
+					+ " Login VARCHAR(45) NOT NULL," 
+					+ " Senha VARCHAR(45) NOT NULL," 
+					+ "  PRIMARY KEY (id));");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

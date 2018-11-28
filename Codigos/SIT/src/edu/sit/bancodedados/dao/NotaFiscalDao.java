@@ -20,9 +20,15 @@ public class NotaFiscalDao extends InstaladorDao implements IDao<NotaFiscal> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE NotaFiscal (" + "id INT NOT NULL AUTO_INCREMENT, " + "DataEmissao DATE NOT NULL," +
-					  "Total DOUBLE NOT NULL," + "Venda INT NOT NULL," + "PRIMARY KEY (id)," + 
-					  "INDEX fk_NotaFiscal_Venda1_idx (Venda ASC)) ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Tabacaria`.`NotaFiscal` (" + 
+					"  `id` INT NOT NULL AUTO_INCREMENT," + 
+					"  `DataEmissao` DATE NOT NULL," + 
+					"  `Total` DOUBLE NOT NULL," + 
+					"  `VendaidVenda` INT NOT NULL," + 
+					"  PRIMARY KEY (`id`)," + 
+					"  INDEX `fk_NotaFiscal_Venda1_idx` (`VendaidVenda` ASC) )" + 
+					"ENGINE = InnoDB;" + 
+					"");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

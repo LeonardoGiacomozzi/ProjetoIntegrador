@@ -20,10 +20,15 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Fornecedor (" + "id INT NOT NULL AUTO_INCREMENT," + 
-					  "Nome VARCHAR(45) NOT NULL," + "CNPJ VARCHAR(45) NOT NULL," + 
-					  "PessoaResponsavel VARCHAR(45) NOT NULL," + "Contato INT NOT NULL," +
-					  "PRIMARY KEY (id)," + "INDEX fk_Fornecedor_Contato1_idx (Contato ASC)) ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Tabacaria`.`Fornecedor` (" + 
+					"  `id` INT NOT NULL AUTO_INCREMENT," + 
+					"  `Nome` VARCHAR(45) NOT NULL," + 
+					"  `PessoaResponsavel` VARCHAR(45) NOT NULL," + 
+					"  `CNPJ` VARCHAR(45) NOT NULL," + 
+					"  `Contato` INT NOT NULL," + 
+					"  PRIMARY KEY (`id`)," + 
+					"  INDEX `fk_Fornecedor_Contato1_idx` (`Contato` ASC) )" + 
+					"ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

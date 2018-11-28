@@ -17,16 +17,16 @@ import edu.sit.installer.populador.Populador;
 public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException {
 
-		//try {
-		//System.out.println(Populador.cliente() ? "foi" : "nãoFoi");
-			//	System.out.println(Populador.funcionario() ? "foi" : "nãoFoi");
-		//	System.out.println(Populador.categoria() ? "foi" : "nãoFoi");
-		//	System.out.println(Populador.fornecedor() ? "foi" : "nãoFoi");
-		//System.out.println(Populador.produto() ? "foi" : "nãoFoi");
-		//System.out.println(Populador.venda() ? "foi" : "nãoFoi");
-		//} catch (InstalacaoException e) {
-		//System.out.println(e.getMessage());
-		//}
+//		try {
+//		System.out.println(Populador.cliente() ? "foi" : "nãoFoi");
+//				System.out.println(Populador.funcionario() ? "foi" : "nãoFoi");
+//			System.out.println(Populador.categoria() ? "foi" : "nãoFoi");
+//			System.out.println(Populador.fornecedor() ? "foi" : "nãoFoi");
+//		System.out.println(Populador.produto() ? "foi" : "nãoFoi");
+//		System.out.println(Populador.venda() ? "foi" : "nãoFoi");
+//		} catch (InstalacaoException e) {
+//		System.out.println(e.getMessage());
+//		}
 		// System.out.println(System.getProperty("user.dir"));
 		// Cria Tabela Banco
 		ClienteDao teste = new ClienteDao();

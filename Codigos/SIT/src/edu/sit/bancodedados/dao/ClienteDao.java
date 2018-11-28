@@ -20,10 +20,15 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Cliente (" + "id INT NOT NULL AUTO_INCREMENT," +
-					  "Nome VARCHAR(45) NOT NULL," + "CPF VARCHAR(14) NOT NULL," + "DataNascimento DATE NOT NULL," +
-					  "Endereco VARCHAR(45) NOT NULL," + "Contato INT NOT NULL," + "PRIMARY KEY (id)," +
-					  "INDEX fk_Cliente_Contato1_idx (Contato ASC)) ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE Cliente (" 
+					+ "id INT NOT NULL AUTO_INCREMENT," 
+					+ "Nome VARCHAR(45) NOT NULL," 
+					+ "CPF VARCHAR(14) NOT NULL," 
+					+ "DataNascimento DATE NOT NULL," 
+					+ "Endereco VARCHAR(45) NOT NULL," 
+					+ "Contato INT NOT NULL," + "PRIMARY KEY (id)," 
+					+ "INDEX fk_Cliente_Contato1_idx (Contato ASC))"
+					+ "ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

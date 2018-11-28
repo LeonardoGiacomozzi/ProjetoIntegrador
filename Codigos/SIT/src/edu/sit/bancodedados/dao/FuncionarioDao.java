@@ -21,10 +21,15 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Funcionario (" + "id INT NOT NULL AUTO_INCREMENT," + "Nome VARCHAR(45) NOT NULL," +
-					  "CPF VARCHAR(45) NOT NULL," + "Cargo VARCHAR(45) NOT NULL," +
-					  "Contato INT NOT NULL," + "PRIMARY KEY (id)," + "INDEX fk_Funcionario_Contato1_idx (Contato ASC))" + 
-					  "ENGINE = InnoDB" + " DEFAULT CHARACTER SET = armscii8;");
+			st.executeUpdate("CREATE TABLE Funcionario (" 
+					+ "id INT NOT NULL AUTO_INCREMENT," 
+					+ "Nome VARCHAR(45) NOT NULL," 
+					+ "CPF VARCHAR(45) NOT NULL," 
+					+ "Cargo VARCHAR(45) NOT NULL," 
+					+ "Contato INT NOT NULL," 
+					+ "PRIMARY KEY (id)," 
+					+ "INDEX fk_Funcionario_Contato1_idx (Contato ASC))" 
+					+ "ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

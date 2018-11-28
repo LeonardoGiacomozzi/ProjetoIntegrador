@@ -21,15 +21,23 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Venda (" + " idVenda INT NOT NULL AUTO_INCREMENT,"
-					+ " Valor DOUBLE NOT NULL," + " Funcionario_idCadastro_Funcionario INT NOT NULL,"
-					+ " Nota_Fiscal_idNota_Fiscal INT NOT NULL," + " PRIMARY KEY (idVenda),"
-					+ " INDEX fk_Venda_Funcionário1_idx (Funcionario_idCadastro_Funcionario ASC),"
-					+ " INDEX fk_Venda_Nota_Fiscal1_idx (Nota_Fiscal_idNota_Fiscal ASC))" + " ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Tabacaria`.`Venda` (" + 
+					"  `id` INT NOT NULL AUTO_INCREMENT," + 
+					"  `Valor` DOUBLE NOT NULL," + 
+					"  `Funcionario` INT NOT NULL," + 
+					"  `Cliente` INT NOT NULL," + 
+					"  PRIMARY KEY (`id`)," + 
+					"  INDEX `fk_Venda_Funcionário1_idx` (`Funcionario` ASC) ," + 
+					"  INDEX `fk_Venda_Cliente1_idx` (`Cliente` ASC) )" + 
+					"ENGINE = InnoDB;");
 			
-			st.executeUpdate("CREATE TABLE ItensPedido (" + "Produtos INT NOT NULL," + "Venda INT NOT NULL,"
-					+ " PRIMARY KEY (Produtos, Venda)," + " INDEX fk_Produtos_has_Venda_Venda1_idx (Venda ASC)," 
-					+ "	INDEX fk_Produtos_has_Venda_Produtos1_idx (Produtos ASC))" + "ENGINE = InnoDB;");
+			st.executeUpdate("CREATE TABLE ItensPedido (" 
+					+ "Produtos INT NOT NULL," 
+					+ "Venda INT NOT NULL,"
+					+ " PRIMARY KEY (Produtos, Venda)," 
+					+ " INDEX fk_Produtos_has_Venda_Venda1_idx (Venda ASC)," 
+					+ "	INDEX fk_Produtos_has_Venda_Produtos1_idx (Produtos ASC))" 
+					+ "ENGINE = InnoDB;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());
