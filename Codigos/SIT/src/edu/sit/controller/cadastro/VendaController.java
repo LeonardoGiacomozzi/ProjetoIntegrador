@@ -84,7 +84,7 @@ public class VendaController {
 		while (clienteId == null) {
 
 			try {
-				System.out.println("\n\n****************LISTA DE CLIENTES***************");
+				System.out.println("\n\n****************LISTA DE CLIENTES***************\n");
 				System.out.print(!ClienteController.visualizar()?"\nNão foi possível carregar os clientes":"");
 				System.out.print("\n#0 ----------- CADASTRAR NOVO CLIENTE \n");
 				System.out.print("\nInforme o código do cliente: \t");
@@ -111,14 +111,21 @@ public class VendaController {
 			Integer quantidade = 0;
 			try {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
-				System.out.println("\n\n***************************LISTA DE PRODUTOS******************************");
-				System.out.println(String.format("%-10s", "Codigo") + String.format("%-19s", "Nome") + String.format("%-13s", "Fornecedor") + 
-						String.format("%-13s", "Categoria") + String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
+				System.out.println("\n\n***************************LISTA DE PRODUTOS******************************\n");
+				System.out.println(String.format("%-10s", "Codigo") + 
+								   String.format("%-19s", "Nome") + 
+								   String.format("%-13s", "Fornecedor") + 
+								   String.format("%-13s", "Categoria") + 
+								   String.format("%-8s", "Valor") + 
+								   String.format("%-6s", "Quantidade"));
 				for (Produto produto : produtosBanco) {
 					System.out.println("-----------------------------------------------------------------------------");
-					System.out.println(String.format("%-10s", "#" + produto.getId()) + String.format("%-20s", produto.getNome()) +
-							String.format("%-13s", produto.getFornecedor().getNome()) + String.format("%-13s", produto.getCategoria().getNome()) +
-							String.format("%-11s", produto.getValorUnitario()) + String.format("%-6s", produto.getQuantidade()));
+					System.out.println(String.format("%-10s", "#" + produto.getId()) +
+									   String.format("%-20s", produto.getNome()) +
+									   String.format("%-13s", produto.getFornecedor().getNome()) + 
+									   String.format("%-13s", produto.getCategoria().getNome()) +
+									   String.format("%-11s", produto.getValorUnitario()) + 
+									   String.format("%-6s", produto.getQuantidade()));
 				}
 				System.out.println("o ----- FINALIZAR COMPRA");
 				opcao = Leitor.leInteger();

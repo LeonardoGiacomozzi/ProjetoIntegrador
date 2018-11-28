@@ -113,7 +113,8 @@ public class FuncionarioController {
 
 		try {
 			for (Funcionario funcionario : new FuncionarioDao().consultaTodos()) {
-				System.out.println("#" + funcionario.getId() + " ----------- " + funcionario.getNome()+ " ----------- " + funcionario.getCpf());
+				System.out.println("#" + funcionario.getId() + " ----------- " + 
+			funcionario.getNome()+ " ----------- " + funcionario.getCpf());
 			}
 			return true;
 		} catch (DaoException | ConexaoException e) {

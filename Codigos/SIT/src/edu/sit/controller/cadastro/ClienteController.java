@@ -101,7 +101,10 @@ public class ClienteController {
 
 		try {
 			for (Cliente cliente : new ClienteDao().consultaTodos()) {
-				System.out.println("#" + cliente.getId() + " ----------- " + cliente.getNome()+ " ----------- " + cliente.getCpf());
+				System.out.println("-----------------------------------------------------");
+				System.out.println(String.format("%-10s", "#" + cliente.getId()) +
+								   String.format("%-10s", cliente.getNome())+
+								   String.format("%-10s", cliente.getCpf()));
 			}
 			return true;
 		} catch (DaoException | ConexaoException e) {
