@@ -126,6 +126,12 @@ public class Venda {
 		setProdutos(produtosNovo);
 	}
 
+	private Venda(Integer cliente,Integer funcionario,ArrayList<Produto> produtos) {
+		setFuncionarioId(funcionario);
+		setClienteId(cliente);
+		setProdutos(produtos);
+	}
+	
 	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor) {
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
@@ -156,6 +162,10 @@ public class Venda {
 		return new Venda(id, valor, funcionarioId, clienteid, produtos);
 	}
 
+	public static Venda criaVenda(Integer cliente, Integer funcionario,ArrayList<Produto> produtos) {
+		return new Venda(cliente, funcionario,produtos);
+		
+	}
 	@Override
 	public String toString() {
 		String listaProdutos = "";
@@ -165,4 +175,5 @@ public class Venda {
 		return "Funcionário:\t\t" + getFuncionario() + "\nCliente:\t\t" + getCliente() + "\nValor:\t\t" + getValor()
 				+ "\nProdutos:\t\t" + listaProdutos;
 	}
+
 }

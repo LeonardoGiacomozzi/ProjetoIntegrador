@@ -24,6 +24,7 @@ import edu.sit.uteis.Leitor;
 public class VendaController {
 
 	private static Double valor = 0.0;
+	private static Venda vendaNova= null;
 
 	public static boolean efetuaVenda() throws CadastroException {
 
@@ -32,16 +33,15 @@ public class VendaController {
 		ArrayList<Produto> produtos = null;
 		valor = 0.0;
 		System.out.print("\n*** EFETUAR VENDA ***\n");
-
 		try {
 			funcionario = pedeFuncionario();
 			cliente = pedeCliente();
 			produtos = pedeProdutos();
+			vendaNova = Venda.criaVenda(cliente, funcionario,produtos);
 		} catch (VendaException e) {
 			System.out.println(e.getMessage());
 		}
 		try {
-			Venda vendaNova = Venda.criaVenda(cliente, funcionario, produtos, valor);
 			System.out.println(new VendaDao().insere(vendaNova)
 					? "\nVenda efetuada com SUCESSO!" + "\n\tGerando Nota Fiscal..." + "\n\tAguarde..."
 					: "Falha na venda");
@@ -142,6 +142,9 @@ public class VendaController {
 
 								if (quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
 									System.out.println("\n\tQuantidade Indisponível");
+								}else {
+									produtoAux.setQuantidade(produtoAux.getQuantidade()-quantidade);
+									new ProdutoDao().altera(produtoAux);
 								}
 							} catch (LeituraException e) {
 								System.out.println(e.getMessage());
@@ -152,10 +155,12 @@ public class VendaController {
 						System.out.println("----------------------------------R$"
 								+ precoAtual(produtoAux.getValorUnitario(), quantidade));
 						System.out.println("-------------------------------------------------");
+						vendaNova.setValor(vendaNova.getValor()+precoAtual(produtoAux.getValorUnitario(), quantidade));
 					} catch (DaoException e) {
 						System.out.println(e.getMessage() + "\n Erro ao adicionar o produto");
 					}
 				}
+				
 			} catch (DaoException | ConexaoException | LeituraException e) {
 				System.out.println(e.getMessage());
 				throw new VendaException(EErrosVenda.BUSCA_LISTA_PRODUTO);
