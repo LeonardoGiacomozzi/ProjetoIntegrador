@@ -99,12 +99,12 @@ public class Instalar {
 			System.out.println("\nErro ao criar a tabela de Usuario");
 		}
 		try {
-			System.out.println(Populador.cliente() ? "foi" : "nãoFoi");
-			System.out.println(Populador.funcionario() ? "foi" : "nãoFoi");
-			System.out.println(Populador.categoria() ? "foi" : "nãoFoi");
-			System.out.println(Populador.fornecedor() ? "foi" : "nãoFoi");
-			System.out.println(Populador.produto() ? "foi" : "nãoFoi");
-			System.out.println(Populador.venda() ? "foi" : "nãoFoi");
+			System.out.println(Populador.cliente() ? "Populador de clienes OK..." : "nãoFoi");
+			System.out.println(Populador.funcionario() ? "Populador de funcionarios OK..." : "nãoFoi");
+			System.out.println(Populador.categoria() ? "Populador de categorias OK..." : "nãoFoi");
+			System.out.println(Populador.fornecedor() ? "Populador de fornecedor OK..." : "nãoFoi");
+			System.out.println(Populador.produto() ? "Populador de produtos OK..." : "nãoFoi");
+			System.out.println(Populador.venda() ? "Populador de vendas OK..." : "nãoFoi");
 		} catch (InstalacaoException e) {
 			System.out.println(e.getMessage());
 			System.out.println("Erro ao popuar o banco");
