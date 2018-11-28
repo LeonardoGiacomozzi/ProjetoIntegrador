@@ -53,7 +53,7 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE id = ?;");
 			pst.setInt(1, idCliente);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("idCliente"), rs.getString("Nome"),
+			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
 					rs.getDate("DataNascimento").toLocalDate(), rs.getString("CPF"), rs.getString("Endereco"),
 					rs.getInt("Contato")) : null;
 		} catch (Exception e) {

@@ -9,6 +9,7 @@ import edu.sit.erro.notaFiscal.EErroNotaFiscal;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.model.NotaFiscal;
 import edu.sit.model.Produto;
+import edu.sit.propriedades.Configuracao;
 import edu.sit.uteis.Arquivo;
 
 public class GeraArquivoNotaFiscal {
@@ -39,11 +40,12 @@ public class GeraArquivoNotaFiscal {
 		palavras.add("-------------------------------------------------------------------------------------------");
 		
 		try {
-			Arquivo.gravaArquivo(System.getProperty("caminho.nota"), palavras, false);
+			String path = Configuracao.getPropriedade("localNota")+"\\nota"+nota.getVenda().getId().toString()+".txt";
+			Arquivo.gravaArquivo(path, palavras, false);
 		} catch (IOException e) {
 			
+			System.out.println(e.getMessage());
 			throw new NotaFiscalException(EErroNotaFiscal.ERRO_GRAVA_ARQUIVO);
-			
 		}
 		return true;
 	}

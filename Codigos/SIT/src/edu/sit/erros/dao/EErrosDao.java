@@ -8,7 +8,8 @@ public enum EErrosDao {
 	ALTERA_DADO ("Erro ao alterar os dados da tabela especificada: "),
 	EXCLUI_DADO ("Erro ao excluir os dados da tabela especificada: "),
 	PEGA_ID ("Erro ao consultar o ultimo ID da tabela especificada: "),
-	ROLLBACK ("Erro ao efetuar o roolback na tabela especificada: ");
+	ROLLBACK ("Erro ao efetuar o roolback na tabela especificada: "),
+	ERRO_CRIAR_BANCO("Erro ao criar o banco");
 	
 	private String mensagem;
 

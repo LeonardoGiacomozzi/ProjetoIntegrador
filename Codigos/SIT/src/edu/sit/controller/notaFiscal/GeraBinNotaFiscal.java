@@ -13,13 +13,15 @@ public class GeraBinNotaFiscal {
 	public static boolean geraBin(NotaFiscal nota) throws NotaFiscalException {
 		
 		ObjectOutputStream grava;
+		String path = System.getProperty("user.dir")+"\\NotasBin\\nota"+nota.getId()+".bin";
 		
 		try {
-			grava = new ObjectOutputStream(new FileOutputStream(System.getProperty("User.dir")+"/NotasBin/nota"+nota.getId()+".bin"));
+			grava = new ObjectOutputStream(new FileOutputStream(path));
 			grava.writeObject(nota.toString());
 			grava.flush();
 			grava.close();
 		} catch (IOException e) {
+			System.out.println(e.getMessage());
 			throw new NotaFiscalException(EErroNotaFiscal.ERRO_GRAVAR_BINARIO);
 		}
 		

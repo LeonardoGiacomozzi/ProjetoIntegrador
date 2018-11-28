@@ -73,6 +73,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		Venda venda = consulta(id);
 		venda.setFuncionario(new FuncionarioDao().consulta(venda.getFuncionarioId()));
 		venda.setCliente(new ClienteDao().consulta(venda.getClienteId()));
+		venda.setProdutos(listaProdutoVenda(id));
 		return venda;
 	}
 

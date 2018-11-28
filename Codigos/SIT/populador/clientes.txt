@@ -1,2 +1,2 @@
-Maria;10/11/1999;Rua Bahia;297.058.420-43;(47)9998-3332;maria@gmail.com
-Julia;10/11/1989;Rua João Pessoa;249.730.600-11;(47)9918-8778;julia@gmail.com
+Maria;10/11/1999;297.058.420-43;Rua Bahia;(47)9998-3332;maria@gmail.com
+Julia;10/11/1989;249.730.600-11;Rua João Pessoa;(47)9918-8778;julia@gmail.com
