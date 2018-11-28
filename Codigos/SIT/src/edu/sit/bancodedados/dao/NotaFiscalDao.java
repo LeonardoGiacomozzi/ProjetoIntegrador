@@ -24,9 +24,8 @@ public class NotaFiscalDao extends InstaladorDao implements IDao<NotaFiscal> {
 					"  `id` INT NOT NULL AUTO_INCREMENT," + 
 					"  `DataEmissao` DATE NOT NULL," + 
 					"  `Total` DOUBLE NOT NULL," + 
-					"  `VendaidVenda` INT NOT NULL," + 
-					"  PRIMARY KEY (`id`)," + 
-					"  INDEX `fk_NotaFiscal_Venda1_idx` (`VendaidVenda` ASC) )" + 
+					"  `arquivo` BLOB NOT NULL," + 
+					"  PRIMARY KEY (`id`))" + 
 					"ENGINE = InnoDB;" + 
 					"");
 			return true;

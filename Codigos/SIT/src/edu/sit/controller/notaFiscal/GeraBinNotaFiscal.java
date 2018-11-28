@@ -13,7 +13,7 @@ public class GeraBinNotaFiscal {
 	public static boolean geraBin(NotaFiscal nota) throws NotaFiscalException {
 		
 		ObjectOutputStream grava;
-		String path = System.getProperty("user.dir")+"\\NotasBin\\nota"+nota.getId()+".bin";
+		String path = System.getProperty("user.dir")+"\\NotasBin\\nota"+nota.getVenda().getId()+".bin";
 		
 		try {
 			grava = new ObjectOutputStream(new FileOutputStream(path));
