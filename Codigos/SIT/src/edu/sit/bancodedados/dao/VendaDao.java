@@ -21,7 +21,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Tabacaria`.`Venda` (" + 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Venda` (" + 
 					"  `id` INT NOT NULL AUTO_INCREMENT," + 
 					"  `Valor` DOUBLE NOT NULL," + 
 					"  `Funcionario` INT NOT NULL," + 

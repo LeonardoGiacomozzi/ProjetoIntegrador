@@ -20,7 +20,7 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Tabacaria`.`Fornecedor` (" + 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Fornecedor` (" + 
 					"  `id` INT NOT NULL AUTO_INCREMENT," + 
 					"  `Nome` VARCHAR(45) NOT NULL," + 
 					"  `PessoaResponsavel` VARCHAR(45) NOT NULL," + 

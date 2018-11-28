@@ -20,7 +20,7 @@ public class NotaFiscalDao extends InstaladorDao implements IDao<NotaFiscal> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE IF NOT EXISTS `Tabacaria`.`NotaFiscal` (" + 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS `NotaFiscal` (" + 
 					"  `id` INT NOT NULL AUTO_INCREMENT," + 
 					"  `DataEmissao` DATE NOT NULL," + 
 					"  `Total` DOUBLE NOT NULL," + 

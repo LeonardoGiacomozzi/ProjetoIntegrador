@@ -32,7 +32,7 @@ private static Connection conn = null;
 		}
 		try {
 			Statement st = conn.createStatement();
-			st.execute("CREATE SCHEMA IF NOT EXISTS `Tabacaria`  DEFAULT CHARACTER SET utf8;");
+			st.execute("CREATE SCHEMA IF NOT EXISTS "+Configuracao.getPropriedade("banco")+"  DEFAULT CHARACTER SET utf8;");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.ERRO_CRIAR_BANCO, e.getMessage(),null);
