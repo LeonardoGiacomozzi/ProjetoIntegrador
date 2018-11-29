@@ -110,7 +110,15 @@ public class ProdutoController {
 		}
 	}
 	
-
+	public static boolean reporEstoque(Integer codigo) {
+		
+		
+		
+		
+		
+		return true;
+				
+	}
 	
 	
 
