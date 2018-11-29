@@ -108,7 +108,7 @@ public class VendaController {
 			Integer quantidade = 0;
 			try {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
-				System.out.println("\n\n**** LISTA DE PRODUTOS ****\n");
+				System.out.println("**** LISTA DE PRODUTOS ****\n");
 				System.out.println(String.format("%-10s", "Codigo") + String.format("%-19s", "Nome")
 									+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
 									+ String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
