@@ -19,7 +19,7 @@ public class CategoriaController {
 
 	public static boolean cadastro() throws CadastroException {
 		String nome = null;
-		System.out.print("\n*** CADASTRO DE CATEGORIA ***\n");
+		System.out.print("\n**** CADASTRO DE CATEGORIA ****\n");
 		nome = UtilCadastro.pedeNome("Nome");
 		try {
 			Categoria categoria = Categoria.criaCategoria(nome);
@@ -36,7 +36,7 @@ public class CategoriaController {
 		try {
 			Categoria categoriaBanco = new CategoriaDao().consulta(codigo);
 
-			System.out.print("*****EDITOR DE CATEGORIA*****");
+			System.out.print("**** EDIÇÃO DE CATEGORIA ****");
 			Integer opcao = 99;
 			while (opcao != 0) {
 				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");

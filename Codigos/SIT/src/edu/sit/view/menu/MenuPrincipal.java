@@ -37,7 +37,6 @@ public class MenuPrincipal {
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}
-			
 			break;
 			
 		case "3":
@@ -49,7 +48,8 @@ public class MenuPrincipal {
 			break;
 			
 		default:
-			System.out.println("*** VOCÊ SAIU ***");
+			System.out.println("\n\n\n****                   VOCÊ SAIU                   ****");
+			System.out.println("****       OBRIGADO POR USAR O SISTEMA SIT!!       ****");
 			break;
 		}
 

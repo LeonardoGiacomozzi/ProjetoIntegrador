@@ -37,7 +37,7 @@ public class ContatoController {
 			Contato contatoBanco = new ContatoDao().consulta(codigo);
 
 			Integer opcao = 99;
-			System.out.print("**** EDITOR DE CONTATO ****");
+			System.out.print("**** EDIÇÃO DE CONTATO ****");
 			while (opcao != 0) {
 				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
 				System.out.println("\n\t\t1----------TELEFONE\t" + contatoBanco.getTelefone());

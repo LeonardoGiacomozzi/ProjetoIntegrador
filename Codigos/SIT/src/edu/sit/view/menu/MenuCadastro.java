@@ -37,27 +37,30 @@ public class MenuCadastro {
 			break;
 		
 		case "1":
-			System.out.println("\n*** CADASTRAR CLIENTE ***");
+			System.out.println("\n**** CADASTRAR CLIENTE ****");
 			try {
 				ClienteController.cadastro();
+				MenuPrincipal.menuGeral();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_CLIENTE);
 			}
 			break;
 
 		case "2":
-			System.out.println("\n*** CADASTRAR FUNCIONÁRIO ***");
+			System.out.println("\n**** CADASTRAR FUNCIONÁRIO ****");
 			try {
 				FuncionarioController.cadastro();
+				MenuPrincipal.menuGeral();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_FUNCIONARIO);
 			}
 			break;
 
 		case "3":
-			System.out.println("\n*** CADASTRAR PRODUTO ***");
+			System.out.println("\n**** CADASTRAR PRODUTO ****");
 			try {
 				ProdutoController.cadastro();
+				MenuPrincipal.menuGeral();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_PRODUTO);
 			}
@@ -66,13 +69,14 @@ public class MenuCadastro {
 		case "4": //Cadastro de Fornecedor: Está comentando para não duplicar Títulos no Console!
 			try {
 				FornecedorController.cadastro();
+				MenuPrincipal.menuGeral();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_FORNECEDOR);
 			}
 			break;
 
 		case "5":
-			System.out.println("\n*** CADASTRO VENDAS ***");
+			System.out.println("\n**** CADASTRO VENDAS ****");
 			try {
 				VendaController.efetuaVenda();
 			} catch (CadastroException e) {

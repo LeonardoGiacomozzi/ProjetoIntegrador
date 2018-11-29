@@ -14,13 +14,13 @@ public class UsuarioController {
 
 		String login = null;
 		String senha = null;
-		System.out.println("*********CADASTRO DE USUARIO*********");
+		System.out.println("**** CADASTRO DE USUARIO ****\n");
 		login = UtilCadastro.pedeNome("Login");
 		senha = UtilCadastro.pedeSenha();
 
 		try {
 			System.out.println(
-					new UsuarioDao().insere(Usuario.criaUsuario(login, senha)) ? "Usuario cadastrado com SUCESSO!!"
+					new UsuarioDao().insere(Usuario.criaUsuario(login, senha)) ? "Usuário cadastrado com SUCESSO!"
 							: "FATAL_ERROR");
 			return true;
 		} catch (DaoException | ConexaoException e) {
