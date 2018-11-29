@@ -6,13 +6,10 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
-import edu.sit.bancodedados.dao.NotaFiscalDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.UsuarioDao;
 import edu.sit.bancodedados.dao.VendaDao;
-import edu.sit.erro.instalacao.InstalacaoException;
 import edu.sit.erros.dao.DaoException;
-import edu.sit.installer.populador.Populador;
 
 public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException {
@@ -119,10 +116,6 @@ public class Teste {
 		CategoriaDao teste7 = new CategoriaDao();
 		// System.out.println(teste7.criaTabela());
 		// System.out.println(teste7.consulta(1));
-
-		NotaFiscalDao teste8 = new NotaFiscalDao();
-		// System.out.println(teste8.criaTabela());
-		System.out.println(teste8.consulta(1));
 		
 		UsuarioDao novo = new UsuarioDao();
 		//System.out.println(novo.criaTabela());

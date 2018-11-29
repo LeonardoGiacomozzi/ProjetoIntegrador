@@ -25,7 +25,7 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 					+ " id INT NOT NULL AUTO_INCREMENT," 
 					+ " Login VARCHAR(45) NOT NULL," 
 					+ " Senha VARCHAR(45) NOT NULL," 
-					+ "  PRIMARY KEY (id));");
+					+ " PRIMARY KEY (id));");
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CRIAR_TABELA, e.getMessage(), this.getClass());

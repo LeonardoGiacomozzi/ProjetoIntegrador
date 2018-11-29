@@ -7,7 +7,6 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
-import edu.sit.bancodedados.dao.NotaFiscalDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.UsuarioDao;
 import edu.sit.bancodedados.dao.VendaDao;
@@ -84,14 +83,7 @@ public class Instalar {
 			System.out.println(e.getMessage());
 			System.out.println("\nErro ao criar a tabela de Venda");
 		}
-		try {
-			System.out.println(
-					new NotaFiscalDao().criaTabela() ? "Tabela de Nota Fiscal criada com sucesso" : "fatal error");
-		} catch (DaoException | ConexaoException e) {
-			System.out.println(e.getMessage());
-			System.out.println("\nErro ao criar a tabela de Nota Fiscal");
-		}
-
+		
 		try {
 			System.out.println(new UsuarioDao().criaTabela() ? "Tabela de Usuarios criada com sucesso" : "fatal error");
 		} catch (DaoException | ConexaoException e) {
