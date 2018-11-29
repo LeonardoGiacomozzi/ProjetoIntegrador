@@ -1,9 +1,11 @@
 package edu.sit.bancodedados.dao;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -83,6 +85,22 @@ public class NotaFiscalDao extends InstaladorDao implements IDao<NotaFiscal> {
 	@Override
 	public boolean insere(NotaFiscal objeto) throws DaoException, ConexaoException {
 		// TODO Auto-generated method stub
+		return false;
+	}
+	public boolean insere(NotaFiscal objeto,Array NotaBin) throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement(
+					"INSERT INTO notaFiscal (dataEmissao,valor) values (?, ?, ?, ?);");
+			pst.setDate(1, new java.sql.Date(objeto.getDataEmissao().getTime().getTime()));
+			pst.setDouble(2, objeto.getTotal());
+			pst.setb
+			return pst.executeUpdate() > 0;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 		return false;
 	}
 
