@@ -126,10 +126,9 @@ public class Venda {
 		setProdutos(produtosNovo);
 	}
 
-	private Venda(Integer cliente,Integer funcionario,ArrayList<Produto> produtos) {
+	private Venda(Integer cliente,Integer funcionario) {
 		setFuncionarioId(funcionario);
 		setClienteId(cliente);
-		setProdutos(produtos);
 	}
 	
 	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor) {
@@ -162,8 +161,8 @@ public class Venda {
 		return new Venda(id, valor, funcionarioId, clienteid, produtos);
 	}
 
-	public static Venda criaVenda(Integer cliente, Integer funcionario,ArrayList<Produto> produtos) {
-		return new Venda(cliente, funcionario,produtos);
+	public static Venda criaVenda(Integer cliente, Integer funcionario) {
+		return new Venda(cliente, funcionario);
 		
 	}
 	@Override

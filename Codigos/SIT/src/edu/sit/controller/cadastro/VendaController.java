@@ -29,14 +29,13 @@ public class VendaController {
 
 		Integer funcionario = null;
 		Integer cliente = null;
-		ArrayList<Produto> produtos = null;
 		valor = 0.0;
 		System.out.print("\n**** EFETUAR VENDA ****\n");
 		try {
 			funcionario = pedeFuncionario();
 			cliente = pedeCliente();
-			produtos = pedeProdutos();
-			vendaNova = Venda.criaVenda(cliente, funcionario, produtos);
+			vendaNova = Venda.criaVenda(cliente, funcionario);
+			vendaNova.setProdutos(pedeProdutos());
 		} catch (VendaException e) {
 			System.out.println(e.getMessage());
 		}
@@ -111,8 +110,8 @@ public class VendaController {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
 				System.out.println("\n\n**** LISTA DE PRODUTOS ****\n");
 				System.out.println(String.format("%-10s", "Codigo") + String.format("%-19s", "Nome")
-						+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
-						+ String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
+									+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
+									+ String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
 				for (Produto produto : produtosBanco) {
 					System.out.println(String.format("%-10s", "[" + produto.getId() + "]")
 							+ String.format("%-20s", produto.getNome())
@@ -120,7 +119,8 @@ public class VendaController {
 							+ String.format("%-13s", produto.getCategoria().getNome())
 							+ String.format("%-10s", produto.getValorUnitario()) + produto.getQuantidade());
 				}
-				System.out.println(String.format("\n" + "%-10s", "[0]") + "FINALIZAR COMPRA");
+				System.out.println(String.format("%-10s", "\n[0]") + "FINALIZAR COMPRA");
+				System.out.print("\n\nInforme o código do produto que deseja comprar: \t");
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
 					try {
@@ -147,8 +147,7 @@ public class VendaController {
 						System.out.println("----------------------------------R$"
 								+ precoAtual(produtoAux.getValorUnitario(), quantidade));
 						System.out.println("-------------------------------------------------");
-						vendaNova
-								.setValor(vendaNova.getValor() + precoAtual(produtoAux.getValorUnitario(), quantidade));
+						vendaNova								.setValor(vendaNova.getValor() + precoAtual(produtoAux.getValorUnitario(), quantidade));
 					} catch (DaoException e) {
 						System.out.println(e.getMessage() + "\n Erro ao adicionar o produto");
 					}

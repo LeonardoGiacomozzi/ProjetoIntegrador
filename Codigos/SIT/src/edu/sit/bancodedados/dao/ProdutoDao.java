@@ -165,11 +165,11 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"UPDATE Produto SET Nome = ?, Quantidade = ?, Valor = ?  WHERE id = ?;");
+					"UPDATE Produtos SET Nome = ?, Quantidade = ?, Valor = ?  WHERE id = ?;");
 			pst.setString(1, objeto.getNome());
 			pst.setInt(2, objeto.getQuantidade());
 			pst.setDouble(3, objeto.getValorUnitario());
-			pst.setInt(5, objeto.getId());
+			pst.setInt(4, objeto.getId());
 			return pst.executeUpdate() > 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.ALTERA_DADO, e.getMessage(), this.getClass());

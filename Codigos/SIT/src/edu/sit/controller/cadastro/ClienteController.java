@@ -100,6 +100,9 @@ public class ClienteController {
 	public static boolean visualizar() throws VisualizacaoException {
 
 		try {
+			System.out.println(String.format("%-10s", "Código") + 
+							   String.format("%-30s", "Nome") + 
+							   "CPF");
 			for (Cliente cliente : new ClienteDao().consultaTodos()) {
 				System.out.println(String.format("%-10s", "[" + cliente.getId() + "]") +
 								   String.format("%-30s", cliente.getNome())+

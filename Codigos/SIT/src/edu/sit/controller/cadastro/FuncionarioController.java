@@ -112,6 +112,9 @@ public class FuncionarioController {
 	public static boolean visualizar() throws VisualizacaoException {
 
 		try {
+			System.out.println(String.format("%-10s", "Código") + 
+							   String.format("%-30s", "Nome") + 
+							   "CPF");
 			for (Funcionario funcionario : new FuncionarioDao().consultaTodos()) {
 				System.out.println(String.format("%-10s", "[" + funcionario.getId() + "]") +  
 								   String.format("%-30s", funcionario.getNome()) +
