@@ -7,7 +7,6 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
-import edu.sit.controller.notaFiscal.GeraBinNotaFiscal;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
@@ -48,7 +47,6 @@ public class VendaController {
 			try {
 				NotaFiscal notaFiscal = NotaFiscal.criaNotaFiscal(vendaNova);
 				GeraArquivoNotaFiscal.geraArquivo(notaFiscal);
-				GeraBinNotaFiscal.geraBin(notaFiscal);
 			} catch (NotaFiscalException e) {
 				System.out.println(e.getMessage());
 			}
