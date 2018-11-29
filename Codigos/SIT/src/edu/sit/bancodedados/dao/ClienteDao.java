@@ -99,8 +99,8 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 			ResultSet rs = st.executeQuery("SELECT * FROM Cliente;");
 			while (rs.next()) {
 				clientes.add(Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
-								rs.getDate("DataNascimento").toLocalDate(), rs.getString("CPF"),
-								rs.getString("Endereco"), rs.getInt("Contato")));
+								rs.getDate("DataNascimento").toLocalDate(), rs.getString("Endereco"),
+								rs.getString("CPF"), rs.getInt("Contato")));
 			}
 			return clientes;
 		} catch (Exception e) {
