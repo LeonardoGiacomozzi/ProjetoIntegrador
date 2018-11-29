@@ -59,7 +59,7 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 			pst.setInt(1, idCliente);
 			ResultSet rs = pst.executeQuery();
 			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
-					rs.getDate("DataNascimento").toLocalDate(), rs.getString("Endereco"),rs.getString("CPF"),
+					rs.getDate("DataNascimento").toLocalDate(), rs.getString("CPF"),rs.getString("Endereco"),
 					rs.getInt("Contato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());

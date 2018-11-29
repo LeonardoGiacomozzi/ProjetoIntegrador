@@ -34,6 +34,7 @@ public class MenuPrincipal {
 		case "2":
 			try {
 				VendaController.efetuaVenda();
+				MenuPrincipal.menuGeral();
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

@@ -42,7 +42,7 @@ public class VendaController {
 		}
 		try {
 			System.out.println(new VendaDao().insere(vendaNova)
-					? "\nVenda efetuada com SUCESSO!" + "\n\tGerando Nota Fiscal..." + "\n\tAguarde..."
+					? "\nVenda efetuada com SUCESSO!\n\n" + "\n\tGerando Nota Fiscal..." + "\n\tAguarde..."
 					: "Falha na venda");
 			try {
 				NotaFiscal notaFiscal = NotaFiscal.criaNotaFiscal(vendaNova);
@@ -63,7 +63,7 @@ public class VendaController {
 		while (funcionarioId == null) {
 
 			try {
-				System.out.println("\n************LISTA DE FUNCIONÁRIOS***************");
+				System.out.println("\n**** LISTA DE FUNCIONÁRIOS ****\n");
 				if (FuncionarioController.visualizar()) {
 					System.out.print("\nInforme o código do funcionário: \t");
 					funcionarioId = Leitor.leInteger();
@@ -82,13 +82,13 @@ public class VendaController {
 		while (clienteId == null) {
 
 			try {
-				System.out.println("\n\n****************LISTA DE CLIENTES***************\n");
+				System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
 				System.out.print(!ClienteController.visualizar()?"\nNão foi possível carregar os clientes":"");
-				System.out.print("\n#0 ----------- CADASTRAR NOVO CLIENTE \n");
-				System.out.print("\nInforme o código do cliente: \t");
+				System.out.print(String.format("%-11s", "\n[0]") + "CADASTRAR NOVO CLIENTE \n");
+				System.out.print("\n\nInforme o código do cliente: \t");
 				clienteId = Leitor.leInteger();
 				if (clienteId == 0) {
-					System.out.println(ClienteController.cadastro() ? "Cliente cadastrado com sucesso" : "Falha");
+					System.out.println(ClienteController.cadastro() == true ? "" : "");
 					clienteId = new ClienteDao().pegaUltimoID();
 				}
 			} catch (ConexaoException | DaoException | LeituraException | CadastroException | VisualizacaoException e) {
@@ -109,7 +109,7 @@ public class VendaController {
 			Integer quantidade = 0;
 			try {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
-				System.out.println("\n\n***************************LISTA DE PRODUTOS******************************\n");
+				System.out.println("\n\n**** LISTA DE PRODUTOS ****\n");
 				System.out.println(String.format("%-10s", "Codigo") + 
 								   String.format("%-19s", "Nome") + 
 								   String.format("%-13s", "Fornecedor") + 
@@ -125,7 +125,7 @@ public class VendaController {
 									   String.format("%-11s", produto.getValorUnitario()) + 
 									   String.format("%-6s", produto.getQuantidade()));
 				}
-				System.out.println("o ----- FINALIZAR COMPRA");
+				System.out.println("0 ----- FINALIZAR COMPRA");
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
 

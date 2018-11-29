@@ -8,7 +8,6 @@ import edu.sit.controller.cadastro.ClienteController;
 import edu.sit.controller.cadastro.FornecedorController;
 import edu.sit.controller.cadastro.FuncionarioController;
 import edu.sit.controller.cadastro.ProdutoController;
-import edu.sit.controller.cadastro.VendaController;
 import edu.sit.erro.cadastro.CadastroException;
 
 public class MenuCadastro {
@@ -72,15 +71,6 @@ public class MenuCadastro {
 				MenuPrincipal.menuGeral();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_FORNECEDOR);
-			}
-			break;
-
-		case "5":
-			System.out.println("\n**** CADASTRO VENDAS ****");
-			try {
-				VendaController.efetuaVenda();
-			} catch (CadastroException e) {
-				System.out.println(EMensagensErroCad.ERRO_VENDAS);
 			}
 			break;
 

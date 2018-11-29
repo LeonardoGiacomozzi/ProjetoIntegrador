@@ -49,7 +49,7 @@ public class FuncionarioController {
 		try {
 			Funcionario funcionarioBanco = new FuncionarioDao().consultaCompleta(codigo);
 
-			System.out.print("*****EDITOR DE Funcionario*****");
+			System.out.print("**** EDIÇÃO DE FUNCIONÁRIO ****\n");
 			Integer opcao = 99;
 			while (opcao != 0) {
 				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
@@ -113,8 +113,9 @@ public class FuncionarioController {
 
 		try {
 			for (Funcionario funcionario : new FuncionarioDao().consultaTodos()) {
-				System.out.println("#" + funcionario.getId() + " ----------- " + 
-			funcionario.getNome()+ " ----------- " + funcionario.getCpf());
+				System.out.println(String.format("%-10s", "[" + funcionario.getId() + "]") +  
+								   String.format("%-30s", funcionario.getNome()) +
+								   String.format("%-10s", funcionario.getCpf()));
 			}
 			return true;
 		} catch (DaoException | ConexaoException e) {
