@@ -107,16 +107,14 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			pst.setInt(1, objeto.getClienteId());
 			pst.setInt(2, objeto.getFuncionarioId());
 			pst.setDouble(3, objeto.getValor());
-			System.out.println(pst.executeUpdate() > 0 ? "Venda inserida com sucesso" : "Erro ao inserir venda");
+			pst.executeUpdate();
 			for (Produto produto : objeto.getProdutos()) {
 
 				PreparedStatement pst2 = conexao
 						.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos) VALUES (?, ?);");
 				pst2.setInt(1, pegaUltimoID());
 				pst2.setInt(2, produto.getId());
-				System.out.println(pst2.executeUpdate() > 0
-						? "produto " + produto.getNome() + " da venda " + pegaUltimoID() + " Inserido com sucesso!"
-						: "Erro ao inserir produto" + produto.getNome());
+				return pst2.executeUpdate() > 0;
 			}
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());

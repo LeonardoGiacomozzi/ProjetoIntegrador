@@ -16,10 +16,10 @@ public class Configuracao {
 	
 	public static boolean setPropriedades() throws PropriedadesException {
 
-		String banco = "banco;" + UtilCadastro.pedeNome("Informe o nome do banco de dados");
-		String usuario = "usuario;" + UtilCadastro.pedeNome("Informe o nome do usuario do banco de dados");
-		String senha = "senha;" + UtilCadastro.pedeNome("Informe a senha de acesso");
-		String localNotas = "localNota;" + UtilCadastro.pedeNome("Informe o local onde deseja salvar as notas fiscais");
+		String banco = "banco;" + UtilCadastro.pedeNome("\nInforme o nome que você deseja para o banco de dados: \n");
+		String usuario = "usuario;" + UtilCadastro.pedeNome("\nInforme o nome do usuário do seu banco de dados: \n");
+		String senha = "senha;" + UtilCadastro.pedeNome("\nInforme a senha de acesso: \n");
+		String localNotas = "localNota;" + UtilCadastro.pedeNome("\nInforme o local onde deseja salvar as notas fiscais: \n");
 
 		ArrayList<String> props = new ArrayList<>();
 		props.add(banco);

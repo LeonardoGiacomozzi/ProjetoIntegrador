@@ -21,7 +21,7 @@ public class UtilCadastro {
 
 		while (nome == null) {
 			try {
-				System.out.print(msg+": \t");
+				System.out.print(msg+"");
 				nome = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
