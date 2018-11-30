@@ -12,13 +12,14 @@ import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.erro.venda.EErrosVenda;
 import edu.sit.erro.venda.VendaException;
-import edu.sit.erro.visualizacao.EErroVisualizacao;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.NotaFiscal;
 import edu.sit.model.Produto;
 import edu.sit.model.Venda;
 import edu.sit.uteis.Leitor;
+import edu.sit.view.controllers.ClienteView;
+import edu.sit.view.controllers.FuncionarioView;
 
 public class VendaController {
 
@@ -63,7 +64,7 @@ public class VendaController {
 
 			try {
 				System.out.println("\n**** LISTA DE FUNCIONÁRIOS ****\n");
-				if (FuncionarioController.visualizar()) {
+				if (FuncionarioView.visualizar()) {
 					System.out.print("\nInforme o código do funcionário: \t");
 					funcionarioId = Leitor.leInteger();
 				}
@@ -82,7 +83,7 @@ public class VendaController {
 
 			try {
 				System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
-				System.out.print(!ClienteController.visualizar() ? "\nNão foi possível carregar os clientes" : "");
+				System.out.print(!ClienteView.visualizar() ? "\nNão foi possível carregar os clientes" : "");
 				System.out.print(String.format("%-11s", "\n[0]") + "CADASTRAR NOVO CLIENTE \n");
 				System.out.print("\n\nInforme o código do cliente: \t");
 				clienteId = Leitor.leInteger();
@@ -169,21 +170,5 @@ public class VendaController {
 		return valor;
 	}
 
-	public static boolean visualizar() throws VisualizacaoException {
-
-		try {
-			for (Venda venda : new VendaDao().consultaTodos()) {
-				System.out.println("#" + venda.getId() + " ----------- " + venda.getValor() + " ----------- "
-						+ venda.getClienteId());
-				System.out.println("-------------------------Produtos-------------------------");
-				for (Produto produto : venda.getProdutos()) {
-					System.out.println("\t\t#" + produto.getId() + " ----------- " + produto.getNome());
-				}
-			}
-			return true;
-		} catch (DaoException | ConexaoException e) {
-			System.out.println(e.getMessage());
-			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_VENDAS);
-		}
-	}
+	
 }
