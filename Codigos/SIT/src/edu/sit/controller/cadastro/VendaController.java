@@ -148,7 +148,7 @@ public class VendaController {
 						System.out.println("----------------------------------R$"
 								+ precoAtual(produtoAux.getValorUnitario(), quantidade));
 						System.out.println("-------------------------------------------------");
-						vendaNova								.setValor(vendaNova.getValor() + precoAtual(produtoAux.getValorUnitario(), quantidade));
+						vendaNova.setValor(vendaNova.getValor() + precoAtual(produtoAux.getValorUnitario(), quantidade));
 					} catch (DaoException e) {
 						System.out.println(e.getMessage() + "\n Erro ao adicionar o produto");
 					}

@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.13.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-8.0.13.jar" sourcepath="C:/Program Files/Java/jdk-11.0.1/lib/jrt-fs.jar"/>
 	<classpathentry kind="lib" path="lib/java-hamcrest-2.0.0.0.jar"/>
 	<classpathentry kind="lib" path="lib/junit-dep-4.11.jar"/>
 	<classpathentry kind="output" path="bin"/>
