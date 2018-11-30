@@ -68,14 +68,6 @@ public class UsuarioController {
 		return false;
 	}
 
-	public static boolean efetuaLogin() {
-		
-		String login = null;
-		String senha = null;
-		System.out.println("*********Login*********");
-		login = UtilCadastro.pedeNome("Login");
-		senha = UtilCadastro.pedeSenha();
-		return validaLogin(Usuario.criaUsuario(login,senha));
-	} 
+	
 
 }

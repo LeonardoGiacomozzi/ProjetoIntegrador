@@ -14,7 +14,7 @@ public class MenuPrincipal {
 		System.out.println("1 - Efetuar Cadastros");
 		System.out.println("2 - Efetuar Vendas");
 		System.out.println("3 - Gerenciamento");
-		System.out.println("4 - Configurações");
+		System.out.println("4 - Area do Gerenete");
 		System.out.println("0 - Sair");
 
 		String escolha = "";

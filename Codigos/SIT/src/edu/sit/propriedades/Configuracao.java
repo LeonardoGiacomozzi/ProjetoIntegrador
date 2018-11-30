@@ -34,7 +34,22 @@ public class Configuracao {
 		}
 		return true;
 	}
+	public static boolean setPropriedades(String[] dados) throws PropriedadesException {
 
+
+		ArrayList<String> props = new ArrayList<>();
+		props.add(dados[0]);
+		props.add(dados[1]);
+		props.add(dados[2]);
+		props.add(dados[3]);
+
+		try {
+			Arquivo.gravaArquivo(path, props, false);
+		} catch (IOException e) {
+			throw new PropriedadesException(EErroPropriedade.ERRO_SALVAR_PROPRIEDADES);
+		}
+		return true;
+	}
 	public static String getPropriedade(String nome ) {
 		
 		 Map<String,String> itensPropriedade = new HashMap<String,String>();
