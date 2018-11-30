@@ -25,7 +25,7 @@ public class ProdutoController {
 		Integer quantidade = null;
 		Double valorUnitario = null;
 
-		nome = UtilCadastro.pedeNome("Nome");
+		nome = UtilCadastro.pedeNome("Nome: \t");
 		quantidade = UtilCadastro.pedeQuantidade();
 		valorUnitario = UtilCadastro.pedeValorUnitario();
 		categoriaId = UtilCadastro.pedeCategoria();

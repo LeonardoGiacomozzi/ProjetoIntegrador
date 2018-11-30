@@ -26,7 +26,7 @@ public class ClienteController {
 		String endereco = null;
 		LocalDate dataNascimento = null;
 
-		nome = UtilCadastro.pedeNome("Nome");
+		nome = UtilCadastro.pedeNome("Nome: \t");
 		cpf = UtilCadastro.pedeCpf();
 		endereco = UtilCadastro.pedeEndereco();
 		dataNascimento = UtilCadastro.pedeDataNascimento();
@@ -38,7 +38,7 @@ public class ClienteController {
 					Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf,
 							new ContatoDao().pegaUltimoID());
 					System.out.println(
-							new ClienteDao().insere(cliente) ? "\nCliente cadastrado com SUCESSO!\n\n" : "\nFalha\n");
+							new ClienteDao().insere(cliente) ? "\nCliente cadastrado com SUCESSO!" : "\nFalha\n");
 				} catch (DaoException e) {
 					System.out.println(e.getMessage());
 				}

@@ -39,6 +39,7 @@ public class MenuCadastro {
 			System.out.println("\n**** CADASTRAR CLIENTE ****");
 			try {
 				ClienteController.cadastro();
+				System.out.println("\n");
 				MenuPrincipal.menuGeral();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_CLIENTE);

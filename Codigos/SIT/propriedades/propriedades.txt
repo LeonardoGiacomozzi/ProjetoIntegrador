@@ -1,4 +1,4 @@
-banco;tabaca
+banco;Tabacaria
 usuario;root
-senha;wircd123
-localNota;c:\notas
+senha;hericles
+localNota;D:\Notas

@@ -86,6 +86,7 @@ public class VendaController {
 				System.out.print(String.format("%-11s", "\n[0]") + "CADASTRAR NOVO CLIENTE \n");
 				System.out.print("\n\nInforme o código do cliente: \t");
 				clienteId = Leitor.leInteger();
+				System.out.println("\n");
 				if (clienteId == 0) {
 					System.out.println(ClienteController.cadastro() == true ? "" : "");
 					clienteId = new ClienteDao().pegaUltimoID();
