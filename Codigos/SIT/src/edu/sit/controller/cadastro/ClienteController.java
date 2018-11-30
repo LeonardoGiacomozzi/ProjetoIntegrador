@@ -7,15 +7,16 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
+import edu.sit.erro.controller.ControllerException;
+import edu.sit.erro.controller.EErroController;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
-import edu.sit.erro.visualizacao.EErroVisualizacao;
-import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Cliente;
 import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
+import edu.sit.view.controllers.ClienteView;
 
 public class ClienteController {
 
@@ -96,22 +97,20 @@ public class ClienteController {
 		}
 
 	}
-
-	public static boolean visualizar() throws VisualizacaoException {
-
+	
+	public static boolean buscaPorCPF() throws ControllerException {
+		System.out.println("Informe o CPF do cliente para busca :");
+		String cpf = UtilCadastro.pedeCpf();
 		try {
-			System.out.println(String.format("%-10s", "Código") + 
-							   String.format("%-30s", "Nome") + 
-							   "CPF");
-			for (Cliente cliente : new ClienteDao().consultaTodos()) {
-				System.out.println(String.format("%-10s", "[" + cliente.getId() + "]") +
-								   String.format("%-30s", cliente.getNome())+
-								   String.format("%-10s", cliente.getCpf()));
-			}
+			Cliente clientebanco = new ClienteDao().consultaCPF(cpf);
+			ClienteView.exibeCliente(clientebanco);
 			return true;
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
-			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_CLIENTES);
+			throw  new ControllerException(EErroController.ERRO_BUSCAR_CLIENTE_CPF);
 		}
 	}
+
+	
+
 }
