@@ -5,6 +5,8 @@ import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
+import edu.sit.erro.controller.ControllerException;
+import edu.sit.erro.controller.EErroController;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
@@ -12,6 +14,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Fornecedor;
 import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
+import edu.sit.view.controllers.FornecedorView;
 
 public class FornecedorController {
 	
@@ -92,6 +95,17 @@ public class FornecedorController {
 
 	}
 
-	
+	public static boolean buscaPorCPF() throws ControllerException {
+		System.out.println("Informe o CNPJ do Fornecedor para busca :");
+		String cnpj = UtilCadastro.pedeCnpj();
+		try {
+			Fornecedor fornecedorbanco = new FornecedorDao().consultaCNPJ(cnpj);
+			FornecedorView.exibeFornecedor(fornecedorbanco);
+			return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+			throw  new ControllerException(EErroController.ERRO_BUSCAR_CNPJ_FORNECEDOR);
+		}
+	}
 
 }
