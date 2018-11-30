@@ -67,7 +67,7 @@ public class ClienteController {
 				opcao = Leitor.leInteger();
 				switch (opcao) {
 				case 1:
-					clienteBanco.setNome(UtilCadastro.pedeNome("Nome"));
+					clienteBanco.setNome(UtilCadastro.pedeNome("Nome: \t"));
 					break;
 				case 2:
 					clienteBanco.setEndereco(UtilCadastro.pedeEndereco());
