@@ -13,6 +13,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
 import edu.sit.view.configuracao.ConfiguracaoView;
+import edu.sit.view.controllers.FuncionarioView;
 import edu.sit.view.controllers.UsuarioView;
 
 public class MenuGerente {
@@ -146,7 +147,7 @@ public class MenuGerente {
 	}
 
 	private static void menuVendas() {
-
+		
 	}
 
 	private static void menuFuncionario() {
@@ -171,10 +172,19 @@ public class MenuGerente {
 			} catch (EdicaoException | ConexaoException | DaoException e) {
 				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
+				
 			}
 			MenuGerente.menusGerente();
 			break;
 		case 2:
+			try {
+				FuncionarioView.visualizar();
+				System.out.println("Informe o codigo do funcionarido que deseja editar");
+				FuncionarioController.editar(Leitor.leInteger());
+			} catch (VisualizacaoException | EdicaoException | LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+			
 			MenuGerente.menusGerente();
 			break;
 		case 0:

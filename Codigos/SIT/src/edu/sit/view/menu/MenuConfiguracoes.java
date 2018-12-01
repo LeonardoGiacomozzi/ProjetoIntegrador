@@ -7,6 +7,7 @@ public class MenuConfiguracoes {
 	public void menuConfiguracao() {
 		
 		ConfiguracaoView.editar();
+		MenuGerente.menusGerente();
 	}
 	
 	
