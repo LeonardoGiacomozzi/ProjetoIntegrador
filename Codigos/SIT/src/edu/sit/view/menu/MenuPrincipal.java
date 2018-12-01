@@ -1,15 +1,13 @@
 package edu.sit.view.menu;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import edu.sit.controller.cadastro.VendaController;
+import edu.sit.uteis.cadastro.UtilCadastro;
+import edu.sit.view.controllers.UsuarioView;
 
 public class MenuPrincipal {
 
 	public static void menuGeral() {
-		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("**** MENU TABACARIA ****");
 		System.out.println("1 - Efetuar Cadastros");
 		System.out.println("2 - Efetuar Vendas");
@@ -17,14 +15,9 @@ public class MenuPrincipal {
 		System.out.println("4 - Area do Gerenete");
 		System.out.println("0 - Sair");
 
-		String escolha = "";
+		String escolha = UtilCadastro.pedeNome("Informe a opção desejada");
 
-		try {
-			escolha = teclado.readLine();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-			
-		}
+		
 
 		switch (escolha) {
 		case "1": // Cadastros
@@ -42,15 +35,24 @@ public class MenuPrincipal {
 			
 		case "3":
 			System.out.println("*** GERENCIAMENTO ***");
+			MenuPrincipal.menuGeral();
 			break;
 			
 		case "4":
-			System.out.println("*** CONFIGURAÇÕES ***");
+			if( UsuarioView.login()){
+				MenuGerente.menusGerente();
+			}else {
+				System.out.println("VOCÊ NÃO TEM ACESSO A ESSA PARTE DO SISTEMA!!!");
+			}
+			MenuPrincipal.menuGeral();
 			break;
-			
-		default:
+		case "0":
 			System.out.println("\n\n\n****                   VOCÊ SAIU                   ****");
 			System.out.println("****       OBRIGADO POR USAR O SISTEMA SIT!!       ****");
+			break;
+		default:
+			System.out.println("Informe um valor valido!!");
+			MenuPrincipal.menuGeral();
 			break;
 		}
 
