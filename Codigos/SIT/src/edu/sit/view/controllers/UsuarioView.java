@@ -12,9 +12,9 @@ import edu.sit.uteis.cadastro.UtilCadastro;
 public class UsuarioView {
 	
 	public static boolean login() {
-		System.out.println("Acesso restrito");
-		String login = UtilCadastro.pedeNome("\tLogin\t:");
-		String senha = UtilCadastro.pedeNome("\tSenha\t:");
+		System.out.println("\nAcesso restrito!");
+		String login = UtilCadastro.pedeNome("\nLogin: \t");
+		String senha = UtilCadastro.pedeNome("Senha: \t");
 		return UsuarioController.validaLogin(Usuario.criaUsuario(login, senha));
 		
 		

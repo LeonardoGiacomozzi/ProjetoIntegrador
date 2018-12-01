@@ -120,7 +120,7 @@ public class UtilCadastro {
 		String cpf = null;
 		while (cpf == null) {
 			try {
-				System.out.print("CPF: \t");
+				System.out.print("Informe o CPF: \t");
 				cpf = Leitor.leCpf();
 
 			} catch (LeituraException e) {

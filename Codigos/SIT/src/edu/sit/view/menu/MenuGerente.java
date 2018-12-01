@@ -19,9 +19,10 @@ import edu.sit.view.controllers.UsuarioView;
 public class MenuGerente {
 
 	public static void menusGerente() {
+		System.out.println("\n**** GERENCIAMENTO ****");
 		System.out.println("1 - Configurações");
-		System.out.println("2 - Cadastro especifico");
-		System.out.println("3 - Gerenciamento especifico");
+		System.out.println("2 - Cadastrar Funcionário/Usuário");
+		System.out.println("3 - Editar Funcionário/Usuário");
 		System.out.println("4 - Gerenciar Vendas");
 		System.out.println("0 - Voltar");
 		System.out.println("\nInforme a opção desejada: \t");

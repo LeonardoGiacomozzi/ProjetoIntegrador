@@ -14,8 +14,8 @@ public class UsuarioController {
 
 		String login = null;
 		String senha = null;
-		System.out.println("**** CADASTRO DE USUARIO ****\n");
-		login = UtilCadastro.pedeNome("Login");
+		System.out.println("**** CADASTRO DE USUÁRIO ****\n");
+		login = UtilCadastro.pedeNome("Login: \t");
 		senha = UtilCadastro.pedeSenha();
 
 		try {
@@ -38,10 +38,10 @@ public class UsuarioController {
 				
 				return true;
 			}
-			System.out.println("Senha Invalida");
+			System.out.println("Senha Inválida!");
 			return false;
 		} catch (DaoException e) {
-			System.out.println(e.getMessage() + "\n Usuario não encontrado\n");
+			System.out.println(e.getMessage() + "\n Usuário não encontrado\n");
 			return false;
 		} catch (ConexaoException e) {
 			System.out.println(e.getMessage());
@@ -53,7 +53,7 @@ public class UsuarioController {
 		String senha1 = null;
 		String senha2 = "zz";
 		
-		System.out.println("senha mestre do sistema\t:");
+		System.out.println("Senha mestre do sistema: \t");
 		senha1 = UtilCadastro.pedeSenha();
 		if ("@ADM".equals(senha1)) {
 			while (!senha1.equals(senha2)) {
