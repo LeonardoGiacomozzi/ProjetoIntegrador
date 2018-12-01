@@ -77,7 +77,7 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 	public Cliente consultaCPF(String cpf) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE CPF = ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE CPF LIKE ?;");
 			pst.setString(1, cpf);
 			ResultSet rs = pst.executeQuery();
 			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),

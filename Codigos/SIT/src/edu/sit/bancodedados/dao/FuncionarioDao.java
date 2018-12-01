@@ -201,5 +201,19 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 		} finally {
 			Conexao.fechaConexao();
 		}
+	}
+
+	public Integer consultaPorCpf(String cpf) throws ConexaoException, DaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE CPF LIKE ?;");
+			pst.setString(1, cpf);
+			ResultSet rs = pst.executeQuery();
+			return rs.first()? rs.getInt("id"):0;
+		}catch (Exception e) {
+			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
 	}	
 }
