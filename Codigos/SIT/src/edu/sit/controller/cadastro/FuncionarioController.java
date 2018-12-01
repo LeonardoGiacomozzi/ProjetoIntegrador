@@ -22,7 +22,7 @@ public class FuncionarioController {
 		ECargo cargo = null;
 		String cpf = null;
 
-		nome = UtilCadastro.pedeNome("Nome");
+		nome = UtilCadastro.pedeNome("Nome: \t");
 		cargo = pedeCargo();
 		cpf = UtilCadastro.pedeCpf();
 		

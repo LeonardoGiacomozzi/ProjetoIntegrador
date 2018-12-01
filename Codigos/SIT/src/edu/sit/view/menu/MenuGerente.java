@@ -62,7 +62,7 @@ public class MenuGerente {
 	}
 
 	private static void menuCadastro() {
-		System.out.println("1 - Cadastrar funcionário");
+		System.out.println("\n1 - Cadastrar funcionário");
 		System.out.println("2 - Cadastrar usuário");
 		System.out.println("0 - Voltar");
 		System.out.println("\nInforme a opção desejada: \t");
@@ -153,7 +153,7 @@ public class MenuGerente {
 	}
 
 	private static void menuFuncionario() {
-		System.out.println("1 - Buscar por CPF");
+		System.out.println("\n1 - Buscar por CPF");
 		System.out.println("2 - Listar todos");
 		System.out.println("0 - Voltar");
 		System.out.println("\nInforme a opção desejada: \t");
