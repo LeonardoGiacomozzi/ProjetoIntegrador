@@ -1,4 +1,4 @@
 banco;tabacaria
-root
+usuario;root
 senha;root
-:D\Notas
+localNota;D:\Notas
