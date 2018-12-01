@@ -90,6 +90,7 @@ CREATE TABLE IF NOT EXISTS `Tabacaria`.`Venda` (
   `Valor` DOUBLE NOT NULL,
   `Funcionario` INT NOT NULL,
   `Cliente` INT NOT NULL,
+  `dataVenda` DATE NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Venda_Funcionário1_idx` (`Funcionario` ASC) ,
   INDEX `fk_Venda_Cliente1_idx` (`Cliente` ASC) )
@@ -117,9 +118,9 @@ CREATE TABLE IF NOT EXISTS `Tabacaria`.`NotaFiscal` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `DataEmissao` DATE NOT NULL,
   `Total` DOUBLE NOT NULL,
-  `VendaidVenda` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_NotaFiscal_Venda1_idx` (`VendaidVenda` ASC) )
+  `arquivo` BLOB NOT NULL,
+  PRIMARY KEY (`id`)
+  )
 ENGINE = InnoDB;
 
 
