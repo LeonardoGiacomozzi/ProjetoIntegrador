@@ -19,12 +19,12 @@ import edu.sit.view.controllers.UsuarioView;
 public class MenuGerente {
 
 	public static void menusGerente() {
-		System.out.println("1-Configurações");
-		System.out.println("2-Cadastro especifico");
-		System.out.println("3-Gerenciamento especifico");
-		System.out.println("4-Gerenciar Vendas");
-		System.out.println("0-Voltar");
-		System.out.println("\nInforem a opção desejada");
+		System.out.println("1 - Configurações");
+		System.out.println("2 - Cadastro especifico");
+		System.out.println("3 - Gerenciamento especifico");
+		System.out.println("4 - Gerenciar Vendas");
+		System.out.println("0 - Voltar");
+		System.out.println("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 
@@ -61,10 +61,10 @@ public class MenuGerente {
 	}
 
 	private static void menuCadastro() {
-		System.out.println("1-Cadastrar funcionario");
-		System.out.println("2-Cadastrar úsuario");
-		System.out.println("0-Voltar");
-		System.out.println("\nInforem a opção desejada");
+		System.out.println("1 - Cadastrar funcionário");
+		System.out.println("2 - Cadastrar usuário");
+		System.out.println("0 - Voltar");
+		System.out.println("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 
@@ -99,7 +99,7 @@ public class MenuGerente {
 			break;
 
 		default:
-			System.out.println("Informe uma opção valida");
+			System.out.println("Informe uma opção válida...");
 			MenuGerente.menuCadastro();
 			break;
 		}
@@ -107,10 +107,10 @@ public class MenuGerente {
 
 	private static void menuGerenciamento() {
 
-		System.out.println("1-Editar funcionario");
-		System.out.println("2-Editar usuario");
-		System.out.println("0-Voltar");
-		System.out.println("\nInforem a opção desejada");
+		System.out.println("1 - Editar funcionário");
+		System.out.println("2 - Editar usuário");
+		System.out.println("0 - Voltar");
+		System.out.println("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 
@@ -129,7 +129,7 @@ public class MenuGerente {
 		case 2:
 			try {
 				UsuarioView.visualizar();
-				System.out.println("Selecionae qual usuario deseja trocar a senha");
+				System.out.println("Selecione qual usuário deseja trocar a senha: \t");
 				UsuarioController.trocaSenha(new UsuarioDao().consulta(Leitor.leInteger()));
 
 			} catch (VisualizacaoException | DaoException | ConexaoException | LeituraException e) {
@@ -147,15 +147,15 @@ public class MenuGerente {
 	}
 
 	private static void menuVendas() {
-		System.out.println("1-Ver vendas");
+		System.out.println("1 - Ver vendas");
 		
 	}
 
 	private static void menuFuncionario() {
-		System.out.println("1-Buscar por CPF");
-		System.out.println("2-Listar todos");
-		System.out.println("0-Voltar");
-		System.out.println("\nInforem a opção desejada");
+		System.out.println("1 - Buscar por CPF");
+		System.out.println("2 - Listar todos");
+		System.out.println("0 - Voltar");
+		System.out.println("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 
@@ -180,7 +180,7 @@ public class MenuGerente {
 		case 2:
 			try {
 				FuncionarioView.visualizar();
-				System.out.println("Informe o codigo do funcionarido que deseja editar");
+				System.out.println("Informe o codigo do funcionário que deseja editar: \t");
 				FuncionarioController.editar(Leitor.leInteger());
 			} catch (VisualizacaoException | EdicaoException | LeituraException e) {
 				System.out.println(e.getMessage());
@@ -192,7 +192,7 @@ public class MenuGerente {
 			MenuGerente.menusGerente();
 			break;
 		default:
-			System.out.println("Informe uma opção valida");
+			System.out.println("Informe uma opção válida...");
 			MenuGerente.menuFuncionario();
 			break;
 

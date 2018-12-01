@@ -17,10 +17,10 @@ public class MenuCadastro {
 		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("\n**** CADASTROS TABACARIA ****");
 		System.out.println("1 - Cadastrar Cliente");
-		System.out.println("2 - Cadastrar Funcionário");
-		System.out.println("3 - Cadastrar Produtos");
-		System.out.println("4 - Cadastrar Fornecedor");
+		System.out.println("2 - Cadastrar Produtos");
+		System.out.println("3 - Cadastrar Fornecedor");
 		System.out.println("0 - Voltar");
+		System.out.println("\nInforme a opção desejada: \t");
 
 		String escolha = "";
 		try {
@@ -47,16 +47,6 @@ public class MenuCadastro {
 			break;
 
 		case "2":
-			System.out.println("\n**** CADASTRAR FUNCIONÁRIO ****");
-			try {
-				FuncionarioController.cadastro();
-				MenuPrincipal.menuGeral();
-			} catch (CadastroException e) {
-				System.out.println(EMensagensErroCad.ERRO_FUNCIONARIO);
-			}
-			break;
-
-		case "3":
 			System.out.println("\n**** CADASTRAR PRODUTO ****");
 			try {
 				ProdutoController.cadastro();
@@ -66,7 +56,7 @@ public class MenuCadastro {
 			}
 			break;
 
-		case "4": //Cadastro de Fornecedor: Está comentando para não duplicar Títulos no Console!
+		case "3": //Cadastro de Fornecedor: Está comentando para não duplicar Títulos no Console!
 			try {
 				FornecedorController.cadastro();
 				MenuPrincipal.menuGeral();

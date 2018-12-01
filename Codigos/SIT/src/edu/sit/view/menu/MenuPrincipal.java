@@ -15,9 +15,7 @@ public class MenuPrincipal {
 		System.out.println("4 - Area do Gerenete");
 		System.out.println("0 - Sair");
 
-		String escolha = UtilCadastro.pedeNome("Informe a opção desejada");
-
-		
+		String escolha = UtilCadastro.pedeNome("\nInforme a opção desejada: \t");
 
 		switch (escolha) {
 		case "1": // Cadastros
@@ -34,7 +32,7 @@ public class MenuPrincipal {
 			break;
 			
 		case "3":
-			System.out.println("*** GERENCIAMENTO ***");
+			System.out.println("**** GERENCIAMENTO ****\n");
 			MenuPrincipal.menuGeral();
 			break;
 			
