@@ -7,7 +7,8 @@ public enum EErroVisualizacao {
 	ERRO_BUSCA_FORNECEDORES("Erro ao buscar os Fornecedores no banco"),
 	ERRO_BUSCA_FUNCIONARIOS("Erro ao buscar os Funcionarios no banco"),
 	ERRO_BUSCA_PRODUTOS("Erro ao buscar os Produtos no banco"),
-	ERRO_BUSCA_VENDAS("Erro ao buscar as Vendas no banco");
+	ERRO_BUSCA_VENDAS("Erro ao buscar as Vendas no banco"),
+	ERRO_BUSCA_USUARIOS("Erro ao buscar os Úsuarios no banco");
 
 	private String mensagem;
 

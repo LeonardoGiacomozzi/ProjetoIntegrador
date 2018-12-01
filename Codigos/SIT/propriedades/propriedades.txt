@@ -1,4 +1,4 @@
-banco;Tabacaria
+banco;tabacaria
 usuario;root
-senha;mcs21081967
-localNota;C:\Ativador
+senha;wircd123
+localNota;c:\notas
