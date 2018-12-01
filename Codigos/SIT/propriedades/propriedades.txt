@@ -1,4 +1,4 @@
-tabacaria
+banco;tabacaria
 root
-root
-D:\Notas
+senha;root
+:D\Notas

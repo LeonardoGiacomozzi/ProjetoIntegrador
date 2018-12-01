@@ -12,7 +12,7 @@ public class MenuPrincipal {
 		System.out.println("1 - Efetuar Cadastros");
 		System.out.println("2 - Efetuar Vendas");
 		System.out.println("3 - Gerenciamento");
-		System.out.println("4 - Área do Gerenete");
+		System.out.println("4 - Área do Gerente");
 		System.out.println("0 - Sair");
 
 		String escolha = UtilCadastro.pedeNome("\nInforme a opção desejada: \t");
