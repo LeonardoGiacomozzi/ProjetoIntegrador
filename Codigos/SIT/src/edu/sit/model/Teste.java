@@ -1,5 +1,7 @@
 package edu.sit.model;
 
+import java.util.ArrayList;
+
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.ClienteDao;
@@ -112,7 +114,14 @@ public class Teste {
 		VendaDao teste6 = new VendaDao();
 		// System.out.println(teste6.criaTabela());
 		// System.out.println(teste6.consultaCompleta(1));
-
+		ArrayList<Venda> vendas = teste6.pegaVendaDia();
+		if (vendas == null) {
+			System.out.println("erro");
+		} else {
+		for (Venda venda : vendas) {
+			System.out.println(venda.toString()+"\n"+venda.getValor());
+		}
+		}
 		CategoriaDao teste7 = new CategoriaDao();
 		// System.out.println(teste7.criaTabela());
 		// System.out.println(teste7.consulta(1));

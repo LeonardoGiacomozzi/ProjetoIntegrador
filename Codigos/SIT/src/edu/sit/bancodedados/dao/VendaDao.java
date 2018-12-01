@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,15 +117,15 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 						.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos) VALUES (?, ?);");
 				pst2.setInt(1, pegaUltimoID());
 				pst2.setInt(2, produto.getId());
-				return pst2.executeUpdate() > 0;
+				System.out.println(pst2.executeUpdate() > 0?"":"");
 			}
+			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();
 		}
 
-		return false;
 	}
 
 	@Override
@@ -176,6 +177,63 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			return itensPedido;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}
+	
+	public ArrayList<Venda> pegaVendaDia() throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("select * from Venda where day(?) = day(dataVenda);");
+				pst.setDate(1,  java.sql.Date.valueOf(LocalDate.now()));
+				ResultSet rs = pst.executeQuery();
+				ArrayList<Venda> vendas = new ArrayList<>();
+				while (rs.next()) {
+					
+					vendas.add( consultaCompleta(rs.first() ?rs.getInt("id"):0));
+				}
+				return vendas;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}
+	
+	public ArrayList<Venda> pegaVendaSemana() throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("select * from Venda where week(?) = week(dataVenda); ");
+				pst.setDate(1,  java.sql.Date.valueOf(LocalDate.now()));
+				ResultSet rs = pst.executeQuery();
+				ArrayList<Venda> vendas = new ArrayList<>();
+				while (rs.next()) {
+					
+					vendas.add( consultaCompleta(rs.first() ?rs.getInt("id"):0));
+				}
+				return vendas;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}
+	
+	public ArrayList<Venda> pegaVendaMes() throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		try {
+			PreparedStatement pst = conexao.prepareStatement("select * from Venda where MONTH(?) = MONTH(dataVenda) ;");
+				pst.setDate(1,  java.sql.Date.valueOf(LocalDate.now()));
+				ResultSet rs = pst.executeQuery();
+				ArrayList<Venda> vendas = new ArrayList<>();
+				while (rs.next()) {
+					
+					vendas.add( consultaCompleta(rs.first() ?rs.getInt("id"):0));
+				}
+				return vendas;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
 		} finally {
 			Conexao.fechaConexao();
 		}
