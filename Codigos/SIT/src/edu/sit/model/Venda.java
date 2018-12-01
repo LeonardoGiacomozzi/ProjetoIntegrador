@@ -1,5 +1,6 @@
 package edu.sit.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -14,6 +15,7 @@ public class Venda {
 	private ArrayList<Produto> produtos;
 	private Integer funcionarioId;
 	private Funcionario funcionario;
+	private LocalDate dataVenda;
 
 	public Integer getId() {
 		return id;
@@ -70,6 +72,13 @@ public class Venda {
 	public void setFuncionarioId(Integer funcionarioId) {
 		this.funcionarioId = funcionarioId;
 	}
+	public LocalDate getDataVenda() {
+		return dataVenda;
+	}
+	
+	public void setDataVenda(LocalDate dataVenda) {
+		this.dataVenda = dataVenda;
+	}
 
 	public Double getValorCompra() {
 		double total = 0.0;
@@ -108,13 +117,15 @@ public class Venda {
 		setCliente(cliente);
 		setFuncionario(funcionario);
 		setProdutos(produtos);
+		setDataVenda(LocalDate.now());
 	}
 	
-	private Venda(Integer id, Double valor, Integer funcionarioId, Integer clienteid,ArrayList<Integer>produtos) {
+	private Venda(Integer id, Double valor, Integer funcionarioId, Integer clienteid,ArrayList<Integer>produtos,LocalDate dataVenda) {
 		setId(id);
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
+		setDataVenda(dataVenda);
 		ArrayList<Produto> produtosNovo =  new ArrayList<Produto>();
 		for (Integer produto : produtos) {
 			try {
@@ -129,36 +140,48 @@ public class Venda {
 	private Venda(Integer cliente,Integer funcionario) {
 		setFuncionarioId(funcionario);
 		setClienteId(cliente);
+		setDataVenda(LocalDate.now());
 	}
 	
+	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor,LocalDate dataVenda) {
+		setValor(valor);
+		setFuncionarioId(funcionarioId);
+		setClienteId(clienteid);
+		setProdutos(produtos);
+		setDataVenda(dataVenda);
+	}
 	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor) {
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
 		setProdutos(produtos);
+		setDataVenda(LocalDate.now());
 	}
 	
-	private Venda(Integer id,Integer clienteid,Integer funcionarioId,Double valor) {
+	private Venda(Integer id,Integer clienteid,Integer funcionarioId,Double valor,LocalDate dataVenda) {
 		setId(id);
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
+		setDataVenda(LocalDate.now());
 	}
 	
 	public static Venda criaVenda(Cliente cliente, ArrayList<Produto> produtos, Funcionario funcionario) {
 		return new Venda(cliente, produtos, funcionario);
 	}
 	
-	public static Venda criaVenda(Integer id,Integer cliente, Integer funcionario,Double valor) {
-		return new Venda(id,cliente,funcionario,valor);
+	public static Venda criaVenda(Integer id,Integer cliente, Integer funcionario,Double valor,LocalDate dataVenda) {
+		return new Venda(id,cliente,funcionario,valor,dataVenda);
 	}
-	
 	public static Venda criaVenda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor)	{
 		return new Venda(clienteid, funcionarioId, produtos, valor);
 	}
+	public static Venda criaVenda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,Double valor,LocalDate data)	{
+		return new Venda(clienteid, funcionarioId, produtos, valor, data);
+	}
 	
-	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer clienteid, ArrayList<Integer>produtos) {
-		return new Venda(id, valor, funcionarioId, clienteid, produtos);
+	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer clienteid, ArrayList<Integer>produtos,LocalDate dataVenda) {
+		return new Venda(id, valor, funcionarioId, clienteid, produtos,dataVenda);
 	}
 
 	public static Venda criaVenda(Integer cliente, Integer funcionario) {
@@ -174,5 +197,6 @@ public class Venda {
 		return "Funcionário:\t\t" + getFuncionario() + "\nCliente:\t\t" + getCliente() + "\nValor:\t\t" + getValor()
 				+ "\nProdutos:\t\t" + listaProdutos;
 	}
+
 
 }

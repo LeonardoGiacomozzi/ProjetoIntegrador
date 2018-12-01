@@ -26,6 +26,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 					"  `Valor` DOUBLE NOT NULL," + 
 					"  `Funcionario` INT NOT NULL," + 
 					"  `Cliente` INT NOT NULL," + 
+					"	 `dataVenda` DATE NOT NULL,"+
 					"  PRIMARY KEY (`id`)," + 
 					"  INDEX `fk_Venda_Funcionário1_idx` (`Funcionario` ASC) ," + 
 					"  INDEX `fk_Venda_Cliente1_idx` (`Cliente` ASC) )" + 
@@ -69,7 +70,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			ResultSet rs = pst.executeQuery();
 			
 			return rs.first() ? Venda.criaVenda(rs.getInt("id"),rs.getInt("Cliente"), 
-					rs.getInt("Funcionario"),rs.getDouble("Valor")) : null;
+					rs.getInt("Funcionario"),rs.getDouble("Valor"),rs.getDate("dataVenda").toLocalDate()) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -103,10 +104,11 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao
-					.prepareStatement("INSERT INTO Venda (Cliente, Funcionario, Valor) VALUES (?, ?, ?);");
+					.prepareStatement("INSERT INTO Venda (Cliente, Funcionario, Valor,dataVenda) VALUES (?, ?, ?,?);");
 			pst.setInt(1, objeto.getClienteId());
 			pst.setInt(2, objeto.getFuncionarioId());
 			pst.setDouble(3, objeto.getValor());
+			pst.setDate(4,  java.sql.Date.valueOf(objeto.getDataVenda()));
 			pst.executeUpdate();
 			for (Produto produto : objeto.getProdutos()) {
 

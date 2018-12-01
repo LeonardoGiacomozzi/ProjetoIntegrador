@@ -13,6 +13,7 @@ import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
+import edu.sit.bancodedados.dao.UsuarioDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.erro.instalacao.EErroInstalacao;
 import edu.sit.erro.instalacao.InstalacaoException;
@@ -24,6 +25,7 @@ import edu.sit.model.ECargo;
 import edu.sit.model.Fornecedor;
 import edu.sit.model.Funcionario;
 import edu.sit.model.Produto;
+import edu.sit.model.Usuario;
 import edu.sit.model.Venda;
 import edu.sit.uteis.Arquivo;
 
@@ -132,7 +134,8 @@ public class Populador {
 						for (String id : dados[2].split("#")) {
 							produtosVenda.add(new ProdutoDao().consulta(Integer.parseInt(id)));
 						}
-				new VendaDao().insere(Venda.criaVenda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda, Double.parseDouble(dados[3])));
+				new VendaDao().insere(Venda.criaVenda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda,
+						Double.parseDouble(dados[3]),LocalDate.parse(dados[4],DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 			}
 			return true;
 		} catch (DaoException | ConexaoException | IOException e) {
@@ -142,4 +145,20 @@ public class Populador {
 
 	}
 
+	public static boolean usuario() throws InstalacaoException {
+		try {
+			List<String> usuarioTxt = (List<String>) Arquivo
+					.leArquivo(System.getProperty("user.dir") + "/populador/usuario.txt");
+			for (String usuario : usuarioTxt) {
+				String[] dados = usuario.split(";");
+				new UsuarioDao().insere(Usuario.criaUsuario(dados[0],dados[1]));
+			}
+			return true;
+		} catch (DaoException | ConexaoException | IOException e) {
+			System.out.println(e.getMessage());
+			throw new InstalacaoException(EErroInstalacao.ERRO_POPULAR_USUARIO);
+		}
+		
+	}
+	
 }

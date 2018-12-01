@@ -147,6 +147,7 @@ public class MenuGerente {
 	}
 
 	private static void menuVendas() {
+		System.out.println("1-Ver vendas");
 		
 	}
 
