@@ -45,7 +45,7 @@ public class VendaController {
 					? "\nVenda efetuada com SUCESSO!\n\n" + "\n\tGerando Nota Fiscal..." + "\n\tAguarde..."
 					: "Falha na venda");
 			try {
-				NotaFiscal notaFiscal = NotaFiscal.criaNotaFiscal(vendaNova);
+				NotaFiscal notaFiscal = NotaFiscal.criaNotaFiscal(new VendaDao().consultaCompleta(new VendaDao().pegaUltimoID()));
 				GeraArquivoNotaFiscal.geraArquivo(notaFiscal);
 			} catch (NotaFiscalException e) {
 				System.out.println(e.getMessage());
@@ -149,7 +149,7 @@ public class VendaController {
 						System.out.println("----------------------------------R$"
 								+ precoAtual(produtoAux.getValorUnitario(), quantidade));
 						System.out.println("-------------------------------------------------");
-						vendaNova.setValor(vendaNova.getValor() + precoAtual(produtoAux.getValorUnitario(), quantidade));
+						vendaNova.setValor((vendaNova.getValor()==null?0:vendaNova.getValor()) + precoAtual(produtoAux.getValorUnitario(), quantidade));
 					} catch (DaoException e) {
 						System.out.println(e.getMessage() + "\n Erro ao adicionar o produto");
 					}
