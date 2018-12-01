@@ -72,7 +72,7 @@ public class UtilCadastro {
 				categoriaId = Leitor.leInteger();
 				if (categoriaId == 0) {
 					System.out.println(
-							CategoriaController.cadastro() ? "Categoria cadastrada com SUCESSO!\n" : "Erro ao cadastrar categoria");
+							CategoriaController.cadastro() ? "\nCategoria cadastrada com SUCESSO!\n" : "Erro ao cadastrar categoria");
 					categoriaId = new CategoriaDao().pegaUltimoID();
 				}
 			} catch (LeituraException | ConexaoException | DaoException e) {

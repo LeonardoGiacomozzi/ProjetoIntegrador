@@ -25,7 +25,7 @@ public class FornecedorController {
 		String pessoaResponsavel = null;
 		System.out.println("\n**** CADASTRO DE FORNECEDOR ****");
 
-		nome = UtilCadastro.pedeNome("Nome");
+		nome = UtilCadastro.pedeNome("Nome: \t");
 		cnpj = UtilCadastro.pedeCnpj();
 		pessoaResponsavel = UtilCadastro.pedePessoaResponsavel();
 		
