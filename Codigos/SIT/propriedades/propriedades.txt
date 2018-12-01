@@ -1,4 +1,4 @@
 banco;Tabacaria
 usuario;root
-senha;hericles
-localNota;D:\Notas
+senha;mcs21081967
+localNota;C:\Ativador
