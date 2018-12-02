@@ -87,7 +87,7 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 		List<Usuario> usuarios = new ArrayList<Usuario>();
 		try {
 			Statement st = conexao.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM Usuario;");
+			ResultSet rs = st.executeQuery("SELECT * FROM Usuarios;");
 			while (rs.next()) {
 				usuarios.add(Usuario.criaUsuario(rs.getInt("id"), rs.getString("Login"), 
 								rs.getString("Senha")));

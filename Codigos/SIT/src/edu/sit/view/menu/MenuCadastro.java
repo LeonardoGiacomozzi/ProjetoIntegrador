@@ -20,7 +20,7 @@ public class MenuCadastro {
 		System.out.println("2 - Cadastrar Produtos");
 		System.out.println("3 - Cadastrar Fornecedor");
 		System.out.println("0 - Voltar");
-		System.out.println("\nInforme a opção desejada: \t");
+		System.out.print("\nInforme a opção desejada: \t");
 
 		String escolha = "";
 		try {
@@ -66,7 +66,7 @@ public class MenuCadastro {
 			break;
 
 		default:
-			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuCadastro.menuCadastro();
 			break;
 		}

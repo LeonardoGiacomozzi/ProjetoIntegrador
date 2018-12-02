@@ -23,10 +23,10 @@ public class UsuarioView {
 	public static boolean visualizar() throws VisualizacaoException {
 		
 		try {
-			System.out.println(String.format("%-10s", "Código") + 
+			System.out.println(String.format("%-16s", "\nCódigo") + 
 							   String.format("%-30s", "Login"));
 			for (Usuario usuario : new UsuarioDao().consultaTodos()) {
-				System.out.println(String.format("%-10s", "[" + usuario.getId() + "]") +
+				System.out.println(String.format("%-15s", "[" + usuario.getId() + "]") +
 								   String.format("%-30s", usuario.getLogin()));
 			}
 			return true;

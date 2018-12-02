@@ -220,11 +220,11 @@ public class UtilCadastro {
 		return pessoaResponsavel;
 	}
 
-	public static String pedeSenha() {
+	public static String pedeSenhaFrase(String msg) {
 		String senha = null;
 		while (senha == null) {
 			try {
-				System.out.print("Senha: \t");
+				System.out.print(msg+"");
 				senha = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -234,6 +234,18 @@ public class UtilCadastro {
 		return senha;
 	}
 
+	public static String pedeSenha() {
+		String senha = null;
+		while (senha == null) {
+			try {
+				senha = Leitor.leString();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		
+		}	
+		return senha;
+	}
 
 
 }

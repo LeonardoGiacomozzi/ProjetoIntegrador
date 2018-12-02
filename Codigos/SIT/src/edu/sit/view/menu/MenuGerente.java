@@ -25,7 +25,7 @@ public class MenuGerente {
 		System.out.println("3 - Editar Funcionário/Usuário");
 		System.out.println("4 - Gerenciar Vendas");
 		System.out.println("0 - Voltar");
-		System.out.println("\nInforme a opção desejada: \t");
+		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 
@@ -54,6 +54,7 @@ public class MenuGerente {
 			MenuGerente.menusGerente();
 			break;
 		case 0:
+			System.out.print("\n");
 			MenuPrincipal.menuGeral();
 			break;
 		default:
@@ -100,7 +101,7 @@ public class MenuGerente {
 			break;
 
 		default:
-			System.out.println("Informe uma opção válida...");
+			System.out.println("\nERRO - Escolha uma opção válida!\n");
 			MenuGerente.menuCadastro();
 			break;
 		}
@@ -108,10 +109,10 @@ public class MenuGerente {
 
 	private static void menuGerenciamento() {
 
-		System.out.println("1 - Editar funcionário");
+		System.out.println("\n1 - Editar funcionário");
 		System.out.println("2 - Editar usuário");
 		System.out.println("0 - Voltar");
-		System.out.println("\nInforme a opção desejada: \t");
+		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 
@@ -130,7 +131,7 @@ public class MenuGerente {
 		case 2:
 			try {
 				UsuarioView.visualizar();
-				System.out.println("Selecione qual usuário deseja trocar a senha: \t");
+				System.out.print("\nSelecione qual usuário deseja trocar a senha: \t");
 				UsuarioController.trocaSenha(new UsuarioDao().consulta(Leitor.leInteger()));
 
 			} catch (VisualizacaoException | DaoException | ConexaoException | LeituraException e) {
@@ -142,6 +143,7 @@ public class MenuGerente {
 			MenuGerente.menusGerente();
 			break;
 		default:
+			System.out.println("\nERRO - Escolha uma opção válida!\n");
 			break;
 		}
 
@@ -156,7 +158,7 @@ public class MenuGerente {
 		System.out.println("\n1 - Buscar por CPF");
 		System.out.println("2 - Listar todos");
 		System.out.println("0 - Voltar");
-		System.out.println("\nInforme a opção desejada: \t");
+		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 
@@ -181,7 +183,7 @@ public class MenuGerente {
 		case 2:
 			try {
 				FuncionarioView.visualizar();
-				System.out.println("Informe o codigo do funcionário que deseja editar: \t");
+				System.out.print("\nInforme o codigo do funcionário que deseja editar: \t");
 				FuncionarioController.editar(Leitor.leInteger());
 			} catch (VisualizacaoException | EdicaoException | LeituraException e) {
 				System.out.println(e.getMessage());
@@ -193,7 +195,7 @@ public class MenuGerente {
 			MenuGerente.menusGerente();
 			break;
 		default:
-			System.out.println("Informe uma opção válida...");
+			System.out.println("\nERRO - Escolha uma opção válida!\n");
 			MenuGerente.menuFuncionario();
 			break;
 

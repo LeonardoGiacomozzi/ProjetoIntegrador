@@ -48,7 +48,7 @@ public class MenuPrincipal {
 			System.out.println("****       OBRIGADO POR USAR O SISTEMA SIT!!       ****");
 			break;
 		default:
-			System.out.println("Informe um valor valido!!");
+			System.out.println("\nERRO - Escolha uma opção válida!\n");
 			MenuPrincipal.menuGeral();
 			break;
 		}
