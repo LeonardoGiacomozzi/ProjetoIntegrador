@@ -108,6 +108,8 @@ public class VendaController {
 				while(new ClienteDao().consulta(clienteId)== null) {
 					System.out.println("Cliente Inválido");
 					System.out.println("Informe um novo cliente");
+					System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
+					ClienteView.visualizar();
 					clienteId = Leitor.leInteger();
 				}
 				if (clienteId == 0) {
