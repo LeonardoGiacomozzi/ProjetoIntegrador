@@ -60,8 +60,6 @@ public class ConfiguracaoView {
 	}
 
 	public static void exibeConfig() {
-		
-		
 		System.out.println("\nConfigurações atuais: ");
 		System.out.println("Nome do banco de dados: ["+Configuracao.getPropriedade("banco") + "]");
 		System.out.println("Nome do usuário do banco: ["+Configuracao.getPropriedade("usuario") + "]");

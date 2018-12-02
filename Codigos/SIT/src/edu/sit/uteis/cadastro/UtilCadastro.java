@@ -223,9 +223,9 @@ public class UtilCadastro {
 	public static String pedeSenha() {
 		String senha = null;
 		while (senha == null) {
-		
 			try {
-				senha =Leitor.leString();
+				System.out.print("Senha: \t");
+				senha = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}

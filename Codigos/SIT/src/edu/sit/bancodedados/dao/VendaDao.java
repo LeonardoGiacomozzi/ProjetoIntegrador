@@ -117,7 +117,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 						.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos) VALUES (?, ?);");
 				pst2.setInt(1, pegaUltimoID());
 				pst2.setInt(2, produto.getId());
-				System.out.println(pst2.executeUpdate() > 0?"":"");
+				System.out.print(pst2.executeUpdate() > 0? "":"");
 			}
 			return true;
 		} catch (Exception e) {

@@ -65,7 +65,7 @@ public class MenuGerente {
 		System.out.println("\n1 - Cadastrar funcionário");
 		System.out.println("2 - Cadastrar usuário");
 		System.out.println("0 - Voltar");
-		System.out.println("\nInforme a opção desejada: \t");
+		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 

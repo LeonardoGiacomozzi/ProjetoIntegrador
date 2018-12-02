@@ -14,13 +14,13 @@ public class UsuarioController {
 
 		String login = null;
 		String senha = null;
-		System.out.println("**** CADASTRO DE USUÁRIO ****\n");
+		System.out.println("\n**** CADASTRO DE USUÁRIO ****");
 		login = UtilCadastro.pedeNome("Login: \t");
 		senha = UtilCadastro.pedeSenha();
 
 		try {
 			System.out.println(
-					new UsuarioDao().insere(Usuario.criaUsuario(login, senha)) ? "Usuário cadastrado com SUCESSO!"
+					new UsuarioDao().insere(Usuario.criaUsuario(login, senha)) ? "\nUsuário cadastrado com SUCESSO!"
 							: "FATAL_ERROR");
 			return true;
 		} catch (DaoException | ConexaoException e) {
@@ -35,7 +35,6 @@ public class UsuarioController {
 		try {
 			Usuario doBanco = new UsuarioDao().consulta(entrando.getLogin());
 			if (doBanco.equals(entrando)) {
-				
 				return true;
 			}
 			System.out.println("Senha Inválida!");
