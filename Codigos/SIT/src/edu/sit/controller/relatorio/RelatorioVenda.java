@@ -4,16 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.sit.erro.notaFiscal.EErroNotaFiscal;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.model.Venda;
 import edu.sit.uteis.Arquivo;
+import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class RelatorioVenda {
 
 	public static boolean geraArquivo(ArrayList<Venda> vendas) throws NotaFiscalException {
-
+		Integer aux = Integer.MAX_VALUE;
 		List<String> palavras = new ArrayList<String>();
 		palavras.add("");
 		for (Venda venda : vendas) {
@@ -27,15 +27,29 @@ public class RelatorioVenda {
 		}
 
 		String nomeArq = UtilCadastro.pedeNome("\nInforme o nome do relatório: \t");
-		String path = UtilCadastro.pedeNome("Informe onde deseja salvar o relatório: \t") + "\\" + nomeArq + ".txt";
+		while (aux != 0) {
+			String path = UtilCadastro.pedeNome("Informe onde deseja salvar o relatório: \t") + "\\" + nomeArq + ".txt";
 
 			try {
 				Arquivo.gravaArquivo(path, palavras, false);
+				System.out.println("\nRelatório gerado com SUCESSO!\n");
+				aux = 0;
+				return true;
 			} catch (IOException e) {
-				throw new NotaFiscalException(EErroNotaFiscal.ERRO_GRAVA_ARQUIVO);
+				System.out.println("\nNome do caminho incorrento!");
+			} finally {
+				if (aux != 0) {
+					System.out.println("\nAperte [1] para Tentar novamente");
+					System.out.println("Aperta [0] para Voltar");
+					try {
+						aux = Leitor.leInteger();
+						System.out.print("\n");
+					} catch (Exception e2) {
+						System.out.println(e2.getMessage());
+					} 
+				}
 			}
-			System.out.println("\nRelatório gerado com SUCESSO!\n");
-			return true;
-		
+		}
+		return (aux == 0);
 	}
 }
