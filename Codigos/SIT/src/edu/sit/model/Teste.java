@@ -3,13 +3,6 @@ package edu.sit.model;
 import java.util.ArrayList;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
-import edu.sit.bancodedados.dao.CategoriaDao;
-import edu.sit.bancodedados.dao.ClienteDao;
-import edu.sit.bancodedados.dao.ContatoDao;
-import edu.sit.bancodedados.dao.FornecedorDao;
-import edu.sit.bancodedados.dao.FuncionarioDao;
-import edu.sit.bancodedados.dao.ProdutoDao;
-import edu.sit.bancodedados.dao.UsuarioDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.erros.dao.DaoException;
 
@@ -28,7 +21,7 @@ public class Teste {
 //		}
 		// System.out.println(System.getProperty("user.dir"));
 		// Cria Tabela Banco
-		ClienteDao teste = new ClienteDao();
+		//ClienteDao teste = new ClienteDao();
 //		try {
 		// System.out.println(teste.criaTabela());
 //		//Exclui tabela
@@ -68,7 +61,7 @@ public class Teste {
 //		
 //		
 //		
-		ContatoDao teste1 = new ContatoDao();
+		//ContatoDao teste1 = new ContatoDao();
 		// teste1.criaTabela();
 //		//System.out.println(teste1.insere(Contato.criaContato("3336-2333", "hericles_peixer@hotmail.com")));
 		// teste1.insere(Contato.criaContato("1111-1111", "22222@hotmail.com"));
@@ -88,14 +81,14 @@ public class Teste {
 //		//System.out.println(teste1.pegaUltimoID());
 		// System.out.println(teste1.pegaUltimoID());
 //		
-		FuncionarioDao teste12 = new FuncionarioDao();
+		//FuncionarioDao teste12 = new FuncionarioDao();
 		// System.out.println(teste12.criaTabela());
 		// System.out.println(teste12.excluiTabela());
 //		
 //		NotaFiscalDao teste3 = new NotaFiscalDao();
 //		//System.out.println(teste3.criaTabela());
 //		
-		FornecedorDao teste4 = new FornecedorDao();
+		//FornecedorDao teste4 = new FornecedorDao();
 		// System.out.println(teste4.criaTabela());
 		// System.out.println(teste4.excluiTabela());
 		// System.out.println(teste4.insere(Fornecedor.criaFornecedorFull("BGM FUMOs",
@@ -106,7 +99,7 @@ public class Teste {
 		// System.out.println(teste4.consultaCNPJ("xx.xxx.xxx/xxxx-xx"));
 		// System.out.println(teste4.consultaTodos());
 //		
-		ProdutoDao teste5 = new ProdutoDao();
+		//ProdutoDao teste5 = new ProdutoDao();
 		// System.out.println(teste5.criaTabela());
 		// System.out.println(teste5.consulta(1));
 //		System.out.println(teste5.consultaCompleta(1));
@@ -122,11 +115,11 @@ public class Teste {
 			System.out.println(venda.toString()+"\n"+venda.getValor());
 		}
 		}
-		CategoriaDao teste7 = new CategoriaDao();
+		//CategoriaDao teste7 = new CategoriaDao();
 		// System.out.println(teste7.criaTabela());
 		// System.out.println(teste7.consulta(1));
 		
-		UsuarioDao novo = new UsuarioDao();
+		//UsuarioDao novo = new UsuarioDao();
 		//System.out.println(novo.criaTabela());
 	}
 }
