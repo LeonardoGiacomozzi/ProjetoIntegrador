@@ -112,7 +112,7 @@ public class Teste {
 			System.out.println("erro");
 		} else {
 		for (Venda venda : vendas) {
-			System.out.println(venda.toString()+"\n"+venda.getValor());
+		System.out.println(venda.toString()+"\n"+venda.getValor()+"a");
 		}
 		}
 		//CategoriaDao teste7 = new CategoriaDao();
