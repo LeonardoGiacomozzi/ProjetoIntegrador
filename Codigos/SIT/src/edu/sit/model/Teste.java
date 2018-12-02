@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.VendaDao;
+import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
+import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.erros.dao.DaoException;
 
 public class Teste {
-	public static void main(String[] args) throws DaoException, ConexaoException {
+	public static void main(String[] args) throws DaoException, ConexaoException, NotaFiscalException {
 
 //		try {
 //		System.out.println(Populador.cliente() ? "foi" : "nãoFoi");
@@ -105,16 +107,17 @@ public class Teste {
 //		System.out.println(teste5.consultaCompleta(1));
 //		
 		VendaDao teste6 = new VendaDao();
+		GeraArquivoNotaFiscal.geraArquivo(NotaFiscal.criaNotaFiscal(teste6.consultaCompleta(1)));
 		// System.out.println(teste6.criaTabela());
 		// System.out.println(teste6.consultaCompleta(1));
-		ArrayList<Venda> vendas = teste6.pegaVendaMes();
-		if (vendas == null) {
-			System.out.println("erro");
-		} else {
-		for (Venda venda : vendas) {
-		System.out.println(venda.toString()+"\n"+venda.getValor()+"a");
-		}
-		}
+//		ArrayList<Venda> vendas = teste6.pegaVendaMes();
+//		if (vendas == null) {
+//			System.out.println("erro");
+//		} else {
+//		for (Venda venda : vendas) {
+//		System.out.println(venda.toString()+"\n"+venda.getValor()+"a");
+//		}
+//		}
 		//CategoriaDao teste7 = new CategoriaDao();
 		// System.out.println(teste7.criaTabela());
 		// System.out.println(teste7.consulta(1));

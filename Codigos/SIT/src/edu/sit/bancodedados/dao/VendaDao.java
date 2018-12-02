@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
@@ -84,7 +85,9 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		Venda venda = consulta(id);
 		venda.setFuncionario(new FuncionarioDao().consulta(venda.getFuncionarioId()));
 		venda.setCliente(new ClienteDao().consulta(venda.getClienteId()));
-		venda.setProdutos(listaProdutoVenda(id));
+		ProdutoQuantidade response =listaProdutoVenda(id);
+		venda.setProdutos(response.getItensPedido());
+		venda.setQuantidade(response.getQuantidadeProduto());
 		return venda;
 	}
 
@@ -167,17 +170,20 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		}
 	}
 
-	public ArrayList<Produto> listaProdutoVenda(Integer codigo) throws DaoException, ConexaoException {
+	public ProdutoQuantidade listaProdutoVenda(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM itensPedido  where venda = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 			ArrayList<Produto> itensPedido = new ArrayList<Produto>();
+			ArrayList<Integer> quantidadeProduto= new ArrayList<Integer>();
 			while (rs.next()) {
 				itensPedido.add(new ProdutoDao().consulta(rs.getInt("produtos")));
+				quantidadeProduto.add(rs.getInt("quantidade"));
 			}
-			return itensPedido;
+			ProdutoQuantidade response = new ProdutoQuantidade(itensPedido,quantidadeProduto);
+			return response;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
