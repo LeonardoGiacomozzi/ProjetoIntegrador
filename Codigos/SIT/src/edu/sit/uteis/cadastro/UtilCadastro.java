@@ -21,7 +21,7 @@ public class UtilCadastro {
 
 		while (nome == null) {
 			try {
-				System.out.print(msg+"");
+				System.out.print(msg + "");
 				nome = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
@@ -40,7 +40,8 @@ public class UtilCadastro {
 					System.out.println("-----------------------------------------------");
 					System.out.println("ID: " + fornecedor.getId() + "\t\tNome: " + fornecedor.getNome());
 				}
-				System.out.println("\nEscolha um Fornecedor pelo ID ou digite 0 (zero) para cadastrar um novo Fornecedor...");
+				System.out.println(
+						"\nEscolha um Fornecedor pelo ID ou digite 0 (zero) para cadastrar um novo Fornecedor...");
 				fornecedorId = Leitor.leInteger();
 				if (fornecedorId == 0) {
 					FornecedorController.cadastro();
@@ -68,11 +69,12 @@ public class UtilCadastro {
 				} catch (DaoException | ConexaoException k) {
 					System.out.println(k.getMessage());
 				}
-				System.out.println("\nEscolha uma categoria pelo ID ou digite 0 (zero) para cadastrar uma nova Categoria...");
+				System.out.println(
+						"\nEscolha uma categoria pelo ID ou digite 0 (zero) para cadastrar uma nova Categoria...");
 				categoriaId = Leitor.leInteger();
 				if (categoriaId == 0) {
-					System.out.println(
-							CategoriaController.cadastro() ? "\nCategoria cadastrada com SUCESSO!\n" : "Erro ao cadastrar categoria");
+					System.out.println(CategoriaController.cadastro() ? "\nCategoria cadastrada com SUCESSO!\n"
+							: "Erro ao cadastrar categoria");
 					categoriaId = new CategoriaDao().pegaUltimoID();
 				}
 			} catch (LeituraException | ConexaoException | DaoException e) {
@@ -224,13 +226,13 @@ public class UtilCadastro {
 		String senha = null;
 		while (senha == null) {
 			try {
-				System.out.print(msg+"");
+				System.out.print(msg + "");
 				senha = Leitor.leString();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
-		
-		}	
+
+		}
 		return senha;
 	}
 
@@ -242,10 +244,19 @@ public class UtilCadastro {
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}
-		
-		}	
+
+		}
 		return senha;
 	}
 
-
+	public static boolean validaInteger(Integer iniciar, Integer fim) {
+		try {
+			if (Leitor.leInteger() < iniciar | Leitor.leInteger() > fim) {
+				return true;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
 }

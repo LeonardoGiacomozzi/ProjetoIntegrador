@@ -46,7 +46,7 @@ public class MenuPrincipal {
 			if( UsuarioView.login()){
 				MenuGerente.menusGerente();
 			}else {
-				System.out.println("VOCÊ NÃO TEM ACESSO A ESSA PARTE DO SISTEMA!!!");
+				System.out.println("\nInformações INVÁLIDAS!\n");
 				MenuPrincipal.menuGeral();
 			}
 			break;

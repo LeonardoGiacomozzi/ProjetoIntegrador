@@ -40,7 +40,6 @@ public class UsuarioController {
 			if (doBanco.equals(entrando)) {
 				return true;
 			}
-			System.out.println("Senha Inválida!");
 			return false;
 		} catch (DaoException e) {
 			System.out.println(e.getMessage() + "\n Usuário não encontrado\n");

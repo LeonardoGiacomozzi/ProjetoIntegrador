@@ -1,4 +1,4 @@
 banco;tabacaria
 usuario;root
-senha;mcs21081967
-localNota;C:\Notas
+senha;hericles
+localNota;D:\Notas
