@@ -42,7 +42,7 @@ public class VendaController {
 		}
 		try {
 			System.out.println(new VendaDao().insere(vendaNova)
-					? "\nVenda efetuada com SUCESSO!\n\n" + "\n\tGerando Nota Fiscal..." + "\n\tAguarde..."
+					? "\nVenda efetuada com SUCESSO!\n" + "Gerando Nota Fiscal..." + "\nAguarde..." + "\nNota Fiscal gerada com SUCESSO!\n\n"
 					: "Falha na venda");
 			try {
 				NotaFiscal notaFiscal = NotaFiscal.criaNotaFiscal(new VendaDao().consultaCompleta(new VendaDao().pegaUltimoID()));
@@ -87,7 +87,6 @@ public class VendaController {
 				System.out.print(String.format("%-11s", "\n[0]") + "CADASTRAR NOVO CLIENTE \n");
 				System.out.print("\n\nInforme o código do cliente: \t");
 				clienteId = Leitor.leInteger();
-				System.out.println("\n");
 				if (clienteId == 0) {
 					System.out.println(ClienteController.cadastro() == true ? "" : "");
 					clienteId = new ClienteDao().pegaUltimoID();
@@ -110,7 +109,7 @@ public class VendaController {
 			Integer quantidade = 0;
 			try {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
-				System.out.println("**** LISTA DE PRODUTOS ****\n");
+				System.out.println("\n**** LISTA DE PRODUTOS ****\n");
 				System.out.println(String.format("%-10s", "Codigo") + String.format("%-19s", "Nome")
 									+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
 									+ String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
@@ -121,21 +120,20 @@ public class VendaController {
 							+ String.format("%-13s", produto.getCategoria().getNome())
 							+ String.format("%-10s", produto.getValorUnitario()) + produto.getQuantidade());
 				}
-				System.out.println(String.format("%-10s", "\n[0]") + "FINALIZAR COMPRA");
-				System.out.print("\n\nInforme o código do produto que deseja comprar: \t");
+				System.out.print("\nInforme o código do produto que deseja comprar: \t");
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
 					try {
 						produtoAux = new ProdutoDao().consulta(opcao);
-						System.out.println("Informe a quantidade que deseja comprar...\t\tDisponível\t:"
-								+ produtoAux.getQuantidade());
+						System.out.print("\nProduto [" + produtoAux.getNome() + "]" +
+										 "\nDisponível [" + produtoAux.getQuantidade() + "]" +
+										 "\nQuantos deseja comprar: \t");
 						while (quantidade == null || quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
-
 							try {
 								quantidade = Leitor.leInteger();
 
 								if (quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
-									System.out.println("\n\tQuantidade Indisponível");
+									System.out.println("\nQuantidade indisponível...");
 								} else {
 									produtoAux.setQuantidade(produtoAux.getQuantidade() - quantidade);
 									new ProdutoDao().altera(produtoAux);
@@ -145,13 +143,15 @@ public class VendaController {
 							}
 						}
 						produtos.add(produtoAux);
-						System.out.println("-------------------------------------------------");
-						System.out.println("----------------------------------R$"
-								+ precoAtual(produtoAux.getValorUnitario(), quantidade));
-						System.out.println("-------------------------------------------------");
+						System.out.println("\n\nValor Total até o momento: [R$" + 
+											precoAtual(produtoAux.getValorUnitario(), quantidade) + "]\n");
 						vendaNova.setValor((vendaNova.getValor()==null?0:vendaNova.getValor()) + precoAtual(produtoAux.getValorUnitario(), quantidade));
+						System.out.println("Deseja continuar comprando?\n" +
+										   "Aperte [1] para Continuar comprando...\n" +
+										   "Aperte [0] para Finalizar COMPRA.");
+						opcao = Leitor.leInteger();
 					} catch (DaoException e) {
-						System.out.println(e.getMessage() + "\n Erro ao adicionar o produto");
+						System.out.println(e.getMessage() + "\nErro ao adicionar o produto");
 					}
 				}
 

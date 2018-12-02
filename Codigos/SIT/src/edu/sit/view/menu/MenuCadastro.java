@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 
 import edu.sit.controller.cadastro.ClienteController;
 import edu.sit.controller.cadastro.FornecedorController;
-import edu.sit.controller.cadastro.FuncionarioController;
 import edu.sit.controller.cadastro.ProdutoController;
 import edu.sit.erro.cadastro.CadastroException;
 

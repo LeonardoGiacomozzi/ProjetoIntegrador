@@ -181,7 +181,7 @@ public class UtilCadastro {
 		while (email == null) {
 			try {
 				System.out.print("Email: \t");
-				email = Leitor.leString();
+				email = Leitor.leEmail();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
 			}

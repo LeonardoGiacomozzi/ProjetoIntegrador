@@ -86,4 +86,17 @@ public class Leitor {
 		}
 		throw new LeituraException(EErroLeitura.ERRO_LER_FONE);
 	}
+	
+	public static String leEmail() throws LeituraException {
+		Pattern padrao = Pattern.compile("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`"
+				+ "{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", Pattern.CASE_INSENSITIVE);
+		Pattern padrao2 = Pattern.compile("SemEmail");
+		String fone = leString();
+		Matcher matcher = padrao.matcher(fone);
+		Matcher matcher2 = padrao2.matcher(fone);
+		if (matcher.matches() | matcher2.matches()) {
+			return fone;
+		}
+		throw new LeituraException(EErroLeitura.ERRO_LER_EMAIL);
+	}
 }
