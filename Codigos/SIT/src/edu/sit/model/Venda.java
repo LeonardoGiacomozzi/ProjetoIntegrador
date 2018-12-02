@@ -16,6 +16,15 @@ public class Venda {
 	private Integer funcionarioId;
 	private Funcionario funcionario;
 	private LocalDate dataVenda;
+	private ArrayList<Integer> quantidade;
+	
+	public void setQuantidade(ArrayList<Integer> quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public ArrayList<Integer> getQuantidade() {
+		return quantidade;
+	}
 
 	public Integer getId() {
 		return id;

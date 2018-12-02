@@ -1,4 +1,4 @@
-package edu.sit.controller.relatoria;
+package edu.sit.controller.relatorio;
 
 import java.io.IOException;
 import java.time.LocalDate;
