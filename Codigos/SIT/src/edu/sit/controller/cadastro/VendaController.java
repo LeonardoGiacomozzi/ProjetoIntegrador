@@ -32,6 +32,7 @@ public class VendaController {
 		Integer funcionario = null;
 		Integer cliente = null;
 		valor = 0.0;
+		quantidadeProduto =  new ArrayList<Integer>();
 		System.out.print("\n**** EFETUAR VENDA ****\n");
 		try {
 			funcionario = pedeFuncionario();
@@ -140,6 +141,7 @@ public class VendaController {
 									if (quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
 										System.out.println("\nQuantidade indisponível...");
 									} else {
+										quantidadeProduto.add(quantidade);
 										produtoAux.setQuantidade(produtoAux.getQuantidade() - quantidade);
 										new ProdutoDao().altera(produtoAux);
 									}
@@ -147,8 +149,7 @@ public class VendaController {
 									System.out.println(e.getMessage());
 								}
 							}
-							produtos.add(produtoAux);
-							quantidadeProduto.add(quantidade);
+
 							System.out.println("\n\nValor Total até o momento: [R$"
 									+ precoAtual(produtoAux.getValorUnitario(), quantidade) + "]\n");
 							vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
