@@ -29,6 +29,17 @@ public class ClienteController {
 
 		nome = UtilCadastro.pedeNome("Nome: \t");
 		cpf = UtilCadastro.pedeCpf();
+		try {
+			while(new ClienteDao().consultaCPF(cpf) != null) {
+				System.out.println("CPF já Cadastrado");
+				System.out.println("Informe um Novo CPF");
+				cpf = UtilCadastro.pedeCpf();
+			}
+				
+		} catch (DaoException | ConexaoException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		endereco = UtilCadastro.pedeEndereco();
 		dataNascimento = UtilCadastro.pedeDataNascimento();
 

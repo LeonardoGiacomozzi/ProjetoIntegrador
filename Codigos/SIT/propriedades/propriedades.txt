@@ -1,4 +1,4 @@
-banco;tabaca
+banco;tabacaria
 usuario;root
-senha;wircd123
-localNota;c:\notas
+senha;mcs21081967
+localNota;C:\Notas
