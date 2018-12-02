@@ -25,7 +25,7 @@ public class VendaController {
 
 	private static Double valor = 0.0;
 	private static Venda vendaNova = null;
-	private static ArrayList<Integer>quantidadeProduto= null;
+	private static ArrayList<Integer> quantidadeProduto = null;
 
 	public static boolean efetuaVenda() throws CadastroException {
 
@@ -44,10 +44,12 @@ public class VendaController {
 		}
 		try {
 			System.out.println(new VendaDao().insere(vendaNova)
-					? "\nVenda efetuada com SUCESSO!\n" + "Gerando Nota Fiscal..." + "\nAguarde..." + "\nNota Fiscal gerada com SUCESSO!\n\n"
+					? "\nVenda efetuada com SUCESSO!\n" + "Gerando Nota Fiscal..." + "\nAguarde..."
+							+ "\nNota Fiscal gerada com SUCESSO!\n\n"
 					: "Falha na venda");
 			try {
-				NotaFiscal notaFiscal = NotaFiscal.criaNotaFiscal(new VendaDao().consultaCompleta(new VendaDao().pegaUltimoID()));
+				NotaFiscal notaFiscal = NotaFiscal
+						.criaNotaFiscal(new VendaDao().consultaCompleta(new VendaDao().pegaUltimoID()));
 				GeraArquivoNotaFiscal.geraArquivo(notaFiscal);
 			} catch (NotaFiscalException e) {
 				System.out.println(e.getMessage());
@@ -102,7 +104,7 @@ public class VendaController {
 
 	}
 
-	private static ArrayList<Produto> pedeProdutos() throws VendaException {
+	private static ArrayList<Produto> pedeProdutos() {
 
 		Integer opcao = Integer.MAX_VALUE;
 		ArrayList<Produto> produtos = new ArrayList<Produto>();
@@ -113,8 +115,8 @@ public class VendaController {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
 				System.out.println("\n**** LISTA DE PRODUTOS ****\n");
 				System.out.println(String.format("%-10s", "Codigo") + String.format("%-19s", "Nome")
-									+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
-									+ String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
+						+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
+						+ String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
 				for (Produto produto : produtosBanco) {
 					System.out.println(String.format("%-10s", "[" + produto.getId() + "]")
 							+ String.format("%-20s", produto.getNome())
@@ -127,32 +129,37 @@ public class VendaController {
 				if (opcao != 0) {
 					try {
 						produtoAux = new ProdutoDao().consulta(opcao);
-						System.out.print("\nProduto [" + produtoAux.getNome() + "]" +
-										 "\nDisponível [" + produtoAux.getQuantidade() + "]" +
-										 "\nQuantos deseja comprar: \t");
-						while (quantidade == null || quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
-							try {
-								quantidade = Leitor.leInteger();
+						if (produtoAux != null) {
 
-								if (quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
-									System.out.println("\nQuantidade indisponível...");
-								} else {
-									produtoAux.setQuantidade(produtoAux.getQuantidade() - quantidade);
-									new ProdutoDao().altera(produtoAux);
+							System.out.print("\nProduto [" + produtoAux.getNome() + "]" + "\nDisponível ["
+									+ produtoAux.getQuantidade() + "]" + "\nQuantos deseja comprar: \t");
+							while (quantidade == null || quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
+								try {
+									quantidade = Leitor.leInteger();
+
+									if (quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
+										System.out.println("\nQuantidade indisponível...");
+									} else {
+										produtoAux.setQuantidade(produtoAux.getQuantidade() - quantidade);
+										new ProdutoDao().altera(produtoAux);
+									}
+								} catch (LeituraException e) {
+									System.out.println(e.getMessage());
 								}
-							} catch (LeituraException e) {
-								System.out.println(e.getMessage());
 							}
+							produtos.add(produtoAux);
+							quantidadeProduto.add(quantidade);
+							System.out.println("\n\nValor Total até o momento: [R$"
+									+ precoAtual(produtoAux.getValorUnitario(), quantidade) + "]\n");
+							vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
+									+ precoAtual(produtoAux.getValorUnitario(), quantidade));
+							System.out.println("Deseja continuar comprando?\n"
+									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
+							opcao = Leitor.leInteger();
+						}else {
+							System.out.println("Valor Invalido");
 						}
-						produtos.add(produtoAux);
-						quantidadeProduto.add(quantidade);
-						System.out.println("\n\nValor Total até o momento: [R$" + 
-											precoAtual(produtoAux.getValorUnitario(), quantidade) + "]\n");
-						vendaNova.setValor((vendaNova.getValor()==null?0:vendaNova.getValor()) + precoAtual(produtoAux.getValorUnitario(), quantidade));
-						System.out.println("Deseja continuar comprando?\n" +
-										   "Aperte [1] para Continuar comprando...\n" +
-										   "Aperte [0] para Finalizar COMPRA.");
-						opcao = Leitor.leInteger();
+						
 					} catch (DaoException e) {
 						System.out.println(e.getMessage() + "\nErro ao adicionar o produto");
 					}
@@ -160,7 +167,6 @@ public class VendaController {
 
 			} catch (DaoException | ConexaoException | LeituraException e) {
 				System.out.println(e.getMessage());
-				throw new VendaException(EErrosVenda.BUSCA_LISTA_PRODUTO);
 			}
 
 		}
@@ -173,5 +179,4 @@ public class VendaController {
 		return valor;
 	}
 
-	
 }
