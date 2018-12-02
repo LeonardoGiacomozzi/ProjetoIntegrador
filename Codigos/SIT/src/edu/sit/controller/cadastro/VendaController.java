@@ -25,6 +25,7 @@ public class VendaController {
 
 	private static Double valor = 0.0;
 	private static Venda vendaNova = null;
+	private static ArrayList<Integer> quantidade= null;
 
 	public static boolean efetuaVenda() throws CadastroException {
 
