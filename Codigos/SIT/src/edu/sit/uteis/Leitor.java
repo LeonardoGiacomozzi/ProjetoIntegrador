@@ -77,9 +77,11 @@ public class Leitor {
 	
 	public static String leFone() throws LeituraException {
 		Pattern padrao = Pattern.compile("(^\\(\\d{2}\\)\\d{4,5}-\\d{4}$)");
+		Pattern padrao2 = Pattern.compile("SemFone");
 		String fone = leString();
 		Matcher matcher = padrao.matcher(fone);
-		if (matcher.matches()) {
+		Matcher matcher2 = padrao2.matcher(fone);
+		if (matcher.matches() | matcher2.matches()) {
 			return fone;
 		}
 		throw new LeituraException(EErroLeitura.ERRO_LER_FONE);
