@@ -2,6 +2,8 @@ package edu.sit.controller.cadastro;
 
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.CategoriaDao;
+import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
@@ -29,7 +31,25 @@ public class ProdutoController {
 		quantidade = UtilCadastro.pedeQuantidade();
 		valorUnitario = UtilCadastro.pedeValorUnitario();
 		categoriaId = UtilCadastro.pedeCategoria();
+		try {
+			while(new CategoriaDao().consulta(categoriaId)== null) {
+				System.out.println("Categoria Inexistente");
+				System.out.println("Informe uma nova categoria");
+				categoriaId = UtilCadastro.pedeCategoria();
+			}
+		} catch (DaoException | ConexaoException e1) {
+			System.out.println(e1.getMessage());
+		}
 		fornecedorId = UtilCadastro.pedeFornecedor();
+		try {
+			while(new FornecedorDao().consulta(fornecedorId) == null) {
+				System.out.println("Fornecedor Inexistente");
+				System.out.println("Informe uma novo Fornecedor Válido");
+				fornecedorId = UtilCadastro.pedeFornecedor();
+			}
+		} catch (DaoException | ConexaoException e1) {
+			System.out.println(e1.getMessage());
+		}
 		
 		try {
 			Produto produto = Produto.criaProdutoBanco(nome, categoriaId, fornecedorId, quantidade, valorUnitario);

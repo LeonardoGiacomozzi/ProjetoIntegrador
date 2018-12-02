@@ -1,5 +1,2 @@
 
-ERRO - Selecionar um produto que nao existe na lista de produtos na hora da venda retorna um NULL.
-ERRO - Validação na lista de categorias pré-cadastradas.
-ERRO - Validação na lista de fornecedor pré-cadastrados.
 
