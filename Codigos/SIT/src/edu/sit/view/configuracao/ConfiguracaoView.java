@@ -21,7 +21,7 @@ public class ConfiguracaoView {
 			System.out.println("2 - Senha do banco");
 			System.out.println("3 - Local onde salva as notas");
 			System.out.println("0 - Salvar e sair");
-			System.out.println("\nInforme a opção desejada: \t");
+			System.out.print("\nInforme a opção desejada: \t");
 
 			try {
 				op = Leitor.leInteger();
@@ -30,13 +30,13 @@ public class ConfiguracaoView {
 			}
 			switch (op) {
 			case 1:
-				props[0] = "usuario;" + UtilCadastro.pedeNome("Informe o nome do úsuario do banco: \t");
+				props[0] = UtilCadastro.pedeNome("Informe o nome do úsuario do banco: \t");
 				break;
 			case 2:
-				props[1] = "senha;" + UtilCadastro.pedeNome("Informe a senha do banco: \t");
+				props[1] = UtilCadastro.pedeNome("Informe a senha do banco: \t");
 				break;
 			case 3:
-				props[2] = "localNota;" + UtilCadastro.pedeNome("Informe o local onde deseja salvar as notas: \t");
+				props[2] = UtilCadastro.pedeNome("Informe o local onde deseja salvar as notas: \t");
 				break;
 			case 0:
 				try {
