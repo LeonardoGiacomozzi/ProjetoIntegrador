@@ -2,8 +2,10 @@ package edu.sit.controller.cadastro;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
+import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
@@ -72,6 +74,17 @@ public class VendaController {
 				if (FuncionarioView.visualizar()) {
 					System.out.print("\nInforme o código do funcionário: \t");
 					funcionarioId = Leitor.leInteger();
+					try {
+						while(new FuncionarioDao().consulta(funcionarioId) == null) {
+							System.out.println("Funcionario Inválido");
+							System.out.println("Informe um novo funcionário");
+							System.out.print("\nInforme o código do funcionário: \t");
+							FuncionarioView.visualizar();
+							funcionarioId = Leitor.leInteger();
+						}
+					} catch (DaoException | ConexaoException e) {
+						System.out.println(e.getMessage());
+					}
 				}
 			} catch (LeituraException | VisualizacaoException e) {
 				System.out.println(e.getMessage());
@@ -92,6 +105,11 @@ public class VendaController {
 				System.out.print(String.format("%-11s", "\n[0]") + "CADASTRAR NOVO CLIENTE \n");
 				System.out.print("\n\nInforme o código do cliente: \t");
 				clienteId = Leitor.leInteger();
+				while(new ClienteDao().consulta(clienteId)== null) {
+					System.out.println("Cliente Inválido");
+					System.out.println("Informe um novo cliente");
+					clienteId = Leitor.leInteger();
+				}
 				if (clienteId == 0) {
 					System.out.println(ClienteController.cadastro() == true ? "" : "");
 					clienteId = new ClienteDao().pegaUltimoID();
