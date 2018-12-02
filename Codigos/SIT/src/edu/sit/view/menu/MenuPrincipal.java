@@ -42,7 +42,6 @@ public class MenuPrincipal {
 			}else {
 				System.out.println("VOCÊ NÃO TEM ACESSO A ESSA PARTE DO SISTEMA!!!");
 			}
-			MenuPrincipal.menuGeral();
 			break;
 		case "0":
 			System.out.println("\n\n\n****                   VOCÊ SAIU                   ****");
