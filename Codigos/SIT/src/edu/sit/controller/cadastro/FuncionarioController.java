@@ -26,6 +26,15 @@ public class FuncionarioController {
 		nome = UtilCadastro.pedeNome("Nome: \t");
 		cargo = pedeCargo();
 		cpf = UtilCadastro.pedeCpf();
+		try {
+			while(new FuncionarioDao().consultaPorCpf(cpf)!= null) {
+				System.out.println("CPF já Cadastrado");
+				System.out.println("Informe um Novo CPF");
+				cpf = UtilCadastro.pedeCpf();
+			}
+		} catch (ConexaoException | DaoException e1) {
+			System.out.println(e1.getMessage());
+		}
 		
 		if (ContatoController.cadastro()) {
 
