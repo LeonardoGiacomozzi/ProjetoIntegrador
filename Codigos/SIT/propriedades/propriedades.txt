@@ -1,4 +1,4 @@
 banco;tabacaria
 usuario;root
-senha;wircd123
+senha;hericles
 localNota;D:\Notas

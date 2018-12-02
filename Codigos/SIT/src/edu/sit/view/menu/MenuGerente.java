@@ -3,11 +3,14 @@ package edu.sit.view.menu;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.UsuarioDao;
+import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.cadastro.FuncionarioController;
 import edu.sit.controller.cadastro.UsuarioController;
+import edu.sit.controller.relatorio.RelatorioVenda;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
+import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.uteis.Leitor;
@@ -49,7 +52,6 @@ public class MenuGerente {
 			break;
 		case 4:
 			MenuGerente.menuVendas();
-			MenuGerente.menusGerente();
 			break;
 		case 0:
 			System.out.print("\n");
@@ -148,7 +150,50 @@ public class MenuGerente {
 	}
 
 	private static void menuVendas() {
-		System.out.println("1 - Ver vendas");
+		System.out.println("\n1 - Gerar relatório (Dia)");
+		System.out.println("2 - Gerar relatório (Semana)");
+		System.out.println("3 - Gerar relatório (Mês)");
+		System.out.println("0 - Voltar");
+		System.out.print("\nInforme a opção desejeda: \t");
+		Integer op = Integer.MAX_VALUE;
+		while (op != 0) {
+			try {
+				op = Leitor.leInteger();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		
+		switch (op) {
+		case 1:
+			try {
+				RelatorioVenda.geraArquivo(new VendaDao().pegaVendaDia());
+			} catch (DaoException | ConexaoException | NotaFiscalException e) {
+				System.out.println(e.getMessage());
+			}
+			break;
+		case 2:
+			try {
+				RelatorioVenda.geraArquivo(new VendaDao().pegaVendaSemana());
+			} catch (DaoException | ConexaoException | NotaFiscalException e) {
+				System.out.println(e.getMessage());
+			}
+			break;
+		case 3:
+			try {
+				RelatorioVenda.geraArquivo(new VendaDao().pegaVendaMes());
+			} catch (DaoException | ConexaoException | NotaFiscalException e) {
+				System.out.println(e.getMessage());
+			}
+			break;
+		case 0:	
+			MenuGerente.menusGerente();
+			break;
+		default:
+			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			MenuGerente.menuFuncionario();
+			break;
+		}
 		
 	}
 
@@ -157,7 +202,7 @@ public class MenuGerente {
 		System.out.println("2 - Listar todos");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
-		Integer op = null;
+		Integer op = Integer.MAX_VALUE;
 		while (op == null) {
 
 			try {
@@ -172,9 +217,7 @@ public class MenuGerente {
 			try {
 				FuncionarioController.editar(new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf()));
 			} catch (EdicaoException | ConexaoException | DaoException e) {
-				// TODO Auto-generated catch block
 				System.out.println(e.getMessage());
-				
 			}
 			MenuGerente.menusGerente();
 			break;
