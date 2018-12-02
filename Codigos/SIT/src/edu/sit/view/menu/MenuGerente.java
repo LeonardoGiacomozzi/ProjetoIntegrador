@@ -43,11 +43,9 @@ public class MenuGerente {
 			break;
 		case 2:
 			MenuGerente.menuCadastro();
-			MenuGerente.menusGerente();
 			break;
 		case 3:
 			MenuGerente.menuGerenciamento();
-			MenuGerente.menusGerente();
 			break;
 		case 4:
 			MenuGerente.menuVendas();

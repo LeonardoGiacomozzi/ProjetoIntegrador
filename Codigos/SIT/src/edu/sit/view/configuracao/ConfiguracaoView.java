@@ -41,10 +41,10 @@ public class ConfiguracaoView {
 			case 0:
 				try {
 					ConfiguracaoController.editar(props);
-					System.out.println("Novas configurações salvas com SUCESSO!");
+					System.out.println("\nNovas configurações salvas com SUCESSO!");
 					
 				} catch (PropriedadesException e) {
-					System.out.println(e.getMessage()+"\n Não foi possivel salvar as alterações...");
+					System.out.println(e.getMessage()+"\n Não foi possível salvar as alterações...");
 				}
 				break;
 

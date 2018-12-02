@@ -42,7 +42,7 @@ public class GeraArquivoNotaFiscal {
 		palavras.add("-----------------------------------------------------------------");
 		palavras.add("");
 		palavras.add(String.format("%-40s", "\nData de emissão: " + nota.getDataEmissao().get(Calendar.DAY_OF_MONTH) +
-								   "/" + nota.getDataEmissao().get(Calendar.MONTH) +
+								   "/" + (nota.getDataEmissao().get(Calendar.MONTH) + 1) +
 								   "/" + nota.getDataEmissao().get(Calendar.YEAR)) +
 				     String.format("%26s", "Hora: " + nota.getDataEmissao().get(Calendar.HOUR_OF_DAY)+":" + 
 								   nota.getDataEmissao().get(Calendar.MINUTE)));
