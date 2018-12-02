@@ -58,6 +58,8 @@ public class MenuGerente {
 			MenuPrincipal.menuGeral();
 			break;
 		default:
+			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			MenuGerente.menusGerente();
 			break;
 		}
 	}
@@ -126,7 +128,6 @@ public class MenuGerente {
 		switch (op) {
 		case 1:
 			MenuGerente.menuFuncionario();
-			MenuGerente.menusGerente();
 			break;
 		case 2:
 			try {
