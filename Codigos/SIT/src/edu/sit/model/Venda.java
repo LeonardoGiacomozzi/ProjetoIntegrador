@@ -91,8 +91,9 @@ public class Venda {
 
 	public Double getValorCompra() {
 		double total = 0.0;
-		for (Produto produto : getProdutos()) {
-			total += produto.getValorUnitario();
+		for (int i=0; i<getProdutos().size();i++) {
+
+			total += getProdutos().get(i).getValorUnitario()*getQuantidade().get(i);
 		}
 		return total;
 	}
