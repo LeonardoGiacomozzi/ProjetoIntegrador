@@ -154,7 +154,7 @@ public class MenuGerente {
 		System.out.println("2 - Gerar relatório (Semana)");
 		System.out.println("3 - Gerar relatório (Mês)");
 		System.out.println("0 - Voltar");
-		System.out.print("\nInforme a opção desejeda: \t");
+		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
 		while (op == null) {
 			try {
