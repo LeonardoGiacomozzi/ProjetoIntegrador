@@ -144,6 +144,7 @@ public class MenuGerente {
 			break;
 		default:
 			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			menuGerenciamento();
 			break;
 		}
 

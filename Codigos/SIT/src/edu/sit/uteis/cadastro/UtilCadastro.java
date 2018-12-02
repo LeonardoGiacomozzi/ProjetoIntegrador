@@ -248,15 +248,4 @@ public class UtilCadastro {
 		}
 		return senha;
 	}
-
-	public static boolean validaInteger(Integer iniciar, Integer fim) {
-		try {
-			if (Leitor.leInteger() < iniciar | Leitor.leInteger() > fim) {
-				return true;
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return false;
-	}
 }

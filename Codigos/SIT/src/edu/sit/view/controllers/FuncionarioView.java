@@ -12,6 +12,7 @@ public class FuncionarioView {
 	public static boolean visualizar() throws VisualizacaoException {
 
 		try {
+			System.out.println("\n**** LISTA DE FUNCIONÁRIOS ****\n");
 			System.out.println(String.format("%-10s", "Código") + 
 							   String.format("%-30s", "Nome") + 
 							   "CPF");

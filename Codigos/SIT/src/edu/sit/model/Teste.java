@@ -121,5 +121,6 @@ public class Teste {
 		
 		//UsuarioDao novo = new UsuarioDao();
 		//System.out.println(novo.criaTabela());
+		
 	}
 }

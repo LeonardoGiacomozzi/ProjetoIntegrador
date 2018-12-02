@@ -31,8 +31,7 @@ public class ClienteController {
 		cpf = UtilCadastro.pedeCpf();
 		try {
 			while(new ClienteDao().consultaCPF(cpf) != null) {
-				System.out.println("CPF já Cadastrado");
-				System.out.println("Informe um Novo CPF");
+				System.out.println("\nCPF já Cadastrado! Informe um novo CPF...\n" );
 				cpf = UtilCadastro.pedeCpf();
 			}
 				
@@ -43,7 +42,7 @@ public class ClienteController {
 		endereco = UtilCadastro.pedeEndereco();
 		dataNascimento = UtilCadastro.pedeDataNascimento();
 		if(Cliente.getIdade(dataNascimento)<18) {
-			System.out.println("Não foi possível cadastrar cliente idade inválida");
+			System.out.println("\nNão foi possível cadastrar o cliente!\nCliente menor de IDADE!");
 			return false;
 			
 		}
