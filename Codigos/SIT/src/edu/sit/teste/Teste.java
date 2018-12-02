@@ -11,7 +11,6 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.cadastro.UsuarioController;
 import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
-import edu.sit.controller.relatorio.RelatorioVenda;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.NotaFiscal;
