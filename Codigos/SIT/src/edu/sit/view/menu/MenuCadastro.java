@@ -1,19 +1,18 @@
 package edu.sit.view.menu;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 
 import edu.sit.controller.cadastro.ClienteController;
 import edu.sit.controller.cadastro.FornecedorController;
 import edu.sit.controller.cadastro.ProdutoController;
 import edu.sit.erro.cadastro.CadastroException;
+import edu.sit.erro.leitura.LeituraException;
+import edu.sit.uteis.Leitor;
 
 public class MenuCadastro {
 
 	public static void menuCadastro() {
 		
-		BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("\n**** CADASTROS TABACARIA ****");
 		System.out.println("1 - Cadastrar Cliente");
 		System.out.println("2 - Cadastrar Produtos");
@@ -21,20 +20,21 @@ public class MenuCadastro {
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
 
-		String escolha = "";
+		Integer escolha = Integer.MAX_VALUE;
 		try {
-			escolha = teclado.readLine();
-		} catch (IOException e) {
-			System.out.println(EMensagensErroCad.ERRO_ESCRITA);
+			escolha = Leitor.leInteger();
+		} catch (LeituraException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
 		switch (escolha) {
-		case "0":
+		case 0:
 			System.out.print("\n");
 			MenuPrincipal.menuGeral();
 			break;
 		
-		case "1":
+		case 1:
 			System.out.println("\n**** CADASTRAR CLIENTE ****");
 			try {
 				ClienteController.cadastro();
@@ -45,7 +45,7 @@ public class MenuCadastro {
 			}
 			break;
 
-		case "2":
+		case 2:
 			System.out.println("\n**** CADASTRAR PRODUTO ****");
 			try {
 				ProdutoController.cadastro();
@@ -55,7 +55,7 @@ public class MenuCadastro {
 			}
 			break;
 
-		case "3": //Cadastro de Fornecedor: Está comentando para não duplicar Títulos no Console!
+		case 3: //Cadastro de Fornecedor: Está comentando para não duplicar Títulos no Console!
 			try {
 				FornecedorController.cadastro();
 				MenuPrincipal.menuGeral();
