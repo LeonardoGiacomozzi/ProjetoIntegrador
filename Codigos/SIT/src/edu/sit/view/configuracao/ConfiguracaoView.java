@@ -16,7 +16,14 @@ public class ConfiguracaoView {
 		exibeConfig();
 		while (op != 0) {
 
-			System.out.println("\nQual propriedade você deseja alterar: ");
+			System.out.println("\n\n###############################################################");
+			System.out.println("#                         !!!AVISO!!!                         #");
+			System.out.println("#    VOCÊ SÓ DEVE MUDAR O USUÁRIO E SENHA DO BANCO CASO A     #"); 
+			System.out.println("#    SENHA DO SEU BANCO DE DADOS FOI ALTERADA EXTERNAMENTE    #");
+			System.out.println("#        ASSIM COMO ESTÁ DESCRITO NO MANUAL DE USUÁRIO!       #");
+			System.out.println("###############################################################\n\n");
+			
+			System.out.println("Qual propriedade você deseja alterar: ");
 			System.out.println("1 - Nome de úsuario do banco");
 			System.out.println("2 - Senha do banco");
 			System.out.println("3 - Local onde salva as notas");
