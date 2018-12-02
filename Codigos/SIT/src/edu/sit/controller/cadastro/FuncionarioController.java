@@ -79,7 +79,7 @@ public class FuncionarioController {
 
 					try {
 						new FuncionarioDao().altera(funcionarioBanco);
-
+						System.out.println("\nFuncionário alterado com SUCESSO!");
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_FUNCIONARIO);
@@ -88,7 +88,6 @@ public class FuncionarioController {
 				default:
 					System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
 					break;
-
 				}
 
 			}
