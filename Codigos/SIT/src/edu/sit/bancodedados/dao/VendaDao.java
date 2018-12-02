@@ -34,8 +34,9 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 					"ENGINE = InnoDB;");
 			
 			st.executeUpdate("CREATE TABLE ItensPedido (" 
-					+ "Produtos INT NOT NULL," 
-					+ "Venda INT NOT NULL,"
+					+ " Produtos INT NOT NULL," 
+					+ " Venda INT NOT NULL,"
+					+ " Quantidade INT NOT NULL,"
 					+ " PRIMARY KEY (Produtos, Venda)," 
 					+ " INDEX fk_Produtos_has_Venda_Venda1_idx (Venda ASC)," 
 					+ "	INDEX fk_Produtos_has_Venda_Produtos1_idx (Produtos ASC))" 
@@ -101,7 +102,6 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 
 	@Override
 	public boolean insere(Venda objeto) throws DaoException, ConexaoException {
-
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao
@@ -111,12 +111,15 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			pst.setDouble(3, objeto.getValor());
 			pst.setDate(4,  java.sql.Date.valueOf(objeto.getDataVenda()));
 			pst.executeUpdate();
-			for (Produto produto : objeto.getProdutos()) {
+			ArrayList<Produto>  produtos = objeto.getProdutos();
+			ArrayList<Integer>  quantidade = objeto.getQuantidade();
+			for (int i=0; i<produtos.size();i++) {
 
 				PreparedStatement pst2 = conexao
-						.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos) VALUES (?, ?);");
+						.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos, Quantidade) VALUES (?, ?, ?);");
 				pst2.setInt(1, pegaUltimoID());
-				pst2.setInt(2, produto.getId());
+				pst2.setInt(2, produtos.get(i).getId());
+				pst2.setInt(3, quantidade.get(i));
 				System.out.print(pst2.executeUpdate() > 0? "":"");
 			}
 			return true;

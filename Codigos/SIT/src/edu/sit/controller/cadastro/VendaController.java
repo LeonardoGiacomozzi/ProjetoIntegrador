@@ -25,7 +25,7 @@ public class VendaController {
 
 	private static Double valor = 0.0;
 	private static Venda vendaNova = null;
-	private static ArrayList<Integer> quantidade= null;
+	private static ArrayList<Integer>quantidadeProduto= null;
 
 	public static boolean efetuaVenda() throws CadastroException {
 
@@ -38,6 +38,7 @@ public class VendaController {
 			cliente = pedeCliente();
 			vendaNova = Venda.criaVenda(cliente, funcionario);
 			vendaNova.setProdutos(pedeProdutos());
+			vendaNova.setQuantidade(quantidadeProduto);
 		} catch (VendaException e) {
 			System.out.println(e.getMessage());
 		}
@@ -144,6 +145,7 @@ public class VendaController {
 							}
 						}
 						produtos.add(produtoAux);
+						quantidadeProduto.add(quantidade);
 						System.out.println("\n\nValor Total até o momento: [R$" + 
 											precoAtual(produtoAux.getValorUnitario(), quantidade) + "]\n");
 						vendaNova.setValor((vendaNova.getValor()==null?0:vendaNova.getValor()) + precoAtual(produtoAux.getValorUnitario(), quantidade));
