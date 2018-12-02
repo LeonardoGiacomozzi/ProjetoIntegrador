@@ -1,0 +1,4 @@
+banco;tabaca
+usuario;root
+senha;wircd123
+localNota;c:\notas
