@@ -126,6 +126,7 @@ public class Venda {
 		setCliente(cliente);
 		setFuncionario(funcionario);
 		setProdutos(produtos);
+		setQuantidade(quantidade);
 		setDataVenda(LocalDate.now());
 	}
 	
@@ -144,6 +145,7 @@ public class Venda {
 			}
 		}
 		setProdutos(produtosNovo);
+		setQuantidade(quantidade);
 	}
 
 	private Venda(Integer cliente,Integer funcionario) {
@@ -157,6 +159,7 @@ public class Venda {
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
 		setProdutos(produtos);
+		setQuantidade(quantidade);
 		setDataVenda(dataVenda);
 	}
 	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,ArrayList<Integer> quantidade,Double valor) {
@@ -164,6 +167,7 @@ public class Venda {
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
 		setProdutos(produtos);
+		setQuantidade(quantidade);
 		setDataVenda(LocalDate.now());
 	}
 	
