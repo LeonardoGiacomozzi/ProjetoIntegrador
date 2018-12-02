@@ -220,6 +220,7 @@ public class MenuGerente {
 		switch (op) {
 		case 1:
 			try {
+				System.out.print("\n");
 				FuncionarioController.editar(new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf()));
 			} catch (EdicaoException | ConexaoException | DaoException e) {
 				System.out.println(e.getMessage());
