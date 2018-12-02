@@ -81,7 +81,7 @@ public class Cliente {
 		setContatoid(contato);
 	}
 	
-	public int getIdade(LocalDate dataNacimento) {
+	public static int getIdade(LocalDate dataNacimento) {
 				
 		return  CalculoIdade.calculaIdade(dataNacimento);
 		

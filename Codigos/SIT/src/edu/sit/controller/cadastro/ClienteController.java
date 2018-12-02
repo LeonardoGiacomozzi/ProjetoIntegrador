@@ -42,6 +42,11 @@ public class ClienteController {
 		}
 		endereco = UtilCadastro.pedeEndereco();
 		dataNascimento = UtilCadastro.pedeDataNascimento();
+		if(Cliente.getIdade(dataNascimento)<18) {
+			System.out.println("Não foi possível cadastrar cliente idade inválida");
+			return false;
+			
+		}
 
 		try {
 			if (ContatoController.cadastro()) {

@@ -1,5 +1,5 @@
-ERRO - Clientes menores de idade conseguem efetuar uma compra.
+
 ERRO - Selecionar um produto que nao existe na lista de produtos na hora da venda retorna um NULL.
 ERRO - Validação na lista de categorias pré-cadastradas.
 ERRO - Validação na lista de fornecedor pré-cadastrados.
-ERRO - É possível cadastrar 2 clientes com o mesmo CPF.
+
