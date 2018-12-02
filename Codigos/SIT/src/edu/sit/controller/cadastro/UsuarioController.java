@@ -34,6 +34,9 @@ public class UsuarioController {
 
 		try {
 			Usuario doBanco = new UsuarioDao().consulta(entrando.getLogin());
+			if (doBanco == null) {
+				return false;
+			}
 			if (doBanco.equals(entrando)) {
 				return true;
 			}

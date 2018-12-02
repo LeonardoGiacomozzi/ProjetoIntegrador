@@ -47,6 +47,7 @@ public class MenuPrincipal {
 				MenuGerente.menusGerente();
 			}else {
 				System.out.println("VOCÊ NÃO TEM ACESSO A ESSA PARTE DO SISTEMA!!!");
+				MenuPrincipal.menuGeral();
 			}
 			break;
 		case 0:
