@@ -107,7 +107,7 @@ public class Teste {
 		VendaDao teste6 = new VendaDao();
 		// System.out.println(teste6.criaTabela());
 		// System.out.println(teste6.consultaCompleta(1));
-		ArrayList<Venda> vendas = teste6.pegaVendaDia();
+		ArrayList<Venda> vendas = teste6.pegaVendaMes();
 		if (vendas == null) {
 			System.out.println("erro");
 		} else {

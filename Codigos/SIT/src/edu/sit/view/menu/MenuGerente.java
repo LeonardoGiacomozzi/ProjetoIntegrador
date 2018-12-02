@@ -155,8 +155,8 @@ public class MenuGerente {
 		System.out.println("3 - Gerar relatório (Mês)");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejeda: \t");
-		Integer op = Integer.MAX_VALUE;
-		while (op != 0) {
+		Integer op = null;
+		while (op == null) {
 			try {
 				op = Leitor.leInteger();
 			} catch (LeituraException e) {
@@ -168,6 +168,7 @@ public class MenuGerente {
 		case 1:
 			try {
 				RelatorioVenda.geraArquivo(new VendaDao().pegaVendaDia());
+				MenuGerente.menusGerente();
 			} catch (DaoException | ConexaoException | NotaFiscalException e) {
 				System.out.println(e.getMessage());
 			}
@@ -175,6 +176,7 @@ public class MenuGerente {
 		case 2:
 			try {
 				RelatorioVenda.geraArquivo(new VendaDao().pegaVendaSemana());
+				MenuGerente.menusGerente();
 			} catch (DaoException | ConexaoException | NotaFiscalException e) {
 				System.out.println(e.getMessage());
 			}
@@ -182,6 +184,7 @@ public class MenuGerente {
 		case 3:
 			try {
 				RelatorioVenda.geraArquivo(new VendaDao().pegaVendaMes());
+				MenuGerente.menusGerente();
 			} catch (DaoException | ConexaoException | NotaFiscalException e) {
 				System.out.println(e.getMessage());
 			}
@@ -202,7 +205,7 @@ public class MenuGerente {
 		System.out.println("2 - Listar todos");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
-		Integer op = Integer.MAX_VALUE;
+		Integer op = null;
 		while (op == null) {
 
 			try {

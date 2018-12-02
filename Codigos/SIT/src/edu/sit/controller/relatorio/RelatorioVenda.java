@@ -24,14 +24,14 @@ public static boolean geraArquivo(ArrayList<Venda> vendas) throws NotaFiscalExce
 					+"\tValor "+ venda.getValor()
 					+"\tData da venda "+venda.getDataVenda());
 		}
-		String path=UtilCadastro.pedeNome("Informe onde deseja salvar o relatório: ")+"\\Relatorio"+LocalDate.now().toString()+".txt";
+		String path=UtilCadastro.pedeNome("\nInforme onde deseja salvar o relatório: ")+"\\Relatorio"+LocalDate.now()+".txt";
 		try {
 			Arquivo.gravaArquivo(path, palavras, false);
 		} catch (IOException e) {
-			
 			System.out.println(e.getMessage());
 			throw new NotaFiscalException(EErroNotaFiscal.ERRO_GRAVA_ARQUIVO);
 		}
+		System.out.println("\nRelatório gerado com SUCESSO!\n");
 		return true;
 	}
 }
