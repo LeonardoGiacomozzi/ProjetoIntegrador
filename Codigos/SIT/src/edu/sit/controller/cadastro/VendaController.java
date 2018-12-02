@@ -162,6 +162,7 @@ public class VendaController {
 										quantidadeProduto.add(quantidade);
 										produtoAux.setQuantidade(produtoAux.getQuantidade() - quantidade);
 										new ProdutoDao().altera(produtoAux);
+										produtos.add(produtoAux);
 									}
 								} catch (LeituraException e) {
 									System.out.println(e.getMessage());
