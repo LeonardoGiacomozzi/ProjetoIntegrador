@@ -191,7 +191,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 				ArrayList<Venda> vendas = new ArrayList<>();
 				while (rs.next()) {
 					
-					vendas.add( consultaCompleta(rs.first() ?rs.getInt("id"):0));
+					vendas.add( consultaCompleta(rs.getInt("id")));
 				}
 				return vendas;
 		} catch (Exception e) {
@@ -210,7 +210,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 				ArrayList<Venda> vendas = new ArrayList<>();
 				while (rs.next()) {
 					
-					vendas.add( consultaCompleta(rs.first() ?rs.getInt("id"):0));
+					vendas.add(consultaCompleta(rs.getInt("id")));
 				}
 				return vendas;
 		} catch (Exception e) {
@@ -229,7 +229,7 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 				ArrayList<Venda> vendas = new ArrayList<>();
 				while (rs.next()) {
 					
-					vendas.add( consultaCompleta(rs.first() ?rs.getInt("id"):0));
+					vendas.add(consultaCompleta(rs.getInt("id")));
 				}
 				return vendas;
 		} catch (Exception e) {
