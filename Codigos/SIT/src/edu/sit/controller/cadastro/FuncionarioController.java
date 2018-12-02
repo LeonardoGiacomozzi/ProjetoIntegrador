@@ -57,14 +57,15 @@ public class FuncionarioController {
 		try {
 			Funcionario funcionarioBanco = new FuncionarioDao().consultaCompleta(codigo);
 
-			System.out.print("**** EDIÇÃO DE FUNCIONÁRIO ****\n");
-			Integer opcao = 99;
+			System.out.print("\n**** EDIÇÃO DE FUNCIONÁRIO ****\n");
+			Integer opcao = Integer.MAX_VALUE;
 			while (opcao != 0) {
-				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
-				System.out.println("\n\t\t1----------CARGO\t" + funcionarioBanco.getCargo());
-				System.out.println("\n\t\t2----------CONTATO\t" + funcionarioBanco.getContato());
-				System.out.println("\n\t\t0----------FINALIZAR");
-				System.out.println("\n\n\t\t---:");
+				System.out.println("Funcionário [" + funcionarioBanco.getNome() + "]");
+				System.out.println(String.format("%-21s", "\n1 - Cargo: ") + funcionarioBanco.getCargo());
+				System.out.println(String.format("%-20s", "2 - Contato: ") + "Telefone: " + funcionarioBanco.getContato().getTelefone());
+				System.out.println(String.format("%-20s", "") + "Email: " + funcionarioBanco.getContato().getEmail());
+				System.out.println("\n0 - Finalizar");
+				System.out.print("\nInforme a opção que deseja alterar: \t");
 				opcao = Leitor.leInteger();
 
 				switch (opcao) {
