@@ -134,7 +134,11 @@ public class Populador {
 						for (String id : dados[2].split("#")) {
 							produtosVenda.add(new ProdutoDao().consulta(Integer.parseInt(id)));
 						}
-				new VendaDao().insere(Venda.criaVenda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda,
+						ArrayList<Integer> quantidadeProduto = new ArrayList<>();
+						for (String id : dados[2].split("#")) {
+							quantidadeProduto.add(Integer.parseInt(id));
+						}
+				new VendaDao().insere(Venda.criaVenda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda,quantidadeProduto,
 						Double.parseDouble(dados[3]),LocalDate.parse(dados[4],DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 			}
 			return true;
