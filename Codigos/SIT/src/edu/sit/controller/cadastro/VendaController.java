@@ -68,9 +68,7 @@ public class VendaController {
 
 		Integer funcionarioId = null;
 		while (funcionarioId == null) {
-
 			try {
-				System.out.println("\n**** LISTA DE FUNCIONÁRIOS ****\n");
 				if (FuncionarioView.visualizar()) {
 					System.out.print("\nInforme o código do funcionário: \t");
 					funcionarioId = Leitor.leInteger();
