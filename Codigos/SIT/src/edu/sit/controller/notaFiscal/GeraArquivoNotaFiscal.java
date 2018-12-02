@@ -17,27 +17,35 @@ public class GeraArquivoNotaFiscal {
 	public static boolean geraArquivo(NotaFiscal nota) throws NotaFiscalException {
 		
 		List<String> palavras = new ArrayList<String>();
-		palavras.add("-------------------------------------------------------------------------------------------");
+		palavras.add("");
 		palavras.add("Cliente:");
-		palavras.add("Nome:\t"+nota.getVenda().getCliente().getNome()+"\tCPF:\t"+nota.getVenda().getCliente().getCpf());
-		palavras.add("-------------------------------------------------------------------------------------------");
+		palavras.add(String.format("%-35s", "Nome: " + nota.getVenda().getCliente().getNome()) + 
+					 String.format("%30s", "CPF: " + nota.getVenda().getCliente().getCpf()));
+		palavras.add("");
+		palavras.add("-----------------------------------------------------------------");
+		palavras.add("");
 		palavras.add("Funcionario:");
-		palavras.add("Nome:\t"+nota.getVenda().getFuncionario().getNome()+"\tCargo:\t"+nota.getVenda().getFuncionario().getCargo().getDescricao());
-		palavras.add("-------------------------------------------------------------------------------------------");
+		palavras.add(String.format("%-35s", "Nome: " + nota.getVenda().getFuncionario().getNome()) +  
+				     String.format("%30s", "Cargo: " + nota.getVenda().getFuncionario().getCargo().getDescricao()));
+		palavras.add("");
+		palavras.add("-----------------------------------------------------------------");
+		palavras.add("");
 		palavras.add("Produtos:");
 		for (Produto produto : nota.getVenda().getProdutos()) {
-			palavras.add(produto.getNome()+"\t\tR$"+produto.getValorUnitario());
+			palavras.add(produto.getNome()+"\t\tR$"+produto.getValorUnitario() + "\n");
 			
 		}
-		palavras.add("-------------------------------------------------------------------------------------------");
-		palavras.add("Valor Total--------------------------------------------------------------------------R$"+nota.getVenda().getValorCompra());
-		palavras.add("-------------------------------------------------------------------------------------------");
-
-		palavras.add("Data de emissão:\t"+nota.getDataEmissao().get(Calendar.DAY_OF_MONTH)+
-				"/"+nota.getDataEmissao().get(Calendar.MONTH)+
-				"/"+nota.getDataEmissao().get(Calendar.YEAR)+
-				"\tHora:\t"+nota.getDataEmissao().get(Calendar.HOUR_OF_DAY)+":"+nota.getDataEmissao().get(Calendar.MINUTE));
-		palavras.add("-------------------------------------------------------------------------------------------");
+		palavras.add("");
+		palavras.add("-----------------------------------------------------------------");
+		palavras.add(String.format("%-40s", "Valor Total") + 
+					 String.format("%25s", "R$" + nota.getVenda().getValorCompra()));
+		palavras.add("-----------------------------------------------------------------");
+		palavras.add("");
+		palavras.add(String.format("%-40s", "\nData de emissão: " + nota.getDataEmissao().get(Calendar.DAY_OF_MONTH) +
+								   "/" + nota.getDataEmissao().get(Calendar.MONTH) +
+								   "/" + nota.getDataEmissao().get(Calendar.YEAR)) +
+				     String.format("%26s", "Hora: " + nota.getDataEmissao().get(Calendar.HOUR_OF_DAY)+":" + 
+								   nota.getDataEmissao().get(Calendar.MINUTE)));
 		
 		try {
 			String path = Configuracao.getPropriedade("localNota")+"\\nota"+nota.getVenda().getId().toString()+".txt";
