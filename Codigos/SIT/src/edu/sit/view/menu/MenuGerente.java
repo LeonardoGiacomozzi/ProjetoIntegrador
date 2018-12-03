@@ -24,8 +24,8 @@ public class MenuGerente {
 	public static void menusGerente() {
 		System.out.println("\n**** GERENCIAMENTO ****");
 		System.out.println("1 - Configurações");
-		System.out.println("2 - Cadastrar Funcionário/Usuário");
-		System.out.println("3 - Editar Funcionário/Usuário");
+		System.out.println("2 - Cadastros");
+		System.out.println("3 - Edições");
 		System.out.println("4 - Gerenciar Vendas");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
@@ -67,6 +67,8 @@ public class MenuGerente {
 	private static void menuCadastro() {
 		System.out.println("\n1 - Cadastrar funcionário");
 		System.out.println("2 - Cadastrar usuário");
+		System.out.println("3 - Cadastrar produto");
+		System.out.println("4 - Cadastrar categoria");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
@@ -97,7 +99,6 @@ public class MenuGerente {
 			}
 			MenuGerente.menuCadastro();
 			break;
-
 		case 0:
 			MenuGerente.menusGerente();
 			break;
@@ -221,8 +222,8 @@ public class MenuGerente {
 		case 1:
 			try {
 				System.out.print("\n");
-				Integer a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
-				FuncionarioController.editar(a);
+				Integer a = new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
+				FuncionarioController.editar(a); 
 			} catch (EdicaoException | ConexaoException | DaoException e) {
 				System.out.println(e.getMessage());
 			}

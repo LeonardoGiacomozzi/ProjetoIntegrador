@@ -206,7 +206,7 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 	public Integer consultaPorCpf(String cpf) throws ConexaoException, DaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
-			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM funcionario WHERE CPF like ?;");
+			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM funcionario WHERE CPF like ?");
 			pst.setString(1, cpf);
 			ResultSet rs = pst.executeQuery();
 			return rs.first()? rs.getInt("id"):0;

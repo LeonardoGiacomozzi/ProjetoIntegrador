@@ -53,7 +53,7 @@ public class ProdutoController {
 		
 		try {
 			Produto produto = Produto.criaProdutoBanco(nome, categoriaId, fornecedorId, quantidade, valorUnitario);
-			System.out.println(new ProdutoDao().insere(produto) ? "\nProduto cadastrado com SUCESSO!\n\n" : "\nFalha\n");
+			System.out.print(new ProdutoDao().insere(produto) ? "\nProduto cadastrado com SUCESSO!\n\n" : "\nFalha\n");
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new CadastroException(EErroCadastro.ERRO_CADASTRO_PRODUTO);

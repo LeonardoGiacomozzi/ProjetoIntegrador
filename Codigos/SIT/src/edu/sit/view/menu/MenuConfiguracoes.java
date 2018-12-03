@@ -8,7 +8,5 @@ public class MenuConfiguracoes {
 		
 		ConfiguracaoView.editar();
 		MenuGerente.menusGerente();
-	}
-	
-	
+	}	
 }
