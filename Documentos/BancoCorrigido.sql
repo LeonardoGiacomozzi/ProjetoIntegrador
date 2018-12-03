@@ -1,5 +1,5 @@
 CREATE SCHEMA IF NOT EXISTS `Tabacaria`  DEFAULT CHARACTER SET utf8 ;
-USE `Tabacaria` ;
+USE `Tabaca` ;
 
 -- -----------------------------------------------------
 -- Table `Tabacaria`.`Contato`
@@ -112,24 +112,13 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Tabacaria`.`NotaFiscal`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Tabacaria`.`NotaFiscal` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `DataEmissao` DATE NOT NULL,
-  `Total` DOUBLE NOT NULL,
-  `arquivo` BLOB NOT NULL,
-  PRIMARY KEY (`id`)
-  )
-ENGINE = InnoDB;
-
-
 -- -----------------------------------------------------
 -- Table `Tabacaria`.`ItensPedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Tabacaria`.`ItensPedido` (
   `Produtos` INT NOT NULL,
   `Venda` INT NOT NULL,
+  `Quantidade` INT NOT NULL,
   PRIMARY KEY (`Produtos`, `Venda`),
   INDEX `fk_Produtos_has_Venda_Venda1_idx` (`Venda` ASC) ,
   INDEX `fk_Produtos_has_Venda_Produtos1_idx` (`Produtos` ASC) )

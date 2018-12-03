@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.erro.notaFiscal.EErroNotaFiscal;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.model.NotaFiscal;
-import edu.sit.model.Produto;
 import edu.sit.propriedades.Configuracao;
 import edu.sit.uteis.Arquivo;
 
@@ -30,9 +30,9 @@ public class GeraArquivoNotaFiscal {
 		palavras.add("");
 		palavras.add("-----------------------------------------------------------------");
 		palavras.add("");
-		palavras.add("Produtos:");
-		for (Produto produto : nota.getVenda().getProdutos()) {
-			palavras.add(produto.getNome()+"\t\tR$"+produto.getValorUnitario() + "\n");
+		palavras.add("Produtos:\t\t\t\t\tQuantidade:");
+		for (ProdutoQuantidade produto : nota.getVenda().getProdutos()) {
+			palavras.add(produto.getItensPedido().getNome()+"\t\tR$"+produto.getItensPedido().getValorUnitario() + "\t\t"+produto.getQuantidadeProduto()+"\n");
 			
 		}
 		palavras.add("");

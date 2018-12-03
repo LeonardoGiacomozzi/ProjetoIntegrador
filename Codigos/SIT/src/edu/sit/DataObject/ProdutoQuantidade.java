@@ -1,27 +1,31 @@
 package edu.sit.DataObject;
 
-import java.util.ArrayList;
 
 import edu.sit.model.Produto;
 
 public class ProdutoQuantidade {
-	private ArrayList<Produto> itensPedido = new ArrayList<Produto>();
-	private ArrayList<Integer> quantidadeProduto= new ArrayList<Integer>();
-	
-	public ArrayList<Produto> getItensPedido() {
+	private Produto itensPedido;
+	private Integer quantidadeProduto;
+	public Produto getItensPedido() {
 		return itensPedido;
 	}
-	public void setItensPedido(ArrayList<Produto> itensPedido) {
+	public void setItensPedido(Produto itensPedido) {
 		this.itensPedido = itensPedido;
 	}
-	public ArrayList<Integer> getQuantidadeProduto() {
+	public Integer getQuantidadeProduto() {
 		return quantidadeProduto;
 	}
-	public void setQuantidadeProduto(ArrayList<Integer> quantidadeProduto) {
+	public void setQuantidadeProduto(Integer quantidadeProduto) {
 		this.quantidadeProduto = quantidadeProduto;
 	}
-	public ProdutoQuantidade(ArrayList<Produto> produtos, ArrayList<Integer> quantidadeProduto) {
-		setItensPedido(produtos);
-		setQuantidadeProduto(quantidadeProduto);
+	 public ProdutoQuantidade(Produto produto, Integer quantidade) {
+
+		 setItensPedido(produto);
+		 setQuantidadeProduto(quantidade);
 	}
+	 public ProdutoQuantidade() {
+
+	}
+	
+	
 }

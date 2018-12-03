@@ -13,7 +13,6 @@ import edu.sit.bancodedados.conexao.Conexao;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
-import edu.sit.model.Produto;
 import edu.sit.model.Venda;
 
 public class VendaDao extends InstaladorDao implements IDao<Venda> {
@@ -85,9 +84,9 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		Venda venda = consulta(id);
 		venda.setFuncionario(new FuncionarioDao().consulta(venda.getFuncionarioId()));
 		venda.setCliente(new ClienteDao().consulta(venda.getClienteId()));
-		ProdutoQuantidade response =listaProdutoVenda(id);
-		venda.setProdutos(response.getItensPedido());
-		venda.setQuantidade(response.getQuantidadeProduto());
+		venda.setProdutos(listaProdutoVenda(id));
+		
+		
 		return venda;
 	}
 
@@ -114,15 +113,14 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			pst.setDouble(3, objeto.getValor());
 			pst.setDate(4,  java.sql.Date.valueOf(objeto.getDataVenda()));
 			pst.executeUpdate();
-			ArrayList<Produto>  produtos = objeto.getProdutos();
-			ArrayList<Integer>  quantidade = objeto.getQuantidade();
-			for (int i=0; i<produtos.size();i++) {
+			ArrayList<ProdutoQuantidade>  produtos = objeto.getProdutos();
+			for (ProdutoQuantidade produto : produtos ) {
 
 				PreparedStatement pst2 = conexao
 						.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos, Quantidade) VALUES (?, ?, ?);");
 				pst2.setInt(1, pegaUltimoID());
-				pst2.setInt(2, produtos.get(i).getId());
-				pst2.setInt(3, quantidade.get(i));
+				pst2.setInt(2, produto.getItensPedido().getId());
+				pst2.setInt(3, produto.getQuantidadeProduto());
 				System.out.print(pst2.executeUpdate() > 0? "":"");
 			}
 			return true;
@@ -170,20 +168,20 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		}
 	}
 
-	public ProdutoQuantidade listaProdutoVenda(Integer codigo) throws DaoException, ConexaoException {
+	public ArrayList<ProdutoQuantidade> listaProdutoVenda(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM itensPedido  where venda = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			ArrayList<Produto> itensPedido = new ArrayList<Produto>();
-			ArrayList<Integer> quantidadeProduto= new ArrayList<Integer>();
+			ArrayList<ProdutoQuantidade> itensPedido = new ArrayList<ProdutoQuantidade>();
 			while (rs.next()) {
-				itensPedido.add(new ProdutoDao().consulta(rs.getInt("produtos")));
-				quantidadeProduto.add(rs.getInt("quantidade"));
+				
+				itensPedido.add(new ProdutoQuantidade(new ProdutoDao().consulta(rs.getInt("produtos")),
+						rs.getInt("quantidade")));
 			}
-			ProdutoQuantidade response = new ProdutoQuantidade(itensPedido,quantidadeProduto);
-			return response;
+			
+			return itensPedido;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {

@@ -3,29 +3,19 @@ package edu.sit.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import edu.sit.bancodedados.conexao.ConexaoException;
-import edu.sit.bancodedados.dao.ProdutoDao;
-import edu.sit.erros.dao.DaoException;
+import edu.sit.DataObject.ProdutoQuantidade;
+
 
 public class Venda {
 	private Integer id;
 	private Double valor;
 	private Integer clienteId;
 	private Cliente cliente;
-	private ArrayList<Produto> produtos;
+	private ArrayList<ProdutoQuantidade> produtos;
 	private Integer funcionarioId;
 	private Funcionario funcionario;
 	private LocalDate dataVenda;
-	private ArrayList<Integer> quantidade;
 	
-	public void setQuantidade(ArrayList<Integer> quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	public ArrayList<Integer> getQuantidade() {
-		return quantidade;
-	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -50,11 +40,12 @@ public class Venda {
 		this.cliente = cliente;
 	}
 
-	public ArrayList<Produto> getProdutos() {
+
+	public ArrayList<ProdutoQuantidade> getProdutos() {
 		return produtos;
 	}
 
-	public void setProdutos(ArrayList<Produto> produtos) {
+	public void setProdutos(ArrayList<ProdutoQuantidade> produtos) {
 		this.produtos = produtos;
 	}
 
@@ -91,9 +82,9 @@ public class Venda {
 
 	public Double getValorCompra() {
 		double total = 0.0;
-		for (int i=0; i<getProdutos().size();i++) {
+		for (ProdutoQuantidade itenPedido : getProdutos()) {
 
-			total += getProdutos().get(i).getValorUnitario()*getQuantidade().get(i);
+			total += itenPedido.getItensPedido().getValorUnitario()*itenPedido.getQuantidadeProduto();
 		}
 		return total;
 	}
@@ -123,30 +114,20 @@ public class Venda {
 		return true;
 	}
 
-	private Venda(Cliente cliente, ArrayList<Produto> produtos, ArrayList<Integer> quantidade ,Funcionario funcionario) {
+	private Venda(Cliente cliente, ArrayList<ProdutoQuantidade> produtos,Funcionario funcionario) {
 		setCliente(cliente);
 		setFuncionario(funcionario);
 		setProdutos(produtos);
-		setQuantidade(quantidade);
 		setDataVenda(LocalDate.now());
 	}
 	
-	private Venda(Integer id, Double valor, Integer funcionarioId, Integer clienteid,ArrayList<Integer>produtos,ArrayList<Integer> quantidade,LocalDate dataVenda) {
+	private Venda(Integer id, Double valor, Integer funcionarioId, Integer clienteid,ArrayList<ProdutoQuantidade>produtos,LocalDate dataVenda) {
 		setId(id);
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
 		setDataVenda(dataVenda);
-		ArrayList<Produto> produtosNovo =  new ArrayList<Produto>();
-		for (Integer produto : produtos) {
-			try {
-				produtosNovo.add(new ProdutoDao().consulta(produto));
-			} catch (DaoException | ConexaoException e) {
-				System.out.println(e.getMessage() + "\n\tErro ao gerar a venda");
-			}
-		}
-		setProdutos(produtosNovo);
-		setQuantidade(quantidade);
+		setProdutos(produtos);
 	}
 
 	private Venda(Integer cliente,Integer funcionario) {
@@ -155,20 +136,18 @@ public class Venda {
 		setDataVenda(LocalDate.now());
 	}
 	
-	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,ArrayList<Integer> quantidade,Double valor,LocalDate dataVenda) {
+	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<ProdutoQuantidade>produtos,Double valor,LocalDate dataVenda) {
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
 		setProdutos(produtos);
-		setQuantidade(quantidade);
 		setDataVenda(dataVenda);
 	}
-	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,ArrayList<Integer> quantidade,Double valor) {
+	private Venda(Integer clienteid,Integer funcionarioId, ArrayList<ProdutoQuantidade>produtos,Double valor) {
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
 		setProdutos(produtos);
-		setQuantidade(quantidade);
 		setDataVenda(LocalDate.now());
 	}
 	
@@ -180,22 +159,22 @@ public class Venda {
 		setDataVenda(LocalDate.now());
 	}
 	
-	public static Venda criaVenda(Cliente cliente, ArrayList<Produto> produtos,ArrayList<Integer> quantidade, Funcionario funcionario) {
-		return new Venda(cliente, produtos,quantidade, funcionario);
+	public static Venda criaVenda(Cliente cliente, ArrayList<ProdutoQuantidade> produtos, Funcionario funcionario) {
+		return new Venda(cliente, produtos, funcionario);
 	}
 	
 	public static Venda criaVenda(Integer id,Integer cliente, Integer funcionario,Double valor,LocalDate dataVenda) {
 		return new Venda(id,cliente,funcionario,valor,dataVenda);
 	}
-	public static Venda criaVenda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,ArrayList<Integer> quantidade,Double valor)	{
-		return new Venda(clienteid, funcionarioId, produtos,quantidade, valor);
+	public static Venda criaVenda(Integer clienteid,Integer funcionarioId, ArrayList<ProdutoQuantidade>produtos,Double valor)	{
+		return new Venda(clienteid, funcionarioId, produtos, valor);
 	}
-	public static Venda criaVenda(Integer clienteid,Integer funcionarioId, ArrayList<Produto>produtos,ArrayList<Integer> quantidade,Double valor,LocalDate data)	{
-		return new Venda(clienteid, funcionarioId, produtos,quantidade, valor, data);
+	public static Venda criaVenda(Integer clienteid,Integer funcionarioId, ArrayList<ProdutoQuantidade>produtos,Double valor,LocalDate data)	{
+		return new Venda(clienteid, funcionarioId, produtos, valor, data);
 	}
 	
-	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer clienteid, ArrayList<Integer>produtos,ArrayList<Integer> quantidade,LocalDate dataVenda) {
-		return new Venda(id, valor, funcionarioId, clienteid, produtos,quantidade,dataVenda);
+	public static Venda consultaVendaBanco(Integer id, Double valor, Integer funcionarioId, Integer clienteid,ArrayList<ProdutoQuantidade> produtos,LocalDate dataVenda) {
+		return new Venda(id, valor, funcionarioId, clienteid, produtos,dataVenda);
 	}
 
 	public static Venda criaVenda(Integer cliente, Integer funcionario) {
@@ -205,8 +184,8 @@ public class Venda {
 	@Override
 	public String toString() {
 		String listaProdutos = "";
-		for (Produto produto : produtos) {
-			listaProdutos += produto.toString() + "\n";
+		for (ProdutoQuantidade produto : produtos) {
+			listaProdutos += produto.getItensPedido().toString() + "\n";
 		}
 		return "Funcionário:\t\t" + getFuncionario() + "\nCliente:\t\t" + getCliente() + "\nValor:\t\t" + getValor()
 				+ "\nProdutos:\t\t" + listaProdutos;

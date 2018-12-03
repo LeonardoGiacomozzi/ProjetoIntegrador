@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.ClienteDao;
@@ -130,15 +131,14 @@ public class Populador {
 					.leArquivo(System.getProperty("user.dir") + "/populador/venda.txt");
 			for (String venda : vendaTxt ) {
 				String[] dados = venda.split(";");
-				ArrayList<Produto> produtosVenda = new ArrayList<>();
-						for (String id : dados[2].split("#")) {
-							produtosVenda.add(new ProdutoDao().consulta(Integer.parseInt(id)));
+				ArrayList<ProdutoQuantidade> produtosVenda = new ArrayList<ProdutoQuantidade>();
+						for (String pQ : dados[2].split("#")) {
+							String[] produtoQ = pQ.split("&");
+							produtosVenda.add(new ProdutoQuantidade(new ProdutoDao().consulta(Integer.parseInt(produtoQ[0]))
+									,Integer.parseInt(produtoQ[1])));
+							
 						}
-						ArrayList<Integer> quantidadeProduto = new ArrayList<>();
-						for (String id : dados[3].split("#")) {
-							quantidadeProduto.add(Integer.parseInt(id));
-						}
-				new VendaDao().insere(Venda.criaVenda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda,quantidadeProduto,
+				new VendaDao().insere(Venda.criaVenda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda,
 						Double.parseDouble(dados[4]),LocalDate.parse(dados[5],DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 			}
 			return true;

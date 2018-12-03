@@ -3,6 +3,7 @@ package edu.sit.controller.cadastro;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
@@ -26,21 +27,18 @@ public class VendaController {
 
 	private static Double valor = 0.0;
 	private static Venda vendaNova = null;
-	private static ArrayList<Integer> quantidadeProduto = null;
 
 	public static boolean efetuaVenda() throws CadastroException {
 
 		Integer funcionario = null;
 		Integer cliente = null;
 		valor = 0.0;
-		quantidadeProduto = new ArrayList<Integer>();
 		System.out.print("\n**** EFETUAR VENDA ****\n");
 		try {
 			funcionario = pedeFuncionario();
 			cliente = pedeCliente();
 			vendaNova = Venda.criaVenda(cliente, funcionario);
 			vendaNova.setProdutos(pedeProdutos());
-			vendaNova.setQuantidade(quantidadeProduto);
 		} catch (VendaException e) {
 			System.out.println(e.getMessage());
 		}
@@ -168,12 +166,12 @@ public class VendaController {
 
 	}
 
-	private static ArrayList<Produto> pedeProdutos() {
+	private static ArrayList<ProdutoQuantidade> pedeProdutos() {
 
 		Integer opcao = Integer.MAX_VALUE;
-		ArrayList<Produto> produtos = new ArrayList<Produto>();
+		ArrayList<ProdutoQuantidade> produtos = new ArrayList<ProdutoQuantidade>();
 		while (opcao != 0) {
-			Produto produtoAux = null;
+			ProdutoQuantidade produtoAux = new ProdutoQuantidade();
 			Integer quantidade = 0;
 			try {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
@@ -192,21 +190,21 @@ public class VendaController {
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
 					try {
-						produtoAux = new ProdutoDao().consulta(opcao);
-						if (produtoAux != null) {
+						produtoAux.setItensPedido(new ProdutoDao().consulta(opcao));
+						if (produtoAux.getItensPedido() != null) {
 
-							System.out.print("\nProduto [" + produtoAux.getNome() + "]" + "\nDisponível ["
-									+ produtoAux.getQuantidade() + "]" + "\nQuantos deseja comprar: \t");
-							while (quantidade == null || quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
+							System.out.print("\nProduto [" + produtoAux.getItensPedido().getNome() + "]" + "\nDisponível ["
+									+ produtoAux.getItensPedido().getQuantidade() + "]" + "\nQuantos deseja comprar: \t");
+							while (quantidade == null || quantidade > produtoAux.getItensPedido().getQuantidade() || quantidade <= 0) {
 								try {
 									quantidade = Leitor.leInteger();
 
-									if (quantidade > produtoAux.getQuantidade() || quantidade <= 0) {
+									if (quantidade > produtoAux.getItensPedido().getQuantidade() || quantidade <= 0) {
 										System.out.println("\nQuantidade indisponível...");
 									} else {
-										quantidadeProduto.add(quantidade);
-										produtoAux.setQuantidade(produtoAux.getQuantidade() - quantidade);
-										new ProdutoDao().altera(produtoAux);
+										produtoAux.setQuantidadeProduto(quantidade);
+										produtoAux.getItensPedido().setQuantidade(produtoAux.getItensPedido().getQuantidade() - quantidade);
+										new ProdutoDao().altera(produtoAux.getItensPedido());
 										produtos.add(produtoAux);
 									}
 								} catch (LeituraException e) {
@@ -215,9 +213,9 @@ public class VendaController {
 							}
 
 							System.out.println("\n\nValor Total até o momento: [R$"
-									+ precoAtual(produtoAux.getValorUnitario(), quantidade) + "]\n");
+									+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade) + "]\n");
 							vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
-									+ precoAtual(produtoAux.getValorUnitario(), quantidade));
+									+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade));
 							System.out.println("Deseja continuar comprando?\n"
 									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
 							opcao = Leitor.leInteger();

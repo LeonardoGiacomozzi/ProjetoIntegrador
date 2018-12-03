@@ -6,6 +6,7 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
+import edu.sit.controller.relatorio.RelatorioVenda;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.uteis.cadastro.UtilCadastro;
@@ -107,9 +108,10 @@ public class Teste {
 		// System.out.println(teste5.criaTabela());
 		// System.out.println(teste5.consulta(1));
 //		System.out.println(teste5.consultaCompleta(1));
-//		
-		VendaDao teste6 = new VendaDao();
-		GeraArquivoNotaFiscal.geraArquivo(NotaFiscal.criaNotaFiscal(teste6.consultaCompleta(1)));
+////		
+//		VendaDao teste6 = new VendaDao();
+//		RelatorioVenda.geraArquivo(teste6.pegaVendaDia());
+		//GeraArquivoNotaFiscal.geraArquivo(NotaFiscal.criaNotaFiscal(teste6.consultaCompleta(1)));
 		// System.out.println(teste6.criaTabela());
 		// System.out.println(teste6.consultaCompleta(1));
 //		ArrayList<Venda> vendas = teste6.pegaVendaMes();
@@ -127,8 +129,8 @@ public class Teste {
 		//UsuarioDao novo = new UsuarioDao();
 		//System.out.println(novo.criaTabela());
 		
-		Integer a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
-		System.out.println(a);
+		//Integer a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
+		//System.out.println(a);
 		
 	}
 }
