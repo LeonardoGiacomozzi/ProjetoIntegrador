@@ -3,10 +3,12 @@ package edu.sit.model;
 import java.util.ArrayList;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
 import edu.sit.erros.dao.DaoException;
+import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class Teste {
 	public static void main(String[] args) throws DaoException, ConexaoException, NotaFiscalException {
@@ -124,6 +126,9 @@ public class Teste {
 		
 		//UsuarioDao novo = new UsuarioDao();
 		//System.out.println(novo.criaTabela());
+		
+		Integer a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
+		System.out.println(a);
 		
 	}
 }

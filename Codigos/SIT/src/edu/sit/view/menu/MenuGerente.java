@@ -221,7 +221,8 @@ public class MenuGerente {
 		case 1:
 			try {
 				System.out.print("\n");
-				FuncionarioController.editar(new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf()));
+				Integer a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
+				FuncionarioController.editar(a);
 			} catch (EdicaoException | ConexaoException | DaoException e) {
 				System.out.println(e.getMessage());
 			}

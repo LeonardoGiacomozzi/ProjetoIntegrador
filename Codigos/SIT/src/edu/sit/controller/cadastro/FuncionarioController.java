@@ -27,7 +27,7 @@ public class FuncionarioController {
 		cargo = pedeCargo();
 		cpf = UtilCadastro.pedeCpf();
 		try {
-			while(new FuncionarioDao().consultaPorCpf(cpf)!= null) {
+			while(new FuncionarioDao().consultaPorCpf(cpf)!= 0) {
 				System.out.println("CPF já Cadastrado");
 				System.out.println("Informe um Novo CPF");
 				cpf = UtilCadastro.pedeCpf();
