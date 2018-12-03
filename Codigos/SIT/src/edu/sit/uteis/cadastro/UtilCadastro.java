@@ -36,9 +36,9 @@ public class UtilCadastro {
 		while (fornecedorId == null) {
 			try {
 				System.out.println("\nLista de Fornecedor pré-cadastrados: \t");
+				System.out.println(String.format("%-20s", "\nCódigo") + "Nome");
 				for (Fornecedor fornecedor : new FornecedorDao().consultaTodos()) {
-					System.out.println("-----------------------------------------------");
-					System.out.println("ID: " + fornecedor.getId() + "\t\tNome: " + fornecedor.getNome());
+					System.out.println(String.format("%-19s", "[" + fornecedor.getId() + "]") + fornecedor.getNome());
 				}
 				System.out.println(
 						"\nEscolha um Fornecedor pelo ID ou digite 0 (zero) para cadastrar um novo Fornecedor...");
@@ -62,9 +62,9 @@ public class UtilCadastro {
 			try {
 				System.out.println("\nLista de Categorias pré-cadastradas: \t");
 				try {
+					System.out.println(String.format("%-20s", "\nCódigo") + "Nome");
 					for (Categoria categoria : new CategoriaDao().consultaTodos()) {
-						System.out.println("-----------------------------------------------");
-						System.out.println("ID: " + categoria.getId() + "\t\tNome: " + categoria.getNome());
+						System.out.println(String.format("%-19s", "[" + categoria.getId() + "]") + categoria.getNome());
 					}
 				} catch (DaoException | ConexaoException k) {
 					System.out.println(k.getMessage());

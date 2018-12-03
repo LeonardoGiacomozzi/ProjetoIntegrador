@@ -72,8 +72,5 @@ public class CategoriaController {
 		}
 
 	}
-
-	
-	
 	
 }

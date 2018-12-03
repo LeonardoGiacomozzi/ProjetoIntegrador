@@ -13,7 +13,7 @@ public class FornecedorView {
 
 		try {
 			for (Fornecedor fornecedor : new FornecedorDao().consultaTodos()) {
-				System.out.println("#" + fornecedor.getId() + " ----------- " + fornecedor.getNome()+ " ----------- " + fornecedor.getCNPJ());
+				System.out.println(String.format("%-10s", "Código") + fornecedor.getId() + " ----------- " + fornecedor.getNome()+ " ----------- " + fornecedor.getCNPJ());
 			}
 			return true;
 		} catch (DaoException | ConexaoException e) {
