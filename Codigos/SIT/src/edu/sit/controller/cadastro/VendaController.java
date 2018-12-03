@@ -12,7 +12,6 @@ import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.notaFiscal.NotaFiscalException;
-import edu.sit.erro.venda.EErrosVenda;
 import edu.sit.erro.venda.VendaException;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
@@ -34,7 +33,7 @@ public class VendaController {
 		Integer funcionario = null;
 		Integer cliente = null;
 		valor = 0.0;
-		quantidadeProduto =  new ArrayList<Integer>();
+		quantidadeProduto = new ArrayList<Integer>();
 		System.out.print("\n**** EFETUAR VENDA ****\n");
 		try {
 			funcionario = pedeFuncionario();
@@ -68,25 +67,42 @@ public class VendaController {
 
 		Integer funcionarioId = null;
 		while (funcionarioId == null) {
-			try {
-				if (FuncionarioView.visualizar()) {
-					System.out.print("\nInforme o código do funcionário: \t");
-					funcionarioId = Leitor.leInteger();
-					try {
-						while(new FuncionarioDao().consulta(funcionarioId) == null) {
-							System.out.println("Funcionario Inválido");
-							System.out.println("Informe um novo funcionário");
-							System.out.print("\nInforme o código do funcionário: \t");
-							FuncionarioView.visualizar();
+			
+				try {
+					if (FuncionarioView.visualizar()) {
+						System.out.print("\nInforme o código do funcionário: \t");
+						try {
 							funcionarioId = Leitor.leInteger();
+						} catch (LeituraException e2) {
+							System.out.println(e2.getMessage());
 						}
-					} catch (DaoException | ConexaoException e) {
-						System.out.println(e.getMessage());
+					
+							try {
+								while (new FuncionarioDao().consulta(funcionarioId) == null) {
+									System.out.println("Funcionario Inválido");
+									System.out.println("Informe um novo funcionário");
+									System.out.print("\nInforme o código do funcionário: \t");
+									try {
+										FuncionarioView.visualizar();
+									} catch (VisualizacaoException e1) {
+										System.out.println(e1.getMessage());
+									}
+									try {
+										funcionarioId = Leitor.leInteger();
+									} catch (LeituraException e) {
+										System.out.println(e.getMessage());
+									}
+
+								}
+							} catch (DaoException | ConexaoException e) {
+								System.out.println(e.getMessage());
+							}
+						
 					}
+				} catch (VisualizacaoException e) {
+					System.out.println(e.getMessage());
 				}
-			} catch (LeituraException | VisualizacaoException e) {
-				System.out.println(e.getMessage());
-			}
+			
 		}
 		return funcionarioId;
 
@@ -97,26 +113,55 @@ public class VendaController {
 		Integer clienteId = null;
 		while (clienteId == null) {
 
+			System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
 			try {
-				System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
 				System.out.print(!ClienteView.visualizar() ? "\nNão foi possível carregar os clientes" : "");
-				System.out.print(String.format("%-11s", "\n[0]") + "CADASTRAR NOVO CLIENTE \n");
-				System.out.print("\n\nInforme o código do cliente: \t");
-				clienteId = Leitor.leInteger();
-				while(new ClienteDao().consulta(clienteId)== null) {
-					System.out.println("Cliente Inválido");
-					System.out.println("Informe um novo cliente");
-					System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
-					ClienteView.visualizar();
-					clienteId = Leitor.leInteger();
-				}
-				if (clienteId == 0) {
-					System.out.println(ClienteController.cadastro() == true ? "" : "");
-					clienteId = new ClienteDao().pegaUltimoID();
-				}
-			} catch (ConexaoException | DaoException | LeituraException | CadastroException | VisualizacaoException e) {
+			} catch (VisualizacaoException e) {
 				System.out.println(e.getMessage());
-				throw new VendaException(EErrosVenda.BUSCA_LISTA_CLIENTE);
+			}
+			System.out.print(String.format("%-11s", "\n[0]") + "CADASTRAR NOVO CLIENTE \n");
+			System.out.print("\n\nInforme o código do cliente: \t");
+
+			
+				try {
+					clienteId = Leitor.leInteger();
+				} catch (LeituraException e2) {
+					System.out.println(e2.getMessage());
+				}
+
+				try {
+					while (new ClienteDao().consulta(clienteId) == null) {
+						System.out.println("Cliente Inválido");
+						System.out.println("Informe um novo cliente");
+						System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
+						try {
+							ClienteView.visualizar();
+						} catch (VisualizacaoException e1) {
+							System.out.println(e1.getMessage());
+						}
+
+						try {
+							clienteId = Leitor.leInteger();
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
+					}
+				} catch (DaoException | ConexaoException e1) {
+					System.out.println(e1.getMessage());
+				}
+			 
+
+			if (clienteId == 0) {
+				try {
+					System.out.println(ClienteController.cadastro() == true ? "" : "");
+				} catch (CadastroException e) {
+					System.out.println(e.getMessage());
+				}
+				try {
+					clienteId = new ClienteDao().pegaUltimoID();
+				} catch (DaoException | ConexaoException e) {
+					System.out.println(e.getMessage());
+				}
 			}
 		}
 		return clienteId;
@@ -176,10 +221,10 @@ public class VendaController {
 							System.out.println("Deseja continuar comprando?\n"
 									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
 							opcao = Leitor.leInteger();
-						}else {
+						} else {
 							System.out.println("Valor Invalido");
 						}
-						
+
 					} catch (DaoException e) {
 						System.out.println(e.getMessage() + "\nErro ao adicionar o produto");
 					}
