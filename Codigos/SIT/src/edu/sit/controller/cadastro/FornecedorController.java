@@ -55,7 +55,7 @@ public class FornecedorController {
 	
 	public static boolean editar(Integer codigo) throws EdicaoException {
 		try {
-			Fornecedor fornecedorBanco = new FornecedorDao().consulta(codigo);
+			Fornecedor fornecedorBanco = new FornecedorDao().consultaCompleta(codigo);
 
 			System.out.print("*****EDITOR DE CATEGORIA*****");
 			Integer opcao = 99;

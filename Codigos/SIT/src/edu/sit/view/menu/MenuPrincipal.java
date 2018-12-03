@@ -11,7 +11,9 @@ public class MenuPrincipal {
 		System.out.println("**** MENU TABACARIA ****");
 		System.out.println("1 - Efetuar Cadastros");
 		System.out.println("2 - Efetuar Vendas");
-		System.out.println("3 - Área do Gerente");
+		System.out.println("3 - Editar Cliente");
+		System.out.println("4 - Área do Gerente");
+		System.out.println("5 - Repor Estoque");
 		System.out.println("0 - Sair");
 
 		Integer escolha = Integer.MAX_VALUE;
@@ -36,12 +38,16 @@ public class MenuPrincipal {
 			}
 			break;
 		case 3:
+			break;
+		case 4:
 			if( UsuarioView.login()){
 				MenuGerente.menusGerente();
 			}else {
 				System.out.println("\nInformações INVÁLIDAS!\n");
 				MenuPrincipal.menuGeral();
 			}
+			break;
+		case 5:
 			break;
 		case 0:
 			System.out.println("\n\n\n****                   VOCÊ SAIU                   ****");

@@ -4,6 +4,8 @@ import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.UsuarioDao;
 import edu.sit.bancodedados.dao.VendaDao;
+import edu.sit.controller.cadastro.CategoriaController;
+import edu.sit.controller.cadastro.FornecedorController;
 import edu.sit.controller.cadastro.FuncionarioController;
 import edu.sit.controller.cadastro.UsuarioController;
 import edu.sit.controller.relatorio.RelatorioVenda;
@@ -16,6 +18,8 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
 import edu.sit.view.configuracao.ConfiguracaoView;
+import edu.sit.view.controllers.CategoriaView;
+import edu.sit.view.controllers.FornecedorView;
 import edu.sit.view.controllers.FuncionarioView;
 import edu.sit.view.controllers.UsuarioView;
 
@@ -65,10 +69,8 @@ public class MenuGerente {
 	}
 
 	private static void menuCadastro() {
-		System.out.println("\n1 - Cadastrar funcionário");
-		System.out.println("2 - Cadastrar usuário");
-		System.out.println("3 - Cadastrar produto");
-		System.out.println("4 - Cadastrar categoria");
+		System.out.println("\n1 - Cadastrar Funcionário");
+		System.out.println("2 - Cadastrar Usuário");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
@@ -112,8 +114,11 @@ public class MenuGerente {
 
 	private static void menuGerenciamento() {
 
-		System.out.println("\n1 - Editar funcionário");
-		System.out.println("2 - Editar usuário");
+		System.out.println("\n1 - Editar Funcionário");
+		System.out.println("2 - Editar Usuário");
+		System.out.println("3 - Editar Produto");
+		System.out.println("4 - Editar Categoria");
+		System.out.println("5 - Editar Fornecedor");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
@@ -140,6 +145,36 @@ public class MenuGerente {
 				System.out.println(e.getMessage());
 			}
 			MenuGerente.menusGerente();
+			break;
+		case 3:
+			break;
+		case 4:
+			try {
+				CategoriaView.visualizar();
+				System.out.print("\nSelecione qual categoria deseja alterar: \t");
+				try {
+					Integer codigo = Leitor.leInteger();
+					CategoriaController.editar(codigo);
+				} catch (LeituraException | EdicaoException e) {
+					System.out.println(e.getMessage());
+				}
+			} catch (VisualizacaoException a) {
+				System.out.println(a.getMessage());
+			}
+			break;
+		case 5:
+			try {
+				FornecedorView.visualizar();
+				System.out.print("\nSelecione qual fornecedor deseja alterar: \t");
+				try {
+					Integer codigo = Leitor.leInteger();
+					FornecedorController.editar(codigo);
+				} catch (EdicaoException | LeituraException a) {
+					System.out.println(a.getMessage());
+				}
+			} catch (VisualizacaoException e) {
+				System.out.println(e.getMessage());
+			}
 			break;
 		case 0:
 			MenuGerente.menusGerente();
