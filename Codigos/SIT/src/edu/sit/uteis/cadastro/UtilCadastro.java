@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
+import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.controller.cadastro.CategoriaController;
 import edu.sit.controller.cadastro.FornecedorController;
 import edu.sit.erro.cadastro.CadastroException;
@@ -120,14 +121,29 @@ public class UtilCadastro {
 
 		String cpf = null;
 		while (cpf == null) {
-			try {
+		
 				System.out.print("Informe o CPF: \t");
-				cpf = Leitor.leCpf();
+				try {
+					cpf = Leitor.leCpf();
+				} catch (LeituraException e1) {
+					System.out.println(e1.getMessage());
+				}
+				
+				try {
+					while(new FuncionarioDao().consultaPorCpf(cpf) == 0) {
+						System.out.println("CPF inválido");
+						System.out.println("Informe um novo CPF");
+						try {
+							cpf = Leitor.leCpf();
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
+					}
+				} catch (ConexaoException | DaoException e) {
+					System.out.println(e.getMessage());
+				}
 
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-
-			}
+			
 		}
 		return cpf;
 	}
