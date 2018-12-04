@@ -261,7 +261,6 @@ public class MenuGerente {
 				Integer a = new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
 				while(a == 0) {
 					System.out.println("\nCPF Inválido!\n");
-					System.out.print("\nInforme um CPF válido: \t");
 					a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
 				}
 				FuncionarioController.editar(a); 

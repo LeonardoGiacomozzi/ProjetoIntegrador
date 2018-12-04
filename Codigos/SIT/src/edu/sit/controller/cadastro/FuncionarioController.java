@@ -60,7 +60,7 @@ public class FuncionarioController {
 			System.out.print("\n**** EDIÇÃO DE FUNCIONÁRIO ****\n");
 			Integer opcao = Integer.MAX_VALUE;
 			while (opcao != 0) {
-				System.out.println("Funcionário [" + funcionarioBanco.getNome() + "]");
+				System.out.println("\nFuncionário [" + funcionarioBanco.getNome() + "]");
 				System.out.println(String.format("%-21s", "\n1 - Cargo: ") + funcionarioBanco.getCargo());
 				System.out.println(String.format("%-20s", "2 - Contato: ") + "Telefone: " + funcionarioBanco.getContato().getTelefone());
 				System.out.println(String.format("%-20s", "") + "Email: " + funcionarioBanco.getContato().getEmail());
@@ -105,7 +105,7 @@ public class FuncionarioController {
 
 		while (cargo == null) {
 			try {
-				System.out.print("Cargo:\t");
+				System.out.print("\nCargo:\t");
 				System.out.println(ECargo.GERENTE.ordinal() + " - Gerente");
 				System.out.print("\t" + ECargo.VENDEDOR.ordinal() + " - Vendedor\n\t");
 				cargo = ECargo.values()[Leitor.leInteger()];
@@ -116,7 +116,4 @@ public class FuncionarioController {
 
 		return cargo;
 	}
-
-	
-	
 }

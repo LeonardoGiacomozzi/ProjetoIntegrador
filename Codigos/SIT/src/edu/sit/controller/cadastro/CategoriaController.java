@@ -33,39 +33,40 @@ public class CategoriaController {
 		try {
 			Categoria categoriaBanco = new CategoriaDao().consulta(codigo);
 
-			System.out.print("**** EDIÇÃO DE CATEGORIA ****");
 			Integer opcao = 99;
 			while (opcao != 0) {
-				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
-				System.out.println("\n\t\t1----------NOME\t" + categoriaBanco.getNome());
-				System.out.println("\n\t\t0----------FINALIZAR");
-				System.out.println("\n\n\t\t---:");
-				opcao = Leitor.leInteger();
+				System.out.println(String.format("%-21s", "\n1 - Nome") + "[" + categoriaBanco.getNome() + "]");
+				System.out.println("0 - Finalizar/Sair");
+				System.out.print("\nInforme a opção que deseja alterar: \t");
+				try {
+					opcao = Leitor.leInteger();
+				} catch (LeituraException e) {
+					System.out.println(e.getMessage());
+				}
 
 				switch (opcao) {
 				case 1:
-					categoriaBanco.setNome(UtilCadastro.pedeNome("Nome"));
+					categoriaBanco.setNome(UtilCadastro.pedeNome("\nDigite o novo Nome: \t"));
 					break;
 
 				case 0:
 
 					try {
 						new CategoriaDao().altera(categoriaBanco);
-
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_CATEGORIA);
 					}
 					break;
 				default:
-					System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
+					System.out.println("\nValor Inválido!\nSelecione uma das opções oferecidas: \t");
 					break;
 
 				}
 
 			}
 			return true;
-		} catch (DaoException | ConexaoException | LeituraException e) {
+		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
 		}

@@ -12,8 +12,11 @@ public class CategoriaView {
 	public static boolean visualizar() throws VisualizacaoException {
 
 		try {
+			System.out.println("\n**** LISTA DE CATEGORIAS ****\n");
+			System.out.println(String.format("%-10s", "Código") + 
+							   String.format("%-30s", "Nome"));
 			for (Categoria categoria : new CategoriaDao().consultaTodos()) {
-				System.out.println("#" + categoria.getId() + " ----------- " + categoria.getNome());
+				System.out.println(String.format("%-10s", "[" + categoria.getId() + "]" ) + categoria.getNome());
 			}
 			return true;
 		} catch (DaoException | ConexaoException e) {
