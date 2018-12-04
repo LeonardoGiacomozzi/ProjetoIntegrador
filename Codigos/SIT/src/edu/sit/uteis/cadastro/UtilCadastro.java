@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
-import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.controller.cadastro.CategoriaController;
 import edu.sit.controller.cadastro.FornecedorController;
 import edu.sit.erro.cadastro.CadastroException;
