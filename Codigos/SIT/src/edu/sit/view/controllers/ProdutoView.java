@@ -2,13 +2,17 @@ package edu.sit.view.controllers;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ProdutoDao;
+import edu.sit.controller.cadastro.ProdutoController;
+import edu.sit.erro.controller.ControllerException;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.visualizacao.EErroVisualizacao;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Produto;
+import edu.sit.uteis.Leitor;
 
 public class ProdutoView {
-	
+
 	public static boolean visualizar() throws VisualizacaoException {
 		try {
 			System.out.println("\n**** LISTA DE PRODUTOS ****\n");
@@ -16,16 +20,53 @@ public class ProdutoView {
 					+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
 					+ String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
 			for (Produto produto : new ProdutoDao().consultaTodosCompleto()) {
-				System.out.println(String.format("%-10s", "[" + produto.getId() + "]")
-						+ String.format("%-20s", produto.getNome())
-						+ String.format("%-13s", produto.getFornecedor().getNome())
-						+ String.format("%-13s", produto.getCategoria().getNome())
-						+ String.format("%-10s", produto.getValorUnitario()) + produto.getQuantidade());
+				System.out.println(
+						String.format("%-10s", "[" + produto.getId() + "]") + String.format("%-20s", produto.getNome())
+								+ String.format("%-13s", produto.getFornecedor().getNome())
+								+ String.format("%-13s", produto.getCategoria().getNome())
+								+ String.format("%-10s", produto.getValorUnitario()) + produto.getQuantidade());
 			}
 			return true;
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_PRODUTOS);
 		}
+	}
+
+	public static boolean reporEstoque() {
+		Integer cod = null;
+		Integer qtd = null;
+		while (cod == null) {
+			try {
+				while (new ProdutoDao().consulta(cod) == null)
+					try {
+						visualizar();
+						try {
+							System.out.print("Informe o codigo do produto  ");
+							cod = Leitor.leInteger();
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
+						try {
+							System.out.print("Informe a quantidade que deseja adicionar ao produto  ");
+							qtd = Leitor.leInteger();
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
+						try {
+							ProdutoController.reporEstoque(cod, qtd);
+							return true;
+						} catch (ControllerException e) {
+							System.out
+									.println(e.getMessage() + "\n\tNão foi possivel adicionar a quantidade ao produto");
+						}
+					} catch (VisualizacaoException e) {
+						System.out.println(e.getMessage() + "\n\tNão foi possivel listar os produtos");
+					}
+			} catch (DaoException | ConexaoException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		return false;
 	}
 }
