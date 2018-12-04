@@ -2,6 +2,7 @@ package edu.sit.view.menu;
 
 
 
+import edu.sit.controller.cadastro.CategoriaController;
 import edu.sit.controller.cadastro.ClienteController;
 import edu.sit.controller.cadastro.FornecedorController;
 import edu.sit.controller.cadastro.ProdutoController;
@@ -17,6 +18,7 @@ public class MenuCadastro {
 		System.out.println("1 - Cadastrar Cliente");
 		System.out.println("2 - Cadastrar Produtos");
 		System.out.println("3 - Cadastrar Fornecedor");
+		System.out.println("4 - Cadastrar Categoria");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
 
@@ -24,7 +26,6 @@ public class MenuCadastro {
 		try {
 			escolha = Leitor.leInteger();
 		} catch (LeituraException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -39,7 +40,7 @@ public class MenuCadastro {
 			try {
 				ClienteController.cadastro();
 				System.out.println("\n");
-				MenuPrincipal.menuGeral();
+				MenuCadastro.menuCadastro();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_CLIENTE);
 			}
@@ -49,7 +50,7 @@ public class MenuCadastro {
 			System.out.println("\n**** CADASTRAR PRODUTO ****");
 			try {
 				ProdutoController.cadastro();
-				MenuPrincipal.menuGeral();
+				MenuCadastro.menuCadastro();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_PRODUTO);
 			}
@@ -58,12 +59,18 @@ public class MenuCadastro {
 		case 3: //Cadastro de Fornecedor: Está comentando para não duplicar Títulos no Console!
 			try {
 				FornecedorController.cadastro();
-				MenuPrincipal.menuGeral();
+				MenuCadastro.menuCadastro();
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_FORNECEDOR);
 			}
 			break;
-
+		case 4:
+			try {
+				CategoriaController.cadastro();
+				MenuCadastro.menuCadastro();
+			} catch (CadastroException e) {
+				System.out.println(EMensagensErroCad.ERRO_ESCRITA);
+			}
 		default:
 			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuCadastro.menuCadastro();
