@@ -13,6 +13,7 @@ public class ClienteView {
 	public static boolean visualizar() throws VisualizacaoException {
 
 		try {
+			System.out.println("\n**** LISTA DE CLIENTES ****\n");
 			System.out.println(String.format("%-10s", "Código") + 
 							   String.format("%-30s", "Nome") + 
 							   "CPF");

@@ -1,8 +1,13 @@
 package edu.sit.view.menu;
 
 
+import edu.sit.controller.cadastro.ClienteController;
 import edu.sit.controller.cadastro.VendaController;
+import edu.sit.erro.editor.EdicaoException;
+import edu.sit.erro.leitura.LeituraException;
+import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.uteis.Leitor;
+import edu.sit.view.controllers.ClienteView;
 import edu.sit.view.controllers.UsuarioView;
 
 public class MenuPrincipal {
@@ -38,6 +43,19 @@ public class MenuPrincipal {
 			}
 			break;
 		case 3:
+			try {
+				ClienteView.visualizar();
+				System.out.print("\nSelecione qual Cliente deseja alterar: \t");
+				try {
+					Integer codigo = Leitor.leInteger();
+					ClienteController.editar(codigo);
+					MenuPrincipal.menuGeral();
+				} catch (EdicaoException | LeituraException e) {
+					System.out.println(e.getMessage());
+				}
+			} catch (VisualizacaoException a) {
+				System.out.println(a.getMessage());
+			}
 			break;
 		case 4:
 			if( UsuarioView.login()){
