@@ -7,6 +7,8 @@ import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
+import edu.sit.erro.controller.ControllerException;
+import edu.sit.erro.controller.EErroController;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
@@ -112,5 +114,24 @@ public class ProdutoController {
 
 		return true;
 
+	}
+	
+	public static boolean reporEstoque(Integer codigo,Integer quantidade) throws ControllerException {
+		Produto produto = null;
+		try {
+			produto = new ProdutoDao().consulta(codigo);
+		} catch (DaoException | ConexaoException e) {
+			throw new ControllerException(EErroController.ERRO_BUSCAR_PRODUTO);
+		}
+		
+		if (produto!=null) {
+			produto.setQuantidade(produto.getQuantidade()+quantidade);
+		}else {
+			return false;
+		}
+		
+		
+		
+		return true;
 	}
 }
