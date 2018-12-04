@@ -12,8 +12,14 @@ public class FornecedorView {
 	public static boolean visualizar() throws VisualizacaoException {
 
 		try {
+			System.out.println("\n**** LISTA DE FUNCIONÁRIOS ****\n");
+			System.out.println(String.format("%-15s", "Código") + 
+							   String.format("%-20s", "Nome") + 
+							   "CNPJ");
 			for (Fornecedor fornecedor : new FornecedorDao().consultaTodos()) {
-				System.out.println(String.format("%-10s", "Código") + fornecedor.getId() + " ----------- " + fornecedor.getNome()+ " ----------- " + fornecedor.getCNPJ());
+				System.out.println(String.format("%-15s", "[" + fornecedor.getId() + "]") + 
+								   String.format("%-20s", fornecedor.getNome()) + 
+								   String.format("%-10s", fornecedor.getCNPJ()));
 			}
 			return true;
 		} catch (DaoException | ConexaoException e) {

@@ -57,7 +57,7 @@ public class FornecedorController {
 		try {
 			Fornecedor fornecedorBanco = new FornecedorDao().consultaCompleta(codigo);
 
-			System.out.print("*****EDITOR DE CATEGORIA*****");
+			System.out.print("\n**** EDIÇÃO DE FORNECEDOR ****\n");
 			Integer opcao = 99;
 			while (opcao != 0) {
 				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
