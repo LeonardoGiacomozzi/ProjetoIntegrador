@@ -139,7 +139,7 @@ public class Populador {
 							
 						}
 				new VendaDao().insere(Venda.criaVenda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda,
-						Double.parseDouble(dados[4]),LocalDate.parse(dados[5],DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
+						Double.parseDouble(dados[3]),LocalDate.parse(dados[4],DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 			}
 			return true;
 		} catch (DaoException | ConexaoException | IOException e) {
