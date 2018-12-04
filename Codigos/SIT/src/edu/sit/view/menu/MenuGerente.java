@@ -258,6 +258,11 @@ public class MenuGerente {
 			try {
 				System.out.print("\n");
 				Integer a = new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
+				while(a == 0) {
+					System.out.println("CPF inválido");
+					System.out.println("Informe um CPF válido");
+					a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
+				}
 				FuncionarioController.editar(a); 
 			} catch (EdicaoException | ConexaoException | DaoException e) {
 				System.out.println(e.getMessage());

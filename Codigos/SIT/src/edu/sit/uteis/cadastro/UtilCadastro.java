@@ -129,19 +129,7 @@ public class UtilCadastro {
 					System.out.println(e1.getMessage());
 				}
 				
-				try {
-					while(new FuncionarioDao().consultaPorCpf(cpf) == 0) {
-						System.out.println("CPF inválido");
-						System.out.println("Informe um novo CPF");
-						try {
-							cpf = Leitor.leCpf();
-						} catch (LeituraException e) {
-							System.out.println(e.getMessage());
-						}
-					}
-				} catch (ConexaoException | DaoException e) {
-					System.out.println(e.getMessage());
-				}
+				
 
 			
 		}
