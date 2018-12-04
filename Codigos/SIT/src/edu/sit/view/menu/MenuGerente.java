@@ -7,6 +7,7 @@ import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.cadastro.CategoriaController;
 import edu.sit.controller.cadastro.FornecedorController;
 import edu.sit.controller.cadastro.FuncionarioController;
+import edu.sit.controller.cadastro.ProdutoController;
 import edu.sit.controller.cadastro.UsuarioController;
 import edu.sit.controller.relatorio.RelatorioVenda;
 import edu.sit.erro.cadastro.CadastroException;
@@ -21,6 +22,7 @@ import edu.sit.view.configuracao.ConfiguracaoView;
 import edu.sit.view.controllers.CategoriaView;
 import edu.sit.view.controllers.FornecedorView;
 import edu.sit.view.controllers.FuncionarioView;
+import edu.sit.view.controllers.ProdutoView;
 import edu.sit.view.controllers.UsuarioView;
 
 public class MenuGerente {
@@ -86,7 +88,7 @@ public class MenuGerente {
 		switch (op) {
 		case 1:
 			try {
-				System.out.println(FuncionarioController.cadastro() ? "Cadastro efetuado com sucesso!!" : "");
+				System.out.println(FuncionarioController.cadastro() ? "Cadastro efetuado com SUCESSO!" : "");
 			} catch (CadastroException e) {
 				System.out.println(e.getMessage());
 			}
@@ -95,7 +97,7 @@ public class MenuGerente {
 
 		case 2:
 			try {
-				System.out.println(UsuarioController.cadastro() ? "Cadastro efetuado com sucesso!!" : "");
+				System.out.println(UsuarioController.cadastro() ? "Cadastro efetuado com SUCESSO!" : "");
 			} catch (CadastroException e) {
 				System.out.println(e.getMessage());
 			}
@@ -176,6 +178,19 @@ public class MenuGerente {
 				MenuGerente.menuGerenciamento();
 			break;
 		case 3:
+			try {
+				ProdutoView.visualizar();
+				System.out.print("\nSelecione qual produto deseja alterar: \t");
+				try {
+					Integer codigo = Leitor.leInteger();
+					ProdutoController.editar(codigo);
+					MenuGerente.menuGerenciamento();
+				} catch (EdicaoException | LeituraException e) {
+					System.out.println(e.getMessage());
+				}
+			} catch (VisualizacaoException a) {
+				System.out.println(a.getMessage());
+			}
 			break;
 		case 4:
 			try {
