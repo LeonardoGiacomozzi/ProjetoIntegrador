@@ -140,11 +140,10 @@ public class MenuGerente {
 				UsuarioView.visualizar();
 				System.out.print("\nSelecione qual usuário deseja trocar a senha: \t");
 				UsuarioController.trocaSenha(new UsuarioDao().consulta(Leitor.leInteger()));
-
+				MenuGerente.menuGerenciamento();
 			} catch (VisualizacaoException | DaoException | ConexaoException | LeituraException e) {
 				System.out.println(e.getMessage());
 			}
-			MenuGerente.menusGerente();
 			break;
 		case 3:
 			break;
@@ -155,6 +154,7 @@ public class MenuGerente {
 				try {
 					Integer codigo = Leitor.leInteger();
 					CategoriaController.editar(codigo);
+					MenuGerente.menuGerenciamento();
 				} catch (LeituraException | EdicaoException e) {
 					System.out.println(e.getMessage());
 				}
@@ -169,6 +169,7 @@ public class MenuGerente {
 				try {
 					Integer codigo = Leitor.leInteger();
 					FornecedorController.editar(codigo);
+					MenuGerente.menuGerenciamento();
 				} catch (EdicaoException | LeituraException a) {
 					System.out.println(a.getMessage());
 				}

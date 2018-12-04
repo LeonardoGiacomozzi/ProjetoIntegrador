@@ -71,6 +71,7 @@ public class MenuCadastro {
 			} catch (CadastroException e) {
 				System.out.println(EMensagensErroCad.ERRO_ESCRITA);
 			}
+			break;
 		default:
 			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuCadastro.menuCadastro();
