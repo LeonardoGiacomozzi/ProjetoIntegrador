@@ -212,10 +212,10 @@ public class VendaController {
 								}
 							}
 
-							System.out.println("\n\nValor Total até o momento: [R$"
-									+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade) + "]\n");
 							vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
 									+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade));
+							System.out.println("\n\nValor Total até o momento: [R$"+
+									vendaNova.getValor() + "]\n");
 							System.out.println("Deseja continuar comprando?\n"
 									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
 							opcao = Leitor.leInteger();
