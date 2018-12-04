@@ -127,9 +127,6 @@ public class UtilCadastro {
 				} catch (LeituraException e1) {
 					System.out.println(e1.getMessage());
 				}
-				
-				
-
 			
 		}
 		return cpf;
