@@ -136,14 +136,44 @@ public class MenuGerente {
 			MenuGerente.menuFuncionario();
 			break;
 		case 2:
-			try {
-				UsuarioView.visualizar();
+			Integer codigoUu = null;
+			while (codigoUu == null) {
+				try {
+					UsuarioView.visualizar();
+				} catch (VisualizacaoException e3) {
+					System.out.println(e3.getMessage());
+				}
 				System.out.print("\nSelecione qual usuário deseja trocar a senha: \t");
-				UsuarioController.trocaSenha(new UsuarioDao().consulta(Leitor.leInteger()));
-				MenuGerente.menuGerenciamento();
-			} catch (VisualizacaoException | DaoException | ConexaoException | LeituraException e) {
-				System.out.println(e.getMessage());
+
+				try {
+					codigoUu = Leitor.leInteger();
+				} catch (LeituraException e2) {
+					System.out.println(e2.getMessage());
+				}
+				
+					try {
+						while (new UsuarioDao().consulta(codigoUu) == null) {
+							System.out.println("Usuario Invalido");
+							System.out.println("Informe um novo Usuario");
+							try {
+								codigoUu = Leitor.leInteger();
+							} catch (LeituraException e) {
+								System.out.println(e.getMessage());
+							}
+						
+							
+						}
+					} catch (DaoException | ConexaoException e) {
+						System.out.println(e.getMessage());
+					}	
+					
 			}
+			try {
+				UsuarioController.trocaSenha(new UsuarioDao().consulta(codigoUu));
+			} catch (DaoException | ConexaoException e1) {
+				System.out.println(e1.getMessage());
+			}
+				MenuGerente.menuGerenciamento();
 			break;
 		case 3:
 			break;
@@ -202,7 +232,7 @@ public class MenuGerente {
 				System.out.println(e.getMessage());
 			}
 		}
-		
+
 		switch (op) {
 		case 1:
 			try {
@@ -228,7 +258,7 @@ public class MenuGerente {
 				System.out.println(e.getMessage());
 			}
 			break;
-		case 0:	
+		case 0:
 			MenuGerente.menusGerente();
 			break;
 		default:
@@ -236,7 +266,7 @@ public class MenuGerente {
 			MenuGerente.menuFuncionario();
 			break;
 		}
-		
+
 	}
 
 	private static void menuFuncionario() {
@@ -259,11 +289,11 @@ public class MenuGerente {
 			try {
 				System.out.print("\n");
 				Integer a = new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
-				while(a == 0) {
+				while (a == 0) {
 					System.out.println("\nCPF Inválido!\n");
-					a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
+					a = new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
 				}
-				FuncionarioController.editar(a); 
+				FuncionarioController.editar(a);
 			} catch (EdicaoException | ConexaoException | DaoException e) {
 				System.out.println(e.getMessage());
 			}
@@ -277,7 +307,7 @@ public class MenuGerente {
 			} catch (VisualizacaoException | EdicaoException | LeituraException e) {
 				System.out.println(e.getMessage());
 			}
-			
+
 			MenuGerente.menusGerente();
 			break;
 		case 0:
