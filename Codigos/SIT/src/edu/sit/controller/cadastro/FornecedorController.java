@@ -60,19 +60,20 @@ public class FornecedorController {
 			System.out.print("\n**** EDIÇÃO DE FORNECEDOR ****\n");
 			Integer opcao = 99;
 			while (opcao != 0) {
-				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
-				System.out.println("\n\t\t1----------NOME DO FORNECEDOR\t\t" + fornecedorBanco.getNome());
-				System.out.println("\n\t\t2----------NOME DA PESSOA RESPONSAVE\t" + fornecedorBanco.getPessoaResponsavel());
-				System.out.println("\n\t\t3----------NOME DA PESSOA RESPONSAVE\t" + fornecedorBanco.getContato().toString());
-				System.out.println("\n\t\t0----------FINALIZAR");
-				System.out.println("\n\n\t\t---:");
+				System.out.println(String.format("%-27s", "\n1 - Nome: ") + fornecedorBanco.getNome());
+				System.out.println(String.format("%-26s", "2 - Pessoa Responsável: ") + fornecedorBanco.getPessoaResponsavel());
+				System.out.println(String.format("%-26s", "3 - Contato: ") + "Telefone: " + fornecedorBanco.getContato().getTelefone());
+				System.out.println(String.format("%-26s", "") + "Email: " + fornecedorBanco.getContato().getEmail());
+				System.out.println("\n0 - Finalizar");
+				System.out.print("\nInforme a opção que deseja alterar: \t");
 				opcao = Leitor.leInteger();
 
 				switch (opcao) {
 				case 1:
-					fornecedorBanco.setNome(UtilCadastro.pedeNome("Nome"));
+					fornecedorBanco.setNome(UtilCadastro.pedeNome("\nInforme o novo Nome: \t"));
 					break;
 				case 2:
+					System.out.print("\n");
 					fornecedorBanco.setPessoaResponsavel(UtilCadastro.pedePessoaResponsavel());
 					break;
 				case 3:
