@@ -42,7 +42,11 @@ public class ContatoController {
 				System.out.println("\n\t\t2----------E-MAIL\t" + contatoBanco.getEmail());
 				System.out.println("\n\t\t0----------FINALIZAR");
 				System.out.println("\n\n\t\t---:");
-				opcao = Leitor.leInteger();
+				try {
+					opcao = Leitor.leInteger();
+				} catch (LeituraException e1) {
+					System.out.println(e1.getMessage());
+				}
 				switch (opcao) {
 				case 1:
 					contatoBanco.setTelefone(UtilCadastro.pedeTelefone());
@@ -65,7 +69,7 @@ public class ContatoController {
 				}
 			}
 			return true;
-		} catch (DaoException | ConexaoException | EdicaoException | LeituraException e) {
+		} catch (DaoException | ConexaoException | EdicaoException e) {
 			System.out.println(e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CONTATO);
 		}
