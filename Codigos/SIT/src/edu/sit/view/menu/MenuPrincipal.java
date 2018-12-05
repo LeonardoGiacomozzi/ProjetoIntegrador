@@ -1,7 +1,5 @@
 package edu.sit.view.menu;
 
-import java.awt.Menu;
-
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.controller.cadastro.ClienteController;
