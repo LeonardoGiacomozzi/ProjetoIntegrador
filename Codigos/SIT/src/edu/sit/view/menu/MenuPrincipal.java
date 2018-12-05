@@ -1,5 +1,7 @@
 package edu.sit.view.menu;
 
+import java.awt.Menu;
+
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.controller.cadastro.ClienteController;
@@ -46,7 +48,6 @@ public class MenuPrincipal {
 			}
 			break;
 		case 3:
-
 			Integer codigo = null;
 			while (codigo == null) {
 				try {
@@ -94,15 +95,20 @@ public class MenuPrincipal {
 			}
 			break;
 		case 5:
-			Integer teste = 1;
-			while(teste !=0) {
-			ProdutoView.reporEstoque();
-			System.out.println("[1]- Adicionar [0] - Sair");
-			try {
-				teste = Leitor.leInteger();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
+			Integer auxiliar = 1;
+			while (auxiliar != 0) {
+				ProdutoView.reporEstoque();
+				System.out.println(String.format("%-10s", "[1]") + "Inserir");
+				System.out.println(String.format("%-10s", "[0]") + "Sair");
+				System.out.print("\nInforme a opção desejada: \t");
+
+				try {
+					auxiliar = Leitor.leInteger();
+				} catch (LeituraException e) {
+					System.out.println(e.getMessage());
+				}
+
+				break;
 			}
 			MenuPrincipal.menuGeral();
 			break;
