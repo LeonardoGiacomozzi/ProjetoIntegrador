@@ -68,7 +68,7 @@ public class ProdutoController {
 			produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
 
 			Integer opcao = 99;
-			System.out.println("**** EDITAR DE PRODUTO ****");
+			System.out.println("\n**** EDIÇÃO DE PRODUTO ****\n");
 			while (opcao != 0) {
 				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
 				System.out.println("\n\t\t1----------NOME\t"+produtoBanco.getNome());
@@ -96,14 +96,14 @@ public class ProdutoController {
 					try {
 
 						System.out.println(
-								new ProdutoDao().altera(produtoBanco) ? "Funcionario cadastrado com sucesso" : "Falha");
+								new ProdutoDao().altera(produtoBanco) ? "\nProduto alterado com SUCESSO!" : "Falha");
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_PRODUTO);
 					}
 					break;
 				default:
-					System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
+					System.out.println("\nValor Inválido!\n\nSelecione uma das opções oferecidas: \t");
 					break;
 				}
 			}

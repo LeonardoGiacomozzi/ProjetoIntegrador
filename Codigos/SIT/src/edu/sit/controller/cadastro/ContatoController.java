@@ -55,7 +55,7 @@ public class ContatoController {
 					break;
 				case 0:
 					try {
-						new ContatoDao().altera(contatoBanco);
+						System.out.println(new ContatoDao().altera(contatoBanco) ? "\nContato alterado com SUCESSO!" : "\nFalha");
 
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());

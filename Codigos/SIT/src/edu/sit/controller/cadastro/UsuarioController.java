@@ -20,8 +20,7 @@ public class UsuarioController {
 
 		try {
 			System.out.println(
-					new UsuarioDao().insere(Usuario.criaUsuario(login, senha)) ? "\nUsuário cadastrado com SUCESSO!"
-							: "FATAL_ERROR");
+					new UsuarioDao().insere(Usuario.criaUsuario(login, senha)) ? "\nUsuário cadastrado com SUCESSO!" : "\nFalha");
 			return true;
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());

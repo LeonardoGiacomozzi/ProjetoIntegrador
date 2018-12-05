@@ -78,8 +78,7 @@ public class FuncionarioController {
 				case 0:
 
 					try {
-						new FuncionarioDao().altera(funcionarioBanco);
-						System.out.println("\nFuncionário alterado com SUCESSO!");
+						System.out.println(new FuncionarioDao().altera(funcionarioBanco) ? "\nFuncionário alterado com SUCESSO!" : "\nFalha");
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_FUNCIONARIO);

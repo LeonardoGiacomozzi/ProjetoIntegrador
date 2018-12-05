@@ -83,8 +83,7 @@ public class FornecedorController {
 				case 0:
 
 					try {
-						new FornecedorDao().altera(fornecedorBanco);
-
+						System.out.println(new FornecedorDao().altera(fornecedorBanco) ? "\nFornecedor alterado com SUCESSO!" : "\nFalha");
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_FORNECEDOR);
