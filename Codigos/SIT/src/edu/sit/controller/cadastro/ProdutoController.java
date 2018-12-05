@@ -126,12 +126,14 @@ public class ProdutoController {
 		
 		if (produto!=null) {
 			produto.setQuantidade(produto.getQuantidade()+quantidade);
+			try {
+				new ProdutoDao().altera(produto);
+			} catch (DaoException | ConexaoException a) {
+				System.out.println(a.getMessage());
+			}
 		}else {
 			return false;
 		}
-		
-		
-		
 		return true;
 	}
 }
