@@ -1,9 +1,12 @@
 package edu.sit.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.FuncionarioDao;
+import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.VendaDao;
 import edu.sit.controller.notaFiscal.GeraArquivoNotaFiscal;
 import edu.sit.controller.relatorio.RelatorioVenda;
@@ -111,7 +114,7 @@ public class Teste {
 ////		
 //		VendaDao teste6 = new VendaDao();
 //		RelatorioVenda.geraArquivo(teste6.pegaVendaDia());
-		//GeraArquivoNotaFiscal.geraArquivo(NotaFiscal.criaNotaFiscal(teste6.consultaCompleta(1)));
+//		GeraArquivoNotaFiscal.geraArquivo(NotaFiscal.criaNotaFiscal(teste6.consultaCompleta(1)));
 		// System.out.println(teste6.criaTabela());
 		// System.out.println(teste6.consultaCompleta(1));
 //		ArrayList<Venda> vendas = teste6.pegaVendaMes();
@@ -131,6 +134,11 @@ public class Teste {
 		
 		//Integer a= new FuncionarioDao().consultaPorCpf(UtilCadastro.pedeCpf());
 		//System.out.println(a);
+		
+		HashMap<Integer, ProdutoQuantidade> a = new HashMap<>();
+		Produto b =  new ProdutoDao().consulta(1);
+		
+		a.put(b.getId(),new ProdutoQuantidade(b,12));
 		
 	}
 }

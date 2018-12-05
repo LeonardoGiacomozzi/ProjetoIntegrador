@@ -1,7 +1,9 @@
 package edu.sit.controller.cadastro;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -38,7 +40,13 @@ public class VendaController {
 			funcionario = pedeFuncionario();
 			cliente = pedeCliente();
 			vendaNova = Venda.criaVenda(cliente, funcionario);
-			vendaNova.setProdutos(pedeProdutos());
+			ArrayList<ProdutoQuantidade> aux = new ArrayList<ProdutoQuantidade>();
+			Map<Integer,ProdutoQuantidade> auxMap = pedeProdutos();
+			for (Map.Entry<Integer,ProdutoQuantidade> object : auxMap.entrySet() ) {
+				aux.add(object.getValue());
+				
+			}
+			vendaNova.setProdutos(aux);
 		} catch (VendaException e) {
 			System.out.println(e.getMessage());
 		}
@@ -65,42 +73,42 @@ public class VendaController {
 
 		Integer funcionarioId = null;
 		while (funcionarioId == null) {
-			
-				try {
-					if (FuncionarioView.visualizar()) {
-						System.out.print("\nInforme o código do funcionário: \t");
-						try {
-							funcionarioId = Leitor.leInteger();
-						} catch (LeituraException e2) {
-							System.out.println(e2.getMessage());
-						}
-					
-							try {
-								while (new FuncionarioDao().consulta(funcionarioId) == null) {
-									System.out.println("Funcionario Inválido");
-									System.out.println("Informe um novo funcionário");
-									System.out.print("\nInforme o código do funcionário: \t");
-									try {
-										FuncionarioView.visualizar();
-									} catch (VisualizacaoException e1) {
-										System.out.println(e1.getMessage());
-									}
-									try {
-										funcionarioId = Leitor.leInteger();
-									} catch (LeituraException e) {
-										System.out.println(e.getMessage());
-									}
 
-								}
-							} catch (DaoException | ConexaoException e) {
+			try {
+				if (FuncionarioView.visualizar()) {
+					System.out.print("\nInforme o código do funcionário: \t");
+					try {
+						funcionarioId = Leitor.leInteger();
+					} catch (LeituraException e2) {
+						System.out.println(e2.getMessage());
+					}
+
+					try {
+						while (new FuncionarioDao().consulta(funcionarioId) == null) {
+							System.out.println("Funcionario Inválido");
+							System.out.println("Informe um novo funcionário");
+							System.out.print("\nInforme o código do funcionário: \t");
+							try {
+								FuncionarioView.visualizar();
+							} catch (VisualizacaoException e1) {
+								System.out.println(e1.getMessage());
+							}
+							try {
+								funcionarioId = Leitor.leInteger();
+							} catch (LeituraException e) {
 								System.out.println(e.getMessage());
 							}
-						
+
+						}
+					} catch (DaoException | ConexaoException e) {
+						System.out.println(e.getMessage());
 					}
-				} catch (VisualizacaoException e) {
-					System.out.println(e.getMessage());
+
 				}
-			
+			} catch (VisualizacaoException e) {
+				System.out.println(e.getMessage());
+			}
+
 		}
 		return funcionarioId;
 
@@ -120,34 +128,32 @@ public class VendaController {
 			System.out.print(String.format("%-11s", "\n[0]") + "CADASTRAR NOVO CLIENTE \n");
 			System.out.print("\n\nInforme o código do cliente: \t");
 
-			
-				try {
-					clienteId = Leitor.leInteger();
-				} catch (LeituraException e2) {
-					System.out.println(e2.getMessage());
-				}
+			try {
+				clienteId = Leitor.leInteger();
+			} catch (LeituraException e2) {
+				System.out.println(e2.getMessage());
+			}
 
-				try {
-					while (new ClienteDao().consulta(clienteId) == null) {
-						System.out.println("Cliente Inválido");
-						System.out.println("Informe um novo cliente");
-						System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
-						try {
-							ClienteView.visualizar();
-						} catch (VisualizacaoException e1) {
-							System.out.println(e1.getMessage());
-						}
-
-						try {
-							clienteId = Leitor.leInteger();
-						} catch (LeituraException e) {
-							System.out.println(e.getMessage());
-						}
+			try {
+				while (new ClienteDao().consulta(clienteId) == null) {
+					System.out.println("Cliente Inválido");
+					System.out.println("Informe um novo cliente");
+					System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
+					try {
+						ClienteView.visualizar();
+					} catch (VisualizacaoException e1) {
+						System.out.println(e1.getMessage());
 					}
-				} catch (DaoException | ConexaoException e1) {
-					System.out.println(e1.getMessage());
+
+					try {
+						clienteId = Leitor.leInteger();
+					} catch (LeituraException e) {
+						System.out.println(e.getMessage());
+					}
 				}
-			 
+			} catch (DaoException | ConexaoException e1) {
+				System.out.println(e1.getMessage());
+			}
 
 			if (clienteId == 0) {
 				try {
@@ -166,10 +172,10 @@ public class VendaController {
 
 	}
 
-	private static ArrayList<ProdutoQuantidade> pedeProdutos() {
+	private static HashMap<Integer, ProdutoQuantidade> pedeProdutos() {
 
 		Integer opcao = Integer.MAX_VALUE;
-		ArrayList<ProdutoQuantidade> produtos = new ArrayList<ProdutoQuantidade>();
+		HashMap<Integer, ProdutoQuantidade> produtos = new HashMap<Integer, ProdutoQuantidade>();
 		while (opcao != 0) {
 			ProdutoQuantidade produtoAux = new ProdutoQuantidade();
 			Integer quantidade = 0;
@@ -189,42 +195,87 @@ public class VendaController {
 				System.out.print("\nInforme o código do produto que deseja comprar: \t");
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
-					try {
-						produtoAux.setItensPedido(new ProdutoDao().consulta(opcao));
-						if (produtoAux.getItensPedido() != null) {
 
-							System.out.print("\nProduto [" + produtoAux.getItensPedido().getNome() + "]" + "\nDisponível ["
-									+ produtoAux.getItensPedido().getQuantidade() + "]" + "\nQuantos deseja comprar: \t");
-							while (quantidade == null || quantidade > produtoAux.getItensPedido().getQuantidade() || quantidade <= 0) {
-								try {
-									quantidade = Leitor.leInteger();
+					if (produtos.containsKey(opcao)) {
 
-									if (quantidade > produtoAux.getItensPedido().getQuantidade() || quantidade <= 0) {
-										System.out.println("\nQuantidade indisponível...");
-									} else {
-										produtoAux.setQuantidadeProduto(quantidade);
-										produtoAux.getItensPedido().setQuantidade(produtoAux.getItensPedido().getQuantidade() - quantidade);
-										new ProdutoDao().altera(produtoAux.getItensPedido());
-										produtos.add(produtoAux);
+						produtoAux = produtos.get(opcao);
+						System.out.println("Produto [" + produtoAux.getItensPedido().getNome()
+								+ "] quantidade no pedido [" + produtoAux.getQuantidadeProduto() + "]"
+								+ " quantidade disponivel [" + produtoAux.getItensPedido().getQuantidade() + "]");
+						while (quantidade == null || quantidade > produtoAux.getItensPedido().getQuantidade()
+								|| quantidade <= 0) {
+							try {
+								quantidade = Leitor.leInteger();
+
+								if (quantidade > produtoAux.getItensPedido().getQuantidade() || quantidade <= 0) {
+									System.out.println("\nQuantidade indisponível...");
+								} else {
+									Integer aux;
+									if (quantidade>produtoAux.getQuantidadeProduto()) {
+										aux = quantidade-produtoAux.getQuantidadeProduto();
+										produtoAux.getItensPedido()
+										.setQuantidade(produtoAux.getItensPedido().getQuantidade() -aux);
+										
+										vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
+												+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade,1));
+									}else {
+										aux = produtoAux.getQuantidadeProduto()-quantidade;
+										produtoAux.getItensPedido()
+										.setQuantidade(produtoAux.getItensPedido().getQuantidade() + aux);
+										vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
+												+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), aux,0));
 									}
-								} catch (LeituraException e) {
-									System.out.println(e.getMessage());
+									produtoAux.setQuantidadeProduto(quantidade);
+									new ProdutoDao().altera(produtoAux.getItensPedido());
+									produtos.put(opcao, produtoAux);
 								}
+							} catch (LeituraException e) {
+								System.out.println(e.getMessage());
 							}
-
-							vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
-									+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade));
-							System.out.println("\n\nValor Total até o momento: [R$"+
-									vendaNova.getValor() + "]\n");
-							System.out.println("Deseja continuar comprando?\n"
-									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
-							opcao = Leitor.leInteger();
-						} else {
-							System.out.println("Valor Invalido");
 						}
 
-					} catch (DaoException e) {
-						System.out.println(e.getMessage() + "\nErro ao adicionar o produto");
+					} else {
+
+						try {
+							produtoAux.setItensPedido(new ProdutoDao().consulta(opcao));
+							if (produtoAux.getItensPedido() != null) {
+
+								System.out.print("\nProduto [" + produtoAux.getItensPedido().getNome() + "]"
+										+ "\nDisponível [" + produtoAux.getItensPedido().getQuantidade() + "]"
+										+ "\nQuantos deseja comprar: \t");
+								while (quantidade == null || quantidade > produtoAux.getItensPedido().getQuantidade()
+										|| quantidade <= 0) {
+									try {
+										quantidade = Leitor.leInteger();
+
+										if (quantidade > produtoAux.getItensPedido().getQuantidade()
+												|| quantidade <= 0) {
+											System.out.println("\nQuantidade indisponível...");
+										} else {
+											produtoAux.setQuantidadeProduto(quantidade);
+											produtoAux.getItensPedido().setQuantidade(
+													produtoAux.getItensPedido().getQuantidade() - quantidade);
+											new ProdutoDao().altera(produtoAux.getItensPedido());
+											produtos.put(opcao, produtoAux);
+											vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
+													+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade,1));
+										}
+									} catch (LeituraException e) {
+										System.out.println(e.getMessage());
+									}
+								}
+								System.out.println("\n\nValor Total até o momento: [R$" + vendaNova.getValor() + "]\n");
+								System.out.println(
+										"Deseja continuar comprando?\n" + "Aperte [1] para Continuar comprando...\n"
+												+ "Aperte [0] para Finalizar COMPRA.");
+								opcao = Leitor.leInteger();
+							} else {
+								System.out.println("Valor Invalido");
+							}
+
+						} catch (DaoException e) {
+							System.out.println(e.getMessage() + "\nErro ao adicionar o produto");
+						}
 					}
 				}
 
@@ -236,9 +287,14 @@ public class VendaController {
 		return produtos;
 	}
 
-	private static Double precoAtual(Double valorUnitario, Integer quantidade) {
+	private static Double precoAtual(Double valorUnitario, Integer quantidade,Integer operacao) {
+		if (operacao==1) {
+			
+			valor = valor + (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
+		}else {
+			valor = valor - (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
 
-		valor = valor + (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
+		}
 		return valor;
 	}
 
