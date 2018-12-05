@@ -67,49 +67,59 @@ public class ClienteController {
 	}
 
 	public static boolean editar(Integer codigo) throws EdicaoException {
-
 		try {
-			Cliente clienteBanco = new ClienteDao().consultaCompleta(codigo);
-
-			Integer opcao = 99;
-			System.out.print("**** EDITOR DE CLIENTE ****");
-			while (opcao != 0) {
-				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
-				System.out.println("\n\t\t1----------NOME\t" + clienteBanco.getNome());
-				System.out.println("\n\t\t2----------ENDEREÇO\t" + clienteBanco.getEndereco());
-				System.out.println("\n\t\t3----------CONTATO\t" + clienteBanco.getContato().toString());
-				System.out.println("\n\t\t0----------FINALIZAR");
-				System.out.println("\n\n\t\t---:");
+		Cliente clienteBanco = new ClienteDao().consultaCompleta(codigo);
+		
+		Integer opcao = 99;
+		System.out.print("**** EDITOR DE CLIENTE ****");
+		while (opcao != 0) {
+			System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
+			System.out.println("\n\t\t1----------NOME\t" + clienteBanco.getNome());
+			System.out.println("\n\t\t2----------ENDEREÇO\t" + clienteBanco.getEndereco());
+			System.out.println("\n\t\t3----------CONTATO\t" + clienteBanco.getContato().toString());
+			System.out.println("\n\t\t0----------FINALIZAR");
+			System.out.println("\n\n\t\t---:");
+			try {
 				opcao = Leitor.leInteger();
-				switch (opcao) {
-				case 1:
-					clienteBanco.setNome(UtilCadastro.pedeNome("Nome: \t"));
-					break;
-				case 2:
-					clienteBanco.setEndereco(UtilCadastro.pedeEndereco());
-					break;
-				case 3:
-					ContatoController.editar(clienteBanco.getContatoid());
-					break;
-				case 0:
-					try {
-						new ClienteDao().altera(clienteBanco);
-
-					} catch (DaoException e) {
-						System.out.println(e.getMessage());
-						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_CATEGORIA);
-					}
-					break;
-				default:
-					System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
-					break;
-				}
+			} catch (LeituraException e1) {
+				System.out.println(e1.getMessage());
 			}
-			return true;
-		} catch (DaoException | ConexaoException | EdicaoException | LeituraException e) {
-			System.out.println(e.getMessage());
-			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
+			switch (opcao) {
+			case 1:
+				clienteBanco.setNome(UtilCadastro.pedeNome("Nome: \t"));
+				break;
+			case 2:
+				clienteBanco.setEndereco(UtilCadastro.pedeEndereco());
+				break;
+			case 3:
+				ContatoController.editar(clienteBanco.getContatoid());
+				break;
+			case 0:
+			
+				try {
+					new ClienteDao().altera(clienteBanco);
+				} catch (DaoException | ConexaoException e) {
+					System.out.println(e.getMessage());
+				}
+
+				
+				break;
+			default:
+				System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
+				break;
+			}
+			}
+		}catch (EdicaoException  | DaoException e ) {
+				System.out.println(e.getMessage());
+				throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
+			} catch (ConexaoException e2) {
+			System.out.println(e2.getMessage());
 		}
+		
+		
+		return true;
+		
+		
 
 	}
 	
