@@ -1,11 +1,13 @@
 package edu.sit.view.menu;
 
-
+import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.controller.cadastro.ClienteController;
 import edu.sit.controller.cadastro.VendaController;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.visualizacao.VisualizacaoException;
+import edu.sit.erros.dao.DaoException;
 import edu.sit.uteis.Leitor;
 import edu.sit.view.controllers.ClienteView;
 import edu.sit.view.controllers.UsuarioView;
@@ -33,7 +35,7 @@ public class MenuPrincipal {
 		case 1: // Cadastros
 			MenuCadastro.menuCadastro();
 			break;
-			
+
 		case 2:
 			try {
 				VendaController.efetuaVenda();
@@ -43,24 +45,49 @@ public class MenuPrincipal {
 			}
 			break;
 		case 3:
-			try {
-				ClienteView.visualizar();
+
+			Integer codigo = null;
+			while (codigo == null) {
+				try {
+					ClienteView.visualizar();
+				} catch (VisualizacaoException e3) {
+					System.out.println(e3.getMessage());
+				}
 				System.out.print("\nSelecione qual Cliente deseja alterar: \t");
 				try {
-					Integer codigo = Leitor.leInteger();
-					ClienteController.editar(codigo);
-					MenuPrincipal.menuGeral();
-				} catch (EdicaoException | LeituraException e) {
-					System.out.println(e.getMessage());
+					codigo = Leitor.leInteger();
+				} catch (LeituraException e2) {
+					System.out.println(e2.getMessage());
 				}
-			} catch (VisualizacaoException a) {
-				System.out.println(a.getMessage());
+				try {
+					while (new ClienteDao().consulta(codigo) == null) {
+						System.out.println("Cliente não encontrado");
+						System.out.println("Informe o Cliente novamente");
+						ClienteView.visualizar();
+						try {
+							codigo = Leitor.leInteger();
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
+					}
+				} catch (DaoException | ConexaoException e) {
+					System.out.println(e.getMessage());
+				} catch (VisualizacaoException e1) {
+					System.out.println(e1.getMessage());
+				}
 			}
+			try {
+				ClienteController.editar(codigo);
+			} catch (EdicaoException e) {
+				System.out.println(e.getMessage());
+			}
+			MenuPrincipal.menuGeral();
+
 			break;
 		case 4:
-			if( UsuarioView.login()){
+			if (UsuarioView.login()) {
 				MenuGerente.menusGerente();
-			}else {
+			} else {
 				System.out.println("\nInformações INVÁLIDAS!\n");
 				MenuPrincipal.menuGeral();
 			}
