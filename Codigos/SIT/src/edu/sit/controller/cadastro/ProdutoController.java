@@ -68,19 +68,22 @@ public class ProdutoController {
 			produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
 
 			Integer opcao = 99;
-			System.out.println("\n**** EDIÇÃO DE PRODUTO ****\n");
+			System.out.println("\n**** EDIÇÃO DE PRODUTO ****");
 			while (opcao != 0) {
-				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
-				System.out.println("\n\t\t1----------NOME\t"+produtoBanco.getNome());
-				System.out.println("\n\t\t2----------CATEGORIA\t"+produtoBanco.getCategoria());
-				System.out.println("\n\t\t3----------FORNECEDOR\t"+produtoBanco.getFornecedor());
-				System.out.println("\n\t\t4----------VALOR UNITARIO\tR$ "+produtoBanco.getValorUnitario());
-				System.out.println("\n\t\t0----------FINALIZAR");
-				System.out.println("\n\n\t\t---:");
+				System.out.println(String.format("%-27s", "\n1 - Nome: ") + produtoBanco.getNome());
+				System.out.println(String.format("%-26s", "2 - Categoria: ") + produtoBanco.getCategoria().getNome());
+				System.out.println(String.format("%-26s", "3 - Fornecedor: ") + produtoBanco.getFornecedor().getNome());
+				System.out.println(String.format("%-26s", "    CNPJ:") + produtoBanco.getFornecedor().getCNPJ());
+				System.out.println(String.format("%-26s", "    Responsável:") + produtoBanco.getFornecedor().getPessoaResponsavel());
+				System.out.println(String.format("%-26s", "    Telefone:") + produtoBanco.getFornecedor().getContato().getTelefone());
+				System.out.println(String.format("%-26s", "    Email:") + produtoBanco.getFornecedor().getContato().getEmail());
+				System.out.println(String.format("%-26s", "4 - Valor Unitário:") + "R$" + produtoBanco.getValorUnitario());
+				System.out.println("\n0 - Finalizar");
+				System.out.print("\nInforme a opção que deseja alterar: \t");
 				opcao = Leitor.leInteger();
 				switch (opcao) {
 				case 1:
-					produtoBanco.setNome(UtilCadastro.pedeNome("Nome"));
+					produtoBanco.setNome(UtilCadastro.pedeNome("\nInforme o novo Nome: \t"));
 
 					break;
 				case 2:
