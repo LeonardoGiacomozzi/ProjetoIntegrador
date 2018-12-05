@@ -40,9 +40,9 @@ public class ProdutoView {
 			try {
 				while (new ProdutoDao().consulta(cod) == null) {
 					try {
-						visualizar();
+						ProdutoView.visualizar();
 						try {
-							System.out.print("\nInforme o código do produto: \t");
+							System.out.print("\nInforme o código do produto que deseja repor: \t");
 							cod = Leitor.leInteger();
 						} catch (LeituraException e) {
 							System.out.println(e.getMessage());
@@ -55,6 +55,8 @@ public class ProdutoView {
 						}
 						try {
 							ProdutoController.reporEstoque(cod, qtd);
+							ProdutoView.visualizar();
+							System.out.print("\n");
 							return true;
 						} catch (ControllerException e) {
 							System.out.println(
