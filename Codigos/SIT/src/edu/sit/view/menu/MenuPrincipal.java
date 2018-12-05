@@ -10,6 +10,7 @@ import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.uteis.Leitor;
 import edu.sit.view.controllers.ClienteView;
+import edu.sit.view.controllers.ProdutoView;
 import edu.sit.view.controllers.UsuarioView;
 
 public class MenuPrincipal {
@@ -93,6 +94,8 @@ public class MenuPrincipal {
 			}
 			break;
 		case 5:
+			ProdutoView.reporEstoque();
+			MenuPrincipal.menuGeral();
 			break;
 		case 0:
 			System.out.println("\n\n\n****                   VOCÊ SAIU                   ****");
