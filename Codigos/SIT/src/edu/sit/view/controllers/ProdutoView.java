@@ -39,6 +39,7 @@ public class ProdutoView {
 		while (cod == 0) {
 			try {
 				while (new ProdutoDao().consulta(cod) == null) {
+					
 					try {
 						ProdutoView.visualizar();
 						try {
@@ -55,6 +56,7 @@ public class ProdutoView {
 						}
 						try {
 							ProdutoController.reporEstoque(cod, qtd);
+							
 							ProdutoView.visualizar();
 							System.out.print("\n");
 							return true;

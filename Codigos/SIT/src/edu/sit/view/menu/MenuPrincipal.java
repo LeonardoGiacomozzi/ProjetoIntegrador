@@ -94,7 +94,16 @@ public class MenuPrincipal {
 			}
 			break;
 		case 5:
+			Integer teste = 1;
+			while(teste !=0) {
 			ProdutoView.reporEstoque();
+			System.out.println("[1]- Adicionar [0] - Sair");
+			try {
+				teste = Leitor.leInteger();
+			} catch (LeituraException e) {
+				System.out.println(e.getMessage());
+			}
+			}
 			MenuPrincipal.menuGeral();
 			break;
 		case 0:
