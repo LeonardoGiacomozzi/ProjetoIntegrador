@@ -86,7 +86,7 @@ public class FuncionarioController {
 					}
 					break;
 				default:
-					System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
+					System.out.println("\nValor Inválido!\n\nSelecione uma das opções oferecidas: \t");
 					break;
 				}
 

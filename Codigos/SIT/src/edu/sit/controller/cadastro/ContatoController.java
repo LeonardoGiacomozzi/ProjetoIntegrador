@@ -35,13 +35,12 @@ public class ContatoController {
 			Contato contatoBanco = new ContatoDao().consulta(codigo);
 
 			Integer opcao = 99;
-			System.out.print("\n**** EDIÇÃO DE CONTATO ****");
+			System.out.print("\n**** EDIÇÃO DE CONTATO ****\n");
 			while (opcao != 0) {
-				System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
-				System.out.println("\n\t\t1----------TELEFONE\t" + contatoBanco.getTelefone());
-				System.out.println("\n\t\t2----------E-MAIL\t" + contatoBanco.getEmail());
-				System.out.println("\n\t\t0----------FINALIZAR");
-				System.out.println("\n\n\t\t---:");
+				System.out.println(String.format("%-27s", "\n1 - Telefone: ") + contatoBanco.getTelefone());
+				System.out.println(String.format("%-26s", "2 - Email: ") + contatoBanco.getEmail());
+				System.out.println("\n0 - Finalizar");
+				System.out.print("\nInforme a opção que deseja alterar: \t");
 				try {
 					opcao = Leitor.leInteger();
 				} catch (LeituraException e1) {
@@ -64,7 +63,7 @@ public class ContatoController {
 					}
 					break;
 				default:
-					System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
+					System.out.println("\nValor Inválido!\n\nSelecione uma das opções oferecidas: \t");
 					break;
 				}
 			}
