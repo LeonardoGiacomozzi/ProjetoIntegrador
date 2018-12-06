@@ -96,7 +96,7 @@ public class MenuPrincipal {
 			Integer auxiliar = Integer.MAX_VALUE;
 			ProdutoView.reporEstoque();
 			while (auxiliar != 0) {
-				System.out.println(String.format("%-10s", "[1]") + "Inserir");
+				System.out.println(String.format("%-10s", "[1]") + "Repor mais produtos");
 				System.out.println(String.format("%-10s", "[0]") + "Sair");
 				System.out.print("\nInforme a opção desejada: \t");
 
@@ -104,8 +104,8 @@ public class MenuPrincipal {
 					auxiliar = Leitor.leInteger();
 					switch (auxiliar) {
 					case 0:
-						MenuPrincipal.menuGeral();
 						System.out.println("\n");
+						MenuPrincipal.menuGeral();
 						break;
 					case 1:
 						auxiliar = 1;
