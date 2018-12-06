@@ -114,7 +114,6 @@ public class VendaController {
 	}
 
 	private static Integer pedeCliente() throws VendaException {
-
 		Integer clienteId = null;
 		while (clienteId == null) {
 			try {
@@ -286,14 +285,8 @@ public class VendaController {
 	}
 
 	private static Double precoAtual(Double valorUnitario, Integer quantidade,Integer operacao) {
-		if (operacao==1) {
-			
-			valor = valor + (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
-		}else {
-			valor = valor - (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
-
-		}
-		return valor;
+	Double n = (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
+	return valor += ( operacao == 1) ? n  : - n;
 	}
 
 }
