@@ -33,8 +33,7 @@ public class ProdutoController {
 		categoriaId = UtilCadastro.pedeCategoria();
 		try {
 			while(new CategoriaDao().consulta(categoriaId)== null) {
-				System.out.println("Categoria Inexistente");
-				System.out.println("Informe uma nova categoria");
+				System.out.println("\nCategoria Inexistente!");
 				categoriaId = UtilCadastro.pedeCategoria();
 			}
 		} catch (DaoException | ConexaoException e1) {
@@ -43,8 +42,7 @@ public class ProdutoController {
 		fornecedorId = UtilCadastro.pedeFornecedor();
 		try {
 			while(new FornecedorDao().consulta(fornecedorId) == null) {
-				System.out.println("Fornecedor Inexistente");
-				System.out.println("Informe uma novo Fornecedor Válido");
+				System.out.println("\nFornecedor Inexistente!");
 				fornecedorId = UtilCadastro.pedeFornecedor();
 			}
 		} catch (DaoException | ConexaoException e1) {

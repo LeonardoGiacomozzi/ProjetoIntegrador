@@ -28,9 +28,8 @@ public class FornecedorController {
 		nome = UtilCadastro.pedeNome("Nome: \t");
 		cnpj = UtilCadastro.pedeCnpj();
 		try {
-			while(new FornecedorDao().consultaCNPJ(cnpj)!= null) {
-				System.out.println("CNPJ já Cadastrado");
-				System.out.println("Informe um Novo CNPJ");
+			while(new FornecedorDao().consultaCNPJ(cnpj) != null) {
+				System.out.println("\nCNPJ já Cadastrado! Informe um novo CNPJ...\n" );
 				cnpj = UtilCadastro.pedeCnpj();
 			}
 		} catch (DaoException | ConexaoException e1) {

@@ -79,9 +79,9 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor Where CNPJ = ?;");
 			pst.setString(1, cnpj);
 			ResultSet rs = pst.executeQuery();
-			Fornecedor fornecedor = rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"),
+			return rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"),
 					rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")) : null;
-			return consultaCompleta(fornecedor.getId());
+			
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {

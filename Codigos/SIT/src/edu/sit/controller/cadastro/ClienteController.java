@@ -36,7 +36,6 @@ public class ClienteController {
 			}
 				
 		} catch (DaoException | ConexaoException e1) {
-			// TODO Auto-generated catch block
 			System.out.println(e1.getMessage());
 		}
 		endereco = UtilCadastro.pedeEndereco();
@@ -73,11 +72,12 @@ public class ClienteController {
 		Integer opcao = 99;
 		System.out.print("\n**** EDIÇÃO DE CLIENTE ****\n");
 		while (opcao != 0) {
-			System.out.println("\n\t\t1----------NOME\t" + clienteBanco.getNome());
-			System.out.println("\n\t\t2----------ENDEREÇO\t" + clienteBanco.getEndereco());
-			System.out.println("\n\t\t3----------CONTATO\t" + clienteBanco.getContato().toString());
-			System.out.println("\n\t\t0----------FINALIZAR");
-			System.out.println("\n\n\t\t---:");
+			System.out.println(String.format("%-27s", "\n1 - Nome: ") + clienteBanco.getNome());
+			System.out.println(String.format("%-26s", "2 - Endereço: ") + clienteBanco.getEndereco());
+			System.out.println(String.format("%-26s", "3 - Contato: ") + "Telefone: " + clienteBanco.getContato().getTelefone());
+			System.out.println(String.format("%-26s", "") + "Email: " + clienteBanco.getContato().getEmail());
+			System.out.println("\n0 - Finalizar");
+			System.out.print("\nInforme a opção que deseja alterar: \t");
 			try {
 				opcao = Leitor.leInteger();
 			} catch (LeituraException e1) {
@@ -85,7 +85,7 @@ public class ClienteController {
 			}
 			switch (opcao) {
 			case 1:
-				clienteBanco.setNome(UtilCadastro.pedeNome("Informe o novo Nome: \t"));
+				clienteBanco.setNome(UtilCadastro.pedeNome("\nInforme o novo Nome: \t"));
 				break;
 			case 2:
 				clienteBanco.setEndereco(UtilCadastro.pedeEndereco());
