@@ -132,6 +132,7 @@ public class MenuGerente {
 				op = Leitor.leInteger();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
+				MenuGerente.menuGerenciamento();
 			}
 		}
 
@@ -299,6 +300,7 @@ public class MenuGerente {
 				op = Leitor.leInteger();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
+				MenuGerente.menuFuncionario();
 			}
 		}
 
