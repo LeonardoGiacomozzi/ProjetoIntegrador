@@ -21,7 +21,7 @@ public class CategoriaController {
 		nome = UtilCadastro.pedeNome("Nome: \t");
 		try {
 			Categoria categoria = Categoria.criaCategoria(nome);
-			System.out.println(new CategoriaDao().insere(categoria) ? "\nCategoria cadastrada com SUCESSO!\n" : "\nFalha\n");
+			System.out.print(new CategoriaDao().insere(categoria) ? "\nCategoria cadastrada com SUCESSO!\n" : "\nFalha\n");
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new CadastroException(EErroCadastro.ERRO_CADASTRO_CATEGORIA);
@@ -52,7 +52,7 @@ public class CategoriaController {
 				case 0:
 
 					try {
-						System.out.println(new CategoriaDao().altera(categoriaBanco) ? "\nCategoria alterada com SUCESSO!" : "\nFalha");
+						System.out.print(new CategoriaDao().altera(categoriaBanco) ? "\nCategoria alterada com SUCESSO!" : "\nFalha");
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_CATEGORIA);

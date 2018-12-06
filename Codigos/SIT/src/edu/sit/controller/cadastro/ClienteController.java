@@ -52,7 +52,7 @@ public class ClienteController {
 				try {
 					Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf,
 							new ContatoDao().pegaUltimoID());
-					System.out.println(
+					System.out.print(
 							new ClienteDao().insere(cliente) ? "\nCliente cadastrado com SUCESSO!" : "\nFalha\n");
 				} catch (DaoException e) {
 					System.out.println(e.getMessage());
@@ -96,7 +96,7 @@ public class ClienteController {
 			case 0:
 			
 				try {
-					System.out.println(new ClienteDao().altera(clienteBanco) ? "\nCliente alterado com SUCESSO!\n" : "\nFalha");
+					System.out.print(new ClienteDao().altera(clienteBanco) ? "\nCliente alterado com SUCESSO!\n\n" : "\nFalha");
 				} catch (DaoException | ConexaoException e) {
 					System.out.println(e.getMessage());
 				}
