@@ -118,8 +118,6 @@ public class VendaController {
 
 		Integer clienteId = null;
 		while (clienteId == null) {
-
-			System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
 			try {
 				System.out.print(!ClienteView.visualizar() ? "\nNão foi possível carregar os clientes" : "");
 			} catch (VisualizacaoException e) {
