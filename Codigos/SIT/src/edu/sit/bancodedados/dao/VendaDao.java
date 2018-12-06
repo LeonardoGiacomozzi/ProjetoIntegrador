@@ -134,7 +134,6 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 
 	@Override
 	public boolean altera(Venda objeto) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
