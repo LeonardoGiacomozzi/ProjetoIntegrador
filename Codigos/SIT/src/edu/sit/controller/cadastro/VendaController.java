@@ -1,9 +1,7 @@
 package edu.sit.controller.cadastro;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -27,26 +25,18 @@ import edu.sit.view.controllers.FuncionarioView;
 
 public class VendaController {
 
-	private static Double valor = 0.0;
 	private static Venda vendaNova = null;
 
 	public static boolean efetuaVenda() throws CadastroException {
 
 		Integer funcionario = null;
 		Integer cliente = null;
-		valor = 0.0;
 		System.out.print("\n**** EFETUAR VENDA ****\n");
 		try {
 			funcionario = pedeFuncionario();
 			cliente = pedeCliente();
 			vendaNova = Venda.criaVenda(cliente, funcionario);
-			ArrayList<ProdutoQuantidade> aux = new ArrayList<ProdutoQuantidade>();
-			Map<Integer,ProdutoQuantidade> auxMap = pedeProdutos();
-			for (Map.Entry<Integer,ProdutoQuantidade> object : auxMap.entrySet() ) {
-				aux.add(object.getValue());
-				
-			}
-			vendaNova.setProdutos(aux);
+			vendaNova.setProdutos(pedeProdutos());
 		} catch (VendaException e) {
 			System.out.println(e.getMessage());
 		}
@@ -167,10 +157,10 @@ public class VendaController {
 
 	}
 
-	private static HashMap<Integer, ProdutoQuantidade> pedeProdutos() {
+	private static ArrayList<ProdutoQuantidade> pedeProdutos() {
 
 		Integer opcao = Integer.MAX_VALUE;
-		HashMap<Integer, ProdutoQuantidade> produtos = new HashMap<Integer, ProdutoQuantidade>();
+		ArrayList<ProdutoQuantidade> produtos = new ArrayList< ProdutoQuantidade>();
 		while (opcao != 0) {
 			ProdutoQuantidade produtoAux = new ProdutoQuantidade();
 			Integer quantidade = 0;
@@ -191,45 +181,6 @@ public class VendaController {
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
 
-					if (produtos.containsKey(opcao)) {
-
-						produtoAux = produtos.get(opcao);
-						System.out.println("Produto [" + produtoAux.getItensPedido().getNome()
-								+ "] quantidade no pedido [" + produtoAux.getQuantidadeProduto() + "]"
-								+ " quantidade disponivel [" + produtoAux.getItensPedido().getQuantidade() + "]");
-						while (quantidade == null || quantidade > produtoAux.getItensPedido().getQuantidade()
-								|| quantidade <= 0) {
-							try {
-								quantidade = Leitor.leInteger();
-
-								if (quantidade > produtoAux.getItensPedido().getQuantidade() || quantidade <= 0) {
-									System.out.println("\nQuantidade indisponível...");
-								} else {
-									Integer aux;
-									if (quantidade>produtoAux.getQuantidadeProduto()) {
-										aux = quantidade-produtoAux.getQuantidadeProduto();
-										produtoAux.getItensPedido()
-										.setQuantidade(produtoAux.getItensPedido().getQuantidade() -aux);
-										
-										vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
-												+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade,1));
-									}else {
-										aux = produtoAux.getQuantidadeProduto()-quantidade;
-										produtoAux.getItensPedido()
-										.setQuantidade(produtoAux.getItensPedido().getQuantidade() + aux);
-										vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
-												+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), aux,0));
-									}
-									produtoAux.setQuantidadeProduto(quantidade);
-									new ProdutoDao().altera(produtoAux.getItensPedido());
-									produtos.put(opcao, produtoAux);
-								}
-							} catch (LeituraException e) {
-								System.out.println(e.getMessage());
-							}
-						}
-
-					} else {
 
 						try {
 							produtoAux.setItensPedido(new ProdutoDao().consulta(opcao));
@@ -251,9 +202,9 @@ public class VendaController {
 											produtoAux.getItensPedido().setQuantidade(
 													produtoAux.getItensPedido().getQuantidade() - quantidade);
 											new ProdutoDao().altera(produtoAux.getItensPedido());
-											produtos.put(opcao, produtoAux);
+											produtos.add(produtoAux);
 											vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
-													+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade,1));
+													+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade));
 										}
 									} catch (LeituraException e) {
 										System.out.println(e.getMessage());
@@ -274,7 +225,7 @@ public class VendaController {
 							System.out.println(e.getMessage() + "\nErro ao adicionar o produto");
 						}
 					}
-				}
+				
 
 			} catch (DaoException | ConexaoException | LeituraException e) {
 				System.out.println(e.getMessage());
@@ -284,9 +235,8 @@ public class VendaController {
 		return produtos;
 	}
 
-	private static Double precoAtual(Double valorUnitario, Integer quantidade,Integer operacao) {
-	Double n = (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
-	return valor += ( operacao == 1) ? n  : - n;
+	private static Double precoAtual(Double valorUnitario, Integer quantidade) {
+	return (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
 	}
 
 }
