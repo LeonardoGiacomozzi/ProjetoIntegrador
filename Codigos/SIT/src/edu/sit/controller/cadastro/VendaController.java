@@ -85,7 +85,7 @@ public class VendaController {
 
 					try {
 						while (new FuncionarioDao().consulta(funcionarioId) == null) {
-							System.out.println("\nFuncionário Inválido!");
+							System.out.println("\nCódigo de Funcionário Inválido!");
 							try {
 								FuncionarioView.visualizar();
 								System.out.print("\nInforme o código do funcionário novamente: \t");
@@ -133,7 +133,7 @@ public class VendaController {
 
 			try {
 				while (new ClienteDao().consulta(clienteId) == null) {
-					System.out.println("\nCliente Inválido!");
+					System.out.println("\nCódigo de Cliente Inválido!");
 					try {
 						ClienteView.visualizar();
 						System.out.print("\nInforme o código do Cliente novamente: \t");
@@ -246,7 +246,7 @@ public class VendaController {
 
 										if (quantidade > produtoAux.getItensPedido().getQuantidade()
 												|| quantidade <= 0) {
-											System.out.println("\nQuantidade indisponível...");
+											System.out.print("\nQuantidade Indisponível!\n\nDigite novamente a quantidade desejada: \t");
 										} else {
 											produtoAux.setQuantidadeProduto(quantidade);
 											produtoAux.getItensPedido().setQuantidade(
@@ -258,6 +258,7 @@ public class VendaController {
 										}
 									} catch (LeituraException e) {
 										System.out.println(e.getMessage());
+										System.out.print("\nTente novamente: \t");
 									}
 								}
 								System.out.println("\n\nValor Total até o momento: [R$" + vendaNova.getValor() + "]\n");
@@ -265,8 +266,9 @@ public class VendaController {
 										"Deseja continuar comprando?\n" + "Aperte [1] para Continuar comprando...\n"
 												+ "Aperte [0] para Finalizar COMPRA.");
 								opcao = Leitor.leInteger();
+								
 							} else {
-								System.out.println("Valor Invalido");
+								System.out.println("\nCódigo de Produto Inválido!");
 							}
 
 						} catch (DaoException e) {

@@ -96,7 +96,7 @@ public class ClienteController {
 			case 0:
 			
 				try {
-					System.out.println(new ClienteDao().altera(clienteBanco) ? "\nCliente alterado com SUCESSO!" : "\nFalha");
+					System.out.println(new ClienteDao().altera(clienteBanco) ? "\nCliente alterado com SUCESSO!\n" : "\nFalha");
 				} catch (DaoException | ConexaoException e) {
 					System.out.println(e.getMessage());
 				}
