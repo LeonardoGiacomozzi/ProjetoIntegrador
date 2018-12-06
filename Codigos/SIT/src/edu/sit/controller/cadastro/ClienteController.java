@@ -71,9 +71,8 @@ public class ClienteController {
 		Cliente clienteBanco = new ClienteDao().consultaCompleta(codigo);
 		
 		Integer opcao = 99;
-		System.out.print("**** EDITOR DE CLIENTE ****");
+		System.out.print("\n**** EDIÇÃO DE CLIENTE ****\n");
 		while (opcao != 0) {
-			System.out.println("\n\tSELECIONE O ITEM QUE DESEJA EDITAR\t:");
 			System.out.println("\n\t\t1----------NOME\t" + clienteBanco.getNome());
 			System.out.println("\n\t\t2----------ENDEREÇO\t" + clienteBanco.getEndereco());
 			System.out.println("\n\t\t3----------CONTATO\t" + clienteBanco.getContato().toString());
@@ -86,7 +85,7 @@ public class ClienteController {
 			}
 			switch (opcao) {
 			case 1:
-				clienteBanco.setNome(UtilCadastro.pedeNome("Nome: \t"));
+				clienteBanco.setNome(UtilCadastro.pedeNome("Informe o novo Nome: \t"));
 				break;
 			case 2:
 				clienteBanco.setEndereco(UtilCadastro.pedeEndereco());
@@ -97,7 +96,7 @@ public class ClienteController {
 			case 0:
 			
 				try {
-					new ClienteDao().altera(clienteBanco);
+					System.out.println(new ClienteDao().altera(clienteBanco) ? "\nCliente alterado com SUCESSO!" : "\nFalha");
 				} catch (DaoException | ConexaoException e) {
 					System.out.println(e.getMessage());
 				}
@@ -105,7 +104,7 @@ public class ClienteController {
 				
 				break;
 			default:
-				System.out.println("Valor Invalido\nSelecione uma das opções oferecidas:");
+				System.out.println("\nValor Inválido!\n\nSelecione uma das opções oferecidas: \t");
 				break;
 			}
 			}

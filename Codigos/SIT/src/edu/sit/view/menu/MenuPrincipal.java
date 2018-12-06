@@ -61,9 +61,9 @@ public class MenuPrincipal {
 				}
 				try {
 					while (new ClienteDao().consulta(codigo) == null) {
-						System.out.println("Cliente não encontrado");
-						System.out.println("Informe o Cliente novamente");
+						System.out.println("\nCliente não ENCONTRADO!");
 						ClienteView.visualizar();
+						System.out.print("\nInforme o código do Cliente novamente: \t");
 						try {
 							codigo = Leitor.leInteger();
 						} catch (LeituraException e) {
@@ -71,7 +71,7 @@ public class MenuPrincipal {
 						}
 					}
 				} catch (DaoException | ConexaoException e) {
-					System.out.println("Cliente não encontrado");
+
 				} catch (VisualizacaoException e1) {
 					System.out.println(e1.getMessage());
 				}
