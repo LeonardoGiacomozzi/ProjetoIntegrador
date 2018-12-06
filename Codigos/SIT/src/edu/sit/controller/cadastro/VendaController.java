@@ -85,11 +85,10 @@ public class VendaController {
 
 					try {
 						while (new FuncionarioDao().consulta(funcionarioId) == null) {
-							System.out.println("Funcionario Inválido");
-							System.out.println("Informe um novo funcionário");
-							System.out.print("\nInforme o código do funcionário: \t");
+							System.out.println("\nFuncionário Inválido!");
 							try {
 								FuncionarioView.visualizar();
+								System.out.print("\nInforme o código do funcionário novamente: \t");
 							} catch (VisualizacaoException e1) {
 								System.out.println(e1.getMessage());
 							}
@@ -100,7 +99,7 @@ public class VendaController {
 							}
 
 						}
-					} catch (DaoException | ConexaoException e) {
+					} catch (DaoException | ConexaoException  e) {
 						System.out.println(e.getMessage());
 					}
 
@@ -134,11 +133,10 @@ public class VendaController {
 
 			try {
 				while (new ClienteDao().consulta(clienteId) == null) {
-					System.out.println("Cliente Inválido");
-					System.out.println("Informe um novo cliente");
-					System.out.println("\n\n**** LISTA DE CLIENTES ****\n");
+					System.out.println("\nCliente Inválido!");
 					try {
 						ClienteView.visualizar();
+						System.out.print("\nInforme o código do Cliente novamente: \t");
 					} catch (VisualizacaoException e1) {
 						System.out.println(e1.getMessage());
 					}
