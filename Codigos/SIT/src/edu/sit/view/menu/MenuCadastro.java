@@ -26,7 +26,7 @@ public class MenuCadastro {
 		try {
 			escolha = Leitor.leInteger();
 		} catch (LeituraException e1) {
-			e1.printStackTrace();
+			System.out.println(e1.getMessage());
 		}
 
 		switch (escolha) {
