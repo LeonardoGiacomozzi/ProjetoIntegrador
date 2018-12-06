@@ -93,23 +93,32 @@ public class MenuPrincipal {
 			}
 			break;
 		case 5:
-			Integer auxiliar = 1;
+			Integer auxiliar = Integer.MAX_VALUE;
+			ProdutoView.reporEstoque();
 			while (auxiliar != 0) {
-				ProdutoView.reporEstoque();
 				System.out.println(String.format("%-10s", "[1]") + "Inserir");
 				System.out.println(String.format("%-10s", "[0]") + "Sair");
 				System.out.print("\nInforme a opção desejada: \t");
 
 				try {
 					auxiliar = Leitor.leInteger();
+					switch (auxiliar) {
+					case 0:
+						MenuPrincipal.menuGeral();
+						System.out.println("\n");
+						break;
+					case 1:
+						auxiliar = 1;
+						ProdutoView.reporEstoque();
+						break;
+					default:
+						System.out.println("\nERRO - Escolha uma opção válida!\n");
+						break;
+					}
 				} catch (LeituraException e) {
 					System.out.println(e.getMessage());
 				}
-
-				break;
 			}
-			MenuPrincipal.menuGeral();
-			break;
 		case 0:
 			System.out.println("\n\n\n****                   VOCÊ SAIU                   ****");
 			System.out.println("****       OBRIGADO POR USAR O SISTEMA SIT!!       ****");

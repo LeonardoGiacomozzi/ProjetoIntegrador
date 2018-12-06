@@ -38,18 +38,17 @@ public class ProdutoView {
 		Integer qtd = null;
 		while (cod == 0) {
 			try {
-				while (new ProdutoDao().consulta(cod) == null) {
-					
+							
+				while (cod == 0) {
 					try {
 						ProdutoView.visualizar();
 						try {
 							System.out.print("\nInforme o código do produto que deseja repor: \t");
 							cod = Leitor.leInteger();
-						} catch (LeituraException e) {
-							System.out.println(e.getMessage());
-						}
-						try {
-							System.out.print("\nInforme a quantidade que deseja adicionar ao produto: \t");
+							Produto produto = new ProdutoDao().consulta(cod);
+							System.out.print("\nProduto: [" + produto.getNome() +
+							                 "]\nDisponível: [" + produto.getQuantidade() + 
+							                 "]\nInforme a quantidade que deseja adicionar: \t");
 							qtd = Leitor.leInteger();
 						} catch (LeituraException e) {
 							System.out.println(e.getMessage());
