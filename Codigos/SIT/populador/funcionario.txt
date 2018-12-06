@@ -1,3 +1,5 @@
-Joao;087.269.160-88;1;(47)98872-1100;joao@hotmail.com
+Carol;087.269.160-88;1;(47)98872-1100;joao@hotmail.com
 Ana;111.785.670-44;0;(47)98342-1100;ana@hotmail.com
-paula;013.144.890-03;1;(47)98872-8520;paula@hotmail.com
+Paula;013.144.890-03;1;(47)98872-8520;paula@hotmail.com
+Marcia;053.143.823-45;0;(47)98432-9120;marcia@gmail.com
+Julia;233.123.213-78;1;(48)3324-5423;julia@gmail.com
