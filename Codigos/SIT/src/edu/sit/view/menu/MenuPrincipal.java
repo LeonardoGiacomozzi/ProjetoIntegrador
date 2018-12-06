@@ -71,7 +71,7 @@ public class MenuPrincipal {
 						}
 					}
 				} catch (DaoException | ConexaoException e) {
-					System.out.println(e.getMessage());
+					System.out.println("Cliente não encontrado");
 				} catch (VisualizacaoException e1) {
 					System.out.println(e1.getMessage());
 				}
