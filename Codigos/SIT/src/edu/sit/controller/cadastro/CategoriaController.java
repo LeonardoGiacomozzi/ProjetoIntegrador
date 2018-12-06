@@ -52,7 +52,7 @@ public class CategoriaController {
 				case 0:
 
 					try {
-						new CategoriaDao().altera(categoriaBanco);
+						System.out.println(new CategoriaDao().altera(categoriaBanco) ? "\nCategoria alterada com SUCESSO!" : "\nFalha");
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_CATEGORIA);

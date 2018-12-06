@@ -323,10 +323,10 @@ public class MenuGerente {
 				System.out.println(e.getMessage());
 			}
 
-			MenuGerente.menusGerente();
+			MenuGerente.menuGerenciamento();
 			break;
 		case 0:
-			MenuGerente.menusGerente();
+			MenuGerente.menuGerenciamento();
 			break;
 		default:
 			System.out.println("\nERRO - Escolha uma opção válida!\n");
