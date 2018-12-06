@@ -112,7 +112,7 @@ public class MenuPrincipal {
 						ProdutoView.reporEstoque();
 						break;
 					default:
-						System.out.println("\nERRO - Escolha uma opção válida!\n");
+						System.out.print("\nERRO - Escolha uma opção válida!\n");
 						break;
 					}
 				} catch (LeituraException e) {
@@ -124,7 +124,7 @@ public class MenuPrincipal {
 			System.out.println("****       OBRIGADO POR USAR O SISTEMA SIT!!       ****");
 			break;
 		default:
-			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuPrincipal.menuGeral();
 			break;
 		}

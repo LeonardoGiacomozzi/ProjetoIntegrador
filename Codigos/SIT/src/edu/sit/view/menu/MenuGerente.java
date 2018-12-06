@@ -42,6 +42,7 @@ public class MenuGerente {
 				op = Leitor.leInteger();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
+				MenuGerente.menusGerente();
 			}
 		}
 
@@ -64,7 +65,7 @@ public class MenuGerente {
 			MenuPrincipal.menuGeral();
 			break;
 		default:
-			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuGerente.menusGerente();
 			break;
 		}
@@ -82,13 +83,14 @@ public class MenuGerente {
 				op = Leitor.leInteger();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
+				MenuGerente.menuCadastro();
 			}
 		}
 
 		switch (op) {
 		case 1:
 			try {
-				System.out.println(FuncionarioController.cadastro() ? "Cadastro efetuado com SUCESSO!" : "");
+				System.out.print(FuncionarioController.cadastro() ? "" : "");
 			} catch (CadastroException e) {
 				System.out.println(e.getMessage());
 			}
@@ -97,7 +99,7 @@ public class MenuGerente {
 
 		case 2:
 			try {
-				System.out.println(UsuarioController.cadastro() ? "Cadastro efetuado com SUCESSO!" : "");
+				System.out.print(UsuarioController.cadastro() ? "" : "");
 			} catch (CadastroException e) {
 				System.out.println(e.getMessage());
 			}
@@ -108,7 +110,7 @@ public class MenuGerente {
 			break;
 
 		default:
-			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuGerente.menuCadastro();
 			break;
 		}
@@ -226,14 +228,14 @@ public class MenuGerente {
 			MenuGerente.menusGerente();
 			break;
 		default:
-			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			menuGerenciamento();
 			break;
 		}
 
 	}
 
-	private static void menuVendas() {
+	public static void menuVendas() {
 		System.out.println("\n1 - Gerar relatório (Dia)");
 		System.out.println("2 - Gerar relatório (Semana)");
 		System.out.println("3 - Gerar relatório (Mês)");
@@ -245,6 +247,7 @@ public class MenuGerente {
 				op = Leitor.leInteger();
 			} catch (LeituraException e) {
 				System.out.println(e.getMessage());
+				MenuGerente.menuVendas();
 			}
 		}
 
@@ -277,8 +280,8 @@ public class MenuGerente {
 			MenuGerente.menusGerente();
 			break;
 		default:
-			System.out.println("\nERRO - Escolha uma opção válida!\n");
-			MenuGerente.menuFuncionario();
+			System.out.print("\nERRO - Escolha uma opção válida!\n");
+			MenuGerente.menuVendas();
 			break;
 		}
 
@@ -329,7 +332,7 @@ public class MenuGerente {
 			MenuGerente.menuGerenciamento();
 			break;
 		default:
-			System.out.println("\nERRO - Escolha uma opção válida!\n");
+			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuGerente.menuFuncionario();
 			break;
 

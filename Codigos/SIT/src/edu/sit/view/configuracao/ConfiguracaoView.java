@@ -33,7 +33,7 @@ public class ConfiguracaoView {
 			try {
 				op = Leitor.leInteger();
 			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
+			
 			}
 			switch (op) {
 			case 1:
@@ -56,7 +56,7 @@ public class ConfiguracaoView {
 				break;
 
 			default:
-					System.out.println("Informe um valor válido...");
+				System.out.print("\nValor Inválido!");
 				break;
 			}
 			

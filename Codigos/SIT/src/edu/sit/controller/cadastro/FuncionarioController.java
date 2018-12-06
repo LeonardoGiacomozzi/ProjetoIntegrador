@@ -41,8 +41,8 @@ public class FuncionarioController {
 			try {
 				Funcionario funcionario = Funcionario.criaFuncionarioBanco(nome, cpf, cargo,
 						new ContatoDao().pegaUltimoID());
-				System.out.println(
-						new FuncionarioDao().insere(funcionario) ? "\nFuncionário cadastrado com SUCESSO!\n\n" : "\nFalha\n");
+				System.out.print(
+						new FuncionarioDao().insere(funcionario) ? "\nFuncionário cadastrado com SUCESSO!\n" : "\nFalha\n");
 			} catch (DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());
 				throw new CadastroException(EErroCadastro.ERRO_CADASTRO_FUNCIONARIO);
