@@ -190,10 +190,10 @@ public class VendaController {
 						produtoAux.setItensPedido(new ProdutoDao().consulta(opcao));
 						if (produtoAux.getItensPedido() != null && produtoAux.getItensPedido().getQuantidade() > 0) {
 
+							do {
 							System.out.print("\nProduto [" + produtoAux.getItensPedido().getNome() + "]"
 									+ "\nDisponível [" + produtoAux.getItensPedido().getQuantidade() + "]"
 									+ "\nSair [0]" + "\nQuantos deseja comprar: \t");
-							do {
 								try {
 									quantidade = Leitor.leInteger();
 
@@ -209,14 +209,16 @@ public class VendaController {
 										vendaNova.setValor(
 												(vendaNova.getValor() == null ? 0 : vendaNova.getValor()) + precoAtual(
 														produtoAux.getItensPedido().getValorUnitario(), quantidade));
+										quantidade = 0;
 									}
-									quantidade = 0;
 								} catch (LeituraException e) {
 									System.out.println(e.getMessage());
 									System.out.print("\nTente novamente: \t");
+									quantidade = 0;
+									
 								}
-							} while (quantidade == null || quantidade > produtoAux.getItensPedido().getQuantidade()
-									|| quantidade < 0);
+							} while (quantidade != null || quantidade < produtoAux.getItensPedido().getQuantidade()
+									|| quantidade >= 0);
 							System.out.println("\n\nValor Total até o momento: [R$" + vendaNova.getValor() + "]\n");
 							System.out.println("Deseja continuar comprando?\n"
 									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
