@@ -30,12 +30,13 @@ public class GeraArquivoNotaFiscal {
 		palavras.add("");
 		palavras.add("-----------------------------------------------------------------");
 		palavras.add("");
-		palavras.add(String.format("%-24s", "Produtos:") + 
-					 String.format("%-24s", "Quantidade:") + 
-					 String.format("%12s", "Valor p/ Item:"));
+		palavras.add(String.format("%-26s", "Produtos") + 
+					 String.format("%-19s", "Quantidade") + 
+					 String.format("%20s", "Valor Unitário"));
 		for (ProdutoQuantidade produto : nota.getVenda().getProdutos()) {
-			palavras.add(String.format("%-24s", produto.getItensPedido().getNome()) +
-						 String.format("%-24s", produto.getQuantidadeProduto()) + "R$" + produto.getItensPedido().getValorUnitario() + "\n");
+			palavras.add(String.format("%-31s", produto.getItensPedido().getNome()) +
+						 String.format("%-20s", produto.getQuantidadeProduto()) + 
+						 String.format("%15s", "R$" + produto.getItensPedido().getValorUnitario() + "\n"));
 			
 		}
 		palavras.add("");
