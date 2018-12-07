@@ -348,13 +348,42 @@ public class MenuGerente {
 			MenuGerente.menusGerente();
 			break;
 		case 2:
+			Integer editar = 0;
+			System.out.print("\nInforme o codigo do funcionário que deseja editar: \t");
 			try {
 				FuncionarioView.visualizar();
-				System.out.print("\nInforme o codigo do funcionário que deseja editar: \t");
-				FuncionarioController.editar(Leitor.leInteger());
-			} catch (VisualizacaoException | EdicaoException | LeituraException e) {
+			} catch (VisualizacaoException e1) {
+				System.out.println(e1.getMessage());
+			}
+			while(editar ==0) {
+				try {
+					editar = Leitor.leInteger();
+				} catch (LeituraException e) {
+					System.out.println(e.getMessage());
+				}
+			try {
+				while( new FuncionarioDao().consulta(editar) == null){
+					System.out.print("\nValor Inválido!");
+					
+					
+					try {
+						FuncionarioView.visualizar();
+						editar = Leitor.leInteger();
+					} catch (LeituraException | VisualizacaoException e) {
+						System.out.println(e.getMessage());
+					}
+					
+				}
+			} catch (DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());
 			}
+		}
+			try {
+				FuncionarioController.editar(editar);
+			} catch (EdicaoException e) {
+				System.out.println(e.getMessage());
+			}
+			
 
 			MenuGerente.menuGerenciamento();
 			break;
