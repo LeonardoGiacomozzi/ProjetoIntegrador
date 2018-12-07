@@ -96,6 +96,25 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 		}
 	}
 	
+	public List<Produto> consultaTodosDisponiveis() throws DaoException, ConexaoException {
+		Connection conexao = Conexao.abreConexao();
+		List<Produto> produtos = new ArrayList<Produto>();
+		try {
+			Statement st = conexao.createStatement();
+			ResultSet rs = st.executeQuery(" SELECT * FROM PRODUTOS P WHERE P.QUANTIDADE>0;");
+			while (rs.next()) {
+				produtos.add(Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
+						rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Fornecedor"), 
+						rs.getInt("Categoria")));
+			}
+			return produtos;
+		} catch (Exception e) {
+			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
+		} finally {
+			Conexao.fechaConexao();
+		}
+	}
+	
 	public List<Produto> consultaTodosCompleto() throws DaoException, ConexaoException {
 		List<Produto> produtosCompleto = new ArrayList<>();
 		List<Produto> produtos = consultaTodos();
@@ -105,6 +124,15 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 		return produtosCompleto;
 	}
 
+	public List<Produto> consultaTodosDisponiveisCompleto() throws DaoException, ConexaoException {
+		List<Produto> produtosCompleto = new ArrayList<>();
+		List<Produto> produtos = consultaTodosDisponiveis();
+		for (Produto produto : produtos) {
+			produtosCompleto.add(consultaCompleta(produto.getId()));
+		}
+		return produtosCompleto;
+	}
+	
 	@Override
 	public List<Produto> consultaVariosPorID(Integer... codigos) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();

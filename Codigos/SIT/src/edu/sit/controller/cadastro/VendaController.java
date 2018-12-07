@@ -165,7 +165,7 @@ public class VendaController {
 			ProdutoQuantidade produtoAux = new ProdutoQuantidade();
 			Integer quantidade = 0;
 			try {
-				List<Produto> produtosBanco = new ProdutoDao().consultaTodosCompleto();
+				List<Produto> produtosBanco = new ProdutoDao().consultaTodosDisponiveisCompleto();
 				System.out.println("\n**** LISTA DE PRODUTOS ****\n");
 				System.out.println(String.format("%-10s", "Codigo") + String.format("%-19s", "Nome")
 						+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
