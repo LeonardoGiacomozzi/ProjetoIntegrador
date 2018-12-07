@@ -7,7 +7,7 @@ public enum ECargo {
 	private String descricao;
 
 	public String getDescricao() {
-		return descricao;
+		return this.descricao;
 	}
 
 	private ECargo(String descricao) {

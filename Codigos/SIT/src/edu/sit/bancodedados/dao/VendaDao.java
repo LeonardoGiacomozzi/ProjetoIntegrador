@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.Conexao;
@@ -114,13 +116,28 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			pst.setDate(4,  java.sql.Date.valueOf(objeto.getDataVenda()));
 			pst.executeUpdate();
 			ArrayList<ProdutoQuantidade>  produtos = objeto.getProdutos();
-			for (ProdutoQuantidade produto : produtos ) {
+			
+			
+			HashMap<Integer,ProdutoQuantidade> listaAux = new HashMap<>();
+			for (ProdutoQuantidade produtoQuantidade : produtos) {
+				if (listaAux.containsKey(produtoQuantidade.getItensPedido().getId())) {
+					listaAux.get(produtoQuantidade.getItensPedido().getId())
+						.setQuantidadeProduto(listaAux.get(produtoQuantidade
+								.getItensPedido().getId()).getQuantidadeProduto()
+								+produtoQuantidade.getQuantidadeProduto());
+				}else {
+					listaAux.put(produtoQuantidade.getItensPedido().getId(), produtoQuantidade);
+				}
+			}
+			
+			
+			for (Entry<Integer, ProdutoQuantidade> produto : listaAux.entrySet() ) {
 
 				PreparedStatement pst2 = conexao
 						.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos, Quantidade) VALUES (?, ?, ?);");
 				pst2.setInt(1, pegaUltimoID());
-				pst2.setInt(2, produto.getItensPedido().getId());
-				pst2.setInt(3, produto.getQuantidadeProduto());
+				pst2.setInt(2, produto.getValue().getItensPedido().getId());
+				pst2.setInt(3, produto.getValue().getQuantidadeProduto());
 				System.out.print(pst2.executeUpdate() > 0? "":"");
 			}
 			return true;
