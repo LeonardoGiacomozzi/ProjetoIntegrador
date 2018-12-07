@@ -54,9 +54,10 @@ public class ProdutoView {
 								} catch (LeituraException e) {
 									System.out.println(e.getMessage());
 								}
-								System.out.println("Valor inválido!");
+								System.out.println("\nValor Inválido!");
 								try {
 									ProdutoView.visualizar();
+									System.out.print("\nInforme o código do produto novamente: \t");
 								} catch (VisualizacaoException e) {
 									System.out.println(e.getMessage());
 								}

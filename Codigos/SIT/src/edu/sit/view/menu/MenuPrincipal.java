@@ -96,8 +96,8 @@ public class MenuPrincipal {
 			Integer auxiliar = Integer.MAX_VALUE;
 			ProdutoView.reporEstoque();
 			while (auxiliar != 0) {
-				System.out.println(String.format("%-10s", "[1]") + "Repor mais produtos");
-				System.out.println(String.format("%-10s", "[0]") + "Sair");
+				System.out.println(String.format("%-10s", "\n[1]") + "Repor mais produtos");
+				System.out.println(String.format("%-9s", "[0]") + "Sair");
 				System.out.print("\nInforme a opção desejada: \t");
 
 				try {
