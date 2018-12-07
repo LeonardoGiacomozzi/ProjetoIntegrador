@@ -41,11 +41,11 @@ public class VendaController {
 			System.out.println(e.getMessage());
 		}
 		try {
-			if (vendaNova.getValor()>0) {
-				
+			if (vendaNova.getValor() > 0) {
+
 				System.out.println(new VendaDao().insere(vendaNova)
 						? "\nVenda efetuada com SUCESSO!\n" + "Gerando Nota Fiscal..." + "\nAguarde..."
-						+ "\nNota Fiscal gerada com SUCESSO!\n\n"
+								+ "\nNota Fiscal gerada com SUCESSO!\n\n"
 						: "Falha na venda");
 
 			}
@@ -93,8 +93,8 @@ public class VendaController {
 							}
 
 						}
-					} catch (DaoException | ConexaoException  e) {
-						System.out.println(e.getMessage());
+					} catch (DaoException | ConexaoException e) {
+
 					}
 
 				}
@@ -141,30 +141,31 @@ public class VendaController {
 					}
 				}
 			} catch (DaoException | ConexaoException e1) {
-				System.out.println(e1.getMessage());
-			}
 
-			if (clienteId == 0) {
-				try {
-					System.out.println(ClienteController.cadastro() == true ? "" : "");
-				} catch (CadastroException e) {
-					System.out.println(e.getMessage());
-				}
-				try {
-					clienteId = new ClienteDao().pegaUltimoID();
-				} catch (DaoException | ConexaoException e) {
-					System.out.println(e.getMessage());
+			}
+			if (clienteId != null) {
+				if (clienteId == 0) {
+					try {
+						System.out.println(ClienteController.cadastro() == true ? "" : "");
+					} catch (CadastroException e) {
+						System.out.println(e.getMessage());
+					}
+					try {
+						clienteId = new ClienteDao().pegaUltimoID();
+					} catch (DaoException | ConexaoException e) {
+						System.out.println(e.getMessage());
+					}
 				}
 			}
 		}
-		return clienteId;
+		return clienteId == null ? 0 : clienteId;
 
 	}
 
 	private static ArrayList<ProdutoQuantidade> pedeProdutos() {
 
 		Integer opcao = Integer.MAX_VALUE;
-		ArrayList<ProdutoQuantidade> produtos = new ArrayList< ProdutoQuantidade>();
+		ArrayList<ProdutoQuantidade> produtos = new ArrayList<ProdutoQuantidade>();
 		while (opcao != 0) {
 			ProdutoQuantidade produtoAux = new ProdutoQuantidade();
 			Integer quantidade = 0;
@@ -185,53 +186,50 @@ public class VendaController {
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
 
+					try {
+						produtoAux.setItensPedido(new ProdutoDao().consulta(opcao));
+						if (produtoAux.getItensPedido() != null && produtoAux.getItensPedido().getQuantidade() > 0) {
 
-						try {
-							produtoAux.setItensPedido(new ProdutoDao().consulta(opcao));
-							if (produtoAux.getItensPedido() != null && produtoAux.getItensPedido().getQuantidade()>0) {
+							System.out.print("\nProduto [" + produtoAux.getItensPedido().getNome() + "]"
+									+ "\nDisponível [" + produtoAux.getItensPedido().getQuantidade() + "]"
+									+ "\nSair [0]" + "\nQuantos deseja comprar: \t");
+							do {
+								try {
+									quantidade = Leitor.leInteger();
 
-								System.out.print("\nProduto [" + produtoAux.getItensPedido().getNome() + "]"
-										+ "\nDisponível [" + produtoAux.getItensPedido().getQuantidade() + "]"
-										+ "\nSair [0]"
-										+ "\nQuantos deseja comprar: \t");
-								do{
-									try {
-										quantidade = Leitor.leInteger();
-
-										if (quantidade > produtoAux.getItensPedido().getQuantidade()
-												|| quantidade < 0) {
-											System.out.print("\nQuantidade Indisponível!\n\nDigite novamente a quantidade desejada: \t");
-										} else {
-											produtoAux.setQuantidadeProduto(quantidade);
-											produtoAux.getItensPedido().setQuantidade(
-													produtoAux.getItensPedido().getQuantidade() - quantidade);
-											new ProdutoDao().altera(produtoAux.getItensPedido());
-											produtos.add(produtoAux);
-											vendaNova.setValor((vendaNova.getValor() == null ? 0 : vendaNova.getValor())
-													+ precoAtual(produtoAux.getItensPedido().getValorUnitario(), quantidade));
-										}
-										quantidade = 0;
-									} catch (LeituraException e) {
-										System.out.println(e.getMessage());
-										System.out.print("\nTente novamente: \t");
+									if (quantidade > produtoAux.getItensPedido().getQuantidade() || quantidade < 0) {
+										System.out.print(
+												"\nQuantidade Indisponível!\n\nDigite novamente a quantidade desejada: \t");
+									} else {
+										produtoAux.setQuantidadeProduto(quantidade);
+										produtoAux.getItensPedido().setQuantidade(
+												produtoAux.getItensPedido().getQuantidade() - quantidade);
+										new ProdutoDao().altera(produtoAux.getItensPedido());
+										produtos.add(produtoAux);
+										vendaNova.setValor(
+												(vendaNova.getValor() == null ? 0 : vendaNova.getValor()) + precoAtual(
+														produtoAux.getItensPedido().getValorUnitario(), quantidade));
 									}
-								}while (quantidade == null || quantidade > produtoAux.getItensPedido().getQuantidade()
-										|| quantidade < 0) ;
-								System.out.println("\n\nValor Total até o momento: [R$" + vendaNova.getValor() + "]\n");
-								System.out.println(
-										"Deseja continuar comprando?\n" + "Aperte [1] para Continuar comprando...\n"
-												+ "Aperte [0] para Finalizar COMPRA.");
-								opcao = Leitor.leInteger();
-								
-							} else {
-								System.out.println("\nCódigo de Produto Inválido!");
-							}
+									quantidade = 0;
+								} catch (LeituraException e) {
+									System.out.println(e.getMessage());
+									System.out.print("\nTente novamente: \t");
+								}
+							} while (quantidade == null || quantidade > produtoAux.getItensPedido().getQuantidade()
+									|| quantidade < 0);
+							System.out.println("\n\nValor Total até o momento: [R$" + vendaNova.getValor() + "]\n");
+							System.out.println("Deseja continuar comprando?\n"
+									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
+							opcao = Leitor.leInteger();
 
-						} catch (DaoException e) {
-							System.out.println(e.getMessage() + "\nErro ao adicionar o produto");
+						} else {
+							System.out.println("\nCódigo de Produto Inválido!");
 						}
+
+					} catch (DaoException e) {
+						System.out.println(e.getMessage() + "\nErro ao adicionar o produto");
 					}
-				
+				}
 
 			} catch (DaoException | ConexaoException | LeituraException e) {
 				System.out.println(e.getMessage());
@@ -242,7 +240,7 @@ public class VendaController {
 	}
 
 	private static Double precoAtual(Double valorUnitario, Integer quantidade) {
-	return (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
+		return (valorUnitario != null ? valorUnitario : 0) * (quantidade != null ? quantidade : 0);
 	}
 
 }
