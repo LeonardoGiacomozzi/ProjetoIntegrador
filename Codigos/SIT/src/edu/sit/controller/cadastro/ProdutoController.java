@@ -63,11 +63,11 @@ public class ProdutoController {
 	public static boolean editar(Integer idProduto) throws EdicaoException{
 		Produto produtoBanco = null;
 		try {
-			produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
 
 			Integer opcao = 99;
 			System.out.println("\n**** EDIÇÃO DE PRODUTO ****");
 			while (opcao != 0) {
+				produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
 				System.out.println(String.format("%-27s", "\n1 - Nome: ") + produtoBanco.getNome());
 				System.out.println(String.format("%-26s", "2 - Categoria: ") + produtoBanco.getCategoria().getNome());
 				System.out.println(String.format("%-26s", "3 - Fornecedor: ") + produtoBanco.getFornecedor().getNome());

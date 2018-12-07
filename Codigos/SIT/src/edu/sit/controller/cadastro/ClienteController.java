@@ -67,11 +67,11 @@ public class ClienteController {
 
 	public static boolean editar(Integer codigo) throws EdicaoException {
 		try {
-		Cliente clienteBanco = new ClienteDao().consultaCompleta(codigo);
 		
 		Integer opcao = 99;
 		System.out.print("\n**** EDIÇÃO DE CLIENTE ****\n");
 		while (opcao != 0) {
+			Cliente clienteBanco = new ClienteDao().consultaCompleta(codigo);
 			System.out.println(String.format("%-27s", "\n1 - Nome: ") + clienteBanco.getNome());
 			System.out.println(String.format("%-26s", "2 - Endereço: ") + clienteBanco.getEndereco());
 			System.out.println(String.format("%-26s", "3 - Contato: ") + "Telefone: " + clienteBanco.getContato().getTelefone());
