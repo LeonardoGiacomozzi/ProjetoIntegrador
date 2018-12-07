@@ -78,7 +78,12 @@ public class ProdutoController {
 				System.out.println(String.format("%-26s", "4 - Valor Unitário:") + "R$" + produtoBanco.getValorUnitario());
 				System.out.println("\n0 - Finalizar");
 				System.out.print("\nInforme a opção que deseja alterar: \t");
-				opcao = Leitor.leInteger();
+				try {
+					opcao = Leitor.leInteger();
+				} catch (LeituraException e1) {
+					// TODO Auto-generated catch block
+					System.out.println(e1.getMessage());
+				}
 				switch (opcao) {
 				case 1:
 					produtoBanco.setNome(UtilCadastro.pedeNome("\nInforme o novo Nome: \t"));
@@ -108,7 +113,7 @@ public class ProdutoController {
 					break;
 				}
 			}
-		} catch (DaoException | ConexaoException | CadastroException | LeituraException e) {
+		} catch (DaoException | ConexaoException | CadastroException e) {
 			System.out.println("Não foi possivel buscar o produto informado\nErro " + e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_PRODUTO);
 		}
