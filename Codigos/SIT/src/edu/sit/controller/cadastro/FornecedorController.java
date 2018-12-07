@@ -65,7 +65,11 @@ public class FornecedorController {
 				System.out.println(String.format("%-26s", "") + "Email: " + fornecedorBanco.getContato().getEmail());
 				System.out.println("\n0 - Finalizar");
 				System.out.print("\nInforme a opção que deseja alterar: \t");
-				opcao = Leitor.leInteger();
+				try {
+					opcao = Leitor.leInteger();
+				} catch (LeituraException e1) {
+					System.out.println(e1.getMessage());
+				}
 
 				switch (opcao) {
 				case 1:
@@ -95,7 +99,7 @@ public class FornecedorController {
 				}
 
 			}
-		} catch (DaoException | ConexaoException | LeituraException e) {
+		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
 		}
