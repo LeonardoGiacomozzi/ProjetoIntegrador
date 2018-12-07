@@ -219,7 +219,7 @@ public class VendaController {
 								}
 							} while (quantidade != null || quantidade < produtoAux.getItensPedido().getQuantidade()
 									|| quantidade >= 0);
-							System.out.println("\n\nValor Total até o momento: [R$" + vendaNova.getValor() + "]\n");
+							System.out.print("\n\nValor Total até o momento: [R$" + vendaNova.getValor() + "]\n");
 							System.out.println("Deseja continuar comprando?\n"
 									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
 							opcao = Leitor.leInteger();
