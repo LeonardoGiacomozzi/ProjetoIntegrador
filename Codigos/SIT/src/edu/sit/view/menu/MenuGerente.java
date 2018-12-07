@@ -1,6 +1,7 @@
 package edu.sit.view.menu;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
 import edu.sit.bancodedados.dao.UsuarioDao;
@@ -193,34 +194,33 @@ public class MenuGerente {
 			} catch (LeituraException e2) {
 				System.out.println(e2.getMessage());
 			}
-			while(codigo == 0) {
-			try {
-				while(new ProdutoDao().consulta(codigo)==null) {
-					System.out.println("Valor invalido");
-					System.out.println("Informe um valor valido");
-					try {
-						ProdutoView.visualizar();
-					} catch (VisualizacaoException e1) {
-						System.out.println(e1.getMessage());
+			while (codigo == 0) {
+				try {
+					while (new ProdutoDao().consulta(codigo) == null) {
+						System.out.println("Valor invalido");
+						System.out.println("Informe um valor valido");
+						try {
+							ProdutoView.visualizar();
+						} catch (VisualizacaoException e1) {
+							System.out.println(e1.getMessage());
+						}
+						try {
+							codigo = Leitor.leInteger();
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
 					}
-					try {
-						codigo = Leitor.leInteger();
-					} catch (LeituraException e) {
-						System.out.println(e.getMessage());
-					}
+
+				} catch (DaoException | ConexaoException e1) {
+					System.out.println(e1.getMessage());
 				}
-				
-			} catch (DaoException | ConexaoException e1) {
-				System.out.println(e1.getMessage());
-			}
 			}
 			try {
 				ProdutoController.editar(codigo);
 			} catch (EdicaoException e1) {
 				System.out.println(e1.getMessage());
 			}
-				MenuGerente.menuGerenciamento();
-		
+			MenuGerente.menuGerenciamento();
 
 			break;
 		case 4:
@@ -239,19 +239,45 @@ public class MenuGerente {
 			}
 			break;
 		case 5:
+			Integer codigo2 = 0;
 			try {
 				FornecedorView.visualizar();
-				System.out.print("\nSelecione qual fornecedor deseja alterar: \t");
+			} catch (VisualizacaoException e3) {
+				System.out.println(e3.getMessage());
+			}
+			System.out.print("\nSelecione qual fornecedor deseja alterar: \t");
+			try {
+				codigo2 = Leitor.leInteger();
+			} catch (LeituraException e2) {
+				System.out.println(e2.getMessage());
+			}
+			while (codigo2 == 0) {
 				try {
-					Integer codigo2 = Leitor.leInteger();
-					FornecedorController.editar(codigo2);
-					MenuGerente.menuGerenciamento();
-				} catch (EdicaoException | LeituraException a) {
-					System.out.println(a.getMessage());
+					while(new FornecedorDao().consulta(codigo2)== null) {
+						System.out.println("Informe um valor Válido!");
+						try {
+							FornecedorView.visualizar();
+						} catch (VisualizacaoException e1) {
+							System.out.println(e1.getMessage());
+						}
+						try {
+							codigo2 =Leitor.leInteger();
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
+						
+					}
+				} catch (DaoException | ConexaoException e) {
+					System.out.println(e.getMessage());
 				}
-			} catch (VisualizacaoException e) {
+			}
+			try {
+				FornecedorController.editar(codigo2);
+			} catch (EdicaoException e) {
 				System.out.println(e.getMessage());
 			}
+			MenuGerente.menuGerenciamento();
+
 			break;
 		case 0:
 			MenuGerente.menusGerente();
@@ -355,35 +381,33 @@ public class MenuGerente {
 			} catch (VisualizacaoException e1) {
 				System.out.println(e1.getMessage());
 			}
-			while(editar ==0) {
+			while (editar == 0) {
 				try {
 					editar = Leitor.leInteger();
 				} catch (LeituraException e) {
 					System.out.println(e.getMessage());
 				}
-			try {
-				while( new FuncionarioDao().consulta(editar) == null){
-					System.out.print("\nValor Inválido!");
-					
-					
-					try {
-						FuncionarioView.visualizar();
-						editar = Leitor.leInteger();
-					} catch (LeituraException | VisualizacaoException e) {
-						System.out.println(e.getMessage());
+				try {
+					while (new FuncionarioDao().consulta(editar) == null) {
+						System.out.print("\nValor Inválido!");
+
+						try {
+							FuncionarioView.visualizar();
+							editar = Leitor.leInteger();
+						} catch (LeituraException | VisualizacaoException e) {
+							System.out.println(e.getMessage());
+						}
+
 					}
-					
+				} catch (DaoException | ConexaoException e) {
+					System.out.println(e.getMessage());
 				}
-			} catch (DaoException | ConexaoException e) {
-				System.out.println(e.getMessage());
 			}
-		}
 			try {
 				FuncionarioController.editar(editar);
 			} catch (EdicaoException e) {
 				System.out.println(e.getMessage());
 			}
-			
 
 			MenuGerente.menuGerenciamento();
 			break;
