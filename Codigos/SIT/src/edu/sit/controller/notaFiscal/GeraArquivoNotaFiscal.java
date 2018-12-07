@@ -35,7 +35,7 @@ public class GeraArquivoNotaFiscal {
 					 String.format("%12s", "Valor p/ Item:"));
 		for (ProdutoQuantidade produto : nota.getVenda().getProdutos()) {
 			palavras.add(String.format("%-24s", produto.getItensPedido().getNome()) +
-						 String.format("%-24", produto.getQuantidadeProduto()) + "R$" + produto.getItensPedido().getValorUnitario() + "\n");
+						 String.format("%-24s", produto.getQuantidadeProduto()) + "R$" + produto.getItensPedido().getValorUnitario() + "\n");
 			
 		}
 		palavras.add("");
