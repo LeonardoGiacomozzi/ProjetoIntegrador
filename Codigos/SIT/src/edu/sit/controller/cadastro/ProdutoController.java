@@ -81,7 +81,6 @@ public class ProdutoController {
 				try {
 					opcao = Leitor.leInteger();
 				} catch (LeituraException e1) {
-					// TODO Auto-generated catch block
 					System.out.println(e1.getMessage());
 				}
 				switch (opcao) {
@@ -91,9 +90,11 @@ public class ProdutoController {
 					break;
 				case 2:
 					produtoBanco.setCategoriaId(UtilCadastro.pedeCategoria());
+					System.out.print(new ProdutoDao().altera(produtoBanco)?"":"");
 					break;
 				case 3:
 					produtoBanco.setFornecedorId(UtilCadastro.pedeFornecedor());
+					System.out.print(new ProdutoDao().altera(produtoBanco)?"":"");
 					break;
 				case 4:
 					produtoBanco.setValorUnitario(UtilCadastro.pedeValorUnitario());

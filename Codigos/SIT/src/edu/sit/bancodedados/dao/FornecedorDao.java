@@ -175,11 +175,12 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"UPDATE Fornecedor SET Nome = ?, CNPJ = ?, PessoaResponsavel = ?  WHERE id = ?;");
+					"UPDATE Fornecedor SET Nome = ?, CNPJ = ?, PessoaResponsavel = ?, Contato = ?  WHERE id = ?;");
 			pst.setString(1, objeto.getNome());
 			pst.setString(2, objeto.getCNPJ());
 			pst.setString(3, objeto.getPessoaResponsavel());
-			pst.setInt(4, objeto.getId());
+			pst.setInt(4, objeto.getContatoid());
+			pst.setInt(5, objeto.getId());
 			return pst.executeUpdate() > 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.ALTERA_DADO, e.getMessage(), this.getClass());

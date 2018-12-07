@@ -60,8 +60,7 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 				return rs.first() ? Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
-					rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Fornecedor"), 
-					rs.getInt("Categoria")) : null;
+					rs.getInt("Quantidade"), rs.getDouble("Valor"),	rs.getInt("Categoria"), rs.getInt("Fornecedor")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -193,11 +192,13 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			PreparedStatement pst = conexao.prepareStatement(
-					"UPDATE Produtos SET Nome = ?, Quantidade = ?, Valor = ?  WHERE id = ?;");
+					"UPDATE Produtos SET Nome = ?, Quantidade = ?, Valor = ?, Fornecedor = ?, Categoria = ?  WHERE id = ?;");
 			pst.setString(1, objeto.getNome());
 			pst.setInt(2, objeto.getQuantidade());
 			pst.setDouble(3, objeto.getValorUnitario());
-			pst.setInt(4, objeto.getId());
+			pst.setInt(4,objeto.getFornecedorId());
+			pst.setInt(5,objeto.getCategoriaId());
+			pst.setInt(6, objeto.getId());
 			return pst.executeUpdate() > 0;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.ALTERA_DADO, e.getMessage(), this.getClass());
