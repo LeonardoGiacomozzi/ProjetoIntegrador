@@ -1,6 +1,7 @@
 package edu.sit.view.menu;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
+import edu.sit.bancodedados.dao.CategoriaDao;
 import edu.sit.bancodedados.dao.FornecedorDao;
 import edu.sit.bancodedados.dao.FuncionarioDao;
 import edu.sit.bancodedados.dao.ProdutoDao;
@@ -224,19 +225,44 @@ public class MenuGerente {
 
 			break;
 		case 4:
+
+			Integer codigo1 = 0;
 			try {
 				CategoriaView.visualizar();
-				System.out.print("\nSelecione qual categoria deseja alterar: \t");
+			} catch (VisualizacaoException e5) {
+				System.out.println(e5.getMessage());
+			}
+			System.out.print("\nSelecione qual categoria deseja alterar: \t");
+			try {
+				codigo1 = Leitor.leInteger();
+			} catch (LeituraException e4) {
+				System.out.println(e4.getMessage());
+			}
+			while (codigo1 == 0) {
 				try {
-					Integer codigo1 = Leitor.leInteger();
-					CategoriaController.editar(codigo1);
-					MenuGerente.menuGerenciamento();
-				} catch (LeituraException | EdicaoException e) {
+					while (new CategoriaDao().consulta(codigo1) == null) {
+						try {
+							CategoriaView.visualizar();
+						} catch (VisualizacaoException e1) {
+							System.out.println(e1.getMessage());
+						}
+						try {
+							codigo1 = Leitor.leInteger();
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
+					}
+				} catch (DaoException | ConexaoException e) {
 					System.out.println(e.getMessage());
 				}
-			} catch (VisualizacaoException a) {
-				System.out.println(a.getMessage());
 			}
+			try {
+				CategoriaController.editar(codigo1);
+			} catch (EdicaoException e4) {
+				System.out.println(e4.getMessage());
+			}
+			MenuGerente.menuGerenciamento();
+
 			break;
 		case 5:
 			Integer codigo2 = 0;
@@ -253,7 +279,7 @@ public class MenuGerente {
 			}
 			while (codigo2 == 0) {
 				try {
-					while(new FornecedorDao().consulta(codigo2)== null) {
+					while (new FornecedorDao().consulta(codigo2) == null) {
 						System.out.println("Informe um valor Válido!");
 						try {
 							FornecedorView.visualizar();
@@ -261,11 +287,11 @@ public class MenuGerente {
 							System.out.println(e1.getMessage());
 						}
 						try {
-							codigo2 =Leitor.leInteger();
+							codigo2 = Leitor.leInteger();
 						} catch (LeituraException e) {
 							System.out.println(e.getMessage());
 						}
-						
+
 					}
 				} catch (DaoException | ConexaoException e) {
 					System.out.println(e.getMessage());
