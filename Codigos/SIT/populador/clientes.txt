@@ -3,3 +3,4 @@ Julia;15/03/1989;Rua João Pessoa, 34;249.730.600-11;(47)99318-8778;julia@gmail.c
 Vitória;25/06/1998;Rua XV de Novembro, 1653;111.111.111-11;(47)2222-2222;vitoria@hotmail.com
 Giovana;03/08/1995;Rua São Paulo, 783;235.734.210-58;(47)94318-8728;giovana@icloud.com
 Larissa;09/04/1992;Rua Governador Julio, 321;657.983.132-64;(47)99553-3255;larissa@yahoo.com.br
+Gabriela;09/03/1997;Rua Julio Michel,142;392.933.244-23;(47)92682-2486;gabriela@hotmail.com
