@@ -40,32 +40,56 @@ public class ProdutoView {
 			try {
 							
 				while (cod == 0) {
-					try {
-						ProdutoView.visualizar();
+					
 						try {
+							ProdutoView.visualizar();
+						} catch (VisualizacaoException e2) {
+							System.out.println(e2.getMessage());
+						}
+						
 							System.out.print("\nInforme o código do produto que deseja repor: \t");
-							cod = Leitor.leInteger();
+							while(new ProdutoDao().consulta(cod) == null) {
+								try {
+									cod = Leitor.leInteger();
+								} catch (LeituraException e) {
+									System.out.println(e.getMessage());
+								}
+								System.out.println("Valor inválido!");
+								try {
+									ProdutoView.visualizar();
+								} catch (VisualizacaoException e) {
+									System.out.println(e.getMessage());
+								}
+								
+							}
 							Produto produto = new ProdutoDao().consulta(cod);
 							System.out.print("\nProduto: [" + produto.getNome() +
 							                 "]\nDisponível: [" + produto.getQuantidade() + 
 							                 "]\nInforme a quantidade que deseja adicionar: \t");
-							qtd = Leitor.leInteger();
-						} catch (LeituraException e) {
-							System.out.println(e.getMessage());
-						}
+							while(qtd == null) {
+							try {
+								qtd = Leitor.leInteger();
+							} catch (LeituraException e) {
+								System.out.println(e.getMessage());
+							}
+							
+							}
+						
 						try {
 							ProdutoController.reporEstoque(cod, qtd);
 							
-							ProdutoView.visualizar();
+							try {
+								ProdutoView.visualizar();
+							} catch (VisualizacaoException e) {
+								System.out.println(e.getMessage());
+							}
 							System.out.print("\n");
 							return true;
 						} catch (ControllerException e) {
 							System.out.println(
 									e.getMessage() + "\n\tNão foi possível adicionar a quantidade ao produto!");
 						}
-					} catch (VisualizacaoException e) {
-						System.out.println(e.getMessage() + "\n\tNão foi possível listar os produtos!");
-					}
+					
 				}
 			} catch (DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());
