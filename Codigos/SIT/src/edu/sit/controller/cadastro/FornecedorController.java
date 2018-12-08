@@ -18,7 +18,6 @@ import edu.sit.view.controllers.FornecedorView;
 
 public class FornecedorController {
 	
-
 	public static boolean cadastro() throws CadastroException {
 		String nome = null;
 		String cnpj = null;

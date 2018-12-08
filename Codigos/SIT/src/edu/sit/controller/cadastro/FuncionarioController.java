@@ -127,6 +127,4 @@ public class FuncionarioController {
 		return false;
 	}
 
-
-
 }
