@@ -69,6 +69,15 @@ public class UsuarioController {
 		return false;
 	}
 
-	
+	public static boolean exclui(Integer codigo) {
+		 
+		try {
+			new UsuarioDao().exclui(codigo);
+			return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
 
 }

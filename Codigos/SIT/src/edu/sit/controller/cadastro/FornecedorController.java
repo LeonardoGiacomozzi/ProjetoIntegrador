@@ -120,4 +120,16 @@ public class FornecedorController {
 		}
 	}
 
+	public static boolean exclui(Integer codigo) {
+		 
+		try {
+			new FornecedorDao().exclui(codigo);
+			return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+		
+		
+	}
 }

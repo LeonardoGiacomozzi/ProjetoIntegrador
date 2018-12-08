@@ -115,4 +115,18 @@ public class FuncionarioController {
 
 		return cargo;
 	}
+
+	public static boolean exclui(Integer codigo) {
+		
+		try {
+			 new FuncionarioDao().exclui(codigo);
+			 return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+		}
+		return false;
+	}
+
+
+
 }

@@ -73,4 +73,15 @@ public class CategoriaController {
 
 	}
 	
+	public static boolean exclui(Integer codigo) {
+		
+		try {
+			new CategoriaDao().exclui(codigo);
+			return true;
+		} catch (DaoException | ConexaoException e) {
+			System.out.println(e.getMessage());
+		}
+			return true;
+	}
+	
 }
