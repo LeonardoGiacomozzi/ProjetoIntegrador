@@ -30,14 +30,11 @@ public class FuncionarioView {
 
 	public static boolean excluir() {
 		try {
-			visualizar();
+			FuncionarioView.visualizar();
 			Integer op = null;
-
 			do {
-
 				try {
-
-					System.out.println("ESCOLHA O FUNCIONARIO QUE QUER EXCLUIR");
+					System.out.print("\nInforme o funcionário que deseja excluir: \t");
 					op = Leitor.leInteger();
 				} catch (LeituraException e) {
 					System.out.println(e.getMessage());

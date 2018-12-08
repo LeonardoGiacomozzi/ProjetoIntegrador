@@ -90,14 +90,11 @@ public class ProdutoView {
 	
 	public static boolean excluir() {
 		try {
-			visualizar();
+			ProdutoView.visualizar();
 			Integer op = null;
-
 			do {
-
 				try {
-
-					System.out.println("ESCOLHA O PRODUTO QUE QUER EXCLUIR");
+					System.out.print("\nInforme o produto que deseja excluir: \t");
 					op = Leitor.leInteger();
 				} catch (LeituraException e) {
 					System.out.println(e.getMessage());
@@ -109,5 +106,4 @@ public class ProdutoView {
 			return false;
 		}
 	}
-
 }

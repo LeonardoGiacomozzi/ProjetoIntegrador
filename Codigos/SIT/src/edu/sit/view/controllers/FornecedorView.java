@@ -41,9 +41,9 @@ public class FornecedorView {
 	public static boolean exclui() {
 
 		try {
-			visualizar();
+			FornecedorView.visualizar();
 			Integer op = null;
-			System.out.println("ESCOLHA QUAL FORNECEDOR DESEJA EXCLUIR ");
+			System.out.print("\nInforme o fornecedor que deseja excluir: \t");
 			do {
 			try {
 				op = Leitor.leInteger();

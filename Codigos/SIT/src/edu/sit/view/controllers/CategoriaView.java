@@ -30,8 +30,8 @@ public class CategoriaView {
 
 	public static boolean exclui() {
 		try {
-			visualizar();
-			System.out.println("ESCOLHA QUAL CATEGORIA DESEJA DELETAR:");
+			CategoriaView.visualizar();
+			System.out.print("\nInforme a categoria que deseja excluir: \t");
 			Integer op =null;
 			do {
 				try {

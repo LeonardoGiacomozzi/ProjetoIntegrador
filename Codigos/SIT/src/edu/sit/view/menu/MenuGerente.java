@@ -36,6 +36,7 @@ public class MenuGerente {
 		System.out.println("2 - Cadastros");
 		System.out.println("3 - Edições");
 		System.out.println("4 - Gerenciar Vendas");
+		System.out.println("5 - Remover");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
