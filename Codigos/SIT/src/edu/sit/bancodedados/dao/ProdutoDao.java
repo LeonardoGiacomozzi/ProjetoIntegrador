@@ -84,8 +84,8 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 			ResultSet rs = st.executeQuery("SELECT * FROM Produtos;");
 			while (rs.next()) {
 				produtos.add(Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
-						rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Fornecedor"), 
-						rs.getInt("Categoria")));
+						rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Categoria"),
+						rs.getInt("Fornecedor")));
 			}
 			return produtos;
 		} catch (Exception e) {
@@ -103,8 +103,8 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 			ResultSet rs = st.executeQuery(" SELECT * FROM PRODUTOS P WHERE P.QUANTIDADE>0;");
 			while (rs.next()) {
 				produtos.add(Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
-						rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Fornecedor"), 
-						rs.getInt("Categoria")));
+						rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Categoria"), 
+						rs.getInt("Fornecedor")));
 			}
 			return produtos;
 		} catch (Exception e) {
@@ -144,8 +144,8 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
 						produto.add(Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
-								rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Fornecedor"), 
-								rs.getInt("Categoria")));
+								rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Categoria"),
+								rs.getInt("Fornecedor")));
 					}
 				} catch (Exception c) {
 					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());
