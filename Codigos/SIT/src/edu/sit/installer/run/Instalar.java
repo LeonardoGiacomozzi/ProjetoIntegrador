@@ -93,13 +93,13 @@ public class Instalar {
 			System.out.println("\nErro ao criar a tabela de Usuario");
 		}
 		try {
-			System.out.println(Populador.cliente() ? "Populador de clientes OK..." : "nãoFoi");
-			System.out.println(Populador.funcionario() ? "Populador de funcionários OK..." : "nãoFoi");
-			System.out.println(Populador.categoria() ? "Populador de categorias OK..." : "nãoFoi");
-			System.out.println(Populador.fornecedor() ? "Populador de fornecedor OK..." : "nãoFoi");
-			System.out.println(Populador.produto() ? "Populador de produtos OK..." : "nãoFoi");
-			System.out.println(Populador.venda() ? "Populador de vendas OK..." : "nãoFoi");
-			System.out.println(Populador.usuario()? "Populador de úsuarios OK..." : "nãoFoi");
+			System.out.println(Populador.cliente() ? "Populador de Clientes OK..." : "nãoFoi");
+			System.out.println(Populador.funcionario() ? "Populador de Funcionários OK..." : "nãoFoi");
+			System.out.println(Populador.categoria() ? "Populador de Categorias OK..." : "nãoFoi");
+			System.out.println(Populador.fornecedor() ? "Populador de Fornecedor OK..." : "nãoFoi");
+			System.out.println(Populador.produto() ? "Populador de Produtos OK..." : "nãoFoi");
+			System.out.println(Populador.venda() ? "Populador de Vendas OK..." : "nãoFoi");
+			System.out.println(Populador.usuario()? "Populador de Usuários OK..." : "nãoFoi");
 			System.out.println("\n\nPronto! O sistema ja está configurado e pronto para ser USADO!");
 		} catch (InstalacaoException e) {
 			System.out.println(e.getMessage());
