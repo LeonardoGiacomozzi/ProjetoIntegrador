@@ -52,15 +52,13 @@ public class UsuarioController {
 	public static boolean trocaSenha(Usuario usuario) {
 		String senha1 = null;
 		String senha2 = "zz";
-		
 		senha1 = UtilCadastro.pedeSenhaFrase("\nSenha mestre do sistema: \t");
 		if ("@ADM".equals(senha1)) {
 			while (!senha1.equals(senha2)) {
 				System.out.print("Informe nova senha: \t");
 				senha1 = UtilCadastro.pedeSenha();
-				System.out.print("Informe novamente a senha: \t");
+				System.out.print("Informe a senha novamente: \t");
 				senha2 = UtilCadastro.pedeSenha();
-				
 			}
 			
 			System.out.print("\nSenha alterada com SUCESSO!\n");
