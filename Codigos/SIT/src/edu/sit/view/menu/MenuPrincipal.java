@@ -104,7 +104,7 @@ public class MenuPrincipal {
 					auxiliar = Leitor.leInteger();
 					switch (auxiliar) {
 					case 0:
-						System.out.print("\n\n");
+						System.out.print("\n");
 						MenuPrincipal.menuGeral();
 						break;
 					case 1:
@@ -119,6 +119,7 @@ public class MenuPrincipal {
 					System.out.println(e.getMessage());
 				}
 			}
+			break;
 		case 0:
 			System.out.println("\n\n\n****                   VOCÊ SAIU                   ****");
 			System.out.println("****       OBRIGADO POR USAR O SISTEMA SIT!!       ****");
