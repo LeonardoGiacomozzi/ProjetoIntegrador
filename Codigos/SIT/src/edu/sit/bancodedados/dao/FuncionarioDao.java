@@ -209,7 +209,7 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM funcionario WHERE CPF like ?");
 			pst.setString(1, cpf);
 			ResultSet rs = pst.executeQuery();
-			return rs.first()? rs.getInt("id"):0;
+			return rs.first() ? rs.getInt("id") : 0;
 		}catch (Exception e) {
 			throw new DaoException(EErrosDao.PEGA_ID, e.getMessage(), this.getClass());
 		} finally {

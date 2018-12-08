@@ -389,7 +389,7 @@ public class MenuGerente {
 			break;
 		case 2:
 			Integer editar = 0;
-			System.out.print("\nInforme o codigo do funcionário que deseja editar: \t");
+			System.out.print("\nInforme o código do funcionário que deseja editar: \t");
 			try {
 				FuncionarioView.visualizar();
 			} catch (VisualizacaoException e1) {
