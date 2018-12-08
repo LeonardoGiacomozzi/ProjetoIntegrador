@@ -168,7 +168,7 @@ public class VendaController {
 		ArrayList<ProdutoQuantidade> produtos = new ArrayList<ProdutoQuantidade>();
 		while (opcao != 0) {
 			ProdutoQuantidade produtoAux = new ProdutoQuantidade();
-			Integer quantidade = 0;
+			Integer quantidade = Integer.MAX_VALUE;
 			try {
 				List<Produto> produtosBanco = new ProdutoDao().consultaTodosDisponiveisCompleto();
 				System.out.println("\n**** LISTA DE PRODUTOS ****\n");
@@ -190,17 +190,17 @@ public class VendaController {
 						produtoAux.setItensPedido(new ProdutoDao().consulta(opcao));
 						if (produtoAux.getItensPedido() != null && produtoAux.getItensPedido().getQuantidade() > 0) {
 
-							do {
-							System.out.print("\nProduto [" + produtoAux.getItensPedido().getNome() + "]"
-									+ "\nDisponível [" + produtoAux.getItensPedido().getQuantidade() + "]"
-									+ "\nSair [0]" + "\nQuantos deseja comprar: \t");
+							while ((quantidade != null && quantidade != produtoAux.getItensPedido().getQuantidade()
+									&& quantidade > produtoAux.getItensPedido().getQuantidade() && quantidade > 0)
+									|| quantidade < 0) {
+								System.out.print("\nProduto [" + produtoAux.getItensPedido().getNome() + "]"
+										+ "\nDisponível [" + produtoAux.getItensPedido().getQuantidade() + "]"
+										+ "\nSair [0]" + "\nQuantos deseja comprar: \t");
 								try {
 									quantidade = Leitor.leInteger();
 
-									if (quantidade > produtoAux.getItensPedido().getQuantidade() || quantidade < 0) {
-										System.out.print(
-												"\nQuantidade Indisponível!\n\nDigite novamente a quantidade desejada: \t");
-									} else {
+									if (quantidade <= produtoAux.getItensPedido().getQuantidade() && quantidade >= 0) {
+
 										produtoAux.setQuantidadeProduto(quantidade);
 										produtoAux.getItensPedido().setQuantidade(
 												produtoAux.getItensPedido().getQuantidade() - quantidade);
@@ -209,14 +209,14 @@ public class VendaController {
 										vendaNova.setValor(
 												(vendaNova.getValor() == null ? 0 : vendaNova.getValor()) + precoAtual(
 														produtoAux.getItensPedido().getValorUnitario(), quantidade));
+										quantidade = 0;
+									} else {
+										System.out.print("\nQuantidade Indisponível!\n");
 									}
 								} catch (LeituraException e) {
 									System.out.println(e.getMessage());
-									System.out.print("\nTente novamente: \t");
-									
 								}
-							} while ((quantidade != null && quantidade >= produtoAux.getItensPedido().getQuantidade())
-									&& quantidade >= 0);
+							}
 							System.out.print("\n\nValor Total até o momento: [R$" + vendaNova.getValor() + "]\n");
 							System.out.println("Deseja continuar comprando?\n"
 									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
