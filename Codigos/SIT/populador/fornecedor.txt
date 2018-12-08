@@ -14,4 +14,4 @@ TITAN;47.533.476/0001-56;Luana Texeira;(37)92363-3746;contato@titan.com
 TRITON;28.846-296/0001-47;Joana Borbosa;(73)93623-3746;contato@triton.com
 KHALIL MAAMOON;43.735.456/0001-54;Tania Ferrari;(73)3469-7563;contato@khalilmaamoon.com
 PRO HOOKAH;67.386.836/0001-47;Tamires Monteiro;(46)3462-7235;contato@prohookah.com
-ART COCO:63.438.756/0001-54;Julia Ferreira;(11)92353-3456;contato@artcoco.com
+ART COCO;63.438.756/0001-54;Julia Ferreira;(11)92353-3456;contato@artcoco.com

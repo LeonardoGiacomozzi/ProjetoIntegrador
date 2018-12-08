@@ -57,7 +57,6 @@ public class Configuracao {
 			try {
 				propriedades = (List<String>) Arquivo.leArquivo(path);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			for (String propriedade : propriedades) {
