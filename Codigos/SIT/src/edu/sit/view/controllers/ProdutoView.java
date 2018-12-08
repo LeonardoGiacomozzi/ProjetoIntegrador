@@ -38,59 +38,48 @@ public class ProdutoView {
 		Integer qtd = null;
 		while (cod == 0) {
 			try {
-							
+
 				while (cod == 0) {
-					
+
+					while (new ProdutoDao().consulta(cod) == null) {
 						try {
 							ProdutoView.visualizar();
-						} catch (VisualizacaoException e2) {
-							System.out.println(e2.getMessage());
-						}
-						
 							System.out.print("\nInforme o código do produto que deseja repor: \t");
-							while(new ProdutoDao().consulta(cod) == null) {
-								try {
-									cod = Leitor.leInteger();
-								} catch (LeituraException e) {
-									System.out.println(e.getMessage());
-								}
-								System.out.println("\nValor Inválido!");
-								try {
-									ProdutoView.visualizar();
-									System.out.print("\nInforme o código do produto novamente: \t");
-								} catch (VisualizacaoException e) {
-									System.out.println(e.getMessage());
-								}
-								
-							}
-							Produto produto = new ProdutoDao().consulta(cod);
-							System.out.print("\nProduto: [" + produto.getNome() +
-							                 "]\nDisponível: [" + produto.getQuantidade() + 
-							                 "]\nInforme a quantidade que deseja adicionar: \t");
-							while(qtd == null) {
-							try {
-								qtd = Leitor.leInteger();
-							} catch (LeituraException e) {
-								System.out.println(e.getMessage());
-							}
-							
-							}
-						
-						try {
-							ProdutoController.reporEstoque(cod, qtd);
-							
-							try {
-								ProdutoView.visualizar();
-							} catch (VisualizacaoException e) {
-								System.out.println(e.getMessage());
-							}
-							System.out.print("\n");
-							return true;
-						} catch (ControllerException e) {
-							System.out.println(
-									e.getMessage() + "\n\tNão foi possível adicionar a quantidade ao produto!");
+							cod = Leitor.leInteger();
+
+						} catch (LeituraException | VisualizacaoException e) {
+							System.out.println(e.getMessage());
 						}
-					
+
+					}
+					while (qtd == null || qtd < 0) {
+						Produto produto = new ProdutoDao().consulta(cod);
+						System.out.print("\nProduto: [" + produto.getNome() + "]\nDisponível: ["
+								+ produto.getQuantidade() + "]\nInforme a quantidade que deseja adicionar: \t");
+						try {
+							qtd = Leitor.leInteger();
+							if (qtd <= 0) {
+								System.out.print("\nValor impossível de ser adicionado!\n");
+							}
+						} catch (LeituraException e) {
+							System.out.println(e.getMessage());
+						}
+					}
+
+					try {
+						ProdutoController.reporEstoque(cod, qtd);
+
+						try {
+							ProdutoView.visualizar();
+						} catch (VisualizacaoException e) {
+							System.out.println(e.getMessage());
+						}
+						System.out.print("\n");
+						return true;
+					} catch (ControllerException e) {
+						System.out.println(e.getMessage() + "\n\tNão foi possível adicionar a quantidade ao produto!");
+					}
+
 				}
 			} catch (DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());

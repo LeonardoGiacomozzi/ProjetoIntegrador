@@ -149,7 +149,6 @@ public class ProdutoController {
 			new ProdutoDao().exclui(codigo);
 			return true;
 		} catch (DaoException | ConexaoException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;

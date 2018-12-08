@@ -104,7 +104,7 @@ public class MenuPrincipal {
 					auxiliar = Leitor.leInteger();
 					switch (auxiliar) {
 					case 0:
-						System.out.println("\n");
+						System.out.print("\n\n");
 						MenuPrincipal.menuGeral();
 						break;
 					case 1:
