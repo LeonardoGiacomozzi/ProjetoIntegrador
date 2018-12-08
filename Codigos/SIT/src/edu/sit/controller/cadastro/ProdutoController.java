@@ -61,13 +61,12 @@ public class ProdutoController {
 	}
 
 	public static boolean editar(Integer idProduto) throws EdicaoException{
-		Produto produtoBanco = null;
 		try {
-
+			Produto produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
 			Integer opcao = 99;
 			System.out.println("\n**** EDIÇÃO DE PRODUTO ****");
 			while (opcao != 0) {
-				produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
+				
 				System.out.println(String.format("%-27s", "\n1 - Nome: ") + produtoBanco.getNome());
 				System.out.println(String.format("%-26s", "2 - Categoria: ") + produtoBanco.getCategoria().getNome());
 				System.out.println(String.format("%-26s", "3 - Fornecedor: ") + produtoBanco.getFornecedor().getNome());
@@ -91,17 +90,18 @@ public class ProdutoController {
 				case 2:
 					produtoBanco.setCategoriaId(UtilCadastro.pedeCategoria());
 					System.out.print(new ProdutoDao().altera(produtoBanco)?"":"");
+					produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
 					break;
 				case 3:
 					produtoBanco.setFornecedorId(UtilCadastro.pedeFornecedor());
 					System.out.print(new ProdutoDao().altera(produtoBanco)?"":"");
+					produtoBanco = new ProdutoDao().consultaCompleta(idProduto);
 					break;
 				case 4:
 					produtoBanco.setValorUnitario(UtilCadastro.pedeValorUnitario());
 					break;
 				case 0:
 					try {
-
 						System.out.println(
 								new ProdutoDao().altera(produtoBanco) ? "\nProduto alterado com SUCESSO!" : "Falha");
 					} catch (DaoException e) {

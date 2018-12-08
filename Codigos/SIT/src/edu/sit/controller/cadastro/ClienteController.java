@@ -30,20 +30,20 @@ public class ClienteController {
 		nome = UtilCadastro.pedeNome("Nome: \t");
 		cpf = UtilCadastro.pedeCpf();
 		try {
-			while(new ClienteDao().consultaCPF(cpf) != null) {
-				System.out.println("\nCPF já Cadastrado! Informe um novo CPF...\n" );
+			while (new ClienteDao().consultaCPF(cpf) != null) {
+				System.out.println("\nCPF já Cadastrado! Informe um novo CPF...\n");
 				cpf = UtilCadastro.pedeCpf();
 			}
-				
+
 		} catch (DaoException | ConexaoException e1) {
 			System.out.println(e1.getMessage());
 		}
 		endereco = UtilCadastro.pedeEndereco();
 		dataNascimento = UtilCadastro.pedeDataNascimento();
-		if(Cliente.getIdade(dataNascimento)<18) {
+		if (Cliente.getIdade(dataNascimento) < 18) {
 			System.out.println("\nNão foi possível cadastrar o cliente!\nCliente menor de IDADE!");
 			return false;
-			
+
 		}
 
 		try {
@@ -67,61 +67,61 @@ public class ClienteController {
 
 	public static boolean editar(Integer codigo) throws EdicaoException {
 		try {
-		
-		Integer opcao = 99;
-		System.out.print("\n**** EDIÇÃO DE CLIENTE ****\n");
-		while (opcao != 0) {
 			Cliente clienteBanco = new ClienteDao().consultaCompleta(codigo);
-			System.out.println(String.format("%-27s", "\n1 - Nome: ") + clienteBanco.getNome());
-			System.out.println(String.format("%-26s", "2 - Endereço: ") + clienteBanco.getEndereco());
-			System.out.println(String.format("%-26s", "3 - Contato: ") + "Telefone: " + clienteBanco.getContato().getTelefone());
-			System.out.println(String.format("%-26s", "") + "Email: " + clienteBanco.getContato().getEmail());
-			System.out.println("\n0 - Finalizar");
-			System.out.print("\nInforme a opção que deseja alterar: \t");
-			try {
-				opcao = Leitor.leInteger();
-			} catch (LeituraException e1) {
-				System.out.println(e1.getMessage());
-			}
-			switch (opcao) {
-			case 1:
-				clienteBanco.setNome(UtilCadastro.pedeNome("\nInforme o novo Nome: \t"));
-				break;
-			case 2:
-				clienteBanco.setEndereco(UtilCadastro.pedeEndereco());
-				break;
-			case 3:
-				ContatoController.editar(clienteBanco.getContatoid());
-				break;
-			case 0:
-			
-				try {
-					System.out.print(new ClienteDao().altera(clienteBanco) ? "\nCliente alterado com SUCESSO!\n\n" : "\nFalha");
-				} catch (DaoException | ConexaoException e) {
-					System.out.println(e.getMessage());
-				}
-
+			Integer opcao = 99;
+			System.out.print("\n**** EDIÇÃO DE CLIENTE ****\n");
+			while (opcao != 0) {
 				
-				break;
-			default:
-				System.out.println("\nValor Inválido!\n\nSelecione uma das opções oferecidas: \t");
-				break;
+				System.out.println(String.format("%-27s", "\n1 - Nome: ") + clienteBanco.getNome());
+				System.out.println(String.format("%-26s", "2 - Endereço: ") + clienteBanco.getEndereco());
+				System.out.println(String.format("%-26s", "3 - Contato: ") + "Telefone: "
+						+ clienteBanco.getContato().getTelefone());
+				System.out.println(String.format("%-26s", "") + "Email: " + clienteBanco.getContato().getEmail());
+				System.out.println("\n0 - Finalizar");
+				System.out.print("\nInforme a opção que deseja alterar: \t");
+				try {
+					opcao = Leitor.leInteger();
+				} catch (LeituraException e1) {
+
+				}
+				switch (opcao) {
+				case 1:
+					clienteBanco.setNome(UtilCadastro.pedeNome("\nInforme o novo Nome: \t"));
+					
+					break;
+				case 2:
+					clienteBanco.setEndereco(UtilCadastro.pedeEndereco());
+					break;
+				case 3:
+					ContatoController.editar(clienteBanco.getContatoid());
+					System.out.print(new ClienteDao().altera(clienteBanco)?"":"");
+					clienteBanco = new ClienteDao().consultaCompleta(codigo);
+					break;
+				case 0:
+
+					try {
+						System.out.print(new ClienteDao().altera(clienteBanco) ? "\nCliente alterado com SUCESSO!\n\n"
+								: "\nFalha");
+					} catch (DaoException | ConexaoException e) {
+						System.out.println(e.getMessage());
+					}
+
+					break;
+				default:
+					System.out.println("\nValor Inválido!\n\nSelecione uma das opções oferecidas: \t");
+					break;
+				}
 			}
-			}
-		}catch (EdicaoException  | DaoException e ) {
-				System.out.println(e.getMessage());
-				throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
-			} catch (ConexaoException e2) {
+
+		} catch (EdicaoException | DaoException e) {
+			System.out.println(e.getMessage());
+			throw new EdicaoException(EErroEdicao.ERRO_BUSCA_CATEGORIA);
+		} catch (ConexaoException e2) {
 			System.out.println(e2.getMessage());
 		}
-		
-		
 		return true;
-		
-		
-
 	}
-	
+
 	public static boolean buscaPorCPF() throws ControllerException {
 		System.out.println("Informe o CPF do cliente para busca :");
 		String cpf = UtilCadastro.pedeCpf();
@@ -131,7 +131,7 @@ public class ClienteController {
 			return true;
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
-			throw  new ControllerException(EErroController.ERRO_BUSCAR_CLIENTE_CPF);
+			throw new ControllerException(EErroController.ERRO_BUSCAR_CLIENTE_CPF);
 		}
 	}
 

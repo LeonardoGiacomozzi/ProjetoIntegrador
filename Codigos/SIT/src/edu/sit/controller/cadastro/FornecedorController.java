@@ -53,11 +53,11 @@ public class FornecedorController {
 	
 	public static boolean editar(Integer codigo) throws EdicaoException {
 		try {
-
+			Fornecedor fornecedorBanco = new FornecedorDao().consultaCompleta(codigo);
 			System.out.print("\n**** EDIÇÃO DE FORNECEDOR ****\n");
 			Integer opcao = 99;
 			while (opcao != 0) {
-				Fornecedor fornecedorBanco = new FornecedorDao().consultaCompleta(codigo);
+				
 				System.out.println(String.format("%-27s", "\n1 - Nome: ") + fornecedorBanco.getNome());
 				System.out.println(String.format("%-26s", "2 - Pessoa Responsável: ") + fornecedorBanco.getPessoaResponsavel());
 				System.out.println(String.format("%-26s", "3 - Contato: ") + "Telefone: " + fornecedorBanco.getContato().getTelefone());
@@ -80,6 +80,8 @@ public class FornecedorController {
 					break;
 				case 3:
 					ContatoController.editar(fornecedorBanco.getContatoid());
+					System.out.print(new FornecedorDao().altera(fornecedorBanco)?"":"");
+					fornecedorBanco = new FornecedorDao().consultaCompleta(codigo);
 					break;
 
 				case 0:

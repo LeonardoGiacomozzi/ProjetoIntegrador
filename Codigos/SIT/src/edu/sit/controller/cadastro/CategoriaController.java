@@ -31,10 +31,10 @@ public class CategoriaController {
 
 	public static boolean editar(Integer codigo) throws EdicaoException {
 		try {
-
+			Categoria categoriaBanco = new CategoriaDao().consulta(codigo);
 			Integer opcao = 99;
 			while (opcao != 0) {
-				Categoria categoriaBanco = new CategoriaDao().consulta(codigo);
+				
 				System.out.println(String.format("%-21s", "\n1 - Nome") + "[" + categoriaBanco.getNome() + "]");
 				System.out.println("0 - Finalizar/Sair");
 				System.out.print("\nInforme a opção que deseja alterar: \t");
@@ -52,7 +52,7 @@ public class CategoriaController {
 				case 0:
 
 					try {
-						System.out.print(new CategoriaDao().altera(categoriaBanco) ? "\nCategoria alterada com SUCESSO!" : "\nFalha");
+						System.out.print(new CategoriaDao().altera(categoriaBanco) ? "\nCategoria alterada com SUCESSO!\n" : "\nFalha");
 					} catch (DaoException e) {
 						System.out.println(e.getMessage());
 						throw new EdicaoException(EErroEdicao.ERRO_EDICAO_CATEGORIA);

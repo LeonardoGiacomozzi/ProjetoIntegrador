@@ -62,6 +62,7 @@ public class UsuarioController {
 				senha2 = UtilCadastro.pedeSenha();
 				
 			}
+			
 			System.out.print("\nSenha alterada com SUCESSO!\n");
 			return true;
 		}

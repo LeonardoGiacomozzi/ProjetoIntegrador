@@ -148,30 +148,26 @@ public class MenuGerente {
 			while (codigoUu == null) {
 				try {
 					UsuarioView.visualizar();
-				} catch (VisualizacaoException e3) {
-					System.out.println(e3.getMessage());
-				}
-				System.out.print("\nSelecione qual usuário deseja trocar a senha: \t");
-
-				try {
+					System.out.print("\nSelecione qual usuário deseja trocar a senha: \t");
 					codigoUu = Leitor.leInteger();
-				} catch (LeituraException e2) {
-					System.out.println(e2.getMessage());
+				} catch (VisualizacaoException | LeituraException e3) {
+					System.out.println(e3.getMessage());
 				}
 
 				try {
 					while (new UsuarioDao().consulta(codigoUu) == null) {
-						System.out.println("Usuario Invalido");
-						System.out.println("Informe um novo Usuario");
 						try {
+							System.out.print("\nCódigo de Usuário Inválido!\n");
+							UsuarioView.visualizar();
+							System.out.print("\nInforme o código novamente: \t");
 							codigoUu = Leitor.leInteger();
-						} catch (LeituraException e) {
+						} catch (LeituraException | VisualizacaoException e) {
 							System.out.println(e.getMessage());
 						}
 
 					}
 				} catch (DaoException | ConexaoException e) {
-					System.out.println(e.getMessage());
+					
 				}
 
 			}
@@ -280,18 +276,13 @@ public class MenuGerente {
 			while (codigo2 == 0) {
 				try {
 					while (new FornecedorDao().consulta(codigo2) == null) {
-						System.out.println("Informe um valor Válido!");
 						try {
 							FornecedorView.visualizar();
-						} catch (VisualizacaoException e1) {
+							System.out.print("\nInforme o código do Fornecedor novamente: \t");
+							codigo2 = Leitor.leInteger();
+						} catch (VisualizacaoException | LeituraException e1) {
 							System.out.println(e1.getMessage());
 						}
-						try {
-							codigo2 = Leitor.leInteger();
-						} catch (LeituraException e) {
-							System.out.println(e.getMessage());
-						}
-
 					}
 				} catch (DaoException | ConexaoException e) {
 					System.out.println(e.getMessage());

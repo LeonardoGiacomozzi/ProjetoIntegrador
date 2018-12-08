@@ -55,11 +55,11 @@ public class FuncionarioController {
 	public static boolean editar(Integer codigo) throws EdicaoException {
 		
 		try {
-
+			Funcionario funcionarioBanco = new FuncionarioDao().consultaCompleta(codigo);
 			System.out.print("\n**** EDIÇÃO DE FUNCIONÁRIO ****\n");
 			Integer opcao = Integer.MAX_VALUE;
 			while (opcao != 0) {
-				Funcionario funcionarioBanco = new FuncionarioDao().consultaCompleta(codigo);
+				
 				System.out.println("\nFuncionário [" + funcionarioBanco.getNome() + "]");
 				System.out.println(String.format("%-21s", "\n1 - Cargo: ") + funcionarioBanco.getCargo());
 				System.out.println(String.format("%-20s", "2 - Contato: ") + "Telefone: " + funcionarioBanco.getContato().getTelefone());
@@ -74,6 +74,8 @@ public class FuncionarioController {
 					break;
 				case 2:
 					ContatoController.editar(funcionarioBanco.getContatoid());
+					System.out.print(new FuncionarioDao().altera(funcionarioBanco)?"":"");
+					funcionarioBanco = new FuncionarioDao().consultaCompleta(codigo);
 					break;
 				case 0:
 
