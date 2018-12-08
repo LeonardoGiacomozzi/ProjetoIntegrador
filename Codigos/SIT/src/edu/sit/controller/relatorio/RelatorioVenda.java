@@ -37,33 +37,34 @@ public class RelatorioVenda {
 				return true;
 			} catch (IOException e) {
 				System.out.println("\nNome do caminho incorrento!");
-			} finally {
 				Integer aux2 = 1;
-					while (aux2 != 0) {
-						System.out.println("\nAperte [1] para Tentar novamente");
-						System.out.println("Aperte [0] para Sair");
-						try {
-							aux = Leitor.leInteger();
-							System.out.print("\n");
-							switch (aux) {
-							case 0:
-								aux2 = 0;
-								break;
-							case 1:
-								aux2 = 0;
-								aux = 1;
-								break;
-							default:
-								System.out.print("Informe uma opção Válida!\n");
-								break;
-							}
-						} catch (Exception e2) {
-							System.out.println(e2.getMessage());
+				while (aux2 != 0) {
+					System.out.println("\nAperte [1] para Tentar novamente");
+					System.out.println("Aperte [0] para Sair");
+					try {
+						aux = Leitor.leInteger();
+						System.out.print("\n");
+						switch (aux) {
+						case 0:
+							aux2 = 0;
+							break;
+						case 1:
+							aux2 = 0;
+							aux = 1;
+							break;
+						default:
+							System.out.print("Informe uma opção Válida!\n");
+							break;
 						}
+					} catch (Exception e2) {
+						System.out.println(e2.getMessage());
 					}
-				
+				}
+
 			}
+
 		}
+
 		return (aux == 0);
 	}
 }
