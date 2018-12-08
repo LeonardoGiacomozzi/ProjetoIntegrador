@@ -2,7 +2,6 @@ package edu.sit.view.controllers;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ProdutoDao;
-import edu.sit.controller.cadastro.FuncionarioController;
 import edu.sit.controller.cadastro.ProdutoController;
 import edu.sit.erro.controller.ControllerException;
 import edu.sit.erro.leitura.LeituraException;
