@@ -53,6 +53,7 @@ public class UsuarioController {
 		String senha1 = null;
 		String senha2 = "zz";
 		senha1 = UtilCadastro.pedeSenhaFrase("\nSenha mestre do sistema: \t");
+		
 		if ("@ADM".equals(senha1)) {
 			while (!senha1.equals(senha2)) {
 				System.out.print("Informe nova senha: \t");
@@ -60,8 +61,13 @@ public class UsuarioController {
 				System.out.print("Informe a senha novamente: \t");
 				senha2 = UtilCadastro.pedeSenha();
 			}
-			
-			System.out.print("\nSenha alterada com SUCESSO!\n");
+			try {
+				usuario.setSenha(senha2);
+				new UsuarioDao().altera(usuario);
+				System.out.print("\nSenha alterada com SUCESSO!\n");
+			} catch (DaoException | ConexaoException e) {
+				System.out.println(e.getMessage());
+			}
 			return true;
 		}
 		System.out.print("\nSenha Incorreta! Você foi redirecionado para o Gerenciamento!\n");

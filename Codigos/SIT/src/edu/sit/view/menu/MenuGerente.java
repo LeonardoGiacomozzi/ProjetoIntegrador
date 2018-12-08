@@ -144,23 +144,23 @@ public class MenuGerente {
 			MenuGerente.menuFuncionario();
 			break;
 		case 2:
-			Integer codigoUu = null;
-			while (codigoUu == null) {
+			Integer cod = null;
+			while (cod == null) {
 				try {
 					UsuarioView.visualizar();
 					System.out.print("\nSelecione qual usuário deseja trocar a senha: \t");
-					codigoUu = Leitor.leInteger();
+					cod = Leitor.leInteger();
 				} catch (VisualizacaoException | LeituraException e3) {
 					System.out.println(e3.getMessage());
 				}
 
 				try {
-					while (new UsuarioDao().consulta(codigoUu) == null) {
+					while (new UsuarioDao().consulta(cod) == null) {
 						try {
 							System.out.print("\nCódigo de Usuário Inválido!\n");
 							UsuarioView.visualizar();
 							System.out.print("\nInforme o código novamente: \t");
-							codigoUu = Leitor.leInteger();
+							cod = Leitor.leInteger();
 						} catch (LeituraException | VisualizacaoException e) {
 							System.out.println(e.getMessage());
 						}
@@ -172,7 +172,7 @@ public class MenuGerente {
 
 			}
 			try {
-				UsuarioController.trocaSenha(new UsuarioDao().consulta(codigoUu));
+				UsuarioController.trocaSenha(new UsuarioDao().consulta(cod));
 			} catch (DaoException | ConexaoException e1) {
 				System.out.println(e1.getMessage());
 			}
