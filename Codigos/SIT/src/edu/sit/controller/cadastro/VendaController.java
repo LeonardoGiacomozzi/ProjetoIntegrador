@@ -1,7 +1,6 @@
 package edu.sit.controller.cadastro;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.ConexaoException;
@@ -17,11 +16,11 @@ import edu.sit.erro.venda.VendaException;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.NotaFiscal;
-import edu.sit.model.Produto;
 import edu.sit.model.Venda;
 import edu.sit.uteis.Leitor;
 import edu.sit.view.controllers.ClienteView;
 import edu.sit.view.controllers.FuncionarioView;
+import edu.sit.view.controllers.ProdutoView;
 
 public class VendaController {
 
@@ -170,18 +169,7 @@ public class VendaController {
 			ProdutoQuantidade produtoAux = new ProdutoQuantidade();
 			Integer quantidade = Integer.MAX_VALUE;
 			try {
-				List<Produto> produtosBanco = new ProdutoDao().consultaTodosDisponiveisCompleto();
-				System.out.println("\n**** LISTA DE PRODUTOS ****\n");
-				System.out.println(String.format("%-10s", "Codigo") + String.format("%-19s", "Nome")
-						+ String.format("%-13s", "Fornecedor") + String.format("%-13s", "Categoria")
-						+ String.format("%-8s", "Valor") + String.format("%-6s", "Quantidade"));
-				for (Produto produto : produtosBanco) {
-					System.out.println(String.format("%-10s", "[" + produto.getId() + "]")
-							+ String.format("%-20s", produto.getNome())
-							+ String.format("%-13s", produto.getFornecedor().getNome())
-							+ String.format("%-13s", produto.getCategoria().getNome())
-							+ String.format("%-10s", produto.getValorUnitario()) + produto.getQuantidade());
-				}
+				ProdutoView.visualizar();
 				System.out.print("\nInforme o código do produto que deseja comprar: \t");
 				opcao = Leitor.leInteger();
 				if (opcao != 0) {
@@ -231,7 +219,7 @@ public class VendaController {
 					}
 				}
 
-			} catch (DaoException | ConexaoException | LeituraException e) {
+			} catch (ConexaoException | LeituraException | VisualizacaoException e) {
 				System.out.println(e.getMessage());
 			}
 
