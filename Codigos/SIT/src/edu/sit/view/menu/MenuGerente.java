@@ -36,7 +36,7 @@ public class MenuGerente {
 		System.out.println("2 - Cadastros");
 		System.out.println("3 - Edições");
 		System.out.println("4 - Gerenciar Vendas");
-		System.out.println("5 - Remover");
+		System.out.println("5 - Excluir Usuário");
 		System.out.println("0 - Voltar");
 		System.out.print("\nInforme a opção desejada: \t");
 		Integer op = null;
@@ -64,10 +64,13 @@ public class MenuGerente {
 		case 4:
 			MenuGerente.menuVendas();
 			break;
+		case 5:
+			
+			break;
 		case 0:
 			System.out.print("\n");
 			MenuPrincipal.menuGeral();
-			break;
+			break;	
 		default:
 			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuGerente.menusGerente();
@@ -436,5 +439,4 @@ public class MenuGerente {
 
 		}
 	}
-
 }

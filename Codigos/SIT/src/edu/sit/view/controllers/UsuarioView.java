@@ -3,10 +3,12 @@ package edu.sit.view.controllers;
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.UsuarioDao;
 import edu.sit.controller.cadastro.UsuarioController;
+import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.visualizacao.EErroVisualizacao;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Usuario;
+import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
 
 public class UsuarioView {
@@ -34,6 +36,26 @@ public class UsuarioView {
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_USUARIOS);
+		}
+	}
+	
+	public static boolean exclui() {
+		try {
+			UsuarioView.visualizar();
+			System.out.print("\nInforme o Usuário que deseja excluir: \t");
+			Integer op =null;
+			do {
+				try {
+					op=Leitor.leInteger();
+				} catch (LeituraException e) {
+					System.out.println(e.getMessage());
+				}
+			}while(op==null);
+				
+			return UsuarioController.exclui(op);
+		} catch (VisualizacaoException e) {
+			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 }

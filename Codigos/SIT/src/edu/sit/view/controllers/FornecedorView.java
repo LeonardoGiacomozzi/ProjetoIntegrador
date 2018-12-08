@@ -2,13 +2,10 @@ package edu.sit.view.controllers;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.FornecedorDao;
-import edu.sit.controller.cadastro.FornecedorController;
-import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.visualizacao.EErroVisualizacao;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Fornecedor;
-import edu.sit.uteis.Leitor;
 
 public class FornecedorView {
 
@@ -35,28 +32,6 @@ public class FornecedorView {
 		System.out.println("Email\t" + fornecedor.getContato().getEmail() + "--------- Telefone\t"
 				+ fornecedor.getContato().getTelefone());
 		System.out.println("Pessoa responsável\t" + fornecedor.getPessoaResponsavel());
-
-	}
-
-	public static boolean exclui() {
-
-		try {
-			FornecedorView.visualizar();
-			Integer op = null;
-			System.out.print("\nInforme o fornecedor que deseja excluir: \t");
-			do {
-			try {
-				op = Leitor.leInteger();
-			} catch (LeituraException e) {
-				System.out.println(e.getMessage());
-			}
-			}while(op==null);
-			 return FornecedorController.exclui(op);
-			
-		} catch (VisualizacaoException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
 
 	}
 

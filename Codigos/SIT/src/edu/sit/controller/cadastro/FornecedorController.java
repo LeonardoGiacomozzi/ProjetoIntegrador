@@ -120,17 +120,4 @@ public class FornecedorController {
 			throw  new ControllerException(EErroController.ERRO_BUSCAR_CNPJ_FORNECEDOR);
 		}
 	}
-
-	public static boolean exclui(Integer codigo) {
-		 
-		try {
-			new FornecedorDao().exclui(codigo);
-			return true;
-		} catch (DaoException | ConexaoException e) {
-			System.out.println(e.getMessage());
-		}
-		return false;
-		
-		
-	}
 }

@@ -2,13 +2,10 @@ package edu.sit.view.controllers;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.CategoriaDao;
-import edu.sit.controller.cadastro.CategoriaController;
-import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.visualizacao.EErroVisualizacao;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Categoria;
-import edu.sit.uteis.Leitor;
 
 public class CategoriaView {
 
@@ -25,26 +22,6 @@ public class CategoriaView {
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_CATEGORIAS);
-		}
-	}
-
-	public static boolean exclui() {
-		try {
-			CategoriaView.visualizar();
-			System.out.print("\nInforme a categoria que deseja excluir: \t");
-			Integer op =null;
-			do {
-				try {
-					op=Leitor.leInteger();
-				} catch (LeituraException e) {
-					System.out.println(e.getMessage());
-				}
-			}while(op==null);
-				
-			return CategoriaController.exclui(op);
-		} catch (VisualizacaoException e) {
-			System.out.println(e.getMessage());
-			return false;
 		}
 	}
 }

@@ -2,13 +2,10 @@ package edu.sit.view.controllers;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.FuncionarioDao;
-import edu.sit.controller.cadastro.FuncionarioController;
-import edu.sit.erro.leitura.LeituraException;
 import edu.sit.erro.visualizacao.EErroVisualizacao;
 import edu.sit.erro.visualizacao.VisualizacaoException;
 import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Funcionario;
-import edu.sit.uteis.Leitor;
 
 public class FuncionarioView {
 
@@ -28,22 +25,4 @@ public class FuncionarioView {
 		}
 	}
 
-	public static boolean excluir() {
-		try {
-			FuncionarioView.visualizar();
-			Integer op = null;
-			do {
-				try {
-					System.out.print("\nInforme o funcionário que deseja excluir: \t");
-					op = Leitor.leInteger();
-				} catch (LeituraException e) {
-					System.out.println(e.getMessage());
-				}
-			} while (op == null);
-			return FuncionarioController.exclui(op);
-		} catch (VisualizacaoException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-	}
 }

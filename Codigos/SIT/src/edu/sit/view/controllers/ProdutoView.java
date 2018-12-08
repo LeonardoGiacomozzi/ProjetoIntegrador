@@ -88,22 +88,4 @@ public class ProdutoView {
 		return false;
 	}
 	
-	public static boolean excluir() {
-		try {
-			ProdutoView.visualizar();
-			Integer op = null;
-			do {
-				try {
-					System.out.print("\nInforme o produto que deseja excluir: \t");
-					op = Leitor.leInteger();
-				} catch (LeituraException e) {
-					System.out.println(e.getMessage());
-				}
-			} while (op == null);
-			return ProdutoController.exclui(op);
-		} catch (VisualizacaoException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-	}
 }

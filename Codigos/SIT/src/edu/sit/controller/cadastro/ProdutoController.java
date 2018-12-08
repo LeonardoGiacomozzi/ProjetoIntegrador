@@ -143,14 +143,4 @@ public class ProdutoController {
 		}
 		return true;
 	}
-	
-	public static boolean exclui(Integer codigo) {
-		try {
-			new ProdutoDao().exclui(codigo);
-			return true;
-		} catch (DaoException | ConexaoException e) {
-			e.printStackTrace();
-		}
-		return false;
-	}
 }
