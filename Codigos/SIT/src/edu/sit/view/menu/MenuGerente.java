@@ -239,13 +239,10 @@ public class MenuGerente {
 					while (new CategoriaDao().consulta(codigo1) == null) {
 						try {
 							CategoriaView.visualizar();
-						} catch (VisualizacaoException e1) {
-							System.out.println(e1.getMessage());
-						}
-						try {
+							System.out.print("\nInforme o código da Categoria novamente: \t");
 							codigo1 = Leitor.leInteger();
-						} catch (LeituraException e) {
-							System.out.println(e.getMessage());
+						} catch (VisualizacaoException | LeituraException e1) {
+							System.out.println(e1.getMessage());
 						}
 					}
 				} catch (DaoException | ConexaoException e) {
