@@ -2,6 +2,7 @@ package edu.sit.view.controllers;
 
 import edu.sit.bancodedados.conexao.ConexaoException;
 import edu.sit.bancodedados.dao.ProdutoDao;
+import edu.sit.controller.cadastro.FuncionarioController;
 import edu.sit.controller.cadastro.ProdutoController;
 import edu.sit.erro.controller.ControllerException;
 import edu.sit.erro.leitura.LeituraException;
@@ -87,4 +88,27 @@ public class ProdutoView {
 		}
 		return false;
 	}
+	
+	public static boolean excluir() {
+		try {
+			visualizar();
+			Integer op = null;
+
+			do {
+
+				try {
+
+					System.out.println("ESCOLHA O PRODUTO QUE QUER EXCLUIR");
+					op = Leitor.leInteger();
+				} catch (LeituraException e) {
+					System.out.println(e.getMessage());
+				}
+			} while (op == null);
+			return ProdutoController.exclui(op);
+		} catch (VisualizacaoException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
 }
