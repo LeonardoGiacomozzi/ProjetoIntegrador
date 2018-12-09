@@ -34,6 +34,9 @@ public class VendaController {
 		try {
 			funcionario = pedeFuncionario();
 			cliente = pedeCliente();
+			if (cliente == 0) {
+				return false;
+			}
 			vendaNova = Venda.criaVenda(cliente, funcionario);
 			vendaNova.setProdutos(pedeProdutos());
 		} catch (VendaException e) {
@@ -121,7 +124,10 @@ public class VendaController {
 		}
 		if (clienteId != null && clienteId == 0) {
 			try {
-				System.out.println(ClienteController.cadastro() == true ? "" : "");
+				if (!ClienteController.cadastro()) {
+					return 0;
+				}
+				
 				clienteId = new ClienteDao().pegaUltimoID();
 			} catch (CadastroException | DaoException | ConexaoException e) {
 				System.out.println(e.getMessage());

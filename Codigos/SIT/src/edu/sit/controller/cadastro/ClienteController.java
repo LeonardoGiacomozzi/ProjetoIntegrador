@@ -38,7 +38,7 @@ public class ClienteController {
 		endereco = UtilCadastro.pedeEndereco();
 		dataNascimento = UtilCadastro.pedeDataNascimento();
 		if (Cliente.getIdade(dataNascimento) < 18) {
-			System.out.println("\nNão foi possível cadastrar o cliente!\nCliente menor de IDADE!");
+			System.out.println("\nNão foi possível cadastrar o cliente!\nCliente menor de IDADE!\n");
 			return false;
 
 		}
