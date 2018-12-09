@@ -42,7 +42,7 @@ public class MenuCadastro {
 				System.out.println("\n");
 				MenuCadastro.menuCadastro();
 			} catch (CadastroException e) {
-				System.out.println(EMensagensErroCad.ERRO_CLIENTE);
+				System.out.println(e.getMessage());
 			}
 			break;
 
@@ -52,7 +52,7 @@ public class MenuCadastro {
 				ProdutoController.cadastro();
 				MenuCadastro.menuCadastro();
 			} catch (CadastroException e) {
-				System.out.println(EMensagensErroCad.ERRO_PRODUTO);
+				System.out.println(e.getMessage());
 			}
 			break;
 
@@ -61,7 +61,7 @@ public class MenuCadastro {
 				FornecedorController.cadastro();
 				MenuCadastro.menuCadastro();
 			} catch (CadastroException e) {
-				System.out.println(EMensagensErroCad.ERRO_FORNECEDOR);
+				System.out.println(e.getMessage());
 			}
 			break;
 		case 4:
@@ -69,7 +69,7 @@ public class MenuCadastro {
 				CategoriaController.cadastro();
 				MenuCadastro.menuCadastro();
 			} catch (CadastroException e) {
-				System.out.println(EMensagensErroCad.ERRO_ESCRITA);
+				System.out.println(e.getMessage());
 			}
 			break;
 		default:
