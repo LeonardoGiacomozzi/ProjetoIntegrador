@@ -182,6 +182,8 @@ public class VendaController {
 								opcao = -1;
 							}
 
+						} else if (produtoAux.getItensPedido() != null && produtoAux.getItensPedido().getQuantidade() == 0) {
+							System.out.print("\nProduto fora de estoque! Precisa repor!\n");
 						} else {
 							System.out.print("\nCódigo de Produto Inválido!\n");
 						}
