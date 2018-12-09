@@ -47,10 +47,11 @@ public class VendaController {
 
 				System.out.println(new VendaDao().insere(vendaNova)
 						? "\nVenda efetuada com SUCESSO!\n" + "Gerando Nota Fiscal..." + "\nAguarde..."
-								+ "\nNota Fiscal gerada com SUCESSO!\n\n"
+								+ "\nNota Fiscal gerada com SUCESSO!\n"
 						: "Falha na venda");
 
 			}
+			System.out.print("\n");
 			try {
 				NotaFiscal notaFiscal = NotaFiscal
 						.criaNotaFiscal(new VendaDao().consultaCompleta(new VendaDao().pegaUltimoID()));
