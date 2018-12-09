@@ -17,11 +17,14 @@ public class UsuarioController {
 		System.out.println("\n**** CADASTRO DE USUÁRIO ****");
 		try {
 			do {
-				login = UtilCadastro.pedeNome("Login: \t");
-			}while(new UsuarioDao().consulta(login)!=null);
+				login = UtilCadastro.pedeNome("\nLogin: \t");
+				if (new UsuarioDao().consulta(login) != null) {
+					System.out.print("\nLogin ja está em Uso!\n");
+				}
+			} while (new UsuarioDao().consulta(login) != null);
+			
 		} catch (DaoException | ConexaoException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println(e1.getMessage());
 		}
 		senha = UtilCadastro.pedeSenhaFrase("Senha: \t");
 

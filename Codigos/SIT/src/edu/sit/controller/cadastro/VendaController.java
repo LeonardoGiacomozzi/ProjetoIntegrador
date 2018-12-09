@@ -109,7 +109,7 @@ public class VendaController {
 				System.out.print("\nInforme o código do cliente: \t");
 				try {
 					clienteId = Leitor.leInteger();
-					if (new ClienteDao().consulta(clienteId) == null) {
+					if (new ClienteDao().consulta(clienteId) == null && clienteId != 0) {
 						System.out.print("\nCódigo de Cliente Inválido!\n");
 					}
 				} catch (LeituraException e2) {
