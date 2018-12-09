@@ -41,21 +41,24 @@ public class UsuarioView {
 	
 	public static boolean exclui() {
 		try {
-			Integer op =null;
-			do {
+			Integer op = null;
+			
+			while(op == null || (new UsuarioDao().consulta(op) == null && op != 0) || op == 1) {
 				try {
 					
 					UsuarioView.visualizar();
 					System.out.print("\n[0] - Sair\n");
 					System.out.print("\nInforme o Usuário que deseja excluir: \t");
-					op=Leitor.leInteger();
+					op = Leitor.leInteger();
 					
 				} catch (LeituraException e) {
 					System.out.println(e.getMessage());
 				}
-			} while(op == null || new UsuarioDao().consulta(op) == null || op == 1 && op != 0);
-				
-			return UsuarioController.exclui(op);
+			}
+			if (op != 0) {
+			System.out.println(UsuarioController.exclui(op) ? "\nUsuário excluído com SUCESSO!" : "\nFalha");
+			}
+			return true;
 		} catch (VisualizacaoException | DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());
 			return false;

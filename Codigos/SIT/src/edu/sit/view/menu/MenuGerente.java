@@ -65,7 +65,7 @@ public class MenuGerente {
 			MenuGerente.menuVendas();
 			break;
 		case 5:
-			System.out.println(UsuarioView.exclui() ? "\nUsuário excluído com SUCESSO!" : "\nFalha");
+			UsuarioView.exclui();
 			MenuGerente.menusGerente();
 			break;
 		case 0:
