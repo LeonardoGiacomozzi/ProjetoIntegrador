@@ -44,16 +44,16 @@ public class UsuarioView {
 			Integer op =null;
 			do {
 				try {
-					do {
+					
 					UsuarioView.visualizar();
+					System.out.print("\n[0] - Sair\n");
 					System.out.print("\nInforme o Usuário que deseja excluir: \t");
 					op=Leitor.leInteger();
-					} while (new UsuarioDao().consulta(op) == null || op == 1);
 					
-				} catch (LeituraException | DaoException | ConexaoException e) {
+				} catch (LeituraException e) {
 					System.out.println(e.getMessage());
 				}
-			} while(op == null || new UsuarioDao().consulta(op) == null || op == 1);
+			} while(op == null || new UsuarioDao().consulta(op) == null || op == 1 && op != 0);
 				
 			return UsuarioController.exclui(op);
 		} catch (VisualizacaoException | DaoException | ConexaoException e) {
