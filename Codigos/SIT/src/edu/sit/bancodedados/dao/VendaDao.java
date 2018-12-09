@@ -34,7 +34,7 @@ public class VendaDao extends InstaladorDao {
 					"  INDEX `fk_Venda_Cliente1_idx` (`Cliente` ASC) )" + 
 					"ENGINE = InnoDB;");
 			
-			st.executeUpdate("CREATE TABLE ItensPedido (" 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS ItensPedido (" 
 					+ " Produtos INT NOT NULL," 
 					+ " Venda INT NOT NULL,"
 					+ " Quantidade INT NOT NULL,"

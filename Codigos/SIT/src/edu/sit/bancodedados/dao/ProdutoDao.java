@@ -20,7 +20,7 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Produtos (" + 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Produtos (" + 
 					"id INT NOT NULL AUTO_INCREMENT," +
 					"Nome VARCHAR(45) NOT NULL," +
 					"Quantidade INT(80) NOT NULL," + 

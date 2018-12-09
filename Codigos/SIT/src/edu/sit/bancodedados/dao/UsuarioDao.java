@@ -21,7 +21,7 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Usuarios (" 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Usuarios (" 
 					+ " id INT NOT NULL AUTO_INCREMENT," 
 					+ " Login VARCHAR(45) NOT NULL," 
 					+ " Senha VARCHAR(45) NOT NULL," 

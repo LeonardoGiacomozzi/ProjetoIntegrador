@@ -21,7 +21,7 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Funcionario (" 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Funcionario (" 
 					+ "id INT NOT NULL AUTO_INCREMENT," 
 					+ "Nome VARCHAR(45) NOT NULL," 
 					+ "CPF VARCHAR(45) NOT NULL," 

@@ -20,7 +20,7 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Cliente (" 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Cliente (" 
 					+ "id INT NOT NULL AUTO_INCREMENT," 
 					+ "Nome VARCHAR(45) NOT NULL," 
 					+ "CPF VARCHAR(14) NOT NULL," 

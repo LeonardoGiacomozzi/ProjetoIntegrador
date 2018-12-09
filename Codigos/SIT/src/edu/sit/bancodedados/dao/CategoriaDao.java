@@ -20,7 +20,7 @@ public class CategoriaDao extends InstaladorDao implements IDao<Categoria> {
 		Connection conexao = Conexao.abreConexao();
 		try {
 			Statement st = conexao.createStatement();
-			st.executeUpdate("CREATE TABLE Categoria (" + 
+			st.executeUpdate("CREATE TABLE IF NOT EXISTS Categoria (" + 
 					"id INT NOT NULL AUTO_INCREMENT," + 
 					"Nome VARCHAR(45) NOT NULL," + 
 					"PRIMARY KEY (id)) ENGINE = InnoDB;");
