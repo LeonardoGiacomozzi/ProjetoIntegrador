@@ -46,6 +46,9 @@ public class ProdutoView {
 							ProdutoView.visualizar();
 							System.out.print("\nInforme o código do produto que deseja repor: \t");
 							cod = Leitor.leInteger();
+							if (new ProdutoDao().consulta(cod) == null) {
+								System.out.print("\nCódigo do produto Inválido!\n");
+							}
 
 						} catch (LeituraException | VisualizacaoException e) {
 							System.out.println(e.getMessage());
