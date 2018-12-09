@@ -65,13 +65,13 @@ public class MenuGerente {
 			MenuGerente.menuVendas();
 			break;
 		case 5:
-			System.out.println(UsuarioView.exclui() ? "\nUsuário excluído com SUCESSO!\n" : "\nFalha");
+			System.out.println(UsuarioView.exclui() ? "\nUsuário excluído com SUCESSO!" : "\nFalha");
 			MenuGerente.menusGerente();
 			break;
 		case 0:
 			System.out.print("\n");
 			MenuPrincipal.menuGeral();
-			break;	
+			break;
 		default:
 			System.out.print("\nERRO - Escolha uma opção válida!\n");
 			MenuGerente.menusGerente();
@@ -150,32 +150,20 @@ public class MenuGerente {
 			break;
 		case 2:
 			Integer cod = null;
-			while (cod == null) {
-				try {
-					UsuarioView.visualizar();
-					System.out.print("\nSelecione qual usuário deseja trocar a senha: \t");
-					cod = Leitor.leInteger();
-				} catch (VisualizacaoException | LeituraException e3) {
-					System.out.println(e3.getMessage());
-				}
-
-				try {
-					while (new UsuarioDao().consulta(cod) == null) {
-						try {
-							System.out.print("\nCódigo de Usuário Inválido!\n");
-							UsuarioView.visualizar();
-							System.out.print("\nInforme o código novamente: \t");
-							cod = Leitor.leInteger();
-						} catch (LeituraException | VisualizacaoException e) {
-							System.out.println(e.getMessage());
-						}
-
+			try {
+				while (cod == null || cod == 1 || new UsuarioDao().consulta(cod) == null) {
+					try {
+						UsuarioView.visualizar();
+						System.out.print("\nSelecione qual usuário deseja trocar a senha: \t");
+						cod = Leitor.leInteger();
+					} catch (VisualizacaoException | LeituraException e3) {
+						System.out.println(e3.getMessage());
 					}
-				} catch (DaoException | ConexaoException e) {
-					
 				}
-
+			} catch (DaoException | ConexaoException e) {
+				System.out.println(e.getMessage());
 			}
+
 			try {
 				UsuarioController.trocaSenha(new UsuarioDao().consulta(cod));
 			} catch (DaoException | ConexaoException e1) {
