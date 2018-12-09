@@ -1,4 +1,4 @@
-banco;tabacaria
+banco;xd
 usuario;root
 senha;hericles
 localNota;D:\Notas
