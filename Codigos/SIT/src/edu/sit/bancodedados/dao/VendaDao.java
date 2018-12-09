@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map.Entry;
 
 import edu.sit.DataObject.ProdutoQuantidade;
@@ -17,7 +16,7 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.erros.dao.EErrosDao;
 import edu.sit.model.Venda;
 
-public class VendaDao extends InstaladorDao implements IDao<Venda> {
+public class VendaDao extends InstaladorDao {
 
 	@Override
 	public boolean criaTabela() throws DaoException, ConexaoException {
@@ -65,7 +64,6 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		}
 	}
 
-	@Override
 	public Venda consulta(Integer codigo) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
@@ -92,19 +90,6 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 		return venda;
 	}
 
-	@Override
-	public List<Venda> consultaTodos() throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Venda> consultaVariosPorID(Integer... faixa) throws DaoException, ConexaoException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean insere(Venda objeto) throws DaoException, ConexaoException {
 		Connection conexao = Conexao.abreConexao();
 		try {
@@ -147,28 +132,6 @@ public class VendaDao extends InstaladorDao implements IDao<Venda> {
 			Conexao.fechaConexao();
 		}
 
-	}
-
-	@Override
-	public boolean altera(Venda objeto) throws DaoException, ConexaoException {
-		return false;
-	}
-
-	@Override
-	public boolean exclui(Integer... codigos) throws DaoException, ConexaoException {
-		Connection conexao = Conexao.abreConexao();
-		try {
-			PreparedStatement pst = conexao.prepareStatement("DELETE FROM Venda WHERE id = ?;");
-			for (Integer novo : codigos) {
-				pst.setInt(1, novo);
-				pst.execute();
-			}
-		} catch (Exception e) {
-			throw new DaoException(EErrosDao.EXCLUI_DADO, e.getMessage(), this.getClass());
-		} finally {
-			Conexao.fechaConexao();
-		}
-		return true;
 	}
 
 	public Integer pegaUltimoID() throws DaoException, ConexaoException {

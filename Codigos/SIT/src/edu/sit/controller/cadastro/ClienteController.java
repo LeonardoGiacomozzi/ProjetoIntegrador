@@ -7,8 +7,6 @@ import edu.sit.bancodedados.dao.ClienteDao;
 import edu.sit.bancodedados.dao.ContatoDao;
 import edu.sit.erro.cadastro.CadastroException;
 import edu.sit.erro.cadastro.EErroCadastro;
-import edu.sit.erro.controller.ControllerException;
-import edu.sit.erro.controller.EErroController;
 import edu.sit.erro.editor.EErroEdicao;
 import edu.sit.erro.editor.EdicaoException;
 import edu.sit.erro.leitura.LeituraException;
@@ -16,7 +14,6 @@ import edu.sit.erros.dao.DaoException;
 import edu.sit.model.Cliente;
 import edu.sit.uteis.Leitor;
 import edu.sit.uteis.cadastro.UtilCadastro;
-import edu.sit.view.controllers.ClienteView;
 
 public class ClienteController {
 
@@ -121,18 +118,4 @@ public class ClienteController {
 		}
 		return true;
 	}
-
-	public static boolean buscaPorCPF() throws ControllerException {
-		System.out.println("Informe o CPF do cliente para busca :");
-		String cpf = UtilCadastro.pedeCpf();
-		try {
-			Cliente clientebanco = new ClienteDao().consultaCPF(cpf);
-			ClienteView.exibeCliente(clientebanco);
-			return true;
-		} catch (DaoException | ConexaoException e) {
-			System.out.println(e.getMessage());
-			throw new ControllerException(EErroController.ERRO_BUSCAR_CLIENTE_CPF);
-		}
-	}
-
 }

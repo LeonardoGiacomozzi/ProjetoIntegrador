@@ -28,16 +28,4 @@ public class ClienteView {
 			throw new VisualizacaoException(EErroVisualizacao.ERRO_BUSCA_CLIENTES);
 		}
 	}
-
-	
-	public static void exibeCliente(Cliente cliente) {
-		System.out.println("************* DADOS DO CLIENTE***************");
-		System.out.println("Nome\t"+cliente.getNome());
-		System.out.println("CPF\t"+cliente.getCpf());
-		System.out.println("Email\t"+cliente.getContato().getEmail()+"--------- Telefone\t"+cliente.getContato().getTelefone());
-		System.out.println("Endereço\t"+cliente.getEndereco());
-		System.out.println("Data de Nascimento\t"+cliente.getDataDeNascimento());
-	
-	}
-
 }
