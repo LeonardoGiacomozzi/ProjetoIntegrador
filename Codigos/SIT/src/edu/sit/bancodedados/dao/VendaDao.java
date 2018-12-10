@@ -124,6 +124,9 @@ public class VendaDao extends InstaladorDao {
 				pst2.setInt(2, produto.getValue().getItensPedido().getId());
 				pst2.setInt(3, produto.getValue().getQuantidadeProduto());
 				System.out.print(pst2.executeUpdate() > 0? "":"");
+				produto.getValue().getItensPedido().setQuantidade(
+						produto.getValue().getItensPedido().getQuantidade()-produto.getValue().getQuantidadeProduto());
+				new ProdutoDao().altera(produto.getValue().getItensPedido());
 			}
 			return true;
 		} catch (Exception e) {

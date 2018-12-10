@@ -166,9 +166,6 @@ public class VendaController {
 									if (quantidade <= produtoAux.getItensPedido().getQuantidade() && quantidade >= 0) {
 
 										produtoAux.setQuantidadeProduto(quantidade);
-										produtoAux.getItensPedido().setQuantidade(
-												produtoAux.getItensPedido().getQuantidade() - quantidade);
-										new ProdutoDao().altera(produtoAux.getItensPedido());
 										produtos.add(produtoAux);
 										vendaNova.setValor(
 												(vendaNova.getValor() == null ? 0 : vendaNova.getValor()) + precoAtual(
