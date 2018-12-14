@@ -1,6 +1,7 @@
 package edu.sit.controller.relatorio;
 
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class RelatorioVenda {
 		for (Venda venda : vendas) {
 			palavras.add("");
 				palavras.add(String.format("%-35s", "Funcionário: " + venda.getFuncionario().getNome())
-						+ String.format("%30s", "Data da Venda: " + venda.getDataVenda()));
+						+ String.format("%30s", "Data da Venda: " + venda.getDataVenda().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 		
 			palavras.add(String.format("%-35s", "Cliente: " + venda.getCliente().getNome())
 					+ String.format("%30s", "Valor: R$" + venda.getValor()));
