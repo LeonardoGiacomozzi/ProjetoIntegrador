@@ -29,7 +29,7 @@ public class Teste {
 	@Test
 	public void testaValidaLogin() {
 
-		assertEquals(true, UsuarioController.validaLogin(Usuario.criaUsuario("admim", "@ADM")));
+		assertEquals(true, UsuarioController.validaLogin(Usuario.criaUsuario("@ADM", "@ADM")));
 
 	}
 
