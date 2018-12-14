@@ -118,7 +118,7 @@ public class Venda {
 		setCliente(cliente);
 		setFuncionario(funcionario);
 		setProdutos(produtos);
-		setDataVenda(LocalDate.now());
+		setDataVenda(dataVenda);
 	}
 	
 	private Venda(Integer id, Double valor, Integer funcionarioId, Integer clienteid,ArrayList<ProdutoQuantidade>produtos,LocalDate dataVenda) {
@@ -148,7 +148,7 @@ public class Venda {
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
 		setProdutos(produtos);
-		setDataVenda(LocalDate.now());
+		setDataVenda(dataVenda);
 	}
 	
 	private Venda(Integer id,Integer clienteid,Integer funcionarioId,Double valor,LocalDate dataVenda) {
@@ -156,7 +156,7 @@ public class Venda {
 		setValor(valor);
 		setFuncionarioId(funcionarioId);
 		setClienteId(clienteid);
-		setDataVenda(LocalDate.now());
+		setDataVenda(dataVenda);
 	}
 	
 	public static Venda criaVenda(Cliente cliente, ArrayList<ProdutoQuantidade> produtos, Funcionario funcionario) {
