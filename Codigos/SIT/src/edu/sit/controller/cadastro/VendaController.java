@@ -141,7 +141,7 @@ public class VendaController {
 
 		Integer opcao = Integer.MAX_VALUE;
 		ArrayList<ProdutoQuantidade> produtos = new ArrayList<ProdutoQuantidade>();
-		while (opcao != -1) {
+		while (opcao != Integer.MIN_VALUE) {
 			ProdutoQuantidade produtoAux = new ProdutoQuantidade();
 			Integer quantidade = Integer.MAX_VALUE;
 			try {
@@ -170,6 +170,9 @@ public class VendaController {
 										vendaNova.setValor(
 												(vendaNova.getValor() == null ? 0 : vendaNova.getValor()) + precoAtual(
 														produtoAux.getItensPedido().getValorUnitario(), quantidade));
+										produtoAux.getItensPedido().setQuantidade(
+												produtoAux.getItensPedido().getQuantidade() - quantidade);
+										new ProdutoDao().altera(produtoAux.getItensPedido());
 										quantidade = 0;
 									} else {
 										System.out.print("\nQuantidade Indisponível!\n");
@@ -183,7 +186,7 @@ public class VendaController {
 									+ "Aperte [1] para Continuar comprando...\n" + "Aperte [0] para Finalizar COMPRA.");
 							opcao = Leitor.leInteger();
 							if (opcao == 0) {
-								opcao = -1;
+								opcao = Integer.MIN_VALUE;
 							}
 
 						} else if (produtoAux.getItensPedido() != null && produtoAux.getItensPedido().getQuantidade() == 0) {
