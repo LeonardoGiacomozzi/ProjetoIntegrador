@@ -29,7 +29,7 @@ public class Teste {
 	@Test
 	public void testaValidaLogin() {
 
-		assertEquals(true, UsuarioController.validaLogin(Usuario.criaUsuario("@ADM", "@ADM")));
+		assertEquals(true, UsuarioController.validaLogin(new Usuario("@ADM", "@ADM")));
 
 	}
 
@@ -37,13 +37,13 @@ public class Teste {
 	public void testaGeraNotaFiscal() throws DaoException, ConexaoException, NotaFiscalException {
 
 		assertEquals(true,
-				GeraArquivoNotaFiscal.geraArquivo(NotaFiscal.criaNotaFiscal(new VendaDao().consultaCompleta(1))));
+				GeraArquivoNotaFiscal.geraArquivo(new NotaFiscal(new VendaDao().consultaCompleta(1))));
 	}
 
 	@Test
 	public void testaValidaLoginException() {
 
-		assertEquals(false, UsuarioController.validaLogin(Usuario.criaUsuario("eu", "32")));
+		assertEquals(false, UsuarioController.validaLogin(new Usuario("eu", "32")));
 
 	}
 	

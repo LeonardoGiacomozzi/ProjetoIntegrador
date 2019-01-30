@@ -53,7 +53,7 @@ public class CategoriaDao extends InstaladorDao implements IDao<Categoria> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Categoria WHERE id = ?;");
 			pst.setInt(1, idCategoria);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Categoria.criaCategoriaId(rs.getInt("id"), rs.getString("Nome")) : null;
+			return rs.first() ? new Categoria(rs.getInt("id"), rs.getString("Nome")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
 		} finally {
@@ -69,7 +69,7 @@ public class CategoriaDao extends InstaladorDao implements IDao<Categoria> {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Categoria;");
 			while (rs.next()) {
-				categorias.add(Categoria.criaCategoriaId(rs.getInt("id"), rs.getString("Nome")));
+				categorias.add( new Categoria(rs.getInt("id"), rs.getString("Nome")));
 			}
 			return categorias;
 		} catch (Exception e) {
@@ -90,7 +90,7 @@ public class CategoriaDao extends InstaladorDao implements IDao<Categoria> {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						categorias.add(Categoria.criaCategoriaId(rs.getInt("id"), rs.getString("Nome")));
+						categorias.add( new Categoria(rs.getInt("id"), rs.getString("Nome")));
 					}
 				} catch (Exception c) {
 					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());

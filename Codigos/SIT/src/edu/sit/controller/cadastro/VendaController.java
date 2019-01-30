@@ -37,7 +37,7 @@ public class VendaController {
 			if (cliente == 0) {
 				return false;
 			}
-			vendaNova = Venda.criaVenda(cliente, funcionario);
+			vendaNova = new Venda(cliente, funcionario);
 			vendaNova.setProdutos(pedeProdutos());
 		} catch (VendaException e) {
 			System.out.println(e.getMessage());
@@ -53,8 +53,8 @@ public class VendaController {
 			}
 			System.out.print("\n");
 			try {
-				NotaFiscal notaFiscal = NotaFiscal
-						.criaNotaFiscal(new VendaDao().consultaCompleta(new VendaDao().pegaUltimoID()));
+				NotaFiscal notaFiscal = new NotaFiscal(
+						new VendaDao().consultaCompleta(new VendaDao().pegaUltimoID()));
 				GeraArquivoNotaFiscal.geraArquivo(notaFiscal);
 			} catch (NotaFiscalException e) {
 				System.out.println(e.getMessage());

@@ -17,7 +17,7 @@ public class UsuarioView {
 		System.out.println("\nAcesso restrito!");
 		String login = UtilCadastro.pedeNome("\nLogin: \t");
 		String senha = UtilCadastro.pedeNome("Senha: \t");
-		return UsuarioController.validaLogin(Usuario.criaUsuario(login, senha));
+		return UsuarioController.validaLogin(new Usuario(login, senha));
 		
 		
 	}

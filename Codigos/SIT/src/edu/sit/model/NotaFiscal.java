@@ -48,25 +48,18 @@ public class NotaFiscal implements Serializable {
 		return dataEmissao;
 	}
 
-	private NotaFiscal(Venda venda) {
+	public NotaFiscal(Venda venda) {
 		setVenda(venda);
 		this.dataEmissao = Calendar.getInstance();
 	}
 	
-	private NotaFiscal(Integer id, Calendar dataEmissao, Double total, Integer vendaid) {
+	public NotaFiscal(Integer id, Calendar dataEmissao, Double total, Integer vendaid) {
 		setId(vendaid);
 		this.dataEmissao = dataEmissao;
 		setTotal(total);
 		setVendaid(vendaid);
 	}
 
-	public static NotaFiscal criaNotaFiscal(Venda venda) {
-		return new NotaFiscal(venda);
-	}
-	
-	public static NotaFiscal consultaNotaBanco(Integer id, Calendar dataEmissao, Double total, Integer vendaid) {
-		return new NotaFiscal(id, dataEmissao, total, vendaid);
-	}
 
 	@Override
 	public int hashCode() {
@@ -93,16 +86,7 @@ public class NotaFiscal implements Serializable {
 		return true;
 	}
 
-	//@Override
-	//public String toString() {/// <sumary> Nota#Cliente#Funcionario#Lista de Produtos#Data de emissão
-	//	String produtos = "";
-	//	for (Produto produto : getVenda().getProdutos()) {
-	//		produtos += "#" + produto.getId();
-	//	}
-
-	//	return getId() + "#" + getVenda().getCliente().getId() + "#" + getVenda().getFuncionario().getId() + produtos
-	//			+ "#" + getDataEmissao();
-	//}
+	
 	
 	@Override
 	public String toString() {

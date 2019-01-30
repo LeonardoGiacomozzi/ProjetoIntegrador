@@ -59,7 +59,7 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Produtos WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-				return rs.first() ? Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
+				return rs.first() ? new Produto(rs.getInt("id"), rs.getString("Nome"),
 					rs.getInt("Quantidade"), rs.getDouble("Valor"),	rs.getInt("Categoria"), rs.getInt("Fornecedor")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -83,7 +83,7 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Produtos;");
 			while (rs.next()) {
-				produtos.add(Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
+				produtos.add(new Produto(rs.getInt("id"), rs.getString("Nome"),
 						rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Categoria"),
 						rs.getInt("Fornecedor")));
 			}
@@ -102,7 +102,7 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery(" SELECT * FROM PRODUTOS P WHERE P.QUANTIDADE>0;");
 			while (rs.next()) {
-				produtos.add(Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
+				produtos.add(new Produto(rs.getInt("id"), rs.getString("Nome"),
 						rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Categoria"), 
 						rs.getInt("Fornecedor")));
 			}
@@ -143,7 +143,7 @@ public class ProdutoDao extends InstaladorDao implements IDao<Produto> {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						produto.add(Produto.consultaProdutoBanco(rs.getInt("id"), rs.getString("Nome"),
+						produto.add(new Produto(rs.getInt("id"), rs.getString("Nome"),
 								rs.getInt("Quantidade"), rs.getDouble("Valor"), rs.getInt("Categoria"),
 								rs.getInt("Fornecedor")));
 					}

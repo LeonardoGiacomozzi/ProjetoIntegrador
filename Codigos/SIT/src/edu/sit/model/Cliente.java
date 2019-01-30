@@ -56,15 +56,9 @@ public class Cliente {
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-	private Cliente (String nome, LocalDate dataDeNascimento, String endereco, String cpf, Contato contato) {
-		setNome(nome);
-		setDataDeNascimento(dataDeNascimento);
-		setEndereco(endereco);
-		setCpf(cpf);
-		setContato(contato);
-	}
 	
-	private Cliente (String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
+	
+	public Cliente (String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		setNome(nome);
 		setDataDeNascimento(dataDeNascimento);
 		setEndereco(endereco);
@@ -72,7 +66,7 @@ public class Cliente {
 		setContatoid(contato);
 	}
 	
-	private Cliente(Integer id, String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
+	public Cliente(Integer id, String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
 		setId(id);
 		setNome(nome);
 		setDataDeNascimento(dataDeNascimento);
@@ -85,21 +79,6 @@ public class Cliente {
 				
 		return  CalculoIdade.calculaIdade(dataNacimento);
 		
-	}
-	public static Cliente criaCliente(String nome, LocalDate dataNascimento) {
-		return new Cliente(nome,dataNascimento,"Endereço Não Informado","Cpf Não Informado",Contato.criaContato());
-	}
-	
-	public static Cliente criaCliente(LocalDate dataDeNascimento,String cpf) {
-		return new Cliente("Nome não Informado",dataDeNascimento,"Endereço não informado",cpf,Contato.criaContato());
-	}
-	
-	public static Cliente criaClienteBanco(String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
-		return new Cliente(nome, dataDeNascimento, endereco, cpf, contato);
-	}
-	
-	public static Cliente consultaClienteBanco(Integer id, String nome, LocalDate dataDeNascimento, String endereco, String cpf, Integer contato) {
-		return new Cliente(id, nome, dataDeNascimento, endereco, cpf, contato);
 	}
 	
 	@Override

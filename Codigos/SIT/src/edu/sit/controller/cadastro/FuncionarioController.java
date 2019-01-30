@@ -39,7 +39,7 @@ public class FuncionarioController {
 		if (ContatoController.cadastro()) {
 
 			try {
-				Funcionario funcionario = Funcionario.criaFuncionarioBanco(nome, cpf, cargo,
+				Funcionario funcionario = new Funcionario(nome, cpf, cargo,
 						new ContatoDao().pegaUltimoID());
 				System.out.print(
 						new FuncionarioDao().insere(funcionario) ? "\nFuncionário cadastrado com SUCESSO!\n" : "\nFalha\n");

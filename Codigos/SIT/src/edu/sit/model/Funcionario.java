@@ -94,13 +94,9 @@ public class Funcionario {
 		return true;
 	}
 
-	private Funcionario(String nome, String cpf, ECargo cargo, Contato contato) {
-		setNome(nome);
-		setCpf(cpf);
-		setCargo(cargo);
-	}
 
-	private Funcionario(Integer id, String nome, String cpf, ECargo cargo, Integer contato) {
+
+	public Funcionario(Integer id, String nome, String cpf, ECargo cargo, Integer contato) {
 		setId(id);
 		setNome(nome);
 		setCpf(cpf);
@@ -108,26 +104,12 @@ public class Funcionario {
 		setCargo(cargo);
 	}
 
-	private Funcionario(String nome, String cpf, ECargo cargo, Integer contato) {
+	public Funcionario(String nome, String cpf, ECargo cargo, Integer contato) {
 		setNome(nome);
 		setCpf(cpf);
 		setContatoid(contato);
 		setCargo(cargo);
 
 	}
-
-	public static Funcionario criaFuncionario(String nome, String cpf, ECargo cargo, Contato contato) {
-		return new Funcionario(nome, cpf, cargo, contato);
-	}
-
-	public static Funcionario criaFuncionarioBanco(String nome, String cpf, ECargo cargo, Integer contato) {
-		return new Funcionario(nome, cpf, cargo, contato);
-	}
-
-	public static Funcionario consultaFuncionarioBanco(Integer id, String nome, String cpf, ECargo cargo,
-			Integer contato) {
-		return new Funcionario(id, nome, cpf, cargo, contato);
-	}
-	public static Funcionario criaFuncionario(String nome, String cpf, ECargo cargo, Integer contato) {
-		return new Funcionario(nome, cpf, cargo, contato);}
 }
+	

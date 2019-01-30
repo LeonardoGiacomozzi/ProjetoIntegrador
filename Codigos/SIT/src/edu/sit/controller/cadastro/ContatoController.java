@@ -21,7 +21,7 @@ public class ContatoController {
 		tel = UtilCadastro.pedeTelefone();
 		email = UtilCadastro.pedeEmail();
 		try {
-			Contato contato = Contato.criaContato(tel, email);
+			Contato contato = new Contato(tel, email);
 			new ContatoDao().insere(contato);
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());

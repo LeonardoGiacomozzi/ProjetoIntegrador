@@ -20,7 +20,7 @@ public class CategoriaController {
 		System.out.print("\n**** CADASTRO DE CATEGORIA ****\n");
 		nome = UtilCadastro.pedeNome("Nome: \t");
 		try {
-			Categoria categoria = Categoria.criaCategoria(nome);
+			Categoria categoria = new Categoria(nome);
 			System.out.print(new CategoriaDao().insere(categoria) ? "\nCategoria cadastrada com SUCESSO!\n" : "\nFalha\n");
 		} catch (DaoException | ConexaoException e) {
 			System.out.println(e.getMessage());

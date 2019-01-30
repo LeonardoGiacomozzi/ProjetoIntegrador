@@ -75,28 +75,8 @@ public class Produto {
 		this.valorUnitario = valorUnitario;
 	}
 
-	public static Produto criaProdutoSemFornecedor(String nome, Categoria categoria, Integer quatidade,
-			Double valorUnitario) {
-		return new Produto(nome, categoria,
-				Fornecedor.criaFornecedorFull("Sem Fornecedor", "Sem Fornecedor", "Sem Fornecedor", 0), quatidade,
-				valorUnitario);
-	}
-
-	public static Produto criaProduto(String nome, Categoria categoria, Integer quatidade, Double valorUnitario,
-			Fornecedor fornecedor) {
-		return new Produto(nome, categoria, fornecedor, quatidade, valorUnitario);
-	}
-
-	public static Produto criaProdutoBanco(String nome, Integer categoria, Integer fornedcedor, Integer quantidade,
-			Double vaorUnitario) {
-		return new Produto(nome, categoria, fornedcedor, quantidade, vaorUnitario);
-	}
-
-	public static Produto consultaProdutoBanco(Integer id, String nome, Integer quantidade, Double valorUnitario, Integer categoria, Integer fornecedor) {
-		return new Produto(id, nome, quantidade, valorUnitario, categoria, fornecedor);
-	}
 	
-	private Produto(Integer id, String nome, Integer quantidade, Double valorUnitario, Integer categoria, Integer funcionario) {
+	public Produto(Integer id, String nome, Integer quantidade, Double valorUnitario, Integer categoria, Integer funcionario) {
 		setId(id);
 		setNome(nome);
 		setQuantidade(quantidade);
@@ -105,15 +85,9 @@ public class Produto {
 		setFornecedorId(funcionario);
 	}
 
-	private Produto(String nome, Categoria categoria, Fornecedor fornecedor, Integer quantidade, Double valorUnitario) {
-		setCategoria(categoria);
-		setFornecedor(fornecedor);
-		setNome(nome);
-		setQuantidade(quantidade);
-		setValorUnitario(valorUnitario);
-	}
+	
 
-	private Produto(String nome, Integer categoria, Integer fornecedor, Integer quantidade, Double valorUnitario) {
+	public Produto(String nome, Integer categoria, Integer fornecedor, Integer quantidade, Double valorUnitario) {
 		setCategoriaId(categoria);
 		setFornecedorId(fornecedor);
 		setNome(nome);

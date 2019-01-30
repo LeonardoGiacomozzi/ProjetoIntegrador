@@ -70,7 +70,7 @@ public class VendaDao extends InstaladorDao {
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
 			
-			return rs.first() ? Venda.criaVenda(rs.getInt("id"),rs.getInt("Cliente"), 
+			return rs.first() ? new Venda(rs.getInt("id"),rs.getInt("Cliente"), 
 					rs.getInt("Funcionario"),rs.getDouble("Valor"),rs.getDate("dataVenda").toLocalDate()) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());

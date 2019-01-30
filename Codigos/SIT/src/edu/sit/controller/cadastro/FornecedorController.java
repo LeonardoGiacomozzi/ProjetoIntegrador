@@ -39,7 +39,7 @@ public class FornecedorController {
 		if (ContatoController.cadastro()) {
 
 			try {
-				Fornecedor fornecedor = Fornecedor.criaFornecedorFull(nome, cnpj, pessoaResponsavel,
+				Fornecedor fornecedor = new Fornecedor(nome, cnpj, pessoaResponsavel,
 						new ContatoDao().pegaUltimoID());
 				System.out.println(
 						new FornecedorDao().insere(fornecedor) ? "\nFornecedor cadastrado com SUCESSO!\n\n" : "\nFalha\n");

@@ -39,8 +39,8 @@ public class Populador {
 					.leArquivo(System.getProperty("user.dir") + "/populador/clientes.txt");
 			for (String cliente : clientesTxt) {
 				String[] dados = cliente.split(";");
-				new ContatoDao().insere(Contato.criaContato(dados[4], dados[5]));
-				new ClienteDao().insere(Cliente.criaClienteBanco(dados[0],
+				new ContatoDao().insere(new Contato(dados[4], dados[5]));
+				new ClienteDao().insere(new Cliente(dados[0],
 						LocalDate.parse(dados[1], DateTimeFormatter.ofPattern("dd/MM/yyyy")), dados[2], dados[3],
 						new ContatoDao().pegaUltimoID()));
 			}
@@ -59,8 +59,8 @@ public class Populador {
 					.leArquivo(System.getProperty("user.dir") + "/populador/funcionario.txt");
 			for (String funcionario : funcionarioTxt) {
 				String[] dados = funcionario.split(";");
-				new ContatoDao().insere(Contato.criaContato(dados[3], dados[4]));
-				new FuncionarioDao().insere(Funcionario.criaFuncionario(dados[0], dados[1],
+				new ContatoDao().insere(new Contato(dados[3], dados[4]));
+				new FuncionarioDao().insere(new Funcionario(dados[0], dados[1],
 						ECargo.values()[Integer.parseInt(dados[2])], new ContatoDao().pegaUltimoID()));
 			}
 			return true;
@@ -78,9 +78,9 @@ public class Populador {
 					.leArquivo(System.getProperty("user.dir") + "/populador/fornecedor.txt");
 			for (String fornecedor : fornededorTxt) {
 				String[] dados = fornecedor.split(";");
-				new ContatoDao().insere(Contato.criaContato(dados[3], dados[4]));
+				new ContatoDao().insere(new Contato(dados[3], dados[4]));
 				new FornecedorDao().insere(
-						Fornecedor.criaFornecedorFull(dados[0], dados[1], dados[2], new ContatoDao().pegaUltimoID()));
+						new Fornecedor(dados[0], dados[1], dados[2], new ContatoDao().pegaUltimoID()));
 			}
 			return true;
 		} catch (DaoException | ConexaoException | IOException e) {
@@ -97,7 +97,7 @@ public class Populador {
 					.leArquivo(System.getProperty("user.dir") + "/populador/categoria.txt");
 			for (String categoria : categoriaTxt) {
 				String[] dados = categoria.split(";");
-				new CategoriaDao().insere(Categoria.criaCategoria(dados[0]));
+				new CategoriaDao().insere(new Categoria(dados[0]));
 			}
 			return true;
 		} catch (DaoException | ConexaoException | IOException e) {
@@ -113,7 +113,7 @@ public class Populador {
 					.leArquivo(System.getProperty("user.dir") + "/populador/produto.txt");
 			for (String produto : produtoTxt) {
 				String[] dados = produto.split(";");
-				new ProdutoDao().insere(Produto.criaProdutoBanco(dados[0], Integer.parseInt(dados[1]),
+				new ProdutoDao().insere(new Produto(dados[0], Integer.parseInt(dados[1]),
 						Integer.parseInt(dados[2]), Integer.parseInt(dados[3]), Double.parseDouble(dados[4])));
 			}
 			return true;
@@ -138,7 +138,7 @@ public class Populador {
 									,Integer.parseInt(produtoQ[1])));
 							
 						}
-				new VendaDao().insere(Venda.criaVenda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda,
+				new VendaDao().insere(new Venda(Integer.parseInt(dados[0]),Integer.parseInt(dados[1]),produtosVenda,
 						Double.parseDouble(dados[3]),LocalDate.parse(dados[4],DateTimeFormatter.ofPattern("dd/MM/yyyy"))));
 			}
 			return true;
@@ -155,7 +155,7 @@ public class Populador {
 					.leArquivo(System.getProperty("user.dir") + "/populador/usuario.txt");
 			for (String usuario : usuarioTxt) {
 				String[] dados = usuario.split(";");
-				new UsuarioDao().insere(Usuario.criaUsuario(dados[0],dados[1]));
+				new UsuarioDao().insere(new Usuario(dados[0],dados[1]));
 			}
 			return true;
 		} catch (DaoException | ConexaoException | IOException e) {

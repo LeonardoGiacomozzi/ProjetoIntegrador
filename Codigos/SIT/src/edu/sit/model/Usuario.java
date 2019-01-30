@@ -65,34 +65,21 @@ public class Usuario {
 		return true;
 	}
 	
-	private Usuario(String login) {
-		setLogin(login);
-		setSenha("@"+login);
-	}
 	
 	
-	private Usuario(String login,String senha) {
+	
+	public Usuario(String login,String senha) {
 		setLogin(login);
 		setSenha(senha);
 	}
 	
-	private Usuario(Integer id,String login,String senha) {
+	public Usuario(Integer id,String login,String senha) {
 		setLogin(login);
 		setSenha(senha);
 		setId(id);
 	}
 	
-	public static Usuario criaUsuario(String login) {
-		return new Usuario(login);
-	}
 	
-	public static Usuario criaUsuario(String login,String senha) {
-		return new Usuario(login,senha);
-	}
-	
-	public static Usuario criaUsuario(Integer id,String login,String senha) {
-		return new Usuario(id,login,senha);
-	}
 	
 	
 }

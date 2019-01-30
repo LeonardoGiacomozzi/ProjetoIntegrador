@@ -56,7 +56,7 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Usuarios WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Usuario.criaUsuario(rs.getInt("id"), 
+			return rs.first() ? new Usuario(rs.getInt("id"), 
 					rs.getString("login"), rs.getString("senha")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -73,7 +73,7 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 					"");
 			pst.setString(1,login);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Usuario.criaUsuario(rs.getInt("id"), 
+			return rs.first() ? new Usuario(rs.getInt("id"), 
 					rs.getString("Login"), rs.getString("Senha")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -89,7 +89,7 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Usuarios WHERE id > 1;");
 			while (rs.next()) {
-				usuarios.add(Usuario.criaUsuario(rs.getInt("id"), rs.getString("Login"), 
+				usuarios.add(new Usuario(rs.getInt("id"), rs.getString("Login"), 
 								rs.getString("Senha")));
 			}
 			return usuarios;
@@ -111,7 +111,7 @@ public class UsuarioDao extends InstaladorDao implements IDao<Usuario> {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						usuario.add(Usuario.criaUsuario(rs.getInt("id"), rs.getString("Login"), 
+						usuario.add(new Usuario(rs.getInt("id"), rs.getString("Login"), 
 								rs.getString("Senha")));
 					}
 				} catch (Exception c) {

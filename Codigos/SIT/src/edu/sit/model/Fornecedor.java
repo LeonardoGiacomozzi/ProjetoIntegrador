@@ -56,21 +56,15 @@ public class Fornecedor {
 		this.pessoaResponsavel = pessoaResponsavel;
 	}
 
-	private Fornecedor(String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
+	public Fornecedor(String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
 		setNome(nome);
 		setCNPJ(cNPJ);
 		setPessoaResponsavel(pessoaResponsavel);
 		setContatoid(contato);
 	}
 	
-	private Fornecedor(String nome, String cNPJ, String pessoaResponsavel, Contato contato) {
-		setNome(nome);
-		setCNPJ(cNPJ);
-		setPessoaResponsavel(pessoaResponsavel);
-		setContato(contato);
-	}
-	
-	private Fornecedor(Integer id, String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
+
+	public Fornecedor(Integer id, String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
 		setId(id);
 		setNome(nome);
 		setCNPJ(cNPJ);
@@ -78,13 +72,7 @@ public class Fornecedor {
 		setContatoid(contato);
 	}
 
-	public static Fornecedor criaFornecedorFull(String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
-		return new Fornecedor(nome, cNPJ, pessoaResponsavel, contato);
-	}
 	
-	public static Fornecedor consultaFornecedorBanco(Integer id, String nome, String cNPJ, String pessoaResponsavel, Integer contato) {
-		return new Fornecedor (id, nome, cNPJ, pessoaResponsavel, contato);
-	}
 
 	@Override
 	public int hashCode() {

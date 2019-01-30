@@ -47,23 +47,15 @@ public class Categoria {
 		return true;
 	}
 	
-	private Categoria(String nome) {
+	public Categoria(String nome) {
 		setNome(nome);
 	}
 	
-	private Categoria(Integer id, String nome) {
+	public Categoria(Integer id, String nome) {
 		setNome(nome);
 		setId(id);
 	}
-	
-	public static Categoria criaCategoria(String nome) {
-		return new Categoria(nome);
-	}
-	
-	public static Categoria criaCategoriaId(Integer id,String nome) {
-		return new Categoria(id,nome);
-	}
-	
+		
 	@Override
 	public String toString() {
 		return "\nCategoria: \t" + getNome();

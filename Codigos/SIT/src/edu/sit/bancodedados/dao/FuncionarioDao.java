@@ -59,7 +59,7 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Funcionario WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Funcionario.consultaFuncionarioBanco(rs.getInt("id"), rs.getString("Nome"), 
+			return rs.first() ? new Funcionario(rs.getInt("id"), rs.getString("Nome"), 
 					rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -82,7 +82,7 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Funcionario;");
 			while (rs.next()) {
-				funcionarios.add(Funcionario.consultaFuncionarioBanco(rs.getInt("id"), rs.getString("Nome"),
+				funcionarios.add(new Funcionario(rs.getInt("id"), rs.getString("Nome"),
 								rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato")));
 			}
 			return funcionarios;
@@ -113,7 +113,7 @@ public class FuncionarioDao extends InstaladorDao implements IDao<Funcionario> {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						funcionario.add(Funcionario.consultaFuncionarioBanco(rs.getInt("id"), rs.getString("Nome"),
+						funcionario.add(new Funcionario(rs.getInt("id"), rs.getString("Nome"),
 								rs.getString("CPF"), ECargo.values()[rs.getInt("Cargo")], rs.getInt("Contato")));
 					}
 				} catch (Exception c) {

@@ -58,7 +58,7 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE id = ?;");
 			pst.setInt(1, idCliente);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
+			return rs.first() ? new Cliente(rs.getInt("id"), rs.getString("Nome"),
 					rs.getDate("DataNascimento").toLocalDate(), rs.getString("Endereco"),rs.getString("CPF"),
 					rs.getInt("Contato")) : null;
 		} catch (Exception e) {
@@ -80,7 +80,7 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Cliente WHERE CPF LIKE ?;");
 			pst.setString(1, cpf);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
+			return rs.first() ? new Cliente(rs.getInt("id"), rs.getString("Nome"),
 					rs.getDate("DataNascimento").toLocalDate(), rs.getString("Endereco"), rs.getString("CPF"),
 					rs.getInt("Contato")) : null;
 		} catch (Exception e) {
@@ -98,7 +98,7 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Cliente;");
 			while (rs.next()) {
-				clientes.add(Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
+				clientes.add(new Cliente(rs.getInt("id"), rs.getString("Nome"),
 								rs.getDate("DataNascimento").toLocalDate(), rs.getString("Endereco"),
 								rs.getString("CPF"), rs.getInt("Contato")));
 			}
@@ -130,7 +130,7 @@ public class ClienteDao extends InstaladorDao implements IDao<Cliente> {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						cliente.add(Cliente.consultaClienteBanco(rs.getInt("id"), rs.getString("Nome"),
+						cliente.add(new Cliente(rs.getInt("id"), rs.getString("Nome"),
 								rs.getDate("DataNascimento").toLocalDate(), rs.getString("Endereco"),
 								rs.getString("CPF"), rs.getInt("Contato")));
 					}

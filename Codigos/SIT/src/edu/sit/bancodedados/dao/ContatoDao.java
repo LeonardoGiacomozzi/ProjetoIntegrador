@@ -54,7 +54,7 @@ public class ContatoDao extends InstaladorDao implements IDao<Contato> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Contato WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Contato.consultaContatoBanco(rs.getInt("id"), 
+			return rs.first() ? new Contato(rs.getInt("id"), 
 					rs.getString("Telefone"), rs.getString("Email")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -71,7 +71,7 @@ public class ContatoDao extends InstaladorDao implements IDao<Contato> {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Contato;");
 			while (rs.next()) {
-				contatos.add(Contato.consultaContatoBanco(rs.getInt("id"), rs.getString("Telefone"), rs.getString("Email")));
+				contatos.add(new Contato(rs.getInt("id"), rs.getString("Telefone"), rs.getString("Email")));
 			}
 			return contatos;
 		} catch (Exception e) {
@@ -92,7 +92,7 @@ public class ContatoDao extends InstaladorDao implements IDao<Contato> {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						contato.add(Contato.consultaContatoBanco(rs.getInt("id"), rs.getString("Telefone"), rs.getString("Email")));
+						contato.add(new Contato(rs.getInt("id"), rs.getString("Telefone"), rs.getString("Email")));
 					}
 				} catch (Exception c) {
 					new DaoException(EErrosDao.CONSULTA_DADO, c.getMessage(), this.getClass());

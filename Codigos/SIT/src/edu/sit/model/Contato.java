@@ -30,30 +30,22 @@ public class Contato {
 		this.email = email;
 	}
 
-	private Contato(String telefone, String email) {
+	public Contato(String telefone, String email) {
 		setEmail(email);
 		setTelefone(telefone);
 	}
 
-	private Contato(Integer id, String telefone, String email) {
+	public Contato(Integer id, String telefone, String email) {
 		setId(id);
 		setTelefone(telefone);
 		setEmail(email);
 	}
 
-	public static Contato criaContato() {
-		return new Contato("Telefone não Informado", "Email não Informado");
-	}
+	
 
-	public static Contato criaContato(String telefone, String email) {
-		return new Contato(telefone, email);
-	}
 
-	public static Contato consultaContatoBanco(Integer id, String telefone, String email) {
-		return new Contato(id, telefone, email);
-	}
 
-	@Override
+		@Override
 	public String toString() {
 		return "Telefone: " + getTelefone() + "\nE-mail: " + getEmail();
 	}

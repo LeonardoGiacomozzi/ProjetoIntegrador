@@ -47,7 +47,7 @@ public class ClienteController {
 			if (ContatoController.cadastro()) {
 
 				try {
-					Cliente cliente = Cliente.criaClienteBanco(nome, dataNascimento, endereco, cpf,
+					Cliente cliente = new Cliente(nome, dataNascimento, endereco, cpf,
 							new ContatoDao().pegaUltimoID());
 					System.out.print(
 							new ClienteDao().insere(cliente) ? "\nCliente cadastrado com SUCESSO!" : "\nFalha\n");

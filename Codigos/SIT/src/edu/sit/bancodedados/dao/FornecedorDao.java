@@ -58,7 +58,7 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor WHERE id = ?;");
 			pst.setInt(1, codigo);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"),
+			return rs.first() ? new Fornecedor(rs.getInt("id"), rs.getString("Nome"),
 					rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")) : null;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.CONSULTA_DADO, e.getMessage(), this.getClass());
@@ -79,7 +79,7 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 			PreparedStatement pst = conexao.prepareStatement("SELECT * FROM Fornecedor Where CNPJ = ?;");
 			pst.setString(1, cnpj);
 			ResultSet rs = pst.executeQuery();
-			return rs.first() ? Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"),
+			return rs.first() ? new Fornecedor(rs.getInt("id"), rs.getString("Nome"),
 					rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")) : null;
 			
 		} catch (Exception e) {
@@ -97,7 +97,7 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 			Statement st = conexao.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM Fornecedor;");
 			while (rs.next()) {
-				fornecedores.add(Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"), 
+				fornecedores.add(new Fornecedor(rs.getInt("id"), rs.getString("Nome"), 
 								rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")));
 			}
 			return fornecedores;
@@ -128,7 +128,7 @@ public class FornecedorDao extends InstaladorDao implements IDao<Fornecedor> {
 					pst.setInt(1, codigo);
 					ResultSet rs = pst.executeQuery();
 					if (rs.first()) {
-						fornecedor.add(Fornecedor.consultaFornecedorBanco(rs.getInt("id"), rs.getString("Nome"), 
+						fornecedor.add(new Fornecedor(rs.getInt("id"), rs.getString("Nome"), 
 								rs.getString("CNPJ"), rs.getString("PessoaResponsavel"), rs.getInt("Contato")));
 					}
 				} catch (Exception c) {
