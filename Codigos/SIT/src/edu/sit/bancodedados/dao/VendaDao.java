@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import edu.sit.DataObject.ProdutoQuantidade;
 import edu.sit.bancodedados.conexao.Conexao;
@@ -113,7 +114,13 @@ public class VendaDao extends InstaladorDao {
 					listaAux.put(produtoQuantidade.getItensPedido().getId(), produtoQuantidade);
 				}
 			}
-			
+			for (Entry<Integer, ProdutoQuantidade> produto : listaAux.entrySet()) {
+				PreparedStatement pst2 = conexao.prepareStatement("INSERT INTO ItensPedido (Venda, Produtos, Quantidade) VALUES (?, ?, ?);");
+				pst2.setInt(1, pegaUltimoID());
+				pst2.setInt(2, produto.getValue().getItensPedido().getId());
+				pst2.setInt(3, produto.getValue().getQuantidadeProduto());
+				System.out.print(pst2.executeUpdate() > 0? "":"");
+			}
 			return true;
 		} catch (Exception e) {
 			throw new DaoException(EErrosDao.INSERE_DADO, e.getMessage(), this.getClass());
